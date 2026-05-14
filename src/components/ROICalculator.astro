@@ -1,0 +1,245 @@
+---
+// ROI Calculator — Astro island (vanilla JS, no framework).
+// Hydrates on idle so we don't block initial paint.
+// Spec: docs/2026-04-02-leadflow-agency-website-design.md § 4.2 (Section 7).
+---
+<section id="roi" class="border-b border-border bg-bg-elevated/20">
+  <div class="max-w-4xl mx-auto px-6 py-24">
+    <h2 class="text-center mb-4">How Much Could AI Save Your Business?</h2>
+    <p class="text-center text-text-secondary max-w-xl mx-auto mb-12">
+      Move the sliders. See what the manual work is actually costing you.
+    </p>
+
+    <div class="bg-bg-elevated border border-border rounded-2xl p-8 md:p-10 shadow-xl shadow-black/20">
+      <div class="grid md:grid-cols-3 gap-8 mb-10">
+        {/* Hours/week */}
+        <div>
+          <label for="roi-hours" class="block text-sm text-text-secondary mb-2">
+            Hours/week on manual tasks
+          </label>
+          <div class="flex items-baseline gap-2 mb-3">
+            <span data-roi-hours-out class="text-2xl font-bold text-accent-2">20</span>
+            <span class="text-xs text-text-secondary">hrs/week</span>
+          </div>
+          <input
+            id="roi-hours"
+            type="range"
+            min="5"
+            max="60"
+            step="1"
+            value="20"
+            data-roi-input="hours"
+            class="roi-range w-full"
+          />
+          <div class="flex justify-between text-[10px] text-text-secondary mt-1">
+            <span>5</span><span>60</span>
+          </div>
+        </div>
+
+        {/* Hourly cost */}
+        <div>
+          <label for="roi-rate" class="block text-sm text-text-secondary mb-2">
+            Avg hourly cost ($)
+          </label>
+          <div class="flex items-baseline gap-2 mb-3">
+            <span class="text-2xl font-bold text-accent-2">$</span>
+            <input
+              id="roi-rate"
+              type="number"
+              min="15"
+              max="200"
+              step="1"
+              value="45"
+              data-roi-input="rate"
+              class="bg-bg-deep border border-border rounded-lg px-3 py-1.5 text-xl font-bold text-accent-2 w-24 focus:outline-none focus:border-accent-2"
+            />
+            <span class="text-xs text-text-secondary">/hr</span>
+          </div>
+          <p class="text-[10px] text-text-secondary">Fully loaded cost incl. benefits</p>
+        </div>
+
+        {/* Automation rate */}
+        <div>
+          <label for="roi-pct" class="block text-sm text-text-secondary mb-2">
+            Estimated automation rate
+          </label>
+          <div class="flex items-baseline gap-2 mb-3">
+            <span data-roi-pct-out class="text-2xl font-bold text-accent-2">60</span>
+            <span class="text-xs text-text-secondary">%</span>
+          </div>
+          <input
+            id="roi-pct"
+            type="range"
+            min="30"
+            max="80"
+            step="1"
+            value="60"
+            data-roi-input="pct"
+            class="roi-range w-full"
+          />
+          <div class="flex justify-between text-[10px] text-text-secondary mt-1">
+            <span>30%</span><span>80%</span>
+          </div>
+        </div>
+      </div>
+
+      {/* Outputs */}
+      <div class="border-t border-border pt-8 grid sm:grid-cols-3 gap-6 text-center">
+        <div>
+          <div class="text-xs uppercase tracking-wider text-text-secondary mb-2">Monthly savings</div>
+          <div data-roi-out="monthly" class="text-4xl md:text-5xl font-extrabold text-accent-2 tabular-nums">
+            $2,338
+          </div>
+        </div>
+        <div>
+          <div class="text-xs uppercase tracking-wider text-text-secondary mb-2">Annual savings</div>
+          <div data-roi-out="annual" class="text-4xl md:text-5xl font-extrabold text-accent-2 tabular-nums">
+            $28,058
+          </div>
+        </div>
+        <div>
+          <div class="text-xs uppercase tracking-wider text-text-secondary mb-2">Hours reclaimed/mo</div>
+          <div data-roi-out="reclaimed" class="text-4xl md:text-5xl font-extrabold text-accent-2 tabular-nums">
+            52
+          </div>
+        </div>
+      </div>
+
+      {/* Email gate */}
+      <div class="border-t border-border mt-10 pt-8">
+        <p class="text-center text-text-secondary mb-4">
+          Want a detailed breakdown customized to your business? Enter your email.
+        </p>
+        <form
+          data-roi-form
+          class="flex flex-col sm:flex-row gap-3 max-w-lg mx-auto"
+          novalidate
+        >
+          <input
+            type="email"
+            required
+            placeholder="you@company.com"
+            data-roi-email
+            class="flex-1 bg-bg-deep border border-border rounded-lg px-4 py-3 text-text-primary placeholder:text-text-secondary/60 focus:outline-none focus:border-accent-2 transition-colors"
+          />
+          <button
+            type="submit"
+            class="inline-flex items-center justify-center px-6 py-3 rounded-lg bg-accent-2 text-bg-deep font-medium hover:opacity-90 transition-all hover:scale-[1.02] shadow-lg shadow-accent-2/20"
+          >
+            Send My Breakdown →
+          </button>
+        </form>
+        <p data-roi-status class="text-center text-xs text-text-secondary mt-3 min-h-[1em]"></p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<style>
+  /* Custom range slider — teal accent track to match outputs */
+  .roi-range {
+    -webkit-appearance: none;
+    appearance: none;
+    height: 6px;
+    background: var(--color-bg-deep);
+    border: 1px solid var(--color-border);
+    border-radius: 999px;
+    outline: none;
+  }
+  .roi-range::-webkit-slider-thumb {
+    -webkit-appearance: none;
+    appearance: none;
+    width: 18px;
+    height: 18px;
+    border-radius: 999px;
+    background: var(--color-accent-2);
+    border: 2px solid var(--color-bg-deep);
+    box-shadow: 0 0 0 1px var(--color-accent-2), 0 4px 12px rgba(6, 182, 212, 0.35);
+    cursor: pointer;
+  }
+  .roi-range::-moz-range-thumb {
+    width: 18px;
+    height: 18px;
+    border-radius: 999px;
+    background: var(--color-accent-2);
+    border: 2px solid var(--color-bg-deep);
+    box-shadow: 0 0 0 1px var(--color-accent-2), 0 4px 12px rgba(6, 182, 212, 0.35);
+    cursor: pointer;
+  }
+</style>
+
+<script>
+  // Astro island — client:idle behaviour via inline module script.
+  // Recalc on every input event; no debounce needed for vanilla math.
+  const hoursInput = document.querySelector<HTMLInputElement>('[data-roi-input="hours"]');
+  const rateInput = document.querySelector<HTMLInputElement>('[data-roi-input="rate"]');
+  const pctInput = document.querySelector<HTMLInputElement>('[data-roi-input="pct"]');
+
+  const hoursOut = document.querySelector<HTMLElement>('[data-roi-hours-out]');
+  const pctOut = document.querySelector<HTMLElement>('[data-roi-pct-out]');
+
+  const monthlyOut = document.querySelector<HTMLElement>('[data-roi-out="monthly"]');
+  const annualOut = document.querySelector<HTMLElement>('[data-roi-out="annual"]');
+  const reclaimedOut = document.querySelector<HTMLElement>('[data-roi-out="reclaimed"]');
+
+  const form = document.querySelector<HTMLFormElement>('[data-roi-form]');
+  const emailInput = document.querySelector<HTMLInputElement>('[data-roi-email]');
+  const status = document.querySelector<HTMLElement>('[data-roi-status]');
+
+  const dollars = new Intl.NumberFormat("en-US", {
+    style: "currency",
+    currency: "USD",
+    maximumFractionDigits: 0,
+  });
+  const integers = new Intl.NumberFormat("en-US", { maximumFractionDigits: 0 });
+
+  function compute() {
+    const hours = Number(hoursInput?.value || 20);
+    const rate = Number(rateInput?.value || 45);
+    const pct = Number(pctInput?.value || 60) / 100;
+
+    const monthly = hours * pct * rate * 4.33;
+    const annual = monthly * 12;
+    const reclaimed = hours * pct * 4.33;
+
+    if (hoursOut) hoursOut.textContent = String(hours);
+    if (pctOut) pctOut.textContent = String(Math.round(pct * 100));
+    if (monthlyOut) monthlyOut.textContent = dollars.format(monthly);
+    if (annualOut) annualOut.textContent = dollars.format(annual);
+    if (reclaimedOut) reclaimedOut.textContent = integers.format(reclaimed);
+  }
+
+  [hoursInput, rateInput, pctInput].forEach((el) => {
+    el?.addEventListener("input", compute);
+  });
+  compute();
+
+  form?.addEventListener("submit", (e) => {
+    e.preventDefault();
+    const email = (emailInput?.value || "").trim();
+    if (!email || !email.includes("@")) {
+      if (status) status.textContent = "Please enter a valid email.";
+      return;
+    }
+    // TODO: POST to Airtable Website Leads (tblNHM3YMqLoiyehf) via scoped PAT —
+    // operator generates a separate scoped PAT for create-only on this table;
+    // do NOT use the main AIRTABLE_PAT here.
+    const payload = {
+      email,
+      hours: Number(hoursInput?.value || 20),
+      rate: Number(rateInput?.value || 45),
+      pct: Number(pctInput?.value || 60),
+      monthlyOut: monthlyOut?.textContent,
+      annualOut: annualOut?.textContent,
+      reclaimedOut: reclaimedOut?.textContent,
+      timestamp: new Date().toISOString(),
+      source: "roi_calculator",
+    };
+    console.log("[roi-calc] submission stub", payload);
+    if (status)
+      status.textContent =
+        "Thanks — your breakdown is on its way. (We'll email it within the hour.)";
+    form.reset();
+    compute();
+  });
+</script>

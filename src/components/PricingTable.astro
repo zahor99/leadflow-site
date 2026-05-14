@@ -1,0 +1,146 @@
+---
+// Pricing — 3 tiers, middle one highlighted.
+// Spec: docs/2026-04-02-leadflow-agency-website-design.md § 4.2 (Section 9).
+const tiers = [
+  {
+    name: "Starter",
+    price: "$500–1,500",
+    cadence: "per project",
+    tagline: "First automation project",
+    features: [
+      "Free AI audit",
+      "1 automation workflow",
+      "2-week delivery",
+      "30-day support",
+    ],
+    cta: "Book My Free Audit",
+    highlighted: false,
+  },
+  {
+    name: "Growth",
+    price: "$1,500–3,500",
+    cadence: "per month",
+    tagline: "Ongoing automation + growth",
+    features: [
+      "Everything in Starter",
+      "3–5 workflows",
+      "Dedicated Slack channel",
+      "Monthly optimization",
+    ],
+    cta: "Book My Free Audit",
+    highlighted: true,
+  },
+  {
+    name: "Scale",
+    price: "Custom",
+    cadence: "tailored engagement",
+    tagline: "Full AI transformation",
+    features: [
+      "Dedicated AI agent team",
+      "Custom integrations",
+      "Priority support",
+      "Quarterly strategy",
+    ],
+    cta: "Book My Free Audit",
+    highlighted: false,
+  },
+];
+
+const badges = [
+  "Money-back guarantee",
+  "No long-term contracts",
+  "Cancel anytime",
+];
+---
+<section id="pricing" class="border-b border-border bg-bg-elevated/20">
+  <div class="max-w-6xl mx-auto px-6 py-24">
+    <h2 class="text-center mb-4">Transparent Pricing. No Surprises.</h2>
+    <p class="text-center text-text-secondary max-w-xl mx-auto mb-16">
+      Starting ranges. Exact pricing is locked in after the free audit.
+    </p>
+
+    <div class="grid md:grid-cols-3 gap-6 items-stretch">
+      {tiers.map((t) => (
+        <div
+          class={`relative flex flex-col rounded-2xl border p-8 transition-all ${
+            t.highlighted
+              ? "border-accent bg-bg-elevated md:scale-[1.04] shadow-2xl shadow-accent/20"
+              : "border-border bg-bg-elevated hover:-translate-y-0.5 hover:shadow-lg hover:shadow-accent/10"
+          }`}
+        >
+          {t.highlighted && (
+            <div class="absolute -top-3 left-1/2 -translate-x-1/2">
+              <span class="inline-flex items-center px-3 py-1 rounded-full bg-accent text-white text-[10px] font-bold tracking-wider uppercase shadow-lg shadow-accent/30">
+                Most Popular
+              </span>
+            </div>
+          )}
+
+          <div class="mb-6">
+            <h3 class="text-2xl mb-1">{t.name}</h3>
+            <p class="text-text-secondary text-sm">{t.tagline}</p>
+          </div>
+
+          <div class="mb-8">
+            <div class="text-4xl font-extrabold text-text-primary tabular-nums">
+              {t.price}
+            </div>
+            <div class="text-text-secondary text-xs mt-1">{t.cadence}</div>
+          </div>
+
+          <ul class="space-y-3 mb-8 flex-1">
+            {t.features.map((f) => (
+              <li class="flex items-start gap-3 text-sm text-text-primary/90">
+                <svg
+                  class={`w-5 h-5 flex-shrink-0 mt-0.5 ${t.highlighted ? "text-accent" : "text-accent-2"}`}
+                  viewBox="0 0 24 24"
+                  fill="none"
+                  stroke="currentColor"
+                  stroke-width="2.2"
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                  aria-hidden="true"
+                >
+                  <path d="M20 6 9 17l-5-5" />
+                </svg>
+                <span>{f}</span>
+              </li>
+            ))}
+          </ul>
+
+          <a
+            href="#contact"
+            class={`mt-auto inline-flex items-center justify-center px-6 py-3 rounded-lg font-medium transition-all hover:scale-[1.02] ${
+              t.highlighted
+                ? "bg-accent text-white hover:bg-accent-hover shadow-lg shadow-accent/20"
+                : "bg-bg-deep border border-border text-text-primary hover:border-accent"
+            }`}
+          >
+            {t.cta} →
+          </a>
+        </div>
+      ))}
+    </div>
+
+    {/* Trust badges */}
+    <div class="mt-16 flex flex-wrap items-center justify-center gap-x-10 gap-y-4">
+      {badges.map((b) => (
+        <div class="inline-flex items-center gap-2 text-sm text-text-secondary">
+          <svg
+            class="w-5 h-5 text-success"
+            viewBox="0 0 24 24"
+            fill="none"
+            stroke="currentColor"
+            stroke-width="2.2"
+            stroke-linecap="round"
+            stroke-linejoin="round"
+            aria-hidden="true"
+          >
+            <path d="M20 6 9 17l-5-5" />
+          </svg>
+          <span>{b}</span>
+        </div>
+      ))}
+    </div>
+  </div>
+</section>

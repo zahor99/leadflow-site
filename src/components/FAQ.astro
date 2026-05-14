@@ -1,0 +1,93 @@
+---
+// FAQ — accordion using native <details>/<summary>. No JS framework needed.
+// Each question is an objection in disguise. Answers per spec § 4.2 (Section 10).
+const faqs = [
+  {
+    q: "How is this different from just using ChatGPT?",
+    a: "ChatGPT is a tool. We build systems. Your AI agents work 24/7, connect to your CRM, follow up with leads, and get smarter over time. No prompting required.",
+  },
+  {
+    q: "What if the AI makes mistakes?",
+    a: "Every system has human-in-the-loop checkpoints. AI handles the volume; you approve the decisions that matter. We monitor and fine-tune continuously.",
+  },
+  {
+    q: "How long until I see results?",
+    a: "Most clients see their first automated lead follow-up within 2 weeks. Full ROI typically appears within 30–60 days.",
+  },
+  {
+    q: "Do I need technical staff to manage this?",
+    a: "No. We build it, we maintain it, we optimize it. You interact through simple dashboards and your existing tools (email, phone, CRM).",
+  },
+  {
+    q: "What happens if I want to cancel?",
+    a: "No long-term contracts. Cancel anytime. Your automations and data belong to you.",
+  },
+  {
+    q: "Can you show me examples of your work?",
+    a: "We automated our own e-commerce operation: 97 products, 135 product variants, multi-platform publishing, 100+ social posts/week — all AI-orchestrated. We build for ourselves first, then for you.",
+  },
+];
+
+// FAQPage JSON-LD — enables rich-snippet eligibility in Google.
+const faqSchema = JSON.stringify({
+  "@context": "https://schema.org",
+  "@type": "FAQPage",
+  mainEntity: faqs.map((f) => ({
+    "@type": "Question",
+    name: f.q,
+    acceptedAnswer: {
+      "@type": "Answer",
+      text: f.a,
+    },
+  })),
+});
+---
+<section id="faq" class="border-b border-border">
+  <div class="max-w-3xl mx-auto px-6 py-24">
+    <h2 class="text-center mb-4">Questions? We've Got Answers.</h2>
+    <p class="text-center text-text-secondary max-w-xl mx-auto mb-16">
+      The most common ones we hear on the audit call.
+    </p>
+
+    <div class="space-y-3">
+      {faqs.map((f) => (
+        <details
+          class="faq-item group bg-bg-elevated border border-border rounded-xl overflow-hidden hover:border-accent/40 transition-colors"
+        >
+          <summary
+            class="flex items-center justify-between gap-4 cursor-pointer list-none px-6 py-5 select-none"
+          >
+            <h3 class="text-base md:text-lg font-medium text-text-primary">{f.q}</h3>
+            <svg
+              class="w-5 h-5 flex-shrink-0 text-accent transition-transform duration-200 group-open:rotate-45"
+              viewBox="0 0 24 24"
+              fill="none"
+              stroke="currentColor"
+              stroke-width="2"
+              stroke-linecap="round"
+              stroke-linejoin="round"
+              aria-hidden="true"
+            >
+              <path d="M12 5v14M5 12h14" />
+            </svg>
+          </summary>
+          <div class="px-6 pb-6 -mt-1">
+            <p class="text-text-secondary leading-relaxed">{f.a}</p>
+          </div>
+        </details>
+      ))}
+    </div>
+  </div>
+</section>
+
+<style>
+  /* Native <summary> ships with a default marker — kill it. */
+  .faq-item summary::-webkit-details-marker {
+    display: none;
+  }
+  .faq-item summary::marker {
+    content: "";
+  }
+</style>
+
+<script type="application/ld+json" set:html={faqSchema} />

@@ -1,0 +1,87 @@
+---
+// Case study — our POD automation system IS the case study.
+// Spec: docs/2026-04-02-leadflow-agency-website-design.md § 4.2 (Section 8).
+const tools = ["Printify", "Etsy", "Shopify", "Supabase", "Pinterest", "Airtable"];
+
+const subStats = [
+  { value: "97", label: "products created by AI agents" },
+  { value: "10", label: "listing images per product" },
+  { value: "7", label: "panel artwork per garment" },
+  { value: "4", label: "platforms: Printify → Etsy → Shopify → Pinterest" },
+];
+---
+<section class="border-b border-border">
+  <div class="max-w-6xl mx-auto px-6 py-24">
+    <p class="text-center text-accent font-medium tracking-wider uppercase text-xs mb-4">
+      Case study · E-commerce product automation
+    </p>
+    <h2 class="text-center mb-4">Built For Our Own Business First</h2>
+    <p class="text-center text-text-secondary max-w-2xl mx-auto mb-16">
+      The same automation stack we sell, running every day in our own stores.
+    </p>
+
+    {/* Hero before/after transition */}
+    <div class="bg-bg-elevated border border-border rounded-2xl p-8 md:p-12 mb-12">
+      <div class="grid md:grid-cols-[1fr_auto_1fr] gap-8 items-center">
+        <div class="text-center md:text-right">
+          <div class="text-xs uppercase tracking-wider text-text-secondary mb-2">Before</div>
+          <div class="text-5xl md:text-6xl font-extrabold text-text-secondary tabular-nums line-through decoration-text-secondary/40">
+            4 hours
+          </div>
+          <div class="text-text-secondary text-sm mt-2">per product (manual)</div>
+        </div>
+        <div class="hidden md:flex flex-col items-center justify-center text-accent">
+          <svg width="40" height="40" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+            <path d="M5 12h14M13 5l7 7-7 7" />
+          </svg>
+        </div>
+        <div class="md:hidden flex justify-center text-accent">
+          <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+            <path d="M12 5v14M19 12l-7 7-7-7" />
+          </svg>
+        </div>
+        <div class="text-center md:text-left">
+          <div class="text-xs uppercase tracking-wider text-accent-2 mb-2">After</div>
+          <div class="text-5xl md:text-6xl font-extrabold text-accent-2 tabular-nums">
+            12 minutes
+          </div>
+          <div class="text-text-secondary text-sm mt-2">per product (AI agents)</div>
+        </div>
+      </div>
+    </div>
+
+    {/* Sub-stats grid */}
+    <div class="grid grid-cols-2 md:grid-cols-4 gap-6 mb-16">
+      {subStats.map((s) => (
+        <div class="bg-bg-elevated border border-border rounded-xl p-6 text-center">
+          <div class="text-3xl md:text-4xl font-extrabold text-accent mb-2 tabular-nums">
+            {s.value}
+          </div>
+          <div class="text-text-secondary text-sm leading-snug">{s.label}</div>
+        </div>
+      ))}
+    </div>
+
+    {/* Tool-mark row — same pattern as CredibilityBar */}
+    <p class="text-center text-xs text-text-secondary uppercase tracking-wider mb-6">
+      Stack we built it on
+    </p>
+    <div class="flex flex-wrap items-center justify-center gap-x-12 gap-y-4 mb-16">
+      {tools.map((name) => (
+        <span class="font-bold text-text-secondary text-lg tracking-tight opacity-60 hover:opacity-90 transition-opacity">
+          {name}
+        </span>
+      ))}
+    </div>
+
+    {/* Pull-quote */}
+    <figure class="max-w-2xl mx-auto text-center">
+      <svg class="w-8 h-8 text-accent/40 mx-auto mb-4" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
+        <path d="M7.17 9.17A4.997 4.997 0 0 0 4 14h3v6H1v-6a8 8 0 0 1 8-8v3a4.99 4.99 0 0 0-1.83 1.17zM17.17 9.17A4.997 4.997 0 0 0 14 14h3v6h-6v-6a8 8 0 0 1 8-8v3a4.99 4.99 0 0 0-2.83 1.17z" />
+      </svg>
+      <blockquote class="text-xl md:text-2xl font-medium text-text-primary leading-relaxed">
+        We built this system for our own stores. Now we build them for you.
+      </blockquote>
+    </figure>
+  </div>
+</section>
