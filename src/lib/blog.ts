@@ -13,12 +13,27 @@ const TABLE_ID = "tblUQPFtXJSU4PiS9";
 const FIELD_IDEA = "fldeuzFTtW9mK48Pq"; // "Idea" / topic
 const FIELD_DRAFT = "flduKUGW9EzBHLFop"; // "Blog Article Draft"
 const FIELD_STATUS = "fldNM1sBbY37VoOj2"; // "Status"
+const FIELD_DIAGRAM = "fld4UpEclclvMg2Dp"; // "Diagram" (multipleAttachments)
+const FIELD_DIAGRAM_DESC = "fldbu7o6RM1cDrZSw"; // "Diagram Description"
+
+interface AirtableAttachment {
+  id: string;
+  url: string;
+  filename: string;
+  width?: number;
+  height?: number;
+  type?: string;
+}
 
 export interface BlogRow {
   id: string;
   idea: string;
   draft: string;
   status: string;
+  /** URL of the first attachment in Diagram field, if any. Used as hero image. */
+  heroImageUrl?: string;
+  /** Alt-text source for the hero image. Falls back to article title. */
+  heroImageAlt?: string;
 }
 
 interface AirtableRecord {
@@ -56,6 +71,8 @@ export async function fetchBlogRows(): Promise<BlogRow[]> {
   params.append("fields[]", FIELD_IDEA);
   params.append("fields[]", FIELD_DRAFT);
   params.append("fields[]", FIELD_STATUS);
+  params.append("fields[]", FIELD_DIAGRAM);
+  params.append("fields[]", FIELD_DIAGRAM_DESC);
   params.append("filterByFormula", filter);
   params.append("pageSize", "100");
   // Force field-ID-keyed responses so a future rename of the Airtable
@@ -91,7 +108,26 @@ export async function fetchBlogRows(): Promise<BlogRow[]> {
             ? String((statusRaw as { name: string }).name)
             : "";
       if (!draft.trim()) continue;
-      rows.push({ id: r.id, idea, draft, status });
+
+      // Hero image: take the FIRST attachment in the Diagram field.
+      // Convention (see blog-writer-seo SKILL.md): the publisher-blog and
+      // visual-generator skills upload the operator-picked variant as
+      // attachments[0]. If none present, the article renders no hero.
+      const attachments = (r.fields[FIELD_DIAGRAM] ?? []) as AirtableAttachment[];
+      const hero = Array.isArray(attachments) && attachments.length > 0 ? attachments[0] : null;
+      const heroDesc = (r.fields[FIELD_DIAGRAM_DESC] ?? "") as string;
+
+      rows.push({
+        id: r.id,
+        idea,
+        draft,
+        status,
+        heroImageUrl: hero?.url,
+        heroImageAlt: hero
+          ? // First line of Diagram Description if it's short; else the article title.
+            (heroDesc.split("\n")[0] || "").trim().slice(0, 140) || idea
+          : undefined,
+      });
     }
     offset = json.offset;
   } while (offset);

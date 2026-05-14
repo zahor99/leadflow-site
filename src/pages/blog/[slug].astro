@@ -26,16 +26,20 @@ export async function getStaticPaths() {
           markdown,
           title: h1,
           status: row.status,
+          heroImageUrl: row.heroImageUrl,
+          heroImageAlt: row.heroImageAlt || h1,
         },
       };
     })
     .filter((p): p is NonNullable<typeof p> => p !== null);
 }
 
-const { markdown, title, status } = Astro.props as {
+const { markdown, title, status, heroImageUrl, heroImageAlt } = Astro.props as {
   markdown: string;
   title: string;
   status: string;
+  heroImageUrl?: string;
+  heroImageAlt?: string;
 };
 
 // Pull AEO JSON-LD blocks out before rendering body markdown so they don't
@@ -61,6 +65,17 @@ const isDraft = status === "draft";
         </div>
       )}
       <h1 class="mb-8">{title}</h1>
+      {heroImageUrl && (
+        <figure class="mb-10 -mx-6 sm:mx-0">
+          <img
+            src={heroImageUrl}
+            alt={heroImageAlt}
+            class="w-full h-auto rounded-xl border border-border bg-bg-elevated"
+            loading="eager"
+            decoding="async"
+          />
+        </figure>
+      )}
       <div class="article-body" set:html={bodyHtml} />
       <hr class="my-12 border-border" />
       <p class="text-text-secondary text-sm">
