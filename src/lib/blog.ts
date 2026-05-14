@@ -47,6 +47,22 @@ interface AirtableListResponse {
 }
 
 /**
+ * Build a same-origin path for a row's hero image. The actual file is
+ * downloaded at build time by `scripts/fetch-hero-images.mjs` and emitted
+ * to `public/blog-heroes/<rowId>.<ext>`, which Astro copies into `dist/`.
+ *
+ * If the prebuild step was skipped (e.g. AIRTABLE_PAT missing in local dev),
+ * the file won't exist and the <img> will 404. That's the same failure
+ * mode as before — we've just shifted it off the Airtable CDN.
+ */
+export function localHeroPath(rowId: string, filename: string): string {
+  const m = (filename || "").toLowerCase().match(/\.([a-z0-9]+)$/);
+  const allowed = new Set(["png", "jpg", "jpeg", "webp", "gif", "svg"]);
+  const ext = m && allowed.has(m[1]) ? `.${m[1]}` : ".png";
+  return `/blog-heroes/${rowId}${ext}`;
+}
+
+/**
  * Fetches rows from the X Content Pipeline where Blog Article Draft is
  * non-empty AND Status is 'draft' or 'published'. Build-time only.
  */
@@ -122,7 +138,9 @@ export async function fetchBlogRows(): Promise<BlogRow[]> {
         idea,
         draft,
         status,
-        heroImageUrl: hero?.url,
+        // Point at the same-origin path written by scripts/fetch-hero-images.mjs.
+        // Avoids relying on v5.airtableusercontent.com URLs that expire ~6mo out.
+        heroImageUrl: hero ? localHeroPath(r.id, hero.filename) : undefined,
         heroImageAlt: hero
           ? // First line of Diagram Description if it's short; else the article title.
             (heroDesc.split("\n")[0] || "").trim().slice(0, 140) || idea
