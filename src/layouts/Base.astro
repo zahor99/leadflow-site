@@ -1,0 +1,83 @@
+---
+import "@fontsource-variable/inter";
+import "@fontsource-variable/jetbrains-mono";
+import "../styles/global.css";
+
+interface Props {
+  title: string;
+  description?: string;
+  ogImage?: string;
+  canonical?: string;
+  /** Extra JSON-LD blocks (already-stringified objects). */
+  schema?: string[];
+}
+
+const SITE_URL = "https://leadflowautomation.com";
+const SITE_NAME = "Lead Flow Automation";
+const DEFAULT_OG = `${SITE_URL}/og-default.png`;
+
+const {
+  title,
+  description = "AI automation systems for service businesses. Stop losing leads to slow follow-up — start closing more.",
+  ogImage = DEFAULT_OG,
+  canonical = Astro.url.href,
+  schema = [],
+} = Astro.props;
+
+const fullTitle = title.includes(SITE_NAME) ? title : `${title} | ${SITE_NAME}`;
+
+// Default Organization schema injected on every page.
+const orgSchema = JSON.stringify({
+  "@context": "https://schema.org",
+  "@type": "ProfessionalService",
+  name: SITE_NAME,
+  url: SITE_URL,
+  description: "AI-powered lead generation, follow-up automation, and business process automation for service businesses.",
+  founder: { "@type": "Person", name: "Gergely Zsigmond" },
+  areaServed: ["US", "EU", "APAC"],
+});
+---
+<!DOCTYPE html>
+<html lang="en" class="scroll-smooth">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="generator" content={Astro.generator} />
+
+    <title>{fullTitle}</title>
+    <meta name="description" content={description} />
+    <link rel="canonical" href={canonical} />
+
+    <!-- Favicon (placeholder; swap in branded mark Day 5) -->
+    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+
+    <!-- Open Graph -->
+    <meta property="og:type" content="website" />
+    <meta property="og:site_name" content={SITE_NAME} />
+    <meta property="og:title" content={fullTitle} />
+    <meta property="og:description" content={description} />
+    <meta property="og:url" content={canonical} />
+    <meta property="og:image" content={ogImage} />
+
+    <!-- Twitter -->
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:title" content={fullTitle} />
+    <meta name="twitter:description" content={description} />
+    <meta name="twitter:image" content={ogImage} />
+
+    <!-- Theme -->
+    <meta name="theme-color" content="#0A0A0F" />
+
+    <!-- Schema -->
+    <script type="application/ld+json" set:html={orgSchema} />
+    {schema.map((block) => (
+      <script type="application/ld+json" set:html={block} />
+    ))}
+
+    <!-- Analytics placeholder (swap to Plausible/Umami at launch) -->
+    <!-- <script defer data-domain="leadflowautomation.com" src="https://plausible.io/js/script.js"></script> -->
+  </head>
+  <body class="bg-bg-deep text-text-primary">
+    <slot />
+  </body>
+</html>
