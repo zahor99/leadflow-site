@@ -1,0 +1,88 @@
+---
+import Base from "../../layouts/Base.astro";
+import Nav from "../../components/Nav.astro";
+import Footer from "../../components/Footer.astro";
+import { fetchBlogRows, deriveSlug, extractH1, extractTldrFirstSentence, extractAeoMeta } from "../../lib/blog.ts";
+
+// Build-time fetch from Airtable. AIRTABLE_PAT is a build-only env var
+// (no PUBLIC_ prefix) — Astro will NOT inline it into the client bundle.
+const rows = await fetchBlogRows();
+
+const articles = rows
+  .map((row) => {
+    const markdown = row.draft ?? "";
+    const h1 = extractH1(markdown);
+    if (!h1) return null;
+    return {
+      slug: deriveSlug(h1),
+      title: h1,
+      summary: extractTldrFirstSentence(markdown),
+      primaryKeyword: extractAeoMeta(markdown).primary_keyword,
+      status: row.status,
+      idea: row.idea,
+    };
+  })
+  .filter((a): a is NonNullable<typeof a> => a !== null);
+---
+<Base
+  title="Blog"
+  description="Field notes on AI automation for service businesses — what actually ships, what breaks, and the dollar math behind each playbook."
+>
+  <Nav />
+  <main>
+    <section class="bg-hero-glow">
+      <div class="max-w-4xl mx-auto px-6 pt-24 pb-12 text-center">
+        <p class="text-accent font-medium tracking-wider uppercase text-xs mb-6">
+          Field Notes
+        </p>
+        <h1 class="mb-6">The Blog</h1>
+        <p class="text-lg sm:text-xl text-text-secondary leading-relaxed max-w-2xl mx-auto">
+          What actually ships in AI automation, what breaks, and the dollar math behind each playbook.
+        </p>
+      </div>
+    </section>
+
+    <section class="max-w-4xl mx-auto px-6 pb-24">
+      {articles.length === 0 ? (
+        <p class="text-text-secondary text-center py-16">
+          No articles published yet. Check back soon.
+        </p>
+      ) : (
+        <ul class="grid gap-6">
+          {articles.map((a) => (
+            <li>
+              <a
+                href={`/blog/${a.slug}/`}
+                class="block bg-bg-elevated border border-border rounded-xl p-6 hover:border-accent transition-colors group"
+              >
+                <div class="flex items-center gap-3 mb-3">
+                  {a.primaryKeyword && (
+                    <span class="text-accent text-xs font-mono tracking-wider uppercase">
+                      {a.primaryKeyword}
+                    </span>
+                  )}
+                  {a.status === "draft" && (
+                    <span class="text-xs px-2 py-0.5 rounded bg-bg-subtle text-text-secondary border border-border">
+                      Draft preview
+                    </span>
+                  )}
+                </div>
+                <h2 class="text-2xl font-bold mb-3 group-hover:text-accent transition-colors">
+                  {a.title}
+                </h2>
+                {a.summary && (
+                  <p class="text-text-secondary leading-relaxed">{a.summary}</p>
+                )}
+                <p class="mt-4 text-accent text-sm inline-flex items-center gap-1">
+                  Read article
+                  <span aria-hidden="true">→</span>
+                </p>
+              </a>
+            </li>
+          ))}
+        </ul>
+      )}
+    </section>
+  </main>
+  <Footer />
+</Base>

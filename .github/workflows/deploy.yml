@@ -22,8 +22,8 @@ jobs:
         uses: actions/checkout@v4
       - name: Install, build, and upload site
         uses: withastro/action@v3
-        # env:
-        #   AIRTABLE_PAT: ${{ secrets.LFA_AIRTABLE_PAT }}   # uncomment when blog routes pull from Airtable
+        env:
+          AIRTABLE_PAT: ${{ secrets.AIRTABLE_PAT }}   # required by src/lib/blog.ts for build-time Airtable fetch
 
   deploy:
     needs: build

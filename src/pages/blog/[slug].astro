@@ -1,0 +1,75 @@
+---
+import { marked } from "marked";
+import Base from "../../layouts/Base.astro";
+import Nav from "../../components/Nav.astro";
+import Footer from "../../components/Footer.astro";
+import {
+  fetchBlogRows,
+  deriveSlug,
+  extractH1,
+  extractTldrFirstSentence,
+  extractAeoSchemaBlocks,
+  stripAeoComments,
+} from "../../lib/blog.ts";
+
+export async function getStaticPaths() {
+  const rows = await fetchBlogRows();
+  return rows
+    .map((row) => {
+      const markdown = row.draft ?? "";
+      const h1 = extractH1(markdown);
+      if (!h1) return null;
+      const slug = deriveSlug(h1);
+      return {
+        params: { slug },
+        props: {
+          markdown,
+          title: h1,
+          status: row.status,
+        },
+      };
+    })
+    .filter((p): p is NonNullable<typeof p> => p !== null);
+}
+
+const { markdown, title, status } = Astro.props as {
+  markdown: string;
+  title: string;
+  status: string;
+};
+
+// Pull AEO JSON-LD blocks out before rendering body markdown so they don't
+// appear as visible comments in the rendered article.
+const schemaBlocks = extractAeoSchemaBlocks(markdown);
+const cleaned = stripAeoComments(markdown);
+
+// Drop the first H1 (we render it ourselves) and parse the rest.
+const bodyMarkdown = cleaned.replace(/^#\s+.+\n/, "");
+const bodyHtml = marked.parse(bodyMarkdown, { async: false }) as string;
+
+const description = extractTldrFirstSentence(markdown).slice(0, 160);
+const isDraft = status === "draft";
+---
+<Base title={title} description={description} schema={schemaBlocks}>
+  <Nav />
+  <main>
+    <article class="max-w-3xl mx-auto px-6 pt-16 pb-24">
+      {isDraft && (
+        <div class="mb-6 inline-flex items-center gap-2 px-3 py-1 rounded-md bg-bg-subtle border border-border text-xs text-text-secondary">
+          <span class="w-2 h-2 rounded-full bg-accent-2"></span>
+          Draft preview — not yet published
+        </div>
+      )}
+      <h1 class="mb-8">{title}</h1>
+      <div class="article-body" set:html={bodyHtml} />
+      <hr class="my-12 border-border" />
+      <p class="text-text-secondary text-sm">
+        Want this kind of system in your business?
+        <a href="/#contact" class="text-accent hover:text-accent-hover">
+          Book a free AI audit →
+        </a>
+      </p>
+    </article>
+  </main>
+  <Footer />
+</Base>
