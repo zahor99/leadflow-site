@@ -3,13 +3,12 @@ import { defineConfig } from 'astro/config';
 import sitemap from '@astrojs/sitemap';
 import tailwindcss from '@tailwindcss/vite';
 
-// While the custom domain (leadflowautomation.com) is being recovered, the site
-// serves from https://zahor99.github.io/leadflow-site/ — so all asset URLs need
-// to be prefixed with /leadflow-site/. Once the custom domain is live, restore
-// `site: 'https://leadflowautomation.com'` and remove the `base` line.
+// Custom domain is leadflowautomation.net (www-canonical). The CNAME file
+// in /public tells GitHub Pages to serve from www.leadflowautomation.net,
+// and apex (leadflowautomation.net) auto-redirects to www via GitHub.
+// (.com was lost in late-2025 expiry; recovered with .net 2026-05-14.)
 export default defineConfig({
-  site: 'https://zahor99.github.io',
-  base: '/leadflow-site/',
+  site: 'https://www.leadflowautomation.net',
   integrations: [sitemap()],
   vite: {
     plugins: [tailwindcss()],

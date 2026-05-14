@@ -1,4 +1,4 @@
 User-agent: *
 Allow: /
 
-Sitemap: https://leadflowautomation.com/sitemap-index.xml
+Sitemap: https://www.leadflowautomation.net/sitemap-index.xml
