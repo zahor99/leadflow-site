@@ -1,0 +1,58 @@
+---
+const steps = [
+  {
+    num: "01",
+    name: "Free AI Audit",
+    body: "We map your workflows and find the automation opportunities with the highest ROI for your business.",
+    // Lucide search
+    iconPath: "M11 19a8 8 0 1 0 0-16 8 8 0 0 0 0 16zM21 21l-4.35-4.35",
+  },
+  {
+    num: "02",
+    name: "Custom Build",
+    body: "We design and deploy your AI systems in 1-2 weeks. No disruption to current operations.",
+    // Lucide wrench
+    iconPath: "M14.7 6.3a1 1 0 0 0 0 1.4l1.6 1.6a1 1 0 0 0 1.4 0l3.77-3.77a6 6 0 0 1-7.94 7.94l-6.91 6.91a2.12 2.12 0 0 1-3-3l6.91-6.91a6 6 0 0 1 7.94-7.94l-3.76 3.76z",
+  },
+  {
+    num: "03",
+    name: "Measurable Results",
+    body: "You save 20+ hours/week while we monitor, optimize, and scale what's working.",
+    // Lucide trending-up
+    iconPath: "M23 6l-9.5 9.5-5-5L1 18M17 6h6v6",
+  },
+];
+---
+<section id="process" class="border-b border-border bg-bg-elevated/20">
+  <div class="max-w-6xl mx-auto px-6 py-24">
+    <h2 class="text-center mb-4">How It Works</h2>
+    <p class="text-center text-text-secondary max-w-xl mx-auto mb-16">
+      From the first audit call to a system that runs itself, in three steps.
+    </p>
+    <div class="grid md:grid-cols-3 gap-8 relative">
+      {/* Subtle connector line between steps on desktop */}
+      <div class="hidden md:block absolute top-8 left-[16.6%] right-[16.6%] h-px bg-border" aria-hidden="true"></div>
+
+      {steps.map((s) => (
+        <div class="text-center relative">
+          <div class="inline-flex items-center justify-center w-16 h-16 rounded-full bg-bg-deep border-2 border-accent/30 text-accent mb-6 relative z-10">
+            <svg
+              class="w-7 h-7"
+              viewBox="0 0 24 24"
+              fill="none"
+              stroke="currentColor"
+              stroke-width="1.8"
+              stroke-linecap="round"
+              stroke-linejoin="round"
+            >
+              <path d={s.iconPath} />
+            </svg>
+          </div>
+          <div class="text-accent font-bold tracking-wider text-xs mb-2">{s.num}</div>
+          <h3 class="mb-3">{s.name}</h3>
+          <p class="text-text-secondary text-base leading-relaxed max-w-xs mx-auto">{s.body}</p>
+        </div>
+      ))}
+    </div>
+  </div>
+</section>

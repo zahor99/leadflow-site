@@ -1,0 +1,66 @@
+---
+const services = [
+  {
+    name: "Never Miss a Lead Again",
+    summary: "AI Lead Generation",
+    body: "AI captures and qualifies every lead from your website, phone, and social media — then follows up in under 60 seconds.",
+    // Lucide phone-call
+    iconPath: "M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z",
+  },
+  {
+    name: "Close Faster, Without the Hustle",
+    summary: "Automated Follow-Up",
+    body: "Automated SMS, email, and voicemail sequences nurture leads until they book — no manual work, no leads slipping through.",
+    // Lucide message-circle-reply
+    iconPath: "M7.9 20A9 9 0 1 0 4 16.1L2 22zM12 13l-2-2 2-2",
+  },
+  {
+    name: "Content That Creates Itself",
+    summary: "Content & Social Automation",
+    body: "An AI-powered content engine that produces and publishes 100+ pieces per week across your social channels.",
+    // Lucide zap
+    iconPath: "M13 2 3 14h9l-1 8 10-12h-9l1-8z",
+  },
+  {
+    name: "Your AI Workforce",
+    summary: "Custom AI Agent Teams",
+    body: "Purpose-built AI agents for any repetitive business process: data entry, customer support, scheduling, reporting.",
+    // Lucide users / bot
+    iconPath: "M12 8V4H8M4 12h6v6H4zM14 12h6v6h-6zM12 16H8M16 8V4h4M12 20v-4",
+  },
+];
+---
+<section id="services" class="border-b border-border">
+  <div class="max-w-6xl mx-auto px-6 py-24">
+    <h2 class="text-center mb-4">What We Build For You</h2>
+    <p class="text-center text-text-secondary max-w-xl mx-auto mb-16">
+      Four service tiers. Every one outcome-priced.
+    </p>
+    <div class="grid md:grid-cols-2 gap-6">
+      {services.map((s) => (
+        <div class="bg-bg-elevated border border-border rounded-xl p-8 hover:-translate-y-0.5 hover:shadow-lg hover:shadow-accent/10 transition-all">
+          <div class="flex items-start gap-4 mb-4">
+            <div class="flex-shrink-0 inline-flex items-center justify-center w-12 h-12 rounded-lg bg-accent/10 text-accent">
+              <svg
+                class="w-6 h-6"
+                viewBox="0 0 24 24"
+                fill="none"
+                stroke="currentColor"
+                stroke-width="1.8"
+                stroke-linecap="round"
+                stroke-linejoin="round"
+              >
+                <path d={s.iconPath} />
+              </svg>
+            </div>
+            <div>
+              <div class="text-xs text-accent font-medium tracking-wider uppercase mb-1">{s.summary}</div>
+              <h3 class="text-xl">{s.name}</h3>
+            </div>
+          </div>
+          <p class="text-text-secondary text-base leading-relaxed">{s.body}</p>
+        </div>
+      ))}
+    </div>
+  </div>
+</section>

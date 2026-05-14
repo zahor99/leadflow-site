@@ -1,0 +1,56 @@
+---
+const base = import.meta.env.BASE_URL;
+---
+<header class="sticky top-0 z-30 backdrop-blur-md bg-bg-deep/70 border-b border-border">
+  <nav class="max-w-6xl mx-auto px-6 py-4 flex items-center justify-between">
+    <a href={base} class="font-bold text-xl tracking-tight">
+      Lead<span class="text-accent">Flow</span>
+    </a>
+    <div class="hidden md:flex items-center gap-8 text-sm text-text-secondary">
+      <a href="#services" class="hover:text-text-primary transition-colors">Services</a>
+      <a href="#process" class="hover:text-text-primary transition-colors">Process</a>
+      <a href="#contact" class="hover:text-text-primary transition-colors">Contact</a>
+      <a
+        href="#contact"
+        class="inline-flex items-center px-4 py-2 rounded-lg bg-accent text-white font-medium hover:bg-accent-hover transition-all hover:scale-[1.02]"
+      >
+        Book My Free Audit →
+      </a>
+    </div>
+    <button
+      class="md:hidden text-text-primary p-2 -mr-2"
+      aria-label="Open menu"
+      data-nav-toggle
+    >
+      <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+        <path d="M4 6h16M4 12h16M4 18h16" />
+      </svg>
+    </button>
+  </nav>
+</header>
+
+<!--
+  Mobile menu (hidden by default; toggled via data-nav-toggle).
+  Kept minimal for Day 2; Day 5 polish adds slide-out + a11y.
+-->
+<div class="md:hidden hidden border-b border-border bg-bg-deep" data-nav-panel>
+  <div class="px-6 py-4 flex flex-col gap-3 text-sm text-text-secondary">
+    <a href="#services" class="py-2 hover:text-text-primary">Services</a>
+    <a href="#process" class="py-2 hover:text-text-primary">Process</a>
+    <a href="#contact" class="py-2 hover:text-text-primary">Contact</a>
+    <a
+      href="#contact"
+      class="inline-flex items-center justify-center px-4 py-2 rounded-lg bg-accent text-white font-medium hover:bg-accent-hover transition-all"
+    >
+      Book My Free Audit →
+    </a>
+  </div>
+</div>
+
+<script>
+  const btn = document.querySelector('[data-nav-toggle]');
+  const panel = document.querySelector('[data-nav-panel]');
+  btn?.addEventListener('click', () => {
+    panel?.classList.toggle('hidden');
+  });
+</script>

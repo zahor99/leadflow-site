@@ -1,0 +1,19 @@
+---
+// Integration logos — honest "integrates with" framing, not "trusted by".
+// Day 2 uses text-mark approximations; Day 5 polish can swap to actual SVG logos.
+const tools = ["Make", "n8n", "Zapier", "HubSpot", "Slack", "Airtable", "Cal.com"];
+---
+<section class="border-y border-border bg-bg-elevated/30">
+  <div class="max-w-6xl mx-auto px-6 py-12">
+    <p class="text-center text-xs text-text-secondary uppercase tracking-wider mb-8">
+      Integrates with the tools you already use
+    </p>
+    <div class="flex flex-wrap items-center justify-center gap-x-12 gap-y-6">
+      {tools.map((name) => (
+        <span class="font-bold text-text-secondary text-lg tracking-tight opacity-60 hover:opacity-90 transition-opacity">
+          {name}
+        </span>
+      ))}
+    </div>
+  </div>
+</section>
