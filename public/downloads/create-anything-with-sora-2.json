@@ -1,0 +1,1394 @@
+{
+  "name": "Create Anything with Sora 2",
+  "nodes": [
+    {
+      "parameters": {},
+      "type": "n8n-nodes-base.manualTrigger",
+      "typeVersion": 1,
+      "position": [
+        -16,
+        0
+      ],
+      "id": "f4d8f446-95b0-4f8c-afae-d8f1618108cc",
+      "name": "When clicking ‘Execute workflow’"
+    },
+    {
+      "parameters": {
+        "assignments": {
+          "assignments": [
+            {
+              "id": "363abbd9-5ed8-4b6a-b1a0-739893a02fff",
+              "name": "video_prompt",
+              "value": "A professor stands at the front of a lively classroom, enthusiastically giving a lecture. On the blackboard behind him are colorful chalk diagrams. With an animated gesture, he declares to the students: 'Sora 2 is now available on Kie AI, making it easier than ever to create stunning videos.' The students listen attentively, some smiling and taking notes.",
+              "type": "string"
+            }
+          ]
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.set",
+      "typeVersion": 3.4,
+      "position": [
+        144,
+        0
+      ],
+      "id": "065c2e80-591d-4de2-80a6-217821a7381b",
+      "name": "Video Prompt"
+    },
+    {
+      "parameters": {
+        "method": "POST",
+        "url": "https://api.kie.ai/api/v1/jobs/createTask",
+        "authentication": "genericCredentialType",
+        "genericAuthType": "httpHeaderAuth",
+        "sendBody": true,
+        "specifyBody": "json",
+        "jsonBody": "={\n  \"model\": \"sora-2-text-to-video\",\n  \"input\": {\n    \"prompt\": \"{{ $json.video_prompt }}\",\n    \"aspect_ratio\": \"landscape\",\n    \"n_frames\": \"10\",\n    \"remove_watermark\": true\n  }\n}",
+        "options": {}
+      },
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 4.2,
+      "position": [
+        304,
+        0
+      ],
+      "id": "be374dc6-bd43-44a6-9db8-1f332cc74bdc",
+      "name": "Text to Video",
+      "credentials": {
+        "httpHeaderAuth": {
+          "id": "bLqwqOamT6YeUyUY",
+          "name": "Kie"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "amount": 10
+      },
+      "type": "n8n-nodes-base.wait",
+      "typeVersion": 1.1,
+      "position": [
+        448,
+        0
+      ],
+      "id": "851f7476-c9fd-463d-903d-9fa29858a06c",
+      "name": "Wait",
+      "webhookId": "9fd30610-c0b9-4f5c-9af5-89b821c11ec3"
+    },
+    {
+      "parameters": {
+        "url": "https://api.kie.ai/api/v1/jobs/recordInfo",
+        "authentication": "genericCredentialType",
+        "genericAuthType": "httpHeaderAuth",
+        "sendQuery": true,
+        "queryParameters": {
+          "parameters": [
+            {
+              "name": "taskId",
+              "value": "={{ $json.data.taskId }}"
+            }
+          ]
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 4.2,
+      "position": [
+        592,
+        0
+      ],
+      "id": "4dbd0eac-9bbc-45b6-afcb-8f0e1a5e9dcd",
+      "name": "Get Video",
+      "credentials": {
+        "httpHeaderAuth": {
+          "id": "bLqwqOamT6YeUyUY",
+          "name": "Kie"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "conditions": {
+          "options": {
+            "caseSensitive": true,
+            "leftValue": "",
+            "typeValidation": "strict",
+            "version": 2
+          },
+          "conditions": [
+            {
+              "id": "4f9a9a29-cc45-4e39-a1a0-e78caadbab09",
+              "leftValue": "={{ $json.data.state }}",
+              "rightValue": "success",
+              "operator": {
+                "type": "string",
+                "operation": "equals",
+                "name": "filter.operator.equals"
+              }
+            }
+          ],
+          "combinator": "and"
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.if",
+      "typeVersion": 2.2,
+      "position": [
+        736,
+        0
+      ],
+      "id": "238962e0-1070-4710-ac29-38bcd22b706e",
+      "name": "If"
+    },
+    {
+      "parameters": {
+        "content": "## Setup\nSee the accompanying SETUP.md for configuration steps (credentials, trigger, and node setup).",
+        "height": 336,
+        "width": 1152,
+        "color": 5
+      },
+      "type": "n8n-nodes-base.stickyNote",
+      "typeVersion": 1,
+      "position": [
+        -64,
+        -112
+      ],
+      "id": "cc983826-adc0-41e4-a224-a062fc8329c5",
+      "name": "Sticky Note"
+    },
+    {
+      "parameters": {
+        "assignments": {
+          "assignments": [
+            {
+              "id": "20ef7845-0ae5-4f77-bbf0-7e4e28a3b12f",
+              "name": "video_prompt",
+              "value": "A realistic UGC style video of a young woman with curly hair sitting in her car recording a selfie style video of herself holding the product, which is in the source image. Nothing about the product from the source image should change. It should appear exactly as given. In the video, the woman says, 'I absolutely love this curl cream. It keeps my hair bouncy, curly, and lightweight all day long. You guys HAVE to try it!' She speaks enthusiastically and authentically.",
+              "type": "string"
+            }
+          ]
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.set",
+      "typeVersion": 3.4,
+      "position": [
+        304,
+        352
+      ],
+      "id": "44d215a3-faf5-46a3-8c9b-132ea6e7d2ff",
+      "name": "Video Prompt1"
+    },
+    {
+      "parameters": {
+        "assignments": {
+          "assignments": [
+            {
+              "id": "02ac4e8d-a5a1-46cf-8b3a-66a32450be95",
+              "name": "image_url",
+              "value": "https://v3b.fal.media/files/b/koala/6PdI8VEnUcEzCDWoM0P8w.jpg",
+              "type": "string"
+            }
+          ]
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.set",
+      "typeVersion": 3.4,
+      "position": [
+        144,
+        352
+      ],
+      "id": "8e557b9b-c183-4356-9905-c57cede502f9",
+      "name": "Image URL"
+    },
+    {
+      "parameters": {
+        "assignments": {
+          "assignments": [
+            {
+              "id": "714ed3d2-1e81-4aae-a977-8151769371a7",
+              "name": "video_url",
+              "value": "={{ JSON.parse($json.data.resultJson).resultUrls[0] }}",
+              "type": "string"
+            }
+          ]
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.set",
+      "typeVersion": 3.4,
+      "position": [
+        896,
+        0
+      ],
+      "id": "276a62c2-5548-4c86-9aa4-c6e1ab99747d",
+      "name": "Video URL"
+    },
+    {
+      "parameters": {
+        "content": "## Setup\nSee the accompanying SETUP.md for configuration steps (credentials, trigger, and node setup).",
+        "height": 336,
+        "width": 464,
+        "color": 4
+      },
+      "type": "n8n-nodes-base.stickyNote",
+      "typeVersion": 1,
+      "position": [
+        -64,
+        1648
+      ],
+      "id": "77a97d3b-173b-4c15-95a9-8ee883bb5cee",
+      "name": "Sticky Note1"
+    },
+    {
+      "parameters": {
+        "assignments": {
+          "assignments": [
+            {
+              "id": "5dddfcc6-0e7c-4972-be51-1b47a8ee9e89",
+              "name": "test",
+              "value": "={{ \"This is line one.\\nThis is line two.\\nThis is line three.\" }}",
+              "type": "string"
+            },
+            {
+              "id": "ef4b303a-e066-4477-a4a9-f4e6ffe59b1c",
+              "name": "test1",
+              "value": "\"pizza pizza\"",
+              "type": "string"
+            }
+          ]
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.set",
+      "typeVersion": 3.4,
+      "position": [
+        16,
+        1776
+      ],
+      "id": "df69f890-c847-4af8-a4cd-61268df57ccc",
+      "name": "Bad"
+    },
+    {
+      "parameters": {
+        "assignments": {
+          "assignments": [
+            {
+              "id": "b09352eb-481e-4fe7-b1a7-b5c4b7df0c1a",
+              "name": "test",
+              "value": "={{ $json.test.replace(/\\r?\\n|\\r/g, ' ') }}",
+              "type": "string"
+            },
+            {
+              "id": "35f57de0-6c41-4566-89bb-bfd0170d0ed6",
+              "name": "test1",
+              "value": "={{ $json.test1.replace(/\"/g, '') }}",
+              "type": "string"
+            }
+          ]
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.set",
+      "typeVersion": 3.4,
+      "position": [
+        224,
+        1776
+      ],
+      "id": "7c9784e6-a7df-412a-85b7-1225c1293732",
+      "name": "Good"
+    },
+    {
+      "parameters": {
+        "method": "POST",
+        "url": "https://api.kie.ai/api/v1/jobs/createTask",
+        "authentication": "genericCredentialType",
+        "genericAuthType": "httpHeaderAuth",
+        "sendBody": true,
+        "specifyBody": "json",
+        "jsonBody": "={\n  \"model\": \"sora-2-image-to-video\",\n  \"input\": {\n    \"prompt\": \"{{ $json.video_prompt }}\",\n    \"image_urls\": [\n      \"{{ $('Image URL').item.json.image_url }}\"\n    ],\n    \"aspect_ratio\": \"portrait\",\n    \"n_frames\": \"10\",\n    \"remove_watermark\": true\n  }\n}",
+        "options": {}
+      },
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 4.2,
+      "position": [
+        448,
+        352
+      ],
+      "id": "d571e412-7a4e-435a-a128-401a89e062cb",
+      "name": "Image to Video",
+      "credentials": {
+        "httpHeaderAuth": {
+          "id": "bLqwqOamT6YeUyUY",
+          "name": "Kie"
+        }
+      }
+    },
+    {
+      "parameters": {},
+      "type": "n8n-nodes-base.wait",
+      "typeVersion": 1.1,
+      "position": [
+        592,
+        352
+      ],
+      "id": "72f7d776-971b-409c-bc32-7aed9271dcfa",
+      "name": "Wait1",
+      "webhookId": "a8fe0b74-6941-4953-9706-3c480f32d39f"
+    },
+    {
+      "parameters": {
+        "url": "https://api.kie.ai/api/v1/jobs/recordInfo",
+        "authentication": "genericCredentialType",
+        "genericAuthType": "httpHeaderAuth",
+        "sendQuery": true,
+        "queryParameters": {
+          "parameters": [
+            {
+              "name": "taskId",
+              "value": "={{ $json.data.taskId }}"
+            }
+          ]
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 4.2,
+      "position": [
+        736,
+        352
+      ],
+      "id": "6161fb65-54c8-49c1-aaf8-9d7a57f8f5fa",
+      "name": "Get Video1",
+      "credentials": {
+        "httpHeaderAuth": {
+          "id": "bLqwqOamT6YeUyUY",
+          "name": "Kie"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "conditions": {
+          "options": {
+            "caseSensitive": true,
+            "leftValue": "",
+            "typeValidation": "strict",
+            "version": 2
+          },
+          "conditions": [
+            {
+              "id": "4f9a9a29-cc45-4e39-a1a0-e78caadbab09",
+              "leftValue": "={{ $json.data.state }}",
+              "rightValue": "success",
+              "operator": {
+                "type": "string",
+                "operation": "equals",
+                "name": "filter.operator.equals"
+              }
+            }
+          ],
+          "combinator": "and"
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.if",
+      "typeVersion": 2.2,
+      "position": [
+        880,
+        352
+      ],
+      "id": "fb0d53ed-39cf-42f8-84ed-5c6e2342f0e9",
+      "name": "If1"
+    },
+    {
+      "parameters": {
+        "assignments": {
+          "assignments": [
+            {
+              "id": "cefb3a3b-6da9-419c-ba11-4dcbf84a1d40",
+              "name": "video_url",
+              "value": "={{ JSON.parse($json.data.resultJson).resultUrls[0] }}",
+              "type": "string"
+            }
+          ]
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.set",
+      "typeVersion": 3.4,
+      "position": [
+        1040,
+        352
+      ],
+      "id": "3dbb025e-bf7d-4b80-afac-12999ae24251",
+      "name": "Video URL1"
+    },
+    {
+      "parameters": {
+        "content": "## Setup\nSee the accompanying SETUP.md for configuration steps (credentials, trigger, and node setup).",
+        "height": 336,
+        "width": 1296,
+        "color": 4
+      },
+      "type": "n8n-nodes-base.stickyNote",
+      "typeVersion": 1,
+      "position": [
+        -64,
+        240
+      ],
+      "id": "05a868f3-35fc-459f-8563-d59f95879834",
+      "name": "Sticky Note2"
+    },
+    {
+      "parameters": {
+        "assignments": {
+          "assignments": [
+            {
+              "id": "8f81a8e5-3dcf-4a01-adf2-616feae8ea38",
+              "name": "scene_1",
+              "value": "A small, adventurous green frog wearing a tiny brown explorer hat leaps across glowing lily pads at sunrise. Soft mist floats over a calm forest pond surrounded by tall reeds and fireflies fading in the morning light. The frog pauses mid-leap, eyes wide with determination, its reflection shimmering in the golden water. Cinematic lighting, warm and magical tone, shallow depth of field.",
+              "type": "string"
+            },
+            {
+              "id": "d4cbbd96-705e-4fe9-9751-bc4d8b669949",
+              "name": "scene_2",
+              "value": "The same frog cautiously hops through ancient moss-covered stone ruins deep in a lush jungle. Vines hang overhead, birds flutter past, and sunlight beams through gaps in the canopy. The frog glances around curiously, brushing dust off an engraved stone with its tiny hand, revealing mysterious runes. Slight camera pan following its movement, adventurous orchestral music vibe.",
+              "type": "string"
+            },
+            {
+              "id": "9acd1c0c-4c1f-4b93-9dff-623eaf4557e8",
+              "name": "scene_3",
+              "value": "Inside a dim cave, illuminated by glowing crystals, the same frog discovers a small wooden chest half-buried in sand. It opens the chest slowly—light spills out, reflecting in the frog’s wide eyes. Gold coins and a shimmering gemstone glow as the frog smiles proudly, lifting the gem triumphantly. The background glitters with magic dust as the camera pulls back to reveal the vast treasure chamber.",
+              "type": "string"
+            },
+            {
+              "id": "540ce05c-7595-4a9a-956a-85615bdf0e31",
+              "name": "image_url",
+              "value": "https://v3b.fal.media/files/b/monkey/MHh_16nXj3e5ARdSbsqAa.jpg",
+              "type": "string"
+            }
+          ]
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.set",
+      "typeVersion": 3.4,
+      "position": [
+        144,
+        1056
+      ],
+      "id": "eb7930ce-e4f7-454b-99c1-40a32518d940",
+      "name": "Video Prompts"
+    },
+    {
+      "parameters": {
+        "method": "POST",
+        "url": "https://api.kie.ai/api/v1/jobs/createTask",
+        "authentication": "genericCredentialType",
+        "genericAuthType": "httpHeaderAuth",
+        "sendBody": true,
+        "specifyBody": "json",
+        "jsonBody": "={\n  \"model\": \"sora-2-pro-storyboard\",\n  \"input\": {\n    \"n_frames\": \"15\",\n    \"image_urls\": [\n      \"{{ $json.image_url }}\"\n    ],\n    \"aspect_ratio\": \"landscape\",\n    \"shots\": [\n      {\n        \"Scene\": \"{{ $json.scene_1 }}\",\n        \"duration\": 5\n      },\n      {\n        \"Scene\": \"{{ $json.scene_2 }}\",\n        \"duration\": 5\n      },\n      {\n        \"Scene\": \"{{ $json.scene_3 }}\",\n        \"duration\": 5\n      }\n    ]\n  }\n}",
+        "options": {}
+      },
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 4.2,
+      "position": [
+        288,
+        1056
+      ],
+      "id": "080d2b56-da42-49e1-b254-cf26bae68e88",
+      "name": "Story Request",
+      "credentials": {
+        "httpHeaderAuth": {
+          "id": "bLqwqOamT6YeUyUY",
+          "name": "Kie"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "amount": 10
+      },
+      "type": "n8n-nodes-base.wait",
+      "typeVersion": 1.1,
+      "position": [
+        448,
+        1056
+      ],
+      "id": "dbc69015-042a-489e-bb49-ee92090c014b",
+      "name": "Wait2",
+      "webhookId": "a8fe0b74-6941-4953-9706-3c480f32d39f"
+    },
+    {
+      "parameters": {
+        "url": "https://api.kie.ai/api/v1/jobs/recordInfo",
+        "authentication": "genericCredentialType",
+        "genericAuthType": "httpHeaderAuth",
+        "sendQuery": true,
+        "queryParameters": {
+          "parameters": [
+            {
+              "name": "taskId",
+              "value": "={{ $json.data.taskId }}"
+            }
+          ]
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 4.2,
+      "position": [
+        592,
+        1056
+      ],
+      "id": "27e92b68-d7ce-469e-ba6b-52b42426a190",
+      "name": "Get Video2",
+      "credentials": {
+        "httpHeaderAuth": {
+          "id": "bLqwqOamT6YeUyUY",
+          "name": "Kie"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "conditions": {
+          "options": {
+            "caseSensitive": true,
+            "leftValue": "",
+            "typeValidation": "strict",
+            "version": 2
+          },
+          "conditions": [
+            {
+              "id": "4f9a9a29-cc45-4e39-a1a0-e78caadbab09",
+              "leftValue": "={{ $json.data.state }}",
+              "rightValue": "success",
+              "operator": {
+                "type": "string",
+                "operation": "equals",
+                "name": "filter.operator.equals"
+              }
+            }
+          ],
+          "combinator": "and"
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.if",
+      "typeVersion": 2.2,
+      "position": [
+        752,
+        1056
+      ],
+      "id": "d9fdf342-7023-4612-8517-a586c8d10691",
+      "name": "If2"
+    },
+    {
+      "parameters": {
+        "assignments": {
+          "assignments": [
+            {
+              "id": "eb125b1c-7589-4a0b-b88f-623d68ca91bd",
+              "name": "video_url",
+              "value": "={{ JSON.parse($json.data.resultJson).resultUrls[0] }}",
+              "type": "string"
+            }
+          ]
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.set",
+      "typeVersion": 3.4,
+      "position": [
+        912,
+        1056
+      ],
+      "id": "61fb81df-7e51-455e-b0b6-19edaaf9e175",
+      "name": "Video URL2"
+    },
+    {
+      "parameters": {
+        "content": "## Setup\nSee the accompanying SETUP.md for configuration steps (credentials, trigger, and node setup).",
+        "height": 336,
+        "width": 1168,
+        "color": 4
+      },
+      "type": "n8n-nodes-base.stickyNote",
+      "typeVersion": 1,
+      "position": [
+        -64,
+        944
+      ],
+      "id": "50a66366-4afa-4309-8725-0147d79edd4d",
+      "name": "Sticky Note3"
+    },
+    {
+      "parameters": {
+        "assignments": {
+          "assignments": [
+            {
+              "id": "20ef7845-0ae5-4f77-bbf0-7e4e28a3b12f",
+              "name": "video_prompt",
+              "value": "@sama recording a selfie style video in a car explaining how gravity works in two short sentences.",
+              "type": "string"
+            }
+          ]
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.set",
+      "typeVersion": 3.4,
+      "position": [
+        144,
+        704
+      ],
+      "id": "f573eb51-eea9-4c23-af8d-9ca1a20b5669",
+      "name": "Video Prompt2"
+    },
+    {
+      "parameters": {
+        "method": "POST",
+        "url": "https://api.kie.ai/api/v1/jobs/createTask",
+        "authentication": "genericCredentialType",
+        "genericAuthType": "httpHeaderAuth",
+        "sendBody": true,
+        "specifyBody": "json",
+        "jsonBody": "={\n  \"model\": \"sora-2-text-to-video\",\n  \"input\": {\n    \"prompt\": \"{{ $json.video_prompt }}\",\n    \"aspect_ratio\": \"portrait\",\n    \"n_frames\": \"10\",\n    \"remove_watermark\": true\n  }\n}",
+        "options": {}
+      },
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 4.2,
+      "position": [
+        304,
+        704
+      ],
+      "id": "bb8ad1f1-d47d-4cd1-8e2b-6d7553892faf",
+      "name": "Text to Video1",
+      "credentials": {
+        "httpHeaderAuth": {
+          "id": "bLqwqOamT6YeUyUY",
+          "name": "Kie"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "amount": 10
+      },
+      "type": "n8n-nodes-base.wait",
+      "typeVersion": 1.1,
+      "position": [
+        448,
+        704
+      ],
+      "id": "85995c6c-f0c4-466a-8461-f992eb0935e0",
+      "name": "Wait3",
+      "webhookId": "9fd30610-c0b9-4f5c-9af5-89b821c11ec3"
+    },
+    {
+      "parameters": {
+        "url": "https://api.kie.ai/api/v1/jobs/recordInfo",
+        "authentication": "genericCredentialType",
+        "genericAuthType": "httpHeaderAuth",
+        "sendQuery": true,
+        "queryParameters": {
+          "parameters": [
+            {
+              "name": "taskId",
+              "value": "={{ $json.data.taskId }}"
+            }
+          ]
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 4.2,
+      "position": [
+        592,
+        704
+      ],
+      "id": "b8fa1e09-c741-41e8-ade0-fd9b81530763",
+      "name": "Get Video3",
+      "credentials": {
+        "httpHeaderAuth": {
+          "id": "bLqwqOamT6YeUyUY",
+          "name": "Kie"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "conditions": {
+          "options": {
+            "caseSensitive": true,
+            "leftValue": "",
+            "typeValidation": "strict",
+            "version": 2
+          },
+          "conditions": [
+            {
+              "id": "4f9a9a29-cc45-4e39-a1a0-e78caadbab09",
+              "leftValue": "={{ $json.data.state }}",
+              "rightValue": "success",
+              "operator": {
+                "type": "string",
+                "operation": "equals",
+                "name": "filter.operator.equals"
+              }
+            }
+          ],
+          "combinator": "and"
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.if",
+      "typeVersion": 2.2,
+      "position": [
+        736,
+        704
+      ],
+      "id": "b3f094c0-6c8f-40bb-a59f-c42dafdf2ce2",
+      "name": "If3"
+    },
+    {
+      "parameters": {
+        "assignments": {
+          "assignments": [
+            {
+              "id": "714ed3d2-1e81-4aae-a977-8151769371a7",
+              "name": "video_url",
+              "value": "={{ JSON.parse($json.data.resultJson).resultUrls[0] }}",
+              "type": "string"
+            }
+          ]
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.set",
+      "typeVersion": 3.4,
+      "position": [
+        896,
+        704
+      ],
+      "id": "c424e30b-1bb3-4b89-9f2f-259f3117fade",
+      "name": "Video URL3"
+    },
+    {
+      "parameters": {
+        "content": "## Setup\nSee the accompanying SETUP.md for configuration steps (credentials, trigger, and node setup).",
+        "height": 336,
+        "width": 1168,
+        "color": 5
+      },
+      "type": "n8n-nodes-base.stickyNote",
+      "typeVersion": 1,
+      "position": [
+        -64,
+        592
+      ],
+      "id": "acd0229c-f6ff-45e0-8da0-9dfa65ae68aa",
+      "name": "Sticky Note4"
+    },
+    {
+      "parameters": {
+        "assignments": {
+          "assignments": [
+            {
+              "id": "363abbd9-5ed8-4b6a-b1a0-739893a02fff",
+              "name": "video_prompt",
+              "value": "A professor stands at the front of a lively classroom, enthusiastically giving a lecture. On the blackboard behind him are colorful chalk diagrams. With an animated gesture, he declares to the students: 'Sora 2 is now available on Kie AI, making it easier than ever to create stunning videos.' The students listen attentively, some smiling and taking notes.",
+              "type": "string"
+            }
+          ]
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.set",
+      "typeVersion": 3.4,
+      "position": [
+        144,
+        1408
+      ],
+      "id": "7cc89943-21b6-4466-884c-be917156c593",
+      "name": "Video Prompt3"
+    },
+    {
+      "parameters": {
+        "method": "POST",
+        "url": "https://api.kie.ai/api/v1/jobs/createTask",
+        "authentication": "genericCredentialType",
+        "genericAuthType": "httpHeaderAuth",
+        "sendBody": true,
+        "specifyBody": "json",
+        "jsonBody": "={\n  \"model\": \"sora-2-text-to-video\",\n  \"input\": {\n    \"prompt\": \"{{ $json.output.replace(/\"/g, '').replace(/\\r?\\n|\\r/g, ' ') }}\",\n    \"aspect_ratio\": \"landscape\",\n    \"n_frames\": \"10\",\n    \"remove_watermark\": true\n  }\n}",
+        "options": {}
+      },
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 4.2,
+      "position": [
+        528,
+        1408
+      ],
+      "id": "6e1c59b9-d6fe-485e-a050-b785deb9f364",
+      "name": "Text to Video2",
+      "credentials": {
+        "httpHeaderAuth": {
+          "id": "bLqwqOamT6YeUyUY",
+          "name": "Kie"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "amount": 10
+      },
+      "type": "n8n-nodes-base.wait",
+      "typeVersion": 1.1,
+      "position": [
+        672,
+        1408
+      ],
+      "id": "e2cd6633-1417-4433-82cc-4f5e6f3725ec",
+      "name": "Wait4",
+      "webhookId": "9fd30610-c0b9-4f5c-9af5-89b821c11ec3"
+    },
+    {
+      "parameters": {
+        "url": "https://api.kie.ai/api/v1/jobs/recordInfo",
+        "authentication": "genericCredentialType",
+        "genericAuthType": "httpHeaderAuth",
+        "sendQuery": true,
+        "queryParameters": {
+          "parameters": [
+            {
+              "name": "taskId",
+              "value": "={{ $json.data.taskId }}"
+            }
+          ]
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 4.2,
+      "position": [
+        816,
+        1408
+      ],
+      "id": "c9e222a2-f1e9-48ae-b47e-d9860d35f711",
+      "name": "Get Video4",
+      "credentials": {
+        "httpHeaderAuth": {
+          "id": "bLqwqOamT6YeUyUY",
+          "name": "Kie"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "conditions": {
+          "options": {
+            "caseSensitive": true,
+            "leftValue": "",
+            "typeValidation": "strict",
+            "version": 2
+          },
+          "conditions": [
+            {
+              "id": "4f9a9a29-cc45-4e39-a1a0-e78caadbab09",
+              "leftValue": "={{ $json.data.state }}",
+              "rightValue": "success",
+              "operator": {
+                "type": "string",
+                "operation": "equals",
+                "name": "filter.operator.equals"
+              }
+            }
+          ],
+          "combinator": "and"
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.if",
+      "typeVersion": 2.2,
+      "position": [
+        960,
+        1408
+      ],
+      "id": "dfcd4261-1ac8-49e5-a6b5-a7a06673c992",
+      "name": "If4"
+    },
+    {
+      "parameters": {
+        "content": "## Setup\nSee the accompanying SETUP.md for configuration steps (credentials, trigger, and node setup).",
+        "height": 336,
+        "width": 1376,
+        "color": 5
+      },
+      "type": "n8n-nodes-base.stickyNote",
+      "typeVersion": 1,
+      "position": [
+        -64,
+        1296
+      ],
+      "id": "44454ce0-fe5c-47fc-a33d-315c55f896eb",
+      "name": "Sticky Note5"
+    },
+    {
+      "parameters": {
+        "assignments": {
+          "assignments": [
+            {
+              "id": "714ed3d2-1e81-4aae-a977-8151769371a7",
+              "name": "video_url",
+              "value": "={{ JSON.parse($json.data.resultJson).resultUrls[0] }}",
+              "type": "string"
+            }
+          ]
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.set",
+      "typeVersion": 3.4,
+      "position": [
+        1120,
+        1408
+      ],
+      "id": "73ff733a-1309-482f-bda9-2f4354eef63b",
+      "name": "Video URL4"
+    },
+    {
+      "parameters": {
+        "promptType": "define",
+        "text": "=Input: {{ $json.video_prompt }}",
+        "options": {
+          "systemMessage": "=# Overview\nYou are an expert AI video prompt engineer trained to design optimized prompts for Sora 2 video generation. Your role is to take a raw input concept (such as a short idea, scene description, or video type) and transform it into a highly detailed, visually rich, and cinematic video prompt.\n\nYour output must describe a **realistic, natural-looking video** that matches the input intent. Focus on optimizing for visual quality, camera realism, lighting accuracy, subject movement, and environmental coherence.\n\nFollow these rules when creating each prompt:\n\n1. Always describe:\n   - The main subject(s): appearance, clothing, age, gender, expression, and motion.\n   - The setting: location, background, lighting, time of day, and atmosphere.\n   - The camera style: angle, lens type, framing, and movement (e.g., handheld, dolly, aerial).\n   - The tone or emotion of the scene (e.g., cinematic, documentary, upbeat, dramatic).\n   - Realistic environmental and lighting effects (e.g., soft sunlight, reflections, motion blur).\n\n2. The prompt should sound like a professional cinematographer describing a shot to a visual effects team.\n3. Avoid generic or repetitive phrasing—each sentence should add visual or contextual detail.\n4. Keep the tone natural and descriptive, not technical or robotic.\n5. Ensure that the prompt reads fluently and feels like a single cohesive vision.\n\nWhen ready, output only the final video prompt with no commentary or additional explanation.\n"
+        }
+      },
+      "type": "@n8n/n8n-nodes-langchain.agent",
+      "typeVersion": 2.2,
+      "position": [
+        272,
+        1408
+      ],
+      "id": "4a26bfde-6b27-4c51-846f-f0e1f7a1ca7f",
+      "name": "AI Agent"
+    },
+    {
+      "parameters": {
+        "model": "openai/gpt-5-mini",
+        "options": {}
+      },
+      "type": "@n8n/n8n-nodes-langchain.lmChatOpenRouter",
+      "typeVersion": 1,
+      "position": [
+        304,
+        1520
+      ],
+      "id": "d5c3b9a5-f1ba-4bb1-8c5d-612326dc1c98",
+      "name": "GPT-5-mini",
+      "credentials": {
+        "openRouterApi": {
+          "id": "td3utRybtI5wRRtH",
+          "name": "OpenRouter account 2"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "content": "## Setup\nSee the accompanying SETUP.md for configuration steps (credentials, trigger, and node setup).",
+        "height": 608,
+        "width": 624
+      },
+      "type": "n8n-nodes-base.stickyNote",
+      "typeVersion": 1,
+      "position": [
+        -704,
+        -112
+      ],
+      "id": "6e70f2e8-5bd7-48df-93c1-160ce2b22eb2",
+      "name": "Sticky Note6"
+    }
+  ],
+  "pinData": {},
+  "connections": {
+    "When clicking ‘Execute workflow’": {
+      "main": [
+        [
+          {
+            "node": "Video Prompt",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Video Prompt": {
+      "main": [
+        [
+          {
+            "node": "Text to Video",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Text to Video": {
+      "main": [
+        [
+          {
+            "node": "Wait",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Wait": {
+      "main": [
+        [
+          {
+            "node": "Get Video",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Get Video": {
+      "main": [
+        [
+          {
+            "node": "If",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Image URL": {
+      "main": [
+        [
+          {
+            "node": "Video Prompt1",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "If": {
+      "main": [
+        [
+          {
+            "node": "Video URL",
+            "type": "main",
+            "index": 0
+          }
+        ],
+        [
+          {
+            "node": "Wait",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Bad": {
+      "main": [
+        [
+          {
+            "node": "Good",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Video Prompt1": {
+      "main": [
+        [
+          {
+            "node": "Image to Video",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Image to Video": {
+      "main": [
+        [
+          {
+            "node": "Wait1",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Wait1": {
+      "main": [
+        [
+          {
+            "node": "Get Video1",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Get Video1": {
+      "main": [
+        [
+          {
+            "node": "If1",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "If1": {
+      "main": [
+        [
+          {
+            "node": "Video URL1",
+            "type": "main",
+            "index": 0
+          }
+        ],
+        [
+          {
+            "node": "Wait1",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Video Prompts": {
+      "main": [
+        [
+          {
+            "node": "Story Request",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Wait2": {
+      "main": [
+        [
+          {
+            "node": "Get Video2",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Get Video2": {
+      "main": [
+        [
+          {
+            "node": "If2",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "If2": {
+      "main": [
+        [
+          {
+            "node": "Video URL2",
+            "type": "main",
+            "index": 0
+          }
+        ],
+        [
+          {
+            "node": "Wait2",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Story Request": {
+      "main": [
+        [
+          {
+            "node": "Wait2",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Text to Video1": {
+      "main": [
+        [
+          {
+            "node": "Wait3",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Wait3": {
+      "main": [
+        [
+          {
+            "node": "Get Video3",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Get Video3": {
+      "main": [
+        [
+          {
+            "node": "If3",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "If3": {
+      "main": [
+        [
+          {
+            "node": "Video URL3",
+            "type": "main",
+            "index": 0
+          }
+        ],
+        [
+          {
+            "node": "Wait3",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Video Prompt2": {
+      "main": [
+        [
+          {
+            "node": "Text to Video1",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Video Prompt3": {
+      "main": [
+        [
+          {
+            "node": "AI Agent",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Text to Video2": {
+      "main": [
+        [
+          {
+            "node": "Wait4",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Wait4": {
+      "main": [
+        [
+          {
+            "node": "Get Video4",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Get Video4": {
+      "main": [
+        [
+          {
+            "node": "If4",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "If4": {
+      "main": [
+        [
+          {
+            "node": "Video URL4",
+            "type": "main",
+            "index": 0
+          }
+        ],
+        [
+          {
+            "node": "Wait4",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "GPT-5-mini": {
+      "ai_languageModel": [
+        [
+          {
+            "node": "AI Agent",
+            "type": "ai_languageModel",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "AI Agent": {
+      "main": [
+        [
+          {
+            "node": "Text to Video2",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    }
+  },
+  "active": false,
+  "settings": {
+    "executionOrder": "v1"
+  },
+  "versionId": "81d548b2-c364-44a7-8f7c-a8af5b5cc55c",
+  "meta": {
+    "templateCredsSetupCompleted": true
+  },
+  "id": "WzLeXxh9mJk1O2FK",
+  "tags": []
+}
