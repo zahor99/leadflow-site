@@ -133,7 +133,7 @@
         "promptType": "define",
         "text": "={{$json.query}}",
         "options": {
-          "systemMessage": "You are a helpful assistant. \n\nIf a number of emails isn't specified, just assume it will be 5.\n\nWhen sending an email, always sign it off from Nate, never include something like [Your Name]"
+          "systemMessage": "You are a helpful assistant. \n\nIf a number of emails isn't specified, just assume it will be 5.\n\nWhen sending an email, always sign it off from Alex, never include something like [Your Name]"
         }
       },
       "id": "0f7ba4a7-44b1-41ce-8904-9a78e8e03be4",

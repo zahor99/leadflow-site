@@ -81,7 +81,7 @@
       "credentials": {
         "slackApi": {
           "id": "NnowrGbCm9OxnUil",
-          "name": "Herk Bot"
+          "name": "Alex Bot"
         }
       }
     },
@@ -172,7 +172,7 @@
         },
         "sendBody": true,
         "specifyBody": "json",
-        "jsonBody": "={\n  \"inputText\": \"{{ $json.output.replace(/\\n/g, ' ').replace(/\"/g, \"'\") }}\",\n  \"textMode\": \"preserve\",\n  \"format\": \"presentation\",\n  \"themeId\": \"trqowgdglqnfqto\",\n  \"numCards\": 10,\n  \"cardSplit\": \"auto\",\n  \"additionalInstructions\": \"A professional business proposal\",\n  \"exportAs\": \"pdf\",\n  \"textOptions\": {\n    \"amount\": \"detailed\",\n    \"tone\": \"professional, inspiring\",\n    \"audience\": \"business owner\",\n    \"language\": \"en\"\n  },\n  \"imageOptions\": {\n    \"source\": \"aiGenerated\",\n    \"model\": \"gemini-2.5-flash-image\",\n    \"style\": \"photorealistic\"\n  },\n  \"cardOptions\": {\n    \"dimensions\": \"fluid\",\n    \"headerFooter\": {\n      \"topRight\": {\n        \"type\": \"image\",\n        \"source\": \"themeLogo\",\n        \"size\": \"sm\"\n      },\n      \"bottomRight\": {\n        \"type\": \"cardNumber\"\n      },\n      \"hideFromFirstCard\": true,\n      \"hideFromLastCard\": false\n    }\n  },\n  \"sharingOptions\": {\n    \"workspaceAccess\": \"view\",\n    \"externalAccess\": \"comment\",\n    \"emailOptions\": {\n      \"recipients\": [\"88@gmail.com\"],\n      \"access\": \"comment\"\n    }\n  }\n}",
+        "jsonBody": "={\n  \"inputText\": \"{{ $json.output.replace(/\\n/g, ' ').replace(/\"/g, \"'\") }}\",\n  \"textMode\": \"preserve\",\n  \"format\": \"presentation\",\n  \"themeId\": \"trqowgdglqnfqto\",\n  \"numCards\": 10,\n  \"cardSplit\": \"auto\",\n  \"additionalInstructions\": \"A professional business proposal\",\n  \"exportAs\": \"pdf\",\n  \"textOptions\": {\n    \"amount\": \"detailed\",\n    \"tone\": \"professional, inspiring\",\n    \"audience\": \"business owner\",\n    \"language\": \"en\"\n  },\n  \"imageOptions\": {\n    \"source\": \"aiGenerated\",\n    \"model\": \"gemini-2.5-flash-image\",\n    \"style\": \"photorealistic\"\n  },\n  \"cardOptions\": {\n    \"dimensions\": \"fluid\",\n    \"headerFooter\": {\n      \"topRight\": {\n        \"type\": \"image\",\n        \"source\": \"themeLogo\",\n        \"size\": \"sm\"\n      },\n      \"bottomRight\": {\n        \"type\": \"cardNumber\"\n      },\n      \"hideFromFirstCard\": true,\n      \"hideFromLastCard\": false\n    }\n  },\n  \"sharingOptions\": {\n    \"workspaceAccess\": \"view\",\n    \"externalAccess\": \"comment\",\n    \"emailOptions\": {\n      \"recipients\": [\"user@example.com\"],\n      \"access\": \"comment\"\n    }\n  }\n}",
         "options": {}
       },
       "type": "n8n-nodes-base.httpRequest",
@@ -216,7 +216,7 @@
       "credentials": {
         "slackApi": {
           "id": "wPjoAuHrr1W0cCye",
-          "name": "Herk Bot"
+          "name": "Alex Bot"
         }
       }
     },

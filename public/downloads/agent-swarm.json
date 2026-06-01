@@ -160,7 +160,7 @@
         "promptType": "define",
         "text": "={{ $json.input }}",
         "options": {
-          "systemMessage": "=# Overview\nYou are the ultimate personal assistant. Your job is to send the user's query to the correct tool. You should never be writing emails or creating summaries — your sole responsibility is to call the correct tool.\n\n## Tools\n- **Think**: Use this to think deeply or if you get stuck\n- **emailAgent**: Use this tool to take action in email\n- **calendarAgent**: Use this tool to take action in calendar\n- **contactAgent**: Use this tool to get, update, or add contacts\n- **contentCreator**: Use this tool to create blog posts\n- **webAgent**: Use this tool to perform deeper web research or get current weather info\n- **youtubeAgent**: Use this tool to find high-performing videos or manage video ideas\n\n## Rules\n- Some actions require you to look up contact information first. For the following actions, you must get contact information and send that to the agent who needs it:\n  - sending emails\n  - drafting emails\n  - creating calendar event with attendee\n\n## Instructions\n1) Call the necessary tools based on the user's request\n2) Use the **Think** tool to verify you took the right steps. This tool should be called every time.\n\n## Examples\n1) \n- Input: send an email to elman asking him what time he wants to leave  \n  - Action: Use **contactAgent** to get elman's email  \n  - Action: Use **emailAgent** to send the email. You will pass the tool a query like:  \n    \"send elman an email to ask what time he wants to leave. here is his email: [email address]\"\n- Output: The email has been sent to elman. Anything else I can help you with?\n\n## Final Reminders\nHere is the current date/time: {{ $now }}\n",
+          "systemMessage": "=# Overview\nYou are the ultimate personal assistant. Your job is to send the user's query to the correct tool. You should never be writing emails or creating summaries — your sole responsibility is to call the correct tool.\n\n## Tools\n- **Think**: Use this to think deeply or if you get stuck\n- **emailAgent**: Use this tool to take action in email\n- **calendarAgent**: Use this tool to take action in calendar\n- **contactAgent**: Use this tool to get, update, or add contacts\n- **contentCreator**: Use this tool to create blog posts\n- **webAgent**: Use this tool to perform deeper web research or get current weather info\n- **youtubeAgent**: Use this tool to find high-performing videos or manage video ideas\n\n## Rules\n- Some actions require you to look up contact information first. For the following actions, you must get contact information and send that to the agent who needs it:\n  - sending emails\n  - drafting emails\n  - creating calendar event with attendee\n\n## Instructions\n1) Call the necessary tools based on the user's request\n2) Use the **Think** tool to verify you took the right steps. This tool should be called every time.\n\n## Examples\n1) \n- Input: send an email to alex sample asking him what time he wants to leave  \n  - Action: Use **contactAgent** to get Alex Sample's email  \n  - Action: Use **emailAgent** to send the email. You will pass the tool a query like:  \n    \"send Alex Sample an email to ask what time he wants to leave. here is his email: [email address]\"\n- Output: The email has been sent to Alex Sample. Anything else I can help you with?\n\n## Final Reminders\nHere is the current date/time: {{ $now }}\n",
           "returnIntermediateSteps": true
         }
       },
@@ -346,7 +346,7 @@
         "toolDescription": "An email agent for all email actions",
         "text": "={{ /*n8n-auto-generated-fromAI-override*/ $fromAI('Prompt__User_Message_', ``, 'string') }}",
         "options": {
-          "systemMessage": "=# Overview\nYou are an email management assistant. All emails must be formatted professionally in HTML and signed off as \"Nate.\" \n\n**Email Management Tools**   \n   - Use \"Send Email\" to send emails.  \n   - Use \"Create Draft\" if the user asks for a draft.  \n   - Use \"Get Emails\" to retrieve emails when requested.\n   - Use \"Get Labels\" to retrieve labels.\n   - Use \"Mark Unread\" to mark an email as unread. You must use \"Get Emails\" first so you have the message ID of the email to flag.\n   - Use \"Label Email\" to flag an email. You must use \"Get Emails\" first so you have the message ID of the email to flag. Then you must use \"Get Labels\" so you have the label ID.\n   - Use \"Email Reply\" to reply to an email. You must use \"Get Emails\" first so you have the message ID of the email to reply to.\n\n## Final Notes\n- Here is the current date/time: {{ $now }}"
+          "systemMessage": "=# Overview\nYou are an email management assistant. All emails must be formatted professionally in HTML and signed off as \"Alex.\" \n\n**Email Management Tools**   \n   - Use \"Send Email\" to send emails.  \n   - Use \"Create Draft\" if the user asks for a draft.  \n   - Use \"Get Emails\" to retrieve emails when requested.\n   - Use \"Get Labels\" to retrieve labels.\n   - Use \"Mark Unread\" to mark an email as unread. You must use \"Get Emails\" first so you have the message ID of the email to flag.\n   - Use \"Label Email\" to flag an email. You must use \"Get Emails\" first so you have the message ID of the email to flag. Then you must use \"Get Labels\" so you have the label ID.\n   - Use \"Email Reply\" to reply to an email. You must use \"Get Emails\" first so you have the message ID of the email to reply to.\n\n## Final Notes\n- Here is the current date/time: {{ $now }}"
         }
       },
       "type": "@n8n/n8n-nodes-langchain.agentTool",
@@ -362,9 +362,9 @@
       "parameters": {
         "calendar": {
           "__rl": true,
-          "value": "88@gmail.com",
+          "value": "user@example.com",
           "mode": "list",
-          "cachedResultName": "88@gmail.com"
+          "cachedResultName": "user@example.com"
         },
         "start": "={{ $fromAI(\"eventStart\") }}",
         "end": "={{ $fromAI(\"eventEnd\") }}",
@@ -394,9 +394,9 @@
       "parameters": {
         "calendar": {
           "__rl": true,
-          "value": "88@gmail.com",
+          "value": "user@example.com",
           "mode": "list",
-          "cachedResultName": "88@gmail.com"
+          "cachedResultName": "user@example.com"
         },
         "start": "={{ $fromAI(\"eventStart\") }}",
         "end": "={{ $fromAI(\"eventEnd\") }}",
@@ -425,9 +425,9 @@
         "operation": "getAll",
         "calendar": {
           "__rl": true,
-          "value": "88@gmail.com",
+          "value": "user@example.com",
           "mode": "list",
-          "cachedResultName": "88@gmail.com"
+          "cachedResultName": "user@example.com"
         },
         "timeMin": "={{ $fromAI(\"dayBefore\",\"the day before the date the user requested\") }}",
         "timeMax": "={{ $fromAI(\"dayAfter\",\"the day after the date the user requested\") }}",
@@ -453,9 +453,9 @@
         "operation": "delete",
         "calendar": {
           "__rl": true,
-          "value": "88@gmail.com",
+          "value": "user@example.com",
           "mode": "list",
-          "cachedResultName": "88@gmail.com"
+          "cachedResultName": "user@example.com"
         },
         "eventId": "={{ $fromAI(\"eventID\") }}",
         "options": {}
@@ -480,9 +480,9 @@
         "operation": "update",
         "calendar": {
           "__rl": true,
-          "value": "88@gmail.com",
+          "value": "user@example.com",
           "mode": "list",
-          "cachedResultName": "88@gmail.com"
+          "cachedResultName": "user@example.com"
         },
         "eventId": "={{ $fromAI(\"eventID\") }}",
         "updateFields": {
@@ -552,7 +552,7 @@
       "credentials": {
         "airtableTokenApi": {
           "id": "UlAGE0msyITVkoCN",
-          "name": "Nate Airtable"
+          "name": "Alex Airtable"
         }
       }
     },
@@ -634,7 +634,7 @@
       "credentials": {
         "airtableTokenApi": {
           "id": "UlAGE0msyITVkoCN",
-          "name": "Nate Airtable"
+          "name": "Alex Airtable"
         }
       }
     },

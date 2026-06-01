@@ -113,7 +113,7 @@
       "credentials": {
         "airtableTokenApi": {
           "id": "UlAGE0msyITVkoCN",
-          "name": "Nate Airtable"
+          "name": "Alex Airtable"
         }
       }
     },
@@ -121,9 +121,9 @@
       "parameters": {
         "calendar": {
           "__rl": true,
-          "value": "88@gmail.com",
+          "value": "user@example.com",
           "mode": "list",
-          "cachedResultName": "88@gmail.com"
+          "cachedResultName": "user@example.com"
         },
         "start": "={{ /*n8n-auto-generated-fromAI-override*/ $fromAI('Start', ``, 'string') }}",
         "end": "={{ /*n8n-auto-generated-fromAI-override*/ $fromAI('End', ``, 'string') }}",
@@ -493,7 +493,7 @@
       "credentials": {
         "googleDriveOAuth2Api": {
           "id": "V2ewjiHO0o6xhQ2R",
-          "name": "88@gmail.com"
+          "name": "user@example.com"
         }
       }
     },

@@ -172,7 +172,7 @@
         "sendTo": "={{ $('On form submission').item.json.Email }}",
         "subject": "Your LinkedIn Post is Here!",
         "emailType": "text",
-        "message": "=Here you go Nate!\n\n\n{{ $('LinkedIn Post Agent').item.json.output }}",
+        "message": "=Here you go Alex!\n\n\n{{ $('LinkedIn Post Agent').item.json.output }}",
         "options": {
           "appendAttribution": false,
           "attachmentsUi": {

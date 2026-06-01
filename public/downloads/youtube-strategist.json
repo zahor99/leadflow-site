@@ -814,7 +814,7 @@
             {
               "id": "e9d530bf-3ca2-48c3-a40b-24f22646289d",
               "name": "Channel Details",
-              "value": "= creates practical, beginner-friendly videos that teach people how to build AI automations using n8n. His content is aimed at solopreneurs, small business owners, and aspiring automation developers who want to save time, reduce costs, and scale without hiring. Whether you're just getting started with AI or looking to level up your automation skills, Nate breaks down complex workflows into simple, actionable tutorials that anyone can follow.",
+              "value": "= creates practical, beginner-friendly videos that teach people how to build AI automations using n8n. His content is aimed at solopreneurs, small business owners, and aspiring automation developers who want to save time, reduce costs, and scale without hiring. Whether you're just getting started with AI or looking to level up your automation skills, Alex breaks down complex workflows into simple, actionable tutorials that anyone can follow.",
               "type": "string"
             }
           ]
@@ -1182,7 +1182,7 @@
           "mode": "list",
           "cachedResultName": "youtube"
         },
-        "text": "=Your Niche and Channel Audit for {{ $now.format('yyyy-MM-dd') }} is complete. \n\nView the results and insights here: \nhttps://docs.google.com/spreadsheets/d/<YOUR_GOOGLE_DOC_ID_HERE>/edit?gid=1836706523#gid=1836706523",
+        "text": "=Your Niche and Channel Audit for {{ $now.format('yyyy-MM-dd') }} is complete. \n\nView the results and insights here: \n<YOUR_GOOGLE_DOC_URL_HERE>",
         "otherOptions": {
           "includeLinkToWorkflow": false
         }

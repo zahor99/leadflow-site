@@ -82,9 +82,9 @@
       "parameters": {
         "calendar": {
           "__rl": true,
-          "value": "88@gmail.com",
+          "value": "user@example.com",
           "mode": "list",
-          "cachedResultName": "88@gmail.com"
+          "cachedResultName": "user@example.com"
         },
         "start": "={{ $fromAI(\"starttime\",\"the time the user asks for the event to start\") }}",
         "end": "={{ $fromAI(\"endtime\",\"the time the user asks for the event to end\") }}",
@@ -112,9 +112,9 @@
       "parameters": {
         "calendar": {
           "__rl": true,
-          "value": "88@gmail.com",
+          "value": "user@example.com",
           "mode": "list",
-          "cachedResultName": "88@gmail.com"
+          "cachedResultName": "user@example.com"
         },
         "start": "={{ $fromAI(\"starttime\",\"the time the user asks for the event to start\") }}",
         "end": "={{ $fromAI(\"endtime\",\"the time the user asks for the event to end\") }}",
@@ -145,9 +145,9 @@
         "operation": "getAll",
         "calendar": {
           "__rl": true,
-          "value": "88@gmail.com",
+          "value": "user@example.com",
           "mode": "list",
-          "cachedResultName": "88@gmail.com"
+          "cachedResultName": "user@example.com"
         },
         "returnAll": true,
         "options": {

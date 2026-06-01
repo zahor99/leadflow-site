@@ -312,7 +312,7 @@
       "credentials": {
         "airtableTokenApi": {
           "id": "UlAGE0msyITVkoCN",
-          "name": "Nate Airtable"
+          "name": "Alex Airtable"
         }
       }
     },
@@ -499,7 +499,7 @@
     },
     {
       "parameters": {
-        "sendTo": "nate@example.com",
+        "sendTo": "alex@example.com",
         "subject": "Test",
         "message": "Test",
         "options": {}

@@ -64,7 +64,7 @@
     {
       "parameters": {
         "resource": "media",
-        "mediaUrl": "=https://drive.google.com/uc?export=download&id={{ $('Google Drive ID').item.json.mediaID }}"
+        "mediaUrl": "=<YOUR_GOOGLE_DOC_URL_HERE> $('Google Drive ID').item.json.mediaID }}"
       },
       "type": "@blotato/n8n-nodes-blotato.blotato",
       "typeVersion": 2,

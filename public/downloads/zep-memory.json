@@ -129,7 +129,7 @@
         "promptType": "define",
         "text": "={{ $('Telegram Trigger1').item.json.message.text }}",
         "options": {
-          "systemMessage": "=You are a helpful assistant.\n\nHere is some additional information about Nate:\n{{ $json.facts.join(\"\\n\") }}\n\n5 most recent interactions with Nate:\n{{ $json.conversations.join(\"\\n\\n\")}}"
+          "systemMessage": "=You are a helpful assistant.\n\nHere is some additional information about Alex:\n{{ $json.facts.join(\"\\n\") }}\n\n5 most recent interactions with Alex:\n{{ $json.conversations.join(\"\\n\\n\")}}"
         }
       },
       "type": "@n8n/n8n-nodes-langchain.agent",
@@ -437,7 +437,7 @@
         "promptType": "define",
         "text": "={{ $('Telegram Trigger2').item.json.message.text }}",
         "options": {
-          "systemMessage": "=You are a helpful assistant.\n\nHere is some additional information about Nate:\n{{ $json.facts.join(\"\\n\") }}"
+          "systemMessage": "=You are a helpful assistant.\n\nHere is some additional information about Alex:\n{{ $json.facts.join(\"\\n\") }}"
         }
       },
       "type": "@n8n/n8n-nodes-langchain.agent",

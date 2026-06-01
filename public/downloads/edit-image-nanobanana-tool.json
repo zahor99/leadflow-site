@@ -81,7 +81,7 @@
       "credentials": {
         "googleDriveOAuth2Api": {
           "id": "V2ewjiHO0o6xhQ2R",
-          "name": "88@gmail.com"
+          "name": "user@example.com"
         }
       }
     },
@@ -213,7 +213,7 @@
       "credentials": {
         "googleDriveOAuth2Api": {
           "id": "V2ewjiHO0o6xhQ2R",
-          "name": "88@gmail.com"
+          "name": "user@example.com"
         }
       }
     },

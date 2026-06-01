@@ -43,7 +43,7 @@
             {
               "id": "f4b8c16e-6788-4c17-b643-94a3f0620860",
               "name": "Workflow Link",
-              "value": "=https://.app.n8n.cloud/workflow/{{ $json.id }}",
+              "value": "=https://your-instance.app.n8n.cloud/workflow/{{ $json.id }}",
               "type": "string"
             }
           ]
@@ -88,7 +88,7 @@
       "credentials": {
         "googleDriveOAuth2Api": {
           "id": "V2ewjiHO0o6xhQ2R",
-          "name": "88@gmail.com"
+          "name": "user@example.com"
         }
       }
     },

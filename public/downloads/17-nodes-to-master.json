@@ -157,7 +157,7 @@
             {
               "id": "629cc1d1-25f4-49d7-9389-609fa4b29e35",
               "name": "name",
-              "value": "nate",
+              "value": "alex",
               "type": "string"
             },
             {
@@ -748,7 +748,7 @@
       "credentials": {
         "airtableTokenApi": {
           "id": "UlAGE0msyITVkoCN",
-          "name": "Nate Airtable"
+          "name": "Alex Airtable"
         }
       }
     },

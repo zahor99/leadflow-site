@@ -211,7 +211,7 @@
         "emailType": "html",
         "message": "={{ $json.output.content }}",
         "options": {
-          "sendTo": "88@gmail.com"
+          "sendTo": "user@example.com"
         }
       },
       "type": "n8n-nodes-base.gmail",
