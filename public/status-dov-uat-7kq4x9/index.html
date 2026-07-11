@@ -63,14 +63,15 @@
   <p class="eyebrow">Den Optiske Vikar · staging UAT · scripted persona walkthroughs</p>
   <h1>Live test run</h1>
   <p class="sub">Browser agents execute the walkthrough scripts like real users. Every gate needs proof: screenshots, database record checks, notification intercepts (all SMS/email land at the operator only). <b>Orchestrator reviews each gate before the next wave launches.</b> Plan: <span style="font-family:var(--mono)">docs/UAT-PLAN.md</span></p>
-  <div class="pulse">WAVE A — V done (2 defects → dev agent fixing) · S finishing</div>
+  <div class="pulse">WAVE A REVIEWED — 3 defects found &amp; being fixed · reruns next</div>
 
   <div class="wave">
-    <div class="wave-h"><span class="t">Wave A — persona basics</span><span class="chip run">RUNNING</span></div>
-    <div class="row"><div class="n"><b>S</b>Store core — login · create 3 named + 1 open request · edge validation · isolation · role wall<div class="d">All 4 UAT bookings confirmed in DB · received-emails sent · SMS legs were skipped (seed users had no phones — fixed + backfilled, commit abdf6b9)</div></div><span class="chip run">RUNNING</span></div>
-    <div class="row"><div class="n"><b>V</b>Vikar core — <b>PARTIAL PASS</b><div class="d">✅ portal renders clean (V1) · accept UAT-S2a → one-hop confirmed w/ history + store email (V2) · decline UAT-S2c (V4) · cross-vikar isolation holds (V7)<br>❌ V5: availability blocking unreachable — portal shows hardcoded legacy team columns; real availability component is dead code<br>❌ V6: personal iCal link not mounted in the vikar portal (feature built, no UI entry)<br>⚠ decline produces no store notification (matrix check in progress) · vikar cards hide the booking note</div></div><span class="chip fail">PARTIAL</span></div>
-    <div class="row"><div class="n"><b>FIX</b>Developer agent: mount availability tab + personal iCal card in vikar portal · decline-notification matrix check → deploy to staging → rerun V5/V6</div><span class="chip run">RUNNING</span></div>
-    <div class="row"><div class="n"><b>GATE A</b>Orchestrator review: screenshots · DB assertions · Gmail intercepts · operator SMS confirmation<div class="d">Process fix: browser scripts run SEQUENTIALLY from Wave B (parallel agents shared Chrome's cookie jar and clobbered each other's logins)</div></div><span class="chip gate">WAITING</span></div>
+    <div class="wave-h"><span class="t">Wave A — persona basics · GATE A REVIEWED</span><span class="chip fail">3 DEFECTS → FIXING</span></div>
+    <div class="row"><div class="n"><b>S</b>Store core — <b>functional pass + 1 real defect</b><div class="d">✅ dashboard · 3 named + 1 open booking created (ids 5–8, DB-verified) · past-date & Sunday rejected · required-field guard · store isolation (no Brillehuset data)<br>❌ S8: /admin renders for a store user — <b>orchestrator-verified as a FRONTEND route-guard gap, NOT a breach</b> (every admin data call returns 403; no data exposed) → fix in flight<br>⚠ end-before-start hours reach the confirm screen (server rejects on submit; client should block earlier)</div></div><span class="chip fail">1 DEFECT</span></div>
+    <div class="row"><div class="n"><b>V</b>Vikar core — <b>functional pass + 2 real defects</b><div class="d">✅ accept UAT-S2a → one-hop confirmed + store email · decline UAT-S2c · cross-vikar isolation<br>❌ V5 availability blocking + ❌ V6 personal iCal — both unreachable in the portal → <b>FIXED &amp; deployed to staging</b> (commit 64ba5f1), rerun pending<br>✅ decline-notifies-nobody confirmed BY DESIGN (default-deny matrix; store sees an "Afvist" badge)</div></div><span class="chip pass">FIX SHIPPED</span></div>
+    <div class="row"><div class="n"><b>FIX-1</b>Vikar V5+V6 — availability tab + iCal card mounted → LIVE on staging</div><span class="chip pass">DONE</span></div>
+    <div class="row"><div class="n"><b>FIX-2</b>Admin route guard (S8) — add AdminGuard mirroring KundeGuard → deploy → rerun S8</div><span class="chip run">RUNNING</span></div>
+    <div class="row"><div class="n"><b>RERUN</b>Re-verify V5 · V6 · S8 on the fixed staging build (sequential, single session)</div><span class="chip gate">QUEUED</span></div>
   </div>
 
   <div class="wave">
@@ -87,7 +88,7 @@
     <div class="row"><div class="n"><b>GATE C</b>Final UAT-READY verdict + handoff notes for Helle's test week</div><span class="chip pend">QUEUED</span></div>
   </div>
 
-  <div class="foot"><span>staging: den-optiske-vikar-staging-c6udm.ondigitalocean.app</span><span>updated 2026-07-11 · wave A: V partial, fixes in flight</span></div>
+  <div class="foot"><span>staging: den-optiske-vikar-staging-c6udm.ondigitalocean.app</span><span>updated 2026-07-11 · wave A dispatch</span></div>
 </div></div>
 
 </body>
