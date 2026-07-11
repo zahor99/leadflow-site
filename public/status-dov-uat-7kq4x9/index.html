@@ -63,19 +63,20 @@
   <p class="eyebrow">Den Optiske Vikar · staging UAT · scripted persona walkthroughs</p>
   <h1>Live test run</h1>
   <p class="sub">Browser agents execute the walkthrough scripts like real users. Every gate needs proof: screenshots, database record checks, notification intercepts (all SMS/email land at the operator only). <b>Orchestrator reviews each gate before the next wave launches.</b> Plan: <span style="font-family:var(--mono)">docs/UAT-PLAN.md</span></p>
-  <div class="pulse">WAVE A REVIEWED — 3 defects found &amp; being fixed · reruns next</div>
+  <div class="pulse">GATE A CLOSED ✓ — all fixes re-verified · Wave B next</div>
 
   <div class="wave">
     <div class="wave-h"><span class="t">Wave A — persona basics · GATE A REVIEWED</span><span class="chip fail">3 DEFECTS → FIXING</span></div>
     <div class="row"><div class="n"><b>S</b>Store core — <b>functional pass + 1 real defect</b><div class="d">✅ dashboard · 3 named + 1 open booking created (ids 5–8, DB-verified) · past-date & Sunday rejected · required-field guard · store isolation (no Brillehuset data)<br>❌ S8: /admin renders for a store user — <b>orchestrator-verified as a FRONTEND route-guard gap, NOT a breach</b> (every admin data call returns 403; no data exposed) → fix in flight<br>⚠ end-before-start hours reach the confirm screen (server rejects on submit; client should block earlier)</div></div><span class="chip fail">1 DEFECT</span></div>
     <div class="row"><div class="n"><b>V</b>Vikar core — <b>functional pass + 2 real defects</b><div class="d">✅ accept UAT-S2a → one-hop confirmed + store email · decline UAT-S2c · cross-vikar isolation<br>❌ V5 availability blocking + ❌ V6 personal iCal — both unreachable in the portal → <b>FIXED &amp; deployed to staging</b> (commit 64ba5f1), rerun pending<br>✅ decline-notifies-nobody confirmed BY DESIGN (default-deny matrix; store sees an "Afvist" badge)</div></div><span class="chip pass">FIX SHIPPED</span></div>
     <div class="row"><div class="n"><b>FIX-1</b>Vikar V5+V6 — availability tab + iCal card mounted → LIVE on staging</div><span class="chip pass">DONE</span></div>
-    <div class="row"><div class="n"><b>FIX-2</b>Admin route guard (S8) — add AdminGuard mirroring KundeGuard → deploy → rerun S8</div><span class="chip run">RUNNING</span></div>
-    <div class="row"><div class="n"><b>RERUN</b>Re-verify V5 · V6 · S8 on the fixed staging build (sequential, single session)</div><span class="chip gate">QUEUED</span></div>
+    <div class="row"><div class="n"><b>FIX-2</b>Admin + vikar route guards (S8) — AdminGuard + VikarGuard added (agent caught a symmetric hole: customer could see vikar shell) → LIVE (commit dcaf1ea)</div><span class="chip pass">DONE</span></div>
+    <div class="row"><div class="n"><b>RERUN ✓</b>Re-verified on fixed build (single session): V5 availability block PASS · V6 iCal card PASS · S8 store→/admin redirect PASS · vikar→/admin redirect PASS · customer→/vikar/portal redirect PASS<div class="d">Orchestrator DB-confirmed Anna's block persisted (isAvailable=0, scoped to her). New minor finding: setAvailability inserts duplicate rows instead of upsert — batched for cleanup</div></div><span class="chip pass">ALL PASS</span></div>
+    <div class="row"><div class="n"><b>GATE A</b>CLOSED ✓ — core store+vikar workflows verified; 3 defects fixed &amp; re-proven; 2 minor items batched (wizard end-before-start validation, availability duplicate-row upsert)</div><span class="chip pass">CLOSED</span></div>
   </div>
 
   <div class="wave">
-    <div class="wave-h"><span class="t">Wave B — cross-persona handshakes</span><span class="chip pend">QUEUED</span></div>
+    <div class="wave-h"><span class="t">Wave B — cross-persona handshakes</span><span class="chip run">NEXT</span></div>
     <div class="row"><div class="n"><b>C</b>Condition loop — vikar condition → store approve · second round rejected · store cancel with band label</div><span class="chip pend">QUEUED</span></div>
     <div class="row"><div class="n"><b>A</b>Admin ops — assign vikar to open request · admin cancel · oversight/escalation queues · role walls (401/403)</div><span class="chip pend">QUEUED</span></div>
     <div class="row"><div class="n"><b>GATE B</b>+ state-machine audit: every history row matches the frozen 11-state machine</div><span class="chip pend">QUEUED</span></div>
