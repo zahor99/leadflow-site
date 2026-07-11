@@ -63,7 +63,7 @@
   <p class="eyebrow">Den Optiske Vikar · staging UAT · scripted persona walkthroughs</p>
   <h1>Live test run</h1>
   <p class="sub">Browser agents execute the walkthrough scripts like real users. Every gate needs proof: screenshots, database record checks, notification intercepts (all SMS/email land at the operator only). <b>Orchestrator reviews each gate before the next wave launches.</b> Plan: <span style="font-family:var(--mono)">docs/UAT-PLAN.md</span></p>
-  <div class="pulse">WAVE C — O found a launch-blocker (no invite UI) · fix + ruling #2 building</div>
+  <div class="pulse">WAVE C — decision made: Better-Auth email+password onboarding · wiring it now</div>
 
   <div class="wave">
     <div class="wave-h"><span class="t">Wave A — persona basics · GATE A REVIEWED</span><span class="chip fail">3 DEFECTS → FIXING</span></div>
@@ -88,7 +88,8 @@
   <div class="wave">
     <div class="wave-h"><span class="t">Wave C — onboarding + UX sweep</span><span class="chip run">RUNNING</span></div>
     <div class="row"><div class="n"><b>O</b>Onboarding rehearsal — <b>FAIL at step 1: admin has NO UI to invite a vikar</b><div class="d">Exhaustive sweep of every admin surface (manage/Vikarer shows only "Rediger adresse"; no invite control anywhere; vikar_invites table = 0 rows ever) — the day-one onboarding journey dead-ends before it starts<br><b>Orchestrator code-verified:</b> the whole backend EXISTS (invite router + claim page at /registrer/:token) — the admin UI entry point + invite email were never wired. Fix in flight ("Inviter vikar" on the Vikarer tab + claim-link email); O reruns in full on the fixed build</div></div><span class="chip fail">1 DEFECT</span></div>
-    <div class="row"><div class="n"><b>FIX-4</b>Admin "Inviter vikar" UI + claim-link invite email (F-C1) · vikar notified on condition-rejection (ruling #2, commit 9c01ccd) — deploying together</div><span class="chip run">IN FLIGHT</span></div>
+    <div class="row"><div class="n"><b>FIX-4</b>Admin "Inviter vikar" UI (F-C1, commit 9525817) · vikar notified on condition-rejection (ruling #2, commit 9c01ccd) — shipped</div><span class="chip pass">DONE</span></div>
+    <div class="row"><div class="n"><b>DECISION</b>Onboarding trace exposed an auth fork: the wired claim/login path used the legacy Manus OAuth, while a complete Better-Auth email+password system sat built-but-unwired<div class="d"><b>Operator ruled: Better-Auth email+password</b> (cuts the Manus dependency, migration-correct). Repointing the admin invite + the /registrer claim page onto the existing Better-Auth chain (login/forgot/set-password pages already built); then Script O reruns in full on the real password flow</div></div><span class="chip run">WIRING</span></div>
     <div class="row"><div class="n"><b>U</b>UX sweep — mobile viewport · console errors · Danish copy · double-submit guard · empty states</div><span class="chip pend">QUEUED (after O — browser agents serialized)</span></div>
     <div class="row"><div class="n"><b>GATE C</b>Final UAT-READY verdict + handoff notes for Helle's test week</div><span class="chip pend">QUEUED</span></div>
   </div>
