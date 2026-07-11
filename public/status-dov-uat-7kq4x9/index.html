@@ -63,7 +63,7 @@
   <p class="eyebrow">Den Optiske Vikar · staging UAT · scripted persona walkthroughs</p>
   <h1>Live test run</h1>
   <p class="sub">Browser agents execute the walkthrough scripts like real users. Every gate needs proof: screenshots, database record checks, notification intercepts (all SMS/email land at the operator only). <b>Orchestrator reviews each gate before the next wave launches.</b> Plan: <span style="font-family:var(--mono)">docs/UAT-PLAN.md</span></p>
-  <div class="pulse">WAVE B RUNNING — script C (condition loop) dispatched</div>
+  <div class="pulse">WAVE B — C done (2 defects, fixes in flight) · script A running</div>
 
   <div class="wave">
     <div class="wave-h"><span class="t">Wave A — persona basics · GATE A REVIEWED</span><span class="chip fail">3 DEFECTS → FIXING</span></div>
@@ -77,8 +77,9 @@
 
   <div class="wave">
     <div class="wave-h"><span class="t">Wave B — cross-persona handshakes</span><span class="chip run">RUNNING</span></div>
-    <div class="row"><div class="n"><b>C</b>Condition loop — vikar condition → store approve · second round rejected (→ renegotiate per state machine) · store cancel with band label</div><span class="chip run">RUNNING</span></div>
-    <div class="row"><div class="n"><b>A</b>Admin ops — assign vikar to open request · admin cancel · oversight/escalation queues · role walls (401/403)</div><span class="chip pend">QUEUED (runs after C — browser agents serialized)</span></div>
+    <div class="row"><div class="n"><b>C</b>Condition loop — <b>partial pass + 2 real defects</b><div class="d">✅ C1: Anna's conditional accept on UAT-S2b — exact condition text in DB + store email intercepted · ✅ C3 create + condition on fresh UAT-C3 (booking #9) — systemic re-confirm<br>❌ C2/C3: store portal has NO condition display and NO approve/reject — <b>orchestrator code-verified: backend procedures exist (storeAcceptCondition/RejectCondition), frontend never wired</b><br>❌ C4: store portal has NO cancel control (admin-only today) — cancel + band label untestable<br>⚠ notification emails link to the dead legacy Manus domain (hardcoded ×4 in notifications.ts)</div></div><span class="chip fail">2 DEFECTS</span></div>
+    <div class="row"><div class="n"><b>FIX-3</b>Store condition UI (view + godkend/afvis) · store cancel + band label · Manus-domain email links → dev agent working, deploy held until script A finishes</div><span class="chip run">IN FLIGHT</span></div>
+    <div class="row"><div class="n"><b>A</b>Admin ops — assign vikar to open request · admin cancel · oversight/escalation queues · role walls (401/403)</div><span class="chip run">RUNNING</span></div>
     <div class="row"><div class="n"><b>GATE B</b>+ state-machine audit: every history row matches the frozen 11-state machine</div><span class="chip pend">QUEUED</span></div>
   </div>
 
