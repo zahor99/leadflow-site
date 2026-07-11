@@ -1,0 +1,93 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<meta name="robots" content="noindex,nofollow">
+<title>DOV UAT — Live Test Run</title>
+<style>
+  :root {
+    --ground:#f7f8fa; --surface:#fff; --surface-2:#f1f3f7; --ink:#141a22; --ink-2:#48505c; --ink-3:#79818e;
+    --line:#e2e6ec; --accent:#2b54c7; --accent-soft:#e8edfb; --go:#1f8a52; --go-soft:#e2f3e9;
+    --amber:#b9760a; --amber-soft:#f8ecd4; --crit:#c4453d; --crit-soft:#fbe9e7;
+    --shadow:0 1px 2px rgba(20,26,34,.05),0 8px 24px -12px rgba(20,26,34,.18);
+    --mono:ui-monospace,"Cascadia Code",Consolas,monospace; --sans:system-ui,-apple-system,"Segoe UI",Roboto,sans-serif;
+  }
+  @media (prefers-color-scheme: dark) { :root {
+    --ground:#0f141b; --surface:#161d26; --surface-2:#1c2530; --ink:#e7ecf3; --ink-2:#a9b2be; --ink-3:#79838f;
+    --line:#273140; --accent:#7d9bff; --accent-soft:#1c2740; --go:#47c584; --go-soft:#12301f;
+    --amber:#e0a340; --amber-soft:#33280f; --crit:#e8746c; --crit-soft:#3a1a16;
+    --shadow:0 1px 2px rgba(0,0,0,.3),0 10px 30px -14px rgba(0,0,0,.6);
+  }}
+  :root[data-theme="light"] {
+    --ground:#f7f8fa; --surface:#fff; --surface-2:#f1f3f7; --ink:#141a22; --ink-2:#48505c; --ink-3:#79818e;
+    --line:#e2e6ec; --accent:#2b54c7; --accent-soft:#e8edfb; --go:#1f8a52; --go-soft:#e2f3e9;
+    --amber:#b9760a; --amber-soft:#f8ecd4; --crit:#c4453d; --crit-soft:#fbe9e7;
+  }
+  :root[data-theme="dark"] {
+    --ground:#0f141b; --surface:#161d26; --surface-2:#1c2530; --ink:#e7ecf3; --ink-2:#a9b2be; --ink-3:#79838f;
+    --line:#273140; --accent:#7d9bff; --accent-soft:#1c2740; --go:#47c584; --go-soft:#12301f;
+    --amber:#e0a340; --amber-soft:#33280f; --crit:#e8746c; --crit-soft:#3a1a16;
+  }
+  *{box-sizing:border-box} body{margin:0}
+  .page{background:var(--ground);color:var(--ink);font-family:var(--sans);line-height:1.5;padding:clamp(16px,3vw,40px);min-height:100vh}
+  .wrap{max-width:860px;margin:0 auto}
+  .eyebrow{font-family:var(--mono);font-size:11px;letter-spacing:.14em;text-transform:uppercase;color:var(--ink-3);margin:0 0 10px}
+  h1{font-size:clamp(22px,4.5vw,34px);margin:0 0 6px;letter-spacing:-.02em}
+  .sub{color:var(--ink-2);font-size:14px;margin:0 0 24px}
+  .sub b{color:var(--ink)}
+  .pulse{display:inline-flex;align-items:center;gap:7px;background:var(--accent-soft);border:1px solid var(--accent);color:var(--accent);font-family:var(--mono);font-size:12px;font-weight:600;border-radius:999px;padding:4px 12px;margin-bottom:22px}
+  @media (prefers-reduced-motion: no-preference){ .pulse::before{content:"";width:8px;height:8px;border-radius:50%;background:var(--accent);animation:p 1.6s ease-in-out infinite} @keyframes p{0%,100%{opacity:.3}50%{opacity:1}} }
+  .wave{background:var(--surface);border:1px solid var(--line);border-radius:12px;box-shadow:var(--shadow);margin-bottom:16px;overflow:hidden}
+  .wave-h{display:flex;justify-content:space-between;align-items:center;gap:10px;padding:12px 16px;border-bottom:1px solid var(--line);background:var(--surface-2)}
+  .wave-h .t{font-family:var(--mono);font-size:12px;font-weight:700;letter-spacing:.08em;text-transform:uppercase}
+  .chip{font-family:var(--mono);font-size:11px;font-weight:600;padding:2px 9px;border-radius:999px;white-space:nowrap}
+  .chip.pend{background:var(--surface-2);color:var(--ink-3);border:1px dashed var(--line)}
+  .chip.run{background:var(--accent-soft);color:var(--accent);border:1px solid var(--accent)}
+  .chip.pass{background:var(--go-soft);color:var(--go);border:1px solid var(--go)}
+  .chip.fail{background:var(--crit-soft);color:var(--crit);border:1px solid var(--crit)}
+  .chip.gate{background:var(--amber-soft);color:var(--amber);border:1px solid var(--amber)}
+  .row{display:flex;justify-content:space-between;align-items:flex-start;gap:12px;padding:11px 16px;border-bottom:1px solid var(--line)}
+  .row:last-child{border-bottom:0}
+  .row .n{font-size:13.5px}
+  .row .n b{font-family:var(--mono);font-size:12px;margin-right:8px}
+  .row .d{color:var(--ink-3);font-size:12px;margin-top:2px}
+  .proof{padding:12px 16px;background:var(--surface-2);border-top:1px solid var(--line);font-size:12.5px;color:var(--ink-2)}
+  .proof img{max-width:100%;border-radius:8px;border:1px solid var(--line);margin-top:8px}
+  .foot{margin-top:28px;font-family:var(--mono);font-size:11px;color:var(--ink-3);display:flex;justify-content:space-between;flex-wrap:wrap;gap:6px}
+</style>
+
+</head>
+<body>
+<div class="page"><div class="wrap">
+  <p class="eyebrow">Den Optiske Vikar · staging UAT · scripted persona walkthroughs</p>
+  <h1>Live test run</h1>
+  <p class="sub">Browser agents execute the walkthrough scripts like real users. Every gate needs proof: screenshots, database record checks, notification intercepts (all SMS/email land at the operator only). <b>Orchestrator reviews each gate before the next wave launches.</b> Plan: <span style="font-family:var(--mono)">docs/UAT-PLAN.md</span></p>
+  <div class="pulse">WAVE A DISPATCHING — 2026-07-11</div>
+
+  <div class="wave">
+    <div class="wave-h"><span class="t">Wave A — persona basics (parallel ×2)</span><span class="chip run">RUNNING</span></div>
+    <div class="row"><div class="n"><b>S</b>Store core — login · create 3 named + 1 open request · edge validation · isolation · role wall<div class="d">Expect on your phone: ~3 new-request SMS ([TEST AGENT] prefix)</div></div><span class="chip run">RUNNING</span></div>
+    <div class="row"><div class="n"><b>V</b>Vikar core — portal · availability · personal iCal privacy · accept UAT-S2a · decline UAT-S2c · cross-vikar isolation</div><span class="chip run">RUNNING</span></div>
+    <div class="row"><div class="n"><b>GATE A</b>Orchestrator review: screenshots · DB assertions · Gmail intercepts · operator SMS confirmation</div><span class="chip gate">WAITING</span></div>
+  </div>
+
+  <div class="wave">
+    <div class="wave-h"><span class="t">Wave B — cross-persona handshakes</span><span class="chip pend">QUEUED</span></div>
+    <div class="row"><div class="n"><b>C</b>Condition loop — vikar condition → store approve · second round rejected · store cancel with band label</div><span class="chip pend">QUEUED</span></div>
+    <div class="row"><div class="n"><b>A</b>Admin ops — assign vikar to open request · admin cancel · oversight/escalation queues · role walls (401/403)</div><span class="chip pend">QUEUED</span></div>
+    <div class="row"><div class="n"><b>GATE B</b>+ state-machine audit: every history row matches the frozen 11-state machine</div><span class="chip pend">QUEUED</span></div>
+  </div>
+
+  <div class="wave">
+    <div class="wave-h"><span class="t">Wave C — onboarding + UX sweep</span><span class="chip pend">QUEUED</span></div>
+    <div class="row"><div class="n"><b>O</b>Invite → claim → REAL password login (Helle's Monday rehearsal) · logout/login · friendly rate-limit</div><span class="chip pend">QUEUED</span></div>
+    <div class="row"><div class="n"><b>U</b>UX sweep — mobile viewport · console errors · Danish copy · double-submit guard · empty states</div><span class="chip pend">QUEUED</span></div>
+    <div class="row"><div class="n"><b>GATE C</b>Final UAT-READY verdict + handoff notes for Helle's test week</div><span class="chip pend">QUEUED</span></div>
+  </div>
+
+  <div class="foot"><span>staging: den-optiske-vikar-staging-c6udm.ondigitalocean.app</span><span>updated 2026-07-11 · wave A dispatch</span></div>
+</div></div>
+
+</body>
+</html>
