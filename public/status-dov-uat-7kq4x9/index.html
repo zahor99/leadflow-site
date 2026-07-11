@@ -63,7 +63,7 @@
   <p class="eyebrow">Den Optiske Vikar · staging UAT · scripted persona walkthroughs</p>
   <h1>Live test run</h1>
   <p class="sub">Browser agents execute the walkthrough scripts like real users. Every gate needs proof: screenshots, database record checks, notification intercepts (all SMS/email land at the operator only). <b>Orchestrator reviews each gate before the next wave launches.</b> Plan: <span style="font-family:var(--mono)">docs/UAT-PLAN.md</span></p>
-  <div class="pulse">WAVE B — A PASSED · fixes deploying · C rerun next</div>
+  <div class="pulse">GATE B CLOSED ✓ — C rerun 3/3 + state-machine audit clean · Wave C next</div>
 
   <div class="wave">
     <div class="wave-h"><span class="t">Wave A — persona basics · GATE A REVIEWED</span><span class="chip fail">3 DEFECTS → FIXING</span></div>
@@ -78,9 +78,10 @@
   <div class="wave">
     <div class="wave-h"><span class="t">Wave B — cross-persona handshakes</span><span class="chip run">RUNNING</span></div>
     <div class="row"><div class="n"><b>C</b>Condition loop — <b>partial pass + 2 real defects</b><div class="d">✅ C1: Anna's conditional accept on UAT-S2b — exact condition text in DB + store email intercepted · ✅ C3 create + condition on fresh UAT-C3 (booking #9) — systemic re-confirm<br>❌ C2/C3: store portal has NO condition display and NO approve/reject — <b>orchestrator code-verified: backend procedures exist (storeAcceptCondition/RejectCondition), frontend never wired</b><br>❌ C4: store portal has NO cancel control (admin-only today) — cancel + band label untestable<br>⚠ notification emails link to the dead legacy Manus domain (hardcoded ×4 in notifications.ts)</div></div><span class="chip fail">2 DEFECTS</span></div>
-    <div class="row"><div class="n"><b>FIX-3</b>Store condition UI (view + godkend/afvis) · store cancel + band label · dead Manus-domain email links → commit 540f350, 362 tests green, deploying to staging</div><span class="chip run">DEPLOYING</span></div>
+    <div class="row"><div class="n"><b>FIX-3</b>Store condition UI (view + godkend/afvis) · store cancel + band label · dead Manus-domain email links → commit 540f350, 362 tests green → LIVE</div><span class="chip pass">DONE</span></div>
+    <div class="row"><div class="n"><b>RERUN ✓</b>C2 approve condition on #6 → Bekræftet · C3 reject condition on #9 → back to Afventer (renegotiate, exactly per frozen machine) · C4 cancel #5 with band badge "Afbud 0–14 dage (100%)"<div class="d">Orchestrator DB-confirmed all three; post-fix emails carry NO stale Manus links; operator received the live SMS legs</div></div><span class="chip pass">3/3 PASS</span></div>
     <div class="row"><div class="n"><b>A</b>Admin ops — <b>PASS 5/5</b><div class="d">✅ A1 dashboard real data · A2 Jonas assigned to UAT-S3 (DB: requested→confirmed by admin, SMS+email intercepted — operator confirmed 2 SMS live) · A3 admin cancel with history · A4 escalation queue (clean empty state) · A6 walls: anon 401, store 403, /admin redirect<br>ℹ Vikar not notified on cancellation — code matches the default-deny §4 matrix, but flagged as a product question for Helle · ℹ staging error bodies show stacks (NODE_ENV=staging tRPC dev affordance; production proven stack-free by existing test)</div></div><span class="chip pass">PASS</span></div>
-    <div class="row"><div class="n"><b>GATE B</b>+ state-machine audit: every history row matches the frozen 11-state machine</div><span class="chip pend">QUEUED</span></div>
+    <div class="row"><div class="n"><b>GATE B</b>CLOSED ✓ — state-machine audit: all 10 history transitions legal (edge + actor) against the frozen machine; zero violations<div class="d">Audit bonus finding: worker-accept didn't stamp opticianId on name-matched open bookings → fix in flight (with 2 batched Wave-A minors); Wave C runs on that build · 2 product questions flagged for Helle: vikar isn't notified on cancellation or condition-rejection (default-deny matrix — needs her ruling, not a bug)</div></div><span class="chip pass">CLOSED</span></div>
   </div>
 
   <div class="wave">
