@@ -63,7 +63,7 @@
   <p class="eyebrow">Den Optiske Vikar · staging UAT · scripted persona walkthroughs</p>
   <h1>Live test run</h1>
   <p class="sub">Browser agents execute the walkthrough scripts like real users. Every gate needs proof: screenshots, database record checks, notification intercepts (all SMS/email land at the operator only). <b>Orchestrator reviews each gate before the next wave launches.</b> Plan: <span style="font-family:var(--mono)">docs/UAT-PLAN.md</span></p>
-  <div class="pulse">WAVE B COMPLETE ✓ — gate closed + cancel-approval workflow live &amp; verified · Wave C next</div>
+  <div class="pulse">WAVE C RUNNING — script O (onboarding rehearsal) dispatched</div>
 
   <div class="wave">
     <div class="wave-h"><span class="t">Wave A — persona basics · GATE A REVIEWED</span><span class="chip fail">3 DEFECTS → FIXING</span></div>
@@ -86,9 +86,9 @@
   </div>
 
   <div class="wave">
-    <div class="wave-h"><span class="t">Wave C — onboarding + UX sweep</span><span class="chip pend">QUEUED</span></div>
-    <div class="row"><div class="n"><b>O</b>Invite → claim → REAL password login (Helle's Monday rehearsal) · logout/login · friendly rate-limit</div><span class="chip pend">QUEUED</span></div>
-    <div class="row"><div class="n"><b>U</b>UX sweep — mobile viewport · console errors · Danish copy · double-submit guard · empty states</div><span class="chip pend">QUEUED</span></div>
+    <div class="wave-h"><span class="t">Wave C — onboarding + UX sweep</span><span class="chip run">RUNNING</span></div>
+    <div class="row"><div class="n"><b>O</b>Invite → claim → REAL password login (Helle's Monday rehearsal) · logout/login · friendly rate-limit</div><span class="chip run">RUNNING</span></div>
+    <div class="row"><div class="n"><b>U</b>UX sweep — mobile viewport · console errors · Danish copy · double-submit guard · empty states</div><span class="chip pend">QUEUED (after O — browser agents serialized)</span></div>
     <div class="row"><div class="n"><b>GATE C</b>Final UAT-READY verdict + handoff notes for Helle's test week</div><span class="chip pend">QUEUED</span></div>
   </div>
 
