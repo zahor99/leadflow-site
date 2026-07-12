@@ -1,0 +1,182 @@
+<!doctype html>
+<html lang="da">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<meta name="robots" content="noindex,nofollow">
+<title>Den Optiske Vikar — Testguide</title>
+<style>
+  :root{
+    --navy:#1A2332; --navy2:#222d40; --gold:#C9A96E; --gold-soft:#f3ebda;
+    --cream:#F5F0E8; --ink:#1d242e; --ink2:#4b5563; --ink3:#6b7280; --line:#e4ded2;
+    --go:#1f7a4d; --go-soft:#e4f2ea; --warn:#b9760a; --warn-soft:#f8ecd4; --stop:#b23b34; --stop-soft:#f8e6e4;
+    --sans:system-ui,-apple-system,"Segoe UI",Roboto,sans-serif; --serif:Georgia,"Times New Roman",serif;
+  }
+  *{box-sizing:border-box} body{margin:0;background:var(--cream);color:var(--ink);font-family:var(--sans);line-height:1.62;font-size:16px}
+  .band{background:var(--navy);padding:26px clamp(16px,4vw,40px)}
+  .band img{height:38px;width:auto;display:block}
+  .wrap{max-width:820px;margin:0 auto;padding:clamp(20px,4vw,44px) clamp(16px,4vw,40px) 60px}
+  .eyebrow{font-size:12px;letter-spacing:.16em;text-transform:uppercase;color:var(--gold);font-weight:700;margin:0 0 6px}
+  h1{font-family:var(--serif);font-size:clamp(26px,5vw,38px);margin:6px 0 8px;letter-spacing:-.01em;line-height:1.15}
+  h2{font-family:var(--serif);font-size:clamp(20px,3.4vw,26px);margin:44px 0 10px;padding-top:22px;border-top:2px solid var(--line);letter-spacing:-.01em}
+  h2 .num{color:var(--gold);margin-right:10px}
+  h3{font-size:16px;margin:22px 0 6px;color:var(--navy)}
+  p{margin:0 0 14px} .lead{font-size:18px;color:var(--ink2)}
+  a{color:#9a7b3c}
+  ol,ul{margin:0 0 16px;padding-left:22px} li{margin:0 0 8px}
+  .callout{border-radius:12px;padding:16px 20px;margin:20px 0;border:1px solid}
+  .callout.info{background:var(--gold-soft);border-color:var(--gold)}
+  .callout.warn{background:var(--warn-soft);border-color:#e0b96a}
+  .callout p:last-child,.callout ul:last-child,.callout ol:last-child{margin-bottom:0}
+  .callout strong{color:var(--navy)}
+  .step{background:#fff;border:1px solid var(--line);border-radius:12px;padding:18px 20px;margin:14px 0;box-shadow:0 1px 2px rgba(26,35,50,.04)}
+  .step h3{margin-top:0;display:flex;align-items:baseline;gap:10px}
+  .step h3 .b{flex:none;display:inline-flex;align-items:center;justify-content:center;min-width:26px;height:26px;border-radius:7px;background:var(--navy);color:var(--gold);font-size:13px;font-weight:700;font-family:var(--sans)}
+  table{width:100%;border-collapse:collapse;margin:8px 0 20px;font-size:15px}
+  th,td{text-align:left;padding:11px 12px;border-bottom:1px solid var(--line);vertical-align:top}
+  th{font-size:12px;letter-spacing:.05em;text-transform:uppercase;color:var(--ink3);font-weight:700}
+  .tag{display:inline-block;font-size:12px;font-weight:700;padding:2px 9px;border-radius:999px;white-space:nowrap}
+  .tag.ok{background:var(--go-soft);color:var(--go)} .tag.soon{background:var(--warn-soft);color:var(--warn)} .tag.off{background:var(--stop-soft);color:var(--stop)}
+  .foot{margin-top:40px;padding-top:18px;border-top:2px solid var(--line);font-size:13px;color:var(--ink3)}
+  code{background:#fff;border:1px solid var(--line);border-radius:5px;padding:1px 6px;font-size:14px;font-family:ui-monospace,Consolas,monospace;color:var(--navy)}
+  .kv{font-size:15px}
+  @media (prefers-color-scheme: dark){
+    :root{--cream:#12171f;--ink:#e7ecf3;--ink2:#b3bcc9;--ink3:#8791a0;--line:#2a3441;--gold-soft:#2a2415;--go-soft:#123122;--warn-soft:#322611;--stop-soft:#331917}
+    body{background:var(--cream)} .step,code,th td{background:#1a212c}
+    .step{background:#1a212c} code{background:#1a212c}
+  }
+</style>
+</head>
+<body>
+<div class="band"><img src="logo.png" alt="Den Optiske Vikar"></div>
+<div class="wrap">
+
+  <p class="eyebrow">Testguide · Prøveuge</p>
+  <h1>Velkommen til dit nye system, Helle</h1>
+  <p class="lead">Denne guide viser dig, hvad du skal prøve i testversionen, hvad der virker, og hvad der endnu ikke er klar. Alt her er sikkert at klikke på — der bliver ikke sendt rigtige beskeder til rigtige mennesker.</p>
+
+  <div class="callout info">
+    <p style="margin-bottom:8px"><strong>Det vigtigste at vide først</strong></p>
+    <ul>
+      <li>Dette er en <strong>testversion</strong> af systemet — ikke den rigtige, offentlige side endnu.</li>
+      <li><strong>Alle e-mails og SMS'er er mærket med “[TEST]”</strong> og går <em>kun</em> til dig og Gergely. Ingen rigtige vikarer eller butikker bliver kontaktet, uanset hvad du gør. Prøv frit.</li>
+      <li>Systemet starter <strong>helt tomt</strong> (ingen bookinger, ingen brugere). Du bygger selv testdata op — præcis som en almindelig arbejdsdag. Alt bliver ryddet igen, før den rigtige lancering.</li>
+      <li>Du logger ind som <strong>administrator</strong> — dig, der har overblik over det hele.</li>
+    </ul>
+  </div>
+
+  <h2><span class="num">1</span>Sådan kommer du i gang</h2>
+  <div class="step">
+    <h3><span class="b">1</span>Åbn invitationen</h3>
+    <p>Find e-mailen med emnet <strong>“[TEST] Invitation til Den Optiske Vikar”</strong> i din indbakke (<code>helle@denoptiskevikar.dk</code>). Klik på linket i mailen.</p>
+  </div>
+  <div class="step">
+    <h3><span class="b">2</span>Vælg din adgangskode</h3>
+    <p>På siden, der åbner, vælger du en adgangskode (mindst 8 tegn) og bekræfter den. Klik <strong>“Aktiver konto”</strong>. Din administrator-konto er nu oprettet.</p>
+  </div>
+  <div class="step">
+    <h3><span class="b">3</span>Log ind</h3>
+    <p>Du bliver sendt til login-siden. Log ind med din e-mail og den adgangskode, du lige valgte. Du lander nu på <strong>administrator-oversigten</strong>. Fremover logger du ind samme sted: <code>…ondigitalocean.app/login</code>.</p>
+  </div>
+  <div class="callout warn">
+    <p><strong>Glemt adgangskoden?</strong> Klik “Glemt adgangskode?” på login-siden — du får en ny e-mail (også mærket [TEST]) med et link til at vælge en ny.</p>
+  </div>
+
+  <h2><span class="num">2</span>Hvad du skal teste — trin for trin</h2>
+  <p>Den bedste test er at bruge systemet, som du ville på en rigtig dag. Her er en anbefalet rækkefølge. Du behøver ikke gøre det hele på én gang.</p>
+
+  <div class="callout info">
+    <p><strong>Lille tip til at teste alene:</strong> Fordi vi er i testtilstand, kommer <em>alle</em> invitations-mails til <em>din</em> indbakke. Så du kan invitere en “test-vikar” eller en “test-butik” på en hvilken som helst e-mailadresse (fx <code>test-vikar@denoptiskevikar.dk</code>), åbne invitationen fra din egen indbakke, og selv sætte den op i et <strong>privat/inkognito-vindue</strong> — så kan du se, hvordan vikaren og butikken oplever systemet.</p>
+  </div>
+
+  <div class="step">
+    <h3><span class="b">A</span>Se dig omkring som administrator</h3>
+    <p>Gå rundt i menuen øverst: <strong>Oversigt</strong>, <strong>Bookinger</strong>, <strong>Eskaleringer</strong>, <strong>Kunder</strong>, og drop-down-menuerne <strong>Agenter</strong> og <strong>Mere</strong>. Læg mærke til den daglige briefing på forsiden. Alt er tomt til at starte med — det er meningen.</p>
+  </div>
+  <div class="step">
+    <h3><span class="b">B</span>Inviter en vikar</h3>
+    <p>Gå til <strong>Administrer → Vikarer</strong> og klik <strong>“Inviter vikar”</strong>. Udfyld navn og e-mail, og lad <strong>Rolle</strong> stå på “Vikar”. Send. Åbn invitations-mailen (den kommer til dig), vælg en adgangskode via linket, og log ind som vikaren i et inkognito-vindue. Se vikar-portalen: <strong>Mine Bookinger</strong>, <strong>Kalender</strong> (med tilgængelighed), <strong>Mine Afregninger</strong> og <strong>Min Profil</strong>.</p>
+  </div>
+  <div class="step">
+    <h3><span class="b">C</span>Opret en butik (kunde) og inviter den</h3>
+    <p>Gå til <strong>Kunder</strong> og opret en ny kontakt/butik. Send en portal-invitation til butikken, og sæt den op på samme måde (åbn mailen → vælg adgangskode → log ind i et andet inkognito-vindue). Se kunde-portalen: <strong>Oversigt</strong>, <strong>Bookinger</strong>, <strong>Kreditter</strong>, <strong>Timer</strong>, <strong>Anmodninger</strong> og <strong>Profil</strong>.</p>
+  </div>
+  <div class="step">
+    <h3><span class="b">D</span>Lav en booking og svar på den</h3>
+    <p>Som <strong>butik</strong>: klik “Book en vikar”, gennemgå trinnene (årsag, dage, timer, evt. ønsket vikar, lokation) og send. Som <strong>vikar</strong>: åbn anmodningen og prøv de tre svar — <strong>Accepter</strong>, <strong>Accepter med vilkår</strong>, og <strong>Afvis</strong>. Læg mærke til, at butik og vikar får hver deres besked undervejs (til din indbakke).</p>
+  </div>
+  <div class="step">
+    <h3><span class="b">E</span>Prøv “accepter med vilkår”-forløbet</h3>
+    <p>Lad vikaren acceptere <em>med et vilkår</em> (fx “kan først starte kl. 10”). Skift til butikken — vilkåret vises, og butikken kan <strong>Godkende</strong> eller <strong>Afvise</strong> det. Godkendes det, bliver bookingen bekræftet. Afvises det, åbnes bookingen igen (til fornyet forhandling), og vikaren får besked.</p>
+  </div>
+  <div class="step">
+    <h3><span class="b">F</span>Prøv annullering med godkendelse</h3>
+    <p>Som <strong>butik</strong>: bed om at annullere en <em>bekræftet</em> booking (hvor der er tildelt en vikar). Bemærk, at det bliver en <strong>anmodning</strong>, der sendes til dig som administrator. Skift til administrator, gå til <strong>Eskaleringer</strong>, og <strong>godkend annulleringen</strong>. Bookingen aflyses, og vikaren får besked. (En booking uden tildelt vikar kan butikken annullere med det samme.)</p>
+  </div>
+  <div class="step">
+    <h3><span class="b">G</span>Tildel en vikar som administrator</h3>
+    <p>Lav en booking uden ønsket vikar (en “åben” anmodning). Gå ind som administrator og <strong>tildel</strong> en vikar til den. Vikaren får besked (e-mail + SMS til din indbakke/telefon).</p>
+  </div>
+  <div class="step">
+    <h3><span class="b">H</span>Tjek at beskederne kommer</h3>
+    <p>Hold øje med din indbakke og telefon undervejs. Ved hvert vigtigt skridt (ny anmodning, bekræftelse, vilkår, annullering) skal der komme en e-mail og/eller SMS — mærket [TEST]. <strong>Både du og Gergely får dem alle</strong>, så I kan følge med i, hvad der bliver testet.</p>
+  </div>
+
+  <h2><span class="num">3</span>Hvad der virker (klar til test)</h2>
+  <p>Alt herunder er gennemtestet og klar til, at du prøver det:</p>
+  <table>
+    <tr><th>Område</th><th>Funktion</th><th></th></tr>
+    <tr><td>Login &amp; adgang</td><td>Log ind med e-mail + adgangskode · glemt/nulstil adgangskode · invitation → vælg adgangskode for vikarer, butikker og administratorer</td><td><span class="tag ok">Virker</span></td></tr>
+    <tr><td>Butik</td><td>Opret bookinger (ønsket vikar eller åben) · se egne bookinger · annullér (går til din godkendelse, når der er tildelt en vikar)</td><td><span class="tag ok">Virker</span></td></tr>
+    <tr><td>Vikar</td><td>Accepter / afvis / accepter med vilkår · tilgængeligheds-kalender · personligt kalender-feed (iCal) · timeregistrering og udlæg</td><td><span class="tag ok">Virker</span></td></tr>
+    <tr><td>Forhandling</td><td>Vilkår-forløbet: vikar sætter vilkår → butik godkender/afviser → genåbning</td><td><span class="tag ok">Virker</span></td></tr>
+    <tr><td>Annullering</td><td>Butik anmoder → administrator godkender → vikaren får besked</td><td><span class="tag ok">Virker</span></td></tr>
+    <tr><td>Administrator</td><td>Tildel vikar til åben anmodning · overblik over bookinger · eskaleringskø · aflys bookinger · inviter vikarer og administratorer · kunde-kartotek · faktura-godkendelse (visning)</td><td><span class="tag ok">Virker</span></td></tr>
+    <tr><td>Beskeder</td><td>E-mail + SMS ved hvert vigtigt skridt · alt på dansk · alt kommer til dig + Gergely i testperioden</td><td><span class="tag ok">Virker</span></td></tr>
+    <tr><td>Generelt</td><td>Hele systemet er på dansk · virker på mobil og computer · dit logo øverst</td><td><span class="tag ok">Virker</span></td></tr>
+  </table>
+
+  <h2><span class="num">4</span>Hvad der IKKE er klar endnu</h2>
+  <p>Følgende er bevidst slået fra eller gemt til en senere fase. Det er ikke fejl — det er planlagt til efter prøveugen:</p>
+  <table>
+    <tr><th>Område</th><th>Status</th><th></th></tr>
+    <tr><td><strong>Betaling / køb af kreditter</strong></td><td>Knapperne “Køb kreditter” viser <em>“Kommer snart”</em> og er slået fra. Du kan sagtens booke uden kreditter i testperioden — betaling kommer i en senere fase.</td><td><span class="tag soon">Senere fase</span></td></tr>
+    <tr><td><strong>Regnskab / e-conomic</strong></td><td>Faktura- og regnskabsskærmene findes, men er endnu ikke koblet til en rigtig e-conomic-konto. Næste fase.</td><td><span class="tag soon">Senere fase</span></td></tr>
+    <tr><td><strong>Kredit-forbrug og saldo-træk</strong></td><td>Selve kredit-/timeforbrugs-logikken er ikke aktiv endnu — den hører sammen med betaling ovenfor.</td><td><span class="tag soon">Senere fase</span></td></tr>
+    <tr><td><strong>Rigtige e-mails/SMS til rigtige modtagere</strong></td><td>Slået fra med vilje i testen — alt kommer til dig + Gergely. Slås til ved den rigtige lancering.</td><td><span class="tag off">Slået fra i test</span></td></tr>
+    <tr><td>Enkelte administrator-værktøjer (visse AI-agent-skærme)</td><td>Under opbygning — enten skjult eller markeret. Ikke en del af prøveugen.</td><td><span class="tag soon">Under opbygning</span></td></tr>
+  </table>
+  <div class="callout warn">
+    <p><strong>Én lille skønhedsfejl:</strong> Når du satte din adgangskode, stod der nogle punkter om “hvad du kan med din konto”, der er skrevet til en vikar — ikke en administrator. Det er kun tekst på den ene side og betyder ikke noget for, hvordan systemet virker. Det bliver rettet.</p>
+  </div>
+
+  <h2><span class="num">5</span>Sådan melder du tilbage</h2>
+  <p>Du behøver ikke et system til det — en simpel liste er nok. For hver ting, du bemærker, skriv gerne:</p>
+  <ul>
+    <li><strong>Hvad gjorde du?</strong> (fx “oprettede en booking som butik”)</li>
+    <li><strong>Hvad forventede du?</strong></li>
+    <li><strong>Hvad skete der i stedet?</strong> (gerne et skærmbillede)</li>
+  </ul>
+  <p>Send din liste til Gergely. Fordi alle beskeder også kommer til ham, kan han se det meste af det, du tester — men dine egne noter om, hvad der føltes forkert eller besværligt, er guld værd.</p>
+
+  <h2><span class="num">6</span>Ordliste</h2>
+  <table>
+    <tr><td class="kv"><strong>Administrator</strong></td><td>Dig, Helle — du har overblik over det hele og styrer vikarer, butikker og bookinger.</td></tr>
+    <tr><td class="kv"><strong>Vikar</strong></td><td>Den optiker, der træder til i en butik. I systemet kaldes rollen “vikar”.</td></tr>
+    <tr><td class="kv"><strong>Butik / Kunde</strong></td><td>Optikerforretningen, der bestiller en vikar.</td></tr>
+    <tr><td class="kv"><strong>Booking</strong></td><td>En anmodning om, at en vikar dækker en vagt en eller flere dage.</td></tr>
+    <tr><td class="kv"><strong>Vilkår</strong></td><td>En betingelse, en vikar kan sætte, når de accepterer (fx “kan først starte kl. 10”), som butikken så godkender eller afviser.</td></tr>
+    <tr><td class="kv"><strong>Eskalering</strong></td><td>En sag, der sendes til dig som administrator at tage stilling til — fx en annulleringsanmodning.</td></tr>
+    <tr><td class="kv"><strong>Kreditter</strong></td><td>Forudbetalte vikartimer (betaling — kommer i en senere fase).</td></tr>
+    <tr><td class="kv"><strong>[TEST]</strong></td><td>Mærket på alle beskeder i testmiljøet. Betyder, at beskeden kun er gået til dig + Gergely, ikke til rigtige modtagere.</td></tr>
+    <tr><td class="kv"><strong>Inkognito-vindue</strong></td><td>Et privat browservindue (Ctrl+Shift+N i Chrome), hvor du kan være logget ind som en anden bruger samtidig — nyttigt til at teste vikar- og butiks-siden.</td></tr>
+  </table>
+
+  <div class="foot">
+    Den Optiske Vikar · testmiljø · denne guide er privat og til intern brug i prøveugen.<br>
+    Spørgsmål undervejs? Skriv til Gergely — han følger med i testen.
+  </div>
+
+</div>
+</body>
+</html>
