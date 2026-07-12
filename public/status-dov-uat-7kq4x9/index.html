@@ -63,7 +63,7 @@
   <p class="eyebrow">Den Optiske Vikar · staging UAT · scripted persona walkthroughs</p>
   <h1>Live test run</h1>
   <p class="sub">Browser agents execute the walkthrough scripts like real users. Every gate needs proof: screenshots, database record checks, notification intercepts (all SMS/email land at the operator only). <b>Orchestrator reviews each gate before the next wave launches.</b> Plan: <span style="font-family:var(--mono)">docs/UAT-PLAN.md</span></p>
-  <div class="pulse">WAVE C — U swept: 1 real defect (admin status labels) fixing · Gate C imminent</div>
+  <div class="pulse">✅ UAT-READY — Waves A/B/C complete, all gates closed · 1 real-device mobile pass outstanding</div>
 
   <div class="wave">
     <div class="wave-h"><span class="t">Wave A — persona basics · GATE A REVIEWED</span><span class="chip fail">3 DEFECTS → FIXING</span></div>
@@ -86,19 +86,20 @@
   </div>
 
   <div class="wave">
-    <div class="wave-h"><span class="t">Wave C — onboarding + UX sweep</span><span class="chip run">RUNNING</span></div>
+    <div class="wave-h"><span class="t">Wave C — onboarding + UX sweep · GATE C CLOSED</span><span class="chip pass">COMPLETE</span></div>
     <div class="row"><div class="n"><b>O</b>Onboarding rehearsal — <b>FAIL at step 1: admin has NO UI to invite a vikar</b><div class="d">Exhaustive sweep of every admin surface (manage/Vikarer shows only "Rediger adresse"; no invite control anywhere; vikar_invites table = 0 rows ever) — the day-one onboarding journey dead-ends before it starts<br><b>Orchestrator code-verified:</b> the whole backend EXISTS (invite router + claim page at /registrer/:token) — the admin UI entry point + invite email were never wired. Fix in flight ("Inviter vikar" on the Vikarer tab + claim-link email); O reruns in full on the fixed build</div></div><span class="chip fail">1 DEFECT</span></div>
     <div class="row"><div class="n"><b>FIX-4</b>Admin "Inviter vikar" UI (F-C1, commit 9525817) · vikar notified on condition-rejection (ruling #2, commit 9c01ccd) — shipped</div><span class="chip pass">DONE</span></div>
     <div class="row"><div class="n"><b>DECISION ✓</b>Auth fork resolved — operator ruled <b>Better-Auth email+password</b> (cuts the Manus dependency); admin invite + both claim pages repointed onto it (commits 9525817 + 90c91a8)</div><span class="chip pass">DONE</span></div>
     <div class="row"><div class="n"><b>O RERUN ✓</b>Onboarding rehearsal PASS 4/4 on the real password flow<div class="d">Admin invites Ulla → invite email with a STAGING claim link (no Manus) → set-password page → email+password login → vikar portal (DB: role=optician, authUserId linked, invite claimed) · logout/login OK · friendly Danish wrong-password + rate-limit copy · zero OAuth bounce<br>Note for Helle (not a defect): the login rate-limit trips after ~3 wrong tries and briefly blocks even the correct password — standard brute-force protection</div></div><span class="chip pass">4/4 PASS</span></div>
     <div class="row"><div class="n"><b>RULING #2 ✓</b>Vikar now notified when store rejects their condition — verified on booking #9: "Vilkår afvist — booking genåbnet" email + SMS to the vikar (DB rows + Gmail intercept confirmed)</div><span class="chip pass">VERIFIED</span></div>
     <div class="row"><div class="n"><b>U</b>UX sweep — <b>2 clean passes, 1 real defect, 2 false alarms cleared</b><div class="d">✅ U2 console clean (8 routes) · ✅ U5 new-vikar empty state clean<br>❌ U3: admin "Alle bookinger" table showed raw enum status (requested/cancelled/worker_declined) — stale local label map instead of the canonical helper → <b>fix in flight</b><br>✓ U4 "zero-credit block" = FALSE ALARM (orchestrator code-verified: by-design "Fortsæt alligevel" nudge dialog the agent's tooling couldn't drive; submit guarded by isPending) · English AI-briefing text = dynamic agent output, prompt tweak not a bug<br>⚠ U1 mobile: automation couldn't hit true 390px portrait → real-device pass recommended (the one uncertified area)</div></div><span class="chip fail">1 DEFECT</span></div>
-    <div class="row"><div class="n"><b>FIX-5</b>Admin booking table → canonical Danish status labels (statusMeta) — deploying</div><span class="chip run">IN FLIGHT</span></div>
+    <div class="row"><div class="n"><b>FIX-5 ✓</b>Admin booking table now shows canonical Danish status labels (reused StatusBadge) — re-verified: all 9 rows Danish (Afventer/Aflyst/Bekræftet/…), edit dropdown intact, console clean</div><span class="chip pass">DONE</span></div>
+    <div class="row"><div class="n"><b>GATE C</b>CLOSED ✓ — onboarding rehearsal + UX sweep complete; all real defects fixed &amp; re-proven<div class="d">Open, non-blocking: real-device mobile pass (automation couldn't reach true 390px); AI daily-briefing bullets render in English (prompt tweak); login rate-limit briefly blocks the correct password after ~3 wrong tries (standard, documented); main.tsx 401-interceptor still points at legacy Manus OAuth (cutover cleanup)</div></div><span class="chip pass">CLOSED</span></div>
     <div class="row"><div class="n"><b>U</b>UX sweep — mobile viewport · console errors · Danish copy · double-submit guard · empty states</div><span class="chip pend">QUEUED (after O — browser agents serialized)</span></div>
     <div class="row"><div class="n"><b>GATE C</b>Final UAT-READY verdict + handoff notes for Helle's test week</div><span class="chip pend">QUEUED</span></div>
   </div>
 
-  <div class="foot"><span>staging: den-optiske-vikar-staging-c6udm.ondigitalocean.app</span><span>updated 2026-07-11 · wave B dispatch</span></div>
+  <div class="foot"><span>staging: den-optiske-vikar-staging-c6udm.ondigitalocean.app</span><span>updated 2026-07-12 · UAT-READY · build 10cceca</span></div>
 </div></div>
 
 </body>
