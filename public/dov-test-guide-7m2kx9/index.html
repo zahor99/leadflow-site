@@ -12,6 +12,7 @@
     --go:#1f7a4d; --go-soft:#e4f2ea; --warn:#b9760a; --warn-soft:#f8ecd4; --stop:#b23b34; --stop-soft:#f8e6e4;
     --sans:system-ui,-apple-system,"Segoe UI",Roboto,sans-serif; --serif:Georgia,"Times New Roman",serif;
   }
+  :root{color-scheme:light}
   *{box-sizing:border-box} body{margin:0;background:var(--cream);color:var(--ink);font-family:var(--sans);line-height:1.62;font-size:16px}
   .band{background:var(--navy);padding:26px clamp(16px,4vw,40px)}
   .band img{height:38px;width:auto;display:block}
@@ -40,11 +41,6 @@
   .foot{margin-top:40px;padding-top:18px;border-top:2px solid var(--line);font-size:13px;color:var(--ink3)}
   code{background:#fff;border:1px solid var(--line);border-radius:5px;padding:1px 6px;font-size:14px;font-family:ui-monospace,Consolas,monospace;color:var(--navy)}
   .kv{font-size:15px}
-  @media (prefers-color-scheme: dark){
-    :root{--cream:#12171f;--ink:#e7ecf3;--ink2:#b3bcc9;--ink3:#8791a0;--line:#2a3441;--gold-soft:#2a2415;--go-soft:#123122;--warn-soft:#322611;--stop-soft:#331917}
-    body{background:var(--cream)} .step,code,th td{background:#1a212c}
-    .step{background:#1a212c} code{background:#1a212c}
-  }
 </style>
 </head>
 <body>
@@ -76,7 +72,7 @@
   </div>
   <div class="step">
     <h3><span class="b">3</span>Log ind</h3>
-    <p>Du bliver sendt til login-siden. Log ind med din e-mail og den adgangskode, du lige valgte. Du lander nu på <strong>administrator-oversigten</strong>. Fremover logger du ind samme sted: <code>…ondigitalocean.app/login</code>.</p>
+    <p>Du bliver sendt til login-siden. Log ind med din e-mail og den adgangskode, du lige valgte. Du lander nu på <strong>administrator-oversigten</strong>. Fremover logger du ind samme sted: <a href="https://den-optiske-vikar-staging-c6udm.ondigitalocean.app/login">den-optiske-vikar-staging-c6udm.ondigitalocean.app/login</a></p>
   </div>
   <div class="callout warn">
     <p><strong>Glemt adgangskoden?</strong> Klik “Glemt adgangskode?” på login-siden — du får en ny e-mail (også mærket [TEST]) med et link til at vælge en ny.</p>

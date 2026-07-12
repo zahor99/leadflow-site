@@ -12,6 +12,7 @@
     --go:#1f7a4d; --go-soft:#e4f2ea; --warn:#b9760a; --warn-soft:#f8ecd4; --stop:#b23b34; --stop-soft:#f8e6e4;
     --sans:system-ui,-apple-system,"Segoe UI",Roboto,sans-serif; --serif:Georgia,"Times New Roman",serif;
   }
+  :root{color-scheme:light}
   *{box-sizing:border-box} body{margin:0;background:var(--cream);color:var(--ink);font-family:var(--sans);line-height:1.62;font-size:16px}
   .band{background:var(--navy);padding:26px clamp(16px,4vw,40px);display:flex;align-items:center;justify-content:space-between;gap:12px}
   .band img{height:38px;width:auto;display:block}
@@ -42,10 +43,6 @@
   code{background:#fff;border:1px solid var(--line);border-radius:5px;padding:1px 6px;font-size:14px;font-family:ui-monospace,Consolas,monospace;color:var(--navy)}
   .kv{font-size:15px}
   .da{color:var(--ink3);font-style:italic}
-  @media (prefers-color-scheme: dark){
-    :root{--cream:#12171f;--ink:#e7ecf3;--ink2:#b3bcc9;--ink3:#8791a0;--line:#2a3441;--gold-soft:#2a2415;--go-soft:#123122;--warn-soft:#322611;--stop-soft:#331917}
-    body{background:var(--cream)} .step,code{background:#1a212c}
-  }
 </style>
 </head>
 <body>
@@ -78,7 +75,7 @@
   </div>
   <div class="step">
     <h3><span class="b">3</span>Log in</h3>
-    <p>You'll be taken to the login page. Log in with your email and the password you just chose. You'll land on the <strong>administrator overview</strong>. From now on you log in at the same place: <code>…ondigitalocean.app/login</code>.</p>
+    <p>You'll be taken to the login page. Log in with your email and the password you just chose. You'll land on the <strong>administrator overview</strong>. From now on you log in at the same place: <a href="https://den-optiske-vikar-staging-c6udm.ondigitalocean.app/login">den-optiske-vikar-staging-c6udm.ondigitalocean.app/login</a></p>
   </div>
   <div class="callout warn">
     <p><strong>Forgot your password?</strong> Click “Glemt adgangskode?” <span class="da">(Forgot password?)</span> on the login page — you'll get another email (also marked [TEST]) with a link to choose a new one.</p>
