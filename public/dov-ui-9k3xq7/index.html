@@ -1,0 +1,38 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<meta name="robots" content="noindex,nofollow">
+<title>DOV — UI after fixes</title>
+<style>
+  :root{--bg:#0f141b;--card:#161d26;--ink:#e7ecf3;--ink2:#a9b2be;--line:#273140;--accent:#7d9bff}
+  *{box-sizing:border-box} body{margin:0;background:var(--bg);color:var(--ink);font:15px/1.5 system-ui,-apple-system,"Segoe UI",Roboto,sans-serif}
+  .wrap{max-width:1100px;margin:0 auto;padding:clamp(16px,3vw,36px)}
+  h1{font-size:clamp(20px,4vw,28px);margin:0 0 4px;letter-spacing:-.02em}
+  .sub{color:var(--ink2);margin:0 0 26px;font-size:14px}
+  .shot{background:var(--card);border:1px solid var(--line);border-radius:12px;overflow:hidden;margin-bottom:22px;box-shadow:0 10px 30px -18px rgba(0,0,0,.7)}
+  .shot h2{font-size:13px;font-weight:600;letter-spacing:.03em;margin:0;padding:12px 16px;border-bottom:1px solid var(--line);color:var(--ink)}
+  .shot h2 span{color:var(--ink2);font-weight:400}
+  .shot img{display:block;width:100%;height:auto}
+  .foot{color:var(--ink2);font-size:12px;font-family:ui-monospace,monospace;margin-top:24px;text-align:center}
+</style>
+</head>
+<body>
+<div class="wrap">
+  <h1>Den Optiske Vikar — UI after logo + cleanup</h1>
+  <p class="sub">Staging build 5b06940 · captured 2026-07-12 · logo integrated, dead controls cleaned, payments staged, admin nav overflow fixed.</p>
+
+  <div class="shot"><h2>1 · Public marketing site <span>— logo top-left, working "Log ind"</span></h2><img src="01-public-site.png" alt="public site"></div>
+  <div class="shot"><h2>2 · Admin nav @ 1280px <span>— fits, no overlap</span></h2><img src="02-admin-nav-1280.png" alt="admin nav 1280"></div>
+  <div class="shot"><h2>3 · Admin nav collapsed (&lt;1280px) <span>— clean hamburger</span></h2><img src="03-admin-nav-collapsed.png" alt="admin nav collapsed"></div>
+  <div class="shot"><h2>4 · Admin — mobile <span>— logo + badges + hamburger</span></h2><img src="04-admin-mobile.png" alt="admin mobile"></div>
+  <div class="shot"><h2>5 · Vikar portal <span>— logo top-left</span></h2><img src="05-vikar-portal.png" alt="vikar portal"></div>
+  <div class="shot"><h2>6 · Store portal <span>— "Log ud" fixed, credit CTA greyed</span></h2><img src="06-store-portal.png" alt="store portal"></div>
+  <div class="shot"><h2>7 · Credits page <span>— payments staged "Kommer snart"</span></h2><img src="07-credits-staged.png" alt="credits staged"></div>
+  <div class="shot"><h2>8 · Login <span>— email + password, self-hosted logo</span></h2><img src="08-login.png" alt="login"></div>
+
+  <p class="foot">private · noindex · den-optiske-vikar staging</p>
+</div>
+</body>
+</html>
