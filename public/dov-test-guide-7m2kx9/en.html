@@ -1,0 +1,183 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<meta name="robots" content="noindex,nofollow">
+<title>Den Optiske Vikar — Test Guide (EN)</title>
+<style>
+  :root{
+    --navy:#1A2332; --navy2:#222d40; --gold:#C9A96E; --gold-soft:#f3ebda;
+    --cream:#F5F0E8; --ink:#1d242e; --ink2:#4b5563; --ink3:#6b7280; --line:#e4ded2;
+    --go:#1f7a4d; --go-soft:#e4f2ea; --warn:#b9760a; --warn-soft:#f8ecd4; --stop:#b23b34; --stop-soft:#f8e6e4;
+    --sans:system-ui,-apple-system,"Segoe UI",Roboto,sans-serif; --serif:Georgia,"Times New Roman",serif;
+  }
+  *{box-sizing:border-box} body{margin:0;background:var(--cream);color:var(--ink);font-family:var(--sans);line-height:1.62;font-size:16px}
+  .band{background:var(--navy);padding:26px clamp(16px,4vw,40px);display:flex;align-items:center;justify-content:space-between;gap:12px}
+  .band img{height:38px;width:auto;display:block}
+  .band .lang{font-size:12px;letter-spacing:.12em;text-transform:uppercase;color:var(--gold);font-weight:700;white-space:nowrap}
+  .wrap{max-width:820px;margin:0 auto;padding:clamp(20px,4vw,44px) clamp(16px,4vw,40px) 60px}
+  .eyebrow{font-size:12px;letter-spacing:.16em;text-transform:uppercase;color:var(--gold);font-weight:700;margin:0 0 6px}
+  h1{font-family:var(--serif);font-size:clamp(26px,5vw,38px);margin:6px 0 8px;letter-spacing:-.01em;line-height:1.15}
+  h2{font-family:var(--serif);font-size:clamp(20px,3.4vw,26px);margin:44px 0 10px;padding-top:22px;border-top:2px solid var(--line);letter-spacing:-.01em}
+  h2 .num{color:var(--gold);margin-right:10px}
+  h3{font-size:16px;margin:22px 0 6px;color:var(--navy)}
+  p{margin:0 0 14px} .lead{font-size:18px;color:var(--ink2)}
+  a{color:#9a7b3c}
+  ol,ul{margin:0 0 16px;padding-left:22px} li{margin:0 0 8px}
+  .callout{border-radius:12px;padding:16px 20px;margin:20px 0;border:1px solid}
+  .callout.info{background:var(--gold-soft);border-color:var(--gold)}
+  .callout.warn{background:var(--warn-soft);border-color:#e0b96a}
+  .callout p:last-child,.callout ul:last-child,.callout ol:last-child{margin-bottom:0}
+  .callout strong{color:var(--navy)}
+  .step{background:#fff;border:1px solid var(--line);border-radius:12px;padding:18px 20px;margin:14px 0;box-shadow:0 1px 2px rgba(26,35,50,.04)}
+  .step h3{margin-top:0;display:flex;align-items:baseline;gap:10px}
+  .step h3 .b{flex:none;display:inline-flex;align-items:center;justify-content:center;min-width:26px;height:26px;border-radius:7px;background:var(--navy);color:var(--gold);font-size:13px;font-weight:700;font-family:var(--sans)}
+  table{width:100%;border-collapse:collapse;margin:8px 0 20px;font-size:15px}
+  th,td{text-align:left;padding:11px 12px;border-bottom:1px solid var(--line);vertical-align:top}
+  th{font-size:12px;letter-spacing:.05em;text-transform:uppercase;color:var(--ink3);font-weight:700}
+  .tag{display:inline-block;font-size:12px;font-weight:700;padding:2px 9px;border-radius:999px;white-space:nowrap}
+  .tag.ok{background:var(--go-soft);color:var(--go)} .tag.soon{background:var(--warn-soft);color:var(--warn)} .tag.off{background:var(--stop-soft);color:var(--stop)}
+  .foot{margin-top:40px;padding-top:18px;border-top:2px solid var(--line);font-size:13px;color:var(--ink3)}
+  code{background:#fff;border:1px solid var(--line);border-radius:5px;padding:1px 6px;font-size:14px;font-family:ui-monospace,Consolas,monospace;color:var(--navy)}
+  .kv{font-size:15px}
+  .da{color:var(--ink3);font-style:italic}
+  @media (prefers-color-scheme: dark){
+    :root{--cream:#12171f;--ink:#e7ecf3;--ink2:#b3bcc9;--ink3:#8791a0;--line:#2a3441;--gold-soft:#2a2415;--go-soft:#123122;--warn-soft:#322611;--stop-soft:#331917}
+    body{background:var(--cream)} .step,code{background:#1a212c}
+  }
+</style>
+</head>
+<body>
+<div class="band"><img src="logo.png" alt="Den Optiske Vikar"><span class="lang">English · internal review copy</span></div>
+<div class="wrap">
+
+  <p class="eyebrow">Test guide · Trial week</p>
+  <h1>Welcome to your new system, Helle</h1>
+  <p class="lead">This guide shows you what to try in the test version, what works, and what isn't ready yet. Everything here is safe to click — no real messages are sent to real people.</p>
+  <p style="font-size:14px;color:var(--ink3)">Note for Gergely: this is the English review copy. The Danish version Helle receives is at <code>/dov-test-guide-7m2kx9/</code>. App button/menu names are kept in Danish (in quotes) since that's what she'll see on screen.</p>
+
+  <div class="callout info">
+    <p style="margin-bottom:8px"><strong>The most important things to know first</strong></p>
+    <ul>
+      <li>This is a <strong>test version</strong> of the system — not the real, public site yet.</li>
+      <li><strong>Every email and SMS is marked “[TEST]”</strong> and goes <em>only</em> to you and Gergely. No real vikars or stores are ever contacted, no matter what you do. Explore freely.</li>
+      <li>The system starts <strong>completely empty</strong> (no bookings, no users). You build up test data yourself — just like a normal working day. Everything is cleared again before the real launch.</li>
+      <li>You log in as the <strong>administrator</strong> — the person with the full overview.</li>
+    </ul>
+  </div>
+
+  <h2><span class="num">1</span>Getting started</h2>
+  <div class="step">
+    <h3><span class="b">1</span>Open the invitation</h3>
+    <p>Find the email with the subject <strong>“[TEST] Invitation til Den Optiske Vikar”</strong> in your inbox (<code>helle@denoptiskevikar.dk</code>). Click the link in the email.</p>
+  </div>
+  <div class="step">
+    <h3><span class="b">2</span>Choose your password</h3>
+    <p>On the page that opens, choose a password (at least 8 characters) and confirm it. Click <strong>“Aktiver konto”</strong> <span class="da">(Activate account)</span>. Your administrator account is now created.</p>
+  </div>
+  <div class="step">
+    <h3><span class="b">3</span>Log in</h3>
+    <p>You'll be taken to the login page. Log in with your email and the password you just chose. You'll land on the <strong>administrator overview</strong>. From now on you log in at the same place: <code>…ondigitalocean.app/login</code>.</p>
+  </div>
+  <div class="callout warn">
+    <p><strong>Forgot your password?</strong> Click “Glemt adgangskode?” <span class="da">(Forgot password?)</span> on the login page — you'll get another email (also marked [TEST]) with a link to choose a new one.</p>
+  </div>
+
+  <h2><span class="num">2</span>What to test — step by step</h2>
+  <p>The best test is to use the system the way you would on a real day. Here is a recommended order. You don't have to do it all at once.</p>
+
+  <div class="callout info">
+    <p><strong>Tip for testing on your own:</strong> Because we're in test mode, <em>all</em> invitation emails come to <em>your</em> inbox. So you can invite a “test vikar” or a “test store” using any email address (e.g. <code>test-vikar@denoptiskevikar.dk</code>), open the invitation from your own inbox, and set it up yourself in a <strong>private/incognito window</strong> — that lets you see how the vikar and the store experience the system.</p>
+  </div>
+
+  <div class="step">
+    <h3><span class="b">A</span>Look around as administrator</h3>
+    <p>Explore the top menu: <strong>“Oversigt”</strong> <span class="da">(Overview)</span>, <strong>“Bookinger”</strong> <span class="da">(Bookings)</span>, <strong>“Eskaleringer”</strong> <span class="da">(Escalations)</span>, <strong>“Kunder”</strong> <span class="da">(Customers)</span>, and the <strong>“Agenter”</strong> and <strong>“Mere”</strong> <span class="da">(Agents / More)</span> drop-downs. Notice the daily briefing on the front page. Everything is empty to start with — that's intended.</p>
+  </div>
+  <div class="step">
+    <h3><span class="b">B</span>Invite a vikar</h3>
+    <p>Go to <strong>“Administrer → Vikarer”</strong> <span class="da">(Manage → Vikars)</span> and click <strong>“Inviter vikar”</strong> <span class="da">(Invite vikar)</span>. Fill in a name and email, and leave <strong>Rolle</strong> <span class="da">(Role)</span> set to “Vikar”. Send. Open the invitation email (it comes to you), choose a password via the link, and log in as the vikar in an incognito window. See the vikar portal: <strong>“Mine Bookinger”</strong>, <strong>“Kalender”</strong> (with availability), <strong>“Mine Afregninger”</strong>, and <strong>“Min Profil”</strong> <span class="da">(My Bookings / Calendar / My Settlements / My Profile)</span>.</p>
+  </div>
+  <div class="step">
+    <h3><span class="b">C</span>Create a store (customer) and invite it</h3>
+    <p>Go to <strong>“Kunder”</strong> and create a new contact/store. Send a portal invitation to the store, and set it up the same way (open the email → choose a password → log in in another incognito window). See the customer portal: <strong>“Oversigt”</strong>, <strong>“Bookinger”</strong>, <strong>“Kreditter”</strong>, <strong>“Timer”</strong>, <strong>“Anmodninger”</strong>, and <strong>“Profil”</strong> <span class="da">(Overview / Bookings / Credits / Hours / Requests / Profile)</span>.</p>
+  </div>
+  <div class="step">
+    <h3><span class="b">D</span>Make a booking and respond to it</h3>
+    <p>As the <strong>store</strong>: click “Book en vikar” <span class="da">(Book a vikar)</span>, go through the steps (reason, days, hours, optional preferred vikar, location) and send. As the <strong>vikar</strong>: open the request and try the three responses — <strong>“Accepter”</strong>, <strong>“Accepter med vilkår”</strong>, and <strong>“Afvis”</strong> <span class="da">(Accept / Accept with condition / Decline)</span>. Notice that the store and the vikar each get their own message along the way (to your inbox).</p>
+  </div>
+  <div class="step">
+    <h3><span class="b">E</span>Try the “accept with condition” flow</h3>
+    <p>Have the vikar accept <em>with a condition</em> (e.g. “can't start until 10:00”). Switch to the store — the condition is shown, and the store can <strong>“Godkend”</strong> <span class="da">(Approve)</span> or <strong>“Afvis”</strong> <span class="da">(Reject)</span> it. If approved, the booking is confirmed. If rejected, the booking reopens (for renegotiation) and the vikar is notified.</p>
+  </div>
+  <div class="step">
+    <h3><span class="b">F</span>Try cancellation with approval</h3>
+    <p>As the <strong>store</strong>: ask to cancel a <em>confirmed</em> booking (one that has a vikar assigned). Notice it becomes a <strong>request</strong> sent to you as the administrator. Switch to the administrator, go to <strong>“Eskaleringer”</strong>, and <strong>approve the cancellation</strong>. The booking is cancelled and the vikar is notified. (A booking with no vikar assigned can be cancelled by the store immediately.)</p>
+  </div>
+  <div class="step">
+    <h3><span class="b">G</span>Assign a vikar as administrator</h3>
+    <p>Create a booking with no preferred vikar (an “open” request). Go in as the administrator and <strong>assign</strong> a vikar to it. The vikar is notified (email + SMS to your inbox/phone).</p>
+  </div>
+  <div class="step">
+    <h3><span class="b">H</span>Check that the messages arrive</h3>
+    <p>Keep an eye on your inbox and phone throughout. At each important step (new request, confirmation, condition, cancellation) an email and/or SMS should arrive — marked [TEST]. <strong>Both you and Gergely receive all of them</strong>, so you can both follow what's being tested.</p>
+  </div>
+
+  <h2><span class="num">3</span>What works (ready to test)</h2>
+  <p>Everything below has been thoroughly tested and is ready for you to try:</p>
+  <table>
+    <tr><th>Area</th><th>Function</th><th></th></tr>
+    <tr><td>Login &amp; access</td><td>Log in with email + password · forgot/reset password · invitation → choose password, for vikars, stores and administrators</td><td><span class="tag ok">Works</span></td></tr>
+    <tr><td>Store</td><td>Create bookings (preferred vikar or open) · see own bookings · cancel (goes to your approval when a vikar is assigned)</td><td><span class="tag ok">Works</span></td></tr>
+    <tr><td>Vikar</td><td>Accept / decline / accept with condition · availability calendar · personal calendar feed (iCal) · time registration and expenses</td><td><span class="tag ok">Works</span></td></tr>
+    <tr><td>Negotiation</td><td>The condition flow: vikar sets a condition → store approves/rejects → reopening</td><td><span class="tag ok">Works</span></td></tr>
+    <tr><td>Cancellation</td><td>Store requests → administrator approves → the vikar is notified</td><td><span class="tag ok">Works</span></td></tr>
+    <tr><td>Administrator</td><td>Assign a vikar to an open request · booking overview · escalation queue · cancel bookings · invite vikars and administrators · customer register · invoice approval (view)</td><td><span class="tag ok">Works</span></td></tr>
+    <tr><td>Messages</td><td>Email + SMS at each important step · all in Danish · all sent to you + Gergely during the test period</td><td><span class="tag ok">Works</span></td></tr>
+    <tr><td>General</td><td>The whole system is in Danish · works on mobile and computer · your logo at the top</td><td><span class="tag ok">Works</span></td></tr>
+  </table>
+
+  <h2><span class="num">4</span>What is NOT ready yet</h2>
+  <p>The following is deliberately switched off or saved for a later phase. These are not bugs — they're planned for after the trial week:</p>
+  <table>
+    <tr><th>Area</th><th>Status</th><th></th></tr>
+    <tr><td><strong>Payment / buying credits</strong></td><td>The “Køb kreditter” <span class="da">(Buy credits)</span> buttons show <em>“Kommer snart”</em> <span class="da">(Coming soon)</span> and are switched off. You can book without credits during the test — payment comes in a later phase.</td><td><span class="tag soon">Later phase</span></td></tr>
+    <tr><td><strong>Accounting / e-conomic</strong></td><td>The invoice and accounting screens exist but are not yet connected to a real e-conomic account. Next phase.</td><td><span class="tag soon">Later phase</span></td></tr>
+    <tr><td><strong>Credit consumption and balance deduction</strong></td><td>The credit/hour-consumption logic isn't active yet — it belongs together with payment above.</td><td><span class="tag soon">Later phase</span></td></tr>
+    <tr><td><strong>Real emails/SMS to real recipients</strong></td><td>Switched off on purpose during the test — everything comes to you + Gergely. Switched on at the real launch.</td><td><span class="tag off">Off in test</span></td></tr>
+    <tr><td>A few administrator tools (some AI-agent screens)</td><td>Under construction — either hidden or marked. Not part of the trial week.</td><td><span class="tag soon">Under construction</span></td></tr>
+  </table>
+  <div class="callout warn">
+    <p><strong>One small cosmetic issue:</strong> When you set your password, there were some bullet points about “what you can do with your account” that are written for a vikar — not an administrator. It's only text on that one page and doesn't affect how the system works. It will be fixed.</p>
+  </div>
+
+  <h2><span class="num">5</span>How to report back</h2>
+  <p>You don't need a system for it — a simple list is enough. For each thing you notice, please write:</p>
+  <ul>
+    <li><strong>What did you do?</strong> (e.g. “created a booking as a store”)</li>
+    <li><strong>What did you expect?</strong></li>
+    <li><strong>What happened instead?</strong> (a screenshot helps)</li>
+  </ul>
+  <p>Send your list to Gergely. Because all messages also come to him, he can see most of what you test — but your own notes about what felt wrong or awkward are worth their weight in gold.</p>
+
+  <h2><span class="num">6</span>Glossary</h2>
+  <table>
+    <tr><td class="kv"><strong>Administrator</strong></td><td>You, Helle — you have the full overview and manage vikars, stores and bookings.</td></tr>
+    <tr><td class="kv"><strong>Vikar</strong></td><td>The optician who steps in at a store. In the system the role is called “vikar”.</td></tr>
+    <tr><td class="kv"><strong>Store / Customer <span class="da">(Butik / Kunde)</span></strong></td><td>The optician business that orders a vikar.</td></tr>
+    <tr><td class="kv"><strong>Booking</strong></td><td>A request for a vikar to cover a shift for one or more days.</td></tr>
+    <tr><td class="kv"><strong>Condition <span class="da">(Vilkår)</span></strong></td><td>A condition a vikar can set when accepting (e.g. “can't start until 10:00”), which the store then approves or rejects.</td></tr>
+    <tr><td class="kv"><strong>Escalation <span class="da">(Eskalering)</span></strong></td><td>A case sent to you as administrator to decide on — e.g. a cancellation request.</td></tr>
+    <tr><td class="kv"><strong>Credits <span class="da">(Kreditter)</span></strong></td><td>Prepaid vikar hours (payment — coming in a later phase).</td></tr>
+    <tr><td class="kv"><strong>[TEST]</strong></td><td>The marker on all messages in the test environment. It means the message only went to you + Gergely, not to real recipients.</td></tr>
+    <tr><td class="kv"><strong>Incognito window</strong></td><td>A private browser window (Ctrl+Shift+N in Chrome) where you can be logged in as a different user at the same time — useful for testing the vikar and store side.</td></tr>
+  </table>
+
+  <div class="foot">
+    Den Optiske Vikar · test environment · internal review copy (English). Helle's copy is the Danish version.
+  </div>
+
+</div>
+</body>
+</html>
