@@ -4,7 +4,7 @@
 <meta charset="utf-8"/>
 <meta name="viewport" content="width=device-width, initial-scale=1"/>
 <meta name="robots" content="noindex,nofollow"/>
-<title>Proposal — Accident Reconstruction AI Platform: RAG, Vision, Agents · Gergely Zsigmond</title>
+<title>Proposal — Multimodal RAG + agent platform for PI litigation · Gergely Zsigmond</title>
 <style>
   :root{color-scheme:dark;}
   *{margin:0;padding:0;box-sizing:border-box;}
@@ -31,24 +31,24 @@
 <body>
 <div class="wrap">
   <div class="eyebrow">Proposal walkthrough</div>
-  <h1>Accident Reconstruction AI Platform: RAG, Vision, Agents</h1>
+  <h1>Multimodal RAG + agent platform for PI litigation</h1>
   <div class="sub">Building an AI Platform for Accident Reconstruction &amp; PI Litigation (MVP + Long-Term Partnership)</div>
-  <video controls preload="metadata" poster="https://files.catbox.moe/w0e760.jpg"><source src="https://files.catbox.moe/judihg.mp4" type="video/mp4"/></video>
+  <video controls preload="metadata" poster="https://files.catbox.moe/w0e760.jpg"><source src="https://files.catbox.moe/oc6yee.mp4" type="video/mp4"/></video>
 
   <div class="card">
     <h2>In short</h2>
-    <p>This is a venture-scale legal tech MVP covering three layers: document ingestion with OCR and semantic retrieval, a computer-vision layer for crash-scene photos and mapping, and LangGraph agents that produce auditable reasoning traces attorneys can cite. Built on FastAPI, Postgres/pgvector, and Next.js — the same stack already in daily production use at a $30B/yr multinational.</p>
+    <p>A full-stack AI platform that ingests police reports, medical records, and crash-scene photos, then runs LangGraph agents to assemble timelines, flag liability, and estimate settlement ranges — all with auditable source attribution. Built in phases: a working document pipeline first, agent reasoning layer second, polished attorney-facing UI third. Anchored by a production multimodal RAG system built for a $30B/yr multinational.</p>
   </div>
 
   <div class="card">
     <h2>Architecture I'd propose</h2>
-    <ul><li><b>Ingestion</b> — OCR / Textract + chunking</li><li><b>Vector Store</b> — Postgres + pgvector</li><li><b>Vision Layer</b> — Scene photos + Mapbox</li><li><b>Agent Layer</b> — LangGraph orchestration</li><li><b>FastAPI Backend</b> — Auth, audit log, APIs</li><li><b>Next.js Frontend</b> — Case dashboard + chat</li></ul>
-    <div class="assumes"><b>Assumes:</b> Supabase or self-hosted Postgres for vector store · Claude or OpenAI as the LLM backbone · Google Maps or Mapbox for crash-site reconstruction — tell me where I'm wrong and the design adapts.</div>
+    <ul><li><b>Document Ingestion</b> — OCR + structured extraction</li><li><b>pgvector Store</b> — Semantic retrieval + rerank</li><li><b>Vision Layer</b> — Photo analysis + mapping</li><li><b>LangGraph Agents</b> — Timeline, liability, settlement</li><li><b>FastAPI Backend</b> — Traced, attributed outputs</li><li><b>Next.js Frontend</b> — Attorney-facing UI</li></ul>
+    <div class="assumes"><b>Assumes:</b> Assumes documents arrive as PDFs and images — Confluence or other sources change the ingestion node only · Assumes Claude or OpenAI as the LLM backbone — swappable at the agent layer · Assumes Postgres/Supabase for the vector store; Pinecone is a drop-in alternative — tell me where I'm wrong and the design adapts.</div>
   </div>
 
   <div class="card">
     <h2>Plan</h2>
-    <ul><li><b>Phase 1 - Document Pipeline</b> (Week 1-3) — OCR ingestion, pgvector retrieval, cited Q&amp;A on docs</li><li><b>Phase 2 - Vision + Agents</b> (Week 4-6) — Scene analysis, mapping layer, LangGraph agent traces</li><li><b>Phase 3 - Frontend + Auth</b> (Week 7-9) — Case dashboard, auth, eval harness, billing hooks</li></ul>
+    <ul><li><b>Phase 1 - Document pipeline</b> (Week 1-3) — Working RAG over your real case docs, runnable today</li><li><b>Phase 2 - Agent reasoning</b> (Week 4-6) — Timeline + liability + settlement agents live</li><li><b>Phase 3 - UI + auth + billing</b> (Week 7-9) — Shippable attorney-facing product</li></ul>
   </div>
 
   <footer>
