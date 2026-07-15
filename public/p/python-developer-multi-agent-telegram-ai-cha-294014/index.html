@@ -1,0 +1,77 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8"/>
+<meta name="viewport" content="width=device-width, initial-scale=1"/>
+<meta name="robots" content="noindex,nofollow"/>
+<title>Proposal — Debug, harden, and launch your multi-agent Telegram bot · Gergely Racz</title>
+<style>
+  :root{color-scheme:dark;}
+  *{margin:0;padding:0;box-sizing:border-box;}
+  body{background:#0E1117;color:#F2F5F9;font-family:Inter,"Segoe UI",system-ui,sans-serif;
+        line-height:1.55;padding:48px 20px 80px;}
+  .wrap{max-width:940px;margin:0 auto;}
+  .eyebrow{font-size:13px;font-weight:700;letter-spacing:.22em;text-transform:uppercase;color:#4F8CFF;}
+  h1{font-size:clamp(26px,4vw,40px);font-weight:800;line-height:1.2;margin:10px 0 6px;}
+  .sub{color:#93A0B4;font-size:16px;margin-bottom:28px;}
+  video{width:100%;border-radius:16px;border:1px solid rgba(255,255,255,.10);
+         background:#000;box-shadow:0 24px 60px rgba(0,0,0,.5);}
+  .card{margin-top:28px;background:#1B2330;border:1px solid rgba(255,255,255,.10);
+         border-radius:16px;padding:26px 30px;}
+  .card h2{font-size:15px;font-weight:800;letter-spacing:.12em;text-transform:uppercase;
+            color:#7FD1AE;margin-bottom:12px;}
+  .card p{font-size:17px;color:#DCE4EF;}
+  ul{margin:10px 0 0 20px;color:#DCE4EF;font-size:16px;}
+  .assumes{margin-top:22px;font-size:14px;color:#F0B429;background:rgba(240,180,41,.07);
+            border:1px dashed rgba(240,180,41,.4);border-radius:12px;padding:14px 18px;}
+  footer{margin-top:40px;color:#6C7A8D;font-size:14px;border-top:1px solid rgba(255,255,255,.08);
+          padding-top:20px;}
+  .booking{border:1px solid rgba(79,140,255,.35);}
+  .booking h2{color:#4F8CFF;}
+  .bsub{font-size:15px;color:#93A0B4;margin-bottom:18px;}
+  .calframe{width:100%;height:660px;border:0;border-radius:12px;background:#fff;}
+  .bbtn{display:block;width:min(420px,100%);margin:18px auto 4px;text-align:center;
+        padding:16px 0;border-radius:999px;background:#4F8CFF;color:#08101F;font-weight:800;
+        font-size:18px;text-decoration:none;box-shadow:0 12px 30px rgba(79,140,255,.35);}
+  .bwarn{margin-top:12px;font-size:13px;color:#F0B429;text-align:center;}
+  .disclose{margin-top:14px;font-size:14px;color:#8A97AB;font-style:italic;text-align:center;}
+</style>
+</head>
+<body data-slug="python-developer-multi-agent-telegram-ai-cha-294014">
+<div class="wrap">
+  <div class="eyebrow">Proposal walkthrough</div>
+  <h1>Debug, harden, and launch your multi-agent Telegram bot</h1>
+  <div class="sub">Python Developer – Multi-Agent Telegram AI Chatbot</div>
+  <video controls preload="metadata" poster="https://v3b.fal.media/files/b/0aa24ef7/0c2isAhMI5dJhwmjDlNPS_poster.jpg"><source src="https://v3b.fal.media/files/b/0aa24ef7/QUnFUwXKsRe6FFR33iP54_final.mp4" type="video/mp4"/></video>
+
+  <div class="card">
+    <h2>In short</h2>
+    <p>Your multi-agent Telegram chatbot is in its final push to production — and that last stretch is where architecture decisions matter most. I&#x27;d start by mapping your agent boundaries and state transitions before touching a line of code, then systematically reproduce and patch bugs, harden conversation state with LangGraph state graphs, and add lightweight evals before launch. The goal is a stable, maintainable codebase your team can keep building on.</p>
+  </div>
+
+  <div class="card">
+    <h2>Architecture I'd propose</h2>
+    <ul><li><b>Telegram Webhook</b> — async handlers, PTB or raw</li><li><b>LangGraph Orchestrator</b> — typed state, agent routing</li><li><b>LiteLLM Router</b> — OpenAI / Gemini fallback</li><li><b>Supabase / Postgres</b> — session + conversation state</li><li><b>Eval Harness</b> — regression tests pre-launch</li></ul>
+    <div class="assumes"><b>Assumes:</b> Assumes LangGraph is already in the stack or is the agreed upgrade target · Assumes Supabase / Postgres for state persistence, as listed in your requirements · Assumes LiteLLM is already present for multi-model routing · Assumes Docker Compose is the local dev and deploy environment — tell me where I'm wrong and the design adapts.</div>
+  </div>
+
+  <div class="card">
+    <h2>Plan</h2>
+    <ul><li><b>Phase 1 - Audit &amp; debug</b> (Week 1) — Bug list with root causes + first patches merged</li><li><b>Phase 2 - Harden &amp; eval</b> (Week 2-3) — State hardened, eval suite green, staging stable</li><li><b>Phase 3 - Launch prep</b> (Week 4) — Production deploy, monitoring in place</li></ul>
+  </div>
+
+  <footer>
+    Gergely Racz — AI architect &amp; developer · PhD Engineering, Cambridge · 10+ yrs in AI.<br/>
+    Reply on Upwork and I'll walk you through any of it.
+  </footer>
+</div>
+<script data-goatcounter="https://leadflowautomation.goatcounter.com/count" async src="//gc.zgo.at/count.js"></script>
+<script>
+(function(){var v=document.querySelector("video");if(!v)return;var f={};
+v.addEventListener("timeupdate",function(){if(!v.duration)return;
+var p=v.currentTime/v.duration;[[25,.25],[75,.75]].forEach(function(m){
+if(p>=m[1]&&!f[m[0]]){f[m[0]]=1;if(window.goatcounter&&window.goatcounter.count)
+window.goatcounter.count({path:"video-"+m[0]+"-"+document.body.dataset.slug,
+title:"video "+m[0]+"%",event:true});}});});})();
+</script></body>
+</html>
