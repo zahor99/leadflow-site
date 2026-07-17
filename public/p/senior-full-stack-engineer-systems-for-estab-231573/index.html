@@ -1,0 +1,77 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8"/>
+<meta name="viewport" content="width=device-width, initial-scale=1"/>
+<meta name="robots" content="noindex,nofollow"/>
+<title>Proposal — Full-stack operational systems for established businesses · Gergely Racz</title>
+<style>
+  :root{color-scheme:dark;}
+  *{margin:0;padding:0;box-sizing:border-box;}
+  body{background:#0E1117;color:#F2F5F9;font-family:Inter,"Segoe UI",system-ui,sans-serif;
+        line-height:1.55;padding:48px 20px 80px;}
+  .wrap{max-width:940px;margin:0 auto;}
+  .eyebrow{font-size:13px;font-weight:700;letter-spacing:.22em;text-transform:uppercase;color:#4F8CFF;}
+  h1{font-size:clamp(26px,4vw,40px);font-weight:800;line-height:1.2;margin:10px 0 6px;}
+  .sub{color:#93A0B4;font-size:16px;margin-bottom:28px;}
+  video{width:100%;border-radius:16px;border:1px solid rgba(255,255,255,.10);
+         background:#000;box-shadow:0 24px 60px rgba(0,0,0,.5);}
+  .card{margin-top:28px;background:#1B2330;border:1px solid rgba(255,255,255,.10);
+         border-radius:16px;padding:26px 30px;}
+  .card h2{font-size:15px;font-weight:800;letter-spacing:.12em;text-transform:uppercase;
+            color:#7FD1AE;margin-bottom:12px;}
+  .card p{font-size:17px;color:#DCE4EF;}
+  ul{margin:10px 0 0 20px;color:#DCE4EF;font-size:16px;}
+  .assumes{margin-top:22px;font-size:14px;color:#F0B429;background:rgba(240,180,41,.07);
+            border:1px dashed rgba(240,180,41,.4);border-radius:12px;padding:14px 18px;}
+  footer{margin-top:40px;color:#6C7A8D;font-size:14px;border-top:1px solid rgba(255,255,255,.08);
+          padding-top:20px;}
+  .booking{border:1px solid rgba(79,140,255,.35);}
+  .booking h2{color:#4F8CFF;}
+  .bsub{font-size:15px;color:#93A0B4;margin-bottom:18px;}
+  .calframe{width:100%;height:660px;border:0;border-radius:12px;background:#fff;}
+  .bbtn{display:block;width:min(420px,100%);margin:18px auto 4px;text-align:center;
+        padding:16px 0;border-radius:999px;background:#4F8CFF;color:#08101F;font-weight:800;
+        font-size:18px;text-decoration:none;box-shadow:0 12px 30px rgba(79,140,255,.35);}
+  .bwarn{margin-top:12px;font-size:13px;color:#F0B429;text-align:center;}
+  .disclose{margin-top:14px;font-size:14px;color:#8A97AB;font-style:italic;text-align:center;}
+</style>
+</head>
+<body data-slug="senior-full-stack-engineer-systems-for-estab-231573">
+<div class="wrap">
+  <div class="eyebrow">Proposal walkthrough</div>
+  <h1>Full-stack operational systems for established businesses</h1>
+  <div class="sub">Senior Full-Stack Engineer - Systems for Established Businesses</div>
+  <video controls preload="metadata" poster="https://v3b.fal.media/files/b/0aa29292/PvmnIZbzROiBUf2tiRN9k_poster.jpg"><source src="https://v3b.fal.media/files/b/0aa29291/xnAMqWcyFvtxVkDUm1LBf_final.mp4" type="video/mp4"/></video>
+
+  <div class="card">
+    <h2>In short</h2>
+    <p>Gergely builds and maintains the fixed-scope software established businesses run on — scheduling, quoting, invoicing, compliance, and operational pipelines — with no in-house tech team required. He delivers with full handoff documentation, built-in observability from day one, and a retainer model for ongoing operate-and-evolve work. Three production systems are running today for clients including a $3B/yr multinational manufacturer.</p>
+  </div>
+
+  <div class="card">
+    <h2>Architecture I'd propose</h2>
+    <ul><li><b>Client workflow</b> — scheduling / quoting / invoicing</li><li><b>FastAPI / Node.js</b> — business logic + REST API</li><li><b>Postgres / Supabase</b> — records, state, audit trail</li><li><b>n8n workflows</b> — webhooks + third-party triggers</li><li><b>Observability layer</b> — structured logs + error alerts</li></ul>
+    <div class="assumes"><b>Assumes:</b> Assumes a web-based system with REST integrations to existing tools · Assumes Postgres as primary datastore; Supabase if managed hosting is preferred · Assumes n8n for operational workflow automation; Node.js or FastAPI chosen per project needs — tell me where I'm wrong and the design adapts.</div>
+  </div>
+
+  <div class="card">
+    <h2>Plan</h2>
+    <ul><li><b>Phase 1 - Core system live</b> (Week 1-3) — Working system you can run, with full handoff docs</li><li><b>Phase 2 - Integrations &amp; polish</b> (Week 4-6) — Third-party connections, edge cases, user testing</li><li><b>Phase 3 - Retainer</b> (Ongoing) — Operate-and-evolve: you own it, I maintain it</li></ul>
+  </div>
+
+  <footer>
+    Gergely Racz — AI architect &amp; developer · PhD Engineering, Cambridge · 10+ yrs in AI.<br/>
+    Reply on Upwork and I'll walk you through any of it.
+  </footer>
+</div>
+<script data-goatcounter="https://leadflowautomation.goatcounter.com/count" async src="//gc.zgo.at/count.js"></script>
+<script>
+(function(){var v=document.querySelector("video");if(!v)return;var f={};
+v.addEventListener("timeupdate",function(){if(!v.duration)return;
+var p=v.currentTime/v.duration;[[25,.25],[75,.75]].forEach(function(m){
+if(p>=m[1]&&!f[m[0]]){f[m[0]]=1;if(window.goatcounter&&window.goatcounter.count)
+window.goatcounter.count({path:"video-"+m[0]+"-"+document.body.dataset.slug,
+title:"video "+m[0]+"%",event:true});}});});})();
+</script></body>
+</html>
