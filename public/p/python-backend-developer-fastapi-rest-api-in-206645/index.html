@@ -1,0 +1,77 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8"/>
+<meta name="viewport" content="width=device-width, initial-scale=1"/>
+<meta name="robots" content="noindex,nofollow"/>
+<title>Proposal — FastAPI middleware linking three energy APIs · Gergely Racz</title>
+<style>
+  :root{color-scheme:dark;}
+  *{margin:0;padding:0;box-sizing:border-box;}
+  body{background:#0E1117;color:#F2F5F9;font-family:Inter,"Segoe UI",system-ui,sans-serif;
+        line-height:1.55;padding:48px 20px 80px;}
+  .wrap{max-width:940px;margin:0 auto;}
+  .eyebrow{font-size:13px;font-weight:700;letter-spacing:.22em;text-transform:uppercase;color:#4F8CFF;}
+  h1{font-size:clamp(26px,4vw,40px);font-weight:800;line-height:1.2;margin:10px 0 6px;}
+  .sub{color:#93A0B4;font-size:16px;margin-bottom:28px;}
+  video{width:100%;border-radius:16px;border:1px solid rgba(255,255,255,.10);
+         background:#000;box-shadow:0 24px 60px rgba(0,0,0,.5);}
+  .card{margin-top:28px;background:#1B2330;border:1px solid rgba(255,255,255,.10);
+         border-radius:16px;padding:26px 30px;}
+  .card h2{font-size:15px;font-weight:800;letter-spacing:.12em;text-transform:uppercase;
+            color:#7FD1AE;margin-bottom:12px;}
+  .card p{font-size:17px;color:#DCE4EF;}
+  ul{margin:10px 0 0 20px;color:#DCE4EF;font-size:16px;}
+  .assumes{margin-top:22px;font-size:14px;color:#F0B429;background:rgba(240,180,41,.07);
+            border:1px dashed rgba(240,180,41,.4);border-radius:12px;padding:14px 18px;}
+  footer{margin-top:40px;color:#6C7A8D;font-size:14px;border-top:1px solid rgba(255,255,255,.08);
+          padding-top:20px;}
+  .booking{border:1px solid rgba(79,140,255,.35);}
+  .booking h2{color:#4F8CFF;}
+  .bsub{font-size:15px;color:#93A0B4;margin-bottom:18px;}
+  .calframe{width:100%;height:660px;border:0;border-radius:12px;background:#fff;}
+  .bbtn{display:block;width:min(420px,100%);margin:18px auto 4px;text-align:center;
+        padding:16px 0;border-radius:999px;background:#4F8CFF;color:#08101F;font-weight:800;
+        font-size:18px;text-decoration:none;box-shadow:0 12px 30px rgba(79,140,255,.35);}
+  .bwarn{margin-top:12px;font-size:13px;color:#F0B429;text-align:center;}
+  .disclose{margin-top:14px;font-size:14px;color:#8A97AB;font-style:italic;text-align:center;}
+</style>
+</head>
+<body data-slug="python-backend-developer-fastapi-rest-api-in-206645">
+<div class="wrap">
+  <div class="eyebrow">Proposal walkthrough</div>
+  <h1>FastAPI middleware linking three energy APIs</h1>
+  <div class="sub">Python Backend Developer (FastAPI) — REST API Integration &amp; Energy Savings</div>
+  <video controls preload="metadata" poster="https://v3b.fal.media/files/b/0aa36b15/uyCt0zamfDI23rvU3b-za_poster.jpg"><source src="https://v3b.fal.media/files/b/0aa36b15/tZaZ0cnZPMXFxIBF_6Wq1_final.mp4" type="video/mp4"/></video>
+
+  <div class="card">
+    <h2>In short</h2>
+    <p>Gergely will build the Python/FastAPI integration layer that polls your IoT gateway, optimization engine, and electricity market API, aligns their time-series data, computes daily savings against the provided business logic, and exposes clean REST endpoints for your dashboard. The work ships in four milestones, each ending in a testable deliverable. Rate is $75/hr.</p>
+  </div>
+
+  <div class="card">
+    <h2>Architecture I'd propose</h2>
+    <ul><li><b>3 API Clients</b> — IoT / optimizer / market</li><li><b>Retry &amp; Validate</b> — backoff + Pydantic schemas</li><li><b>Time-Align Layer</b> — interval normalisation</li><li><b>Savings Engine</b> — actual vs baseline calc</li><li><b>Results API</b> — FastAPI + OpenAPI docs</li></ul>
+    <div class="assumes"><b>Assumes:</b> Assumes savings formula is fully defined and provided by you before milestone 3 · Assumes each API has REST/JSON responses — no binary or SOAP formats · Assumes Postgres or SQLite for persistence; schema TBC at kick-off · Assumes Docker Compose deployment target; Kubernetes out of scope this phase — tell me where I'm wrong and the design adapts.</div>
+  </div>
+
+  <div class="card">
+    <h2>Plan</h2>
+    <ul><li><b>Phase 1 — Scaffold &amp; CI</b> (Week 1) — FastAPI app, Docker Compose, env config, CI skeleton</li><li><b>Phase 2 — API clients &amp; tests</b> (Week 1-2) — 3 clients with mocks — suite runs without live credentials</li><li><b>Phase 3-4 — Align, calc, ship</b> (Week 2-3) — Savings engine + results endpoints + deployment image</li></ul>
+  </div>
+
+  <footer>
+    Gergely Racz — AI architect &amp; developer · PhD Engineering, Cambridge · 10+ yrs in AI.<br/>
+    Reply on Upwork and I'll walk you through any of it.
+  </footer>
+</div>
+<script data-goatcounter="https://leadflowautomation.goatcounter.com/count" async src="//gc.zgo.at/count.js"></script>
+<script>
+(function(){var v=document.querySelector("video");if(!v)return;var f={};
+v.addEventListener("timeupdate",function(){if(!v.duration)return;
+var p=v.currentTime/v.duration;[[25,.25],[75,.75]].forEach(function(m){
+if(p>=m[1]&&!f[m[0]]){f[m[0]]=1;if(window.goatcounter&&window.goatcounter.count)
+window.goatcounter.count({path:"video-"+m[0]+"-"+document.body.dataset.slug,
+title:"video "+m[0]+"%",event:true});}});});})();
+</script></body>
+</html>
