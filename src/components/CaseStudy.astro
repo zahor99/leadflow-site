@@ -1,6 +1,7 @@
 ---
 // Recent work — client engagements anonymized under contract; two entries are our own products.
-// Every number here traces to a delivered system. The in-progress engagement is labelled as such.
+// Every number here traces to a delivered system.
+const base = import.meta.env.BASE_URL;
 
 const flagship = {
   eyebrow: "Enterprise knowledge systems · US",
@@ -12,7 +13,7 @@ const flagship = {
     { value: "Daily", label: "production use since April 2026" },
   ],
   stack: ["n8n", "PostgreSQL · pgvector", "Gemini", "Cross-encoder reranker"],
-  status: "In production",
+  img: "case-rag",
 };
 
 const cases = [
@@ -21,40 +22,35 @@ const cases = [
     title: "Sensor error-compensation on embedded systems",
     body: "Neural-network models compensating sensor error on embedded hardware for a global automotive-components group — machine learning under real physical constraints, shipped to R&D.",
     stack: ["Keras", "Python", "Embedded"],
-    status: "Delivered",
-    own: false,
+    img: "case-ml",
   },
   {
     eyebrow: "Full-stack SaaS · Denmark",
     title: "Booking & credit platform for a staffing marketplace",
     body: "A transactional web application — credit engine, booking flows, admin — built with typed APIs end to end, then verified by a scripted multi-persona UAT program: three waves, 10+ defects found and fixed before handover to the client's admin team.",
     stack: ["React 19", "tRPC", "Drizzle · MySQL", "DigitalOcean"],
-    status: "Delivered & handed over",
-    own: false,
+    img: "case-saas",
   },
   {
     eyebrow: "Vertical AI product · Legal",
     title: "EstateOps — AI acquisition platform for estate-planning firms",
     body: "Our own product: a domain RAG brain built on a 494-page legal corpus, an AI voice intake agent writing live into the CRM and booking real calendar slots, and an ROI calculator that opens the conversation.",
     stack: ["RAG", "Voice AI", "GoHighLevel", "Python"],
-    status: "Our product",
-    own: true,
+    img: "case-estateops",
   },
   {
     eyebrow: "E-commerce automation",
     title: "ScalePod — multi-agent product pipeline",
     body: "Our own product: from a product brief to published listings across Printify, Etsy, Shopify and Pinterest — pattern, mockups, copy and publishing all agent-orchestrated. 4 hours of manual work per product became 12 minutes; 97 products shipped this way.",
     stack: ["Multi-agent", "Shopify", "Etsy", "Supabase"],
-    status: "Our product",
-    own: true,
+    img: "case-scalepod",
   },
   {
     eyebrow: "Agentic ERP/CRM · Denmark",
     title: "Supplier-pricing & quoting platform for an industrial trading company",
     body: "An agentic pricing platform integrating Microsoft Business Central and HubSpot: supplier price collection, quote generation and order flow — every price and quote behind a human-approval gate, delivered inside the client's own Azure tenant.",
     stack: ["Business Central", "HubSpot", "Azure AI Foundry · Claude", "MCP"],
-    status: "Currently in delivery",
-    own: false,
+    img: "case-erp",
   },
 ];
 ---
@@ -66,58 +62,56 @@ const cases = [
     </p>
 
     {/* Flagship — full-width featured card */}
-    <div class="bg-bg-elevated border border-border rounded-2xl p-8 md:p-12 mb-6">
-      <div class="flex items-center justify-between gap-4 flex-wrap mb-4">
-        <p class="text-accent font-medium tracking-wider uppercase text-xs">{flagship.eyebrow}</p>
-        <span class="inline-flex items-center px-2.5 py-1 rounded-full bg-success/10 text-success text-[11px] font-semibold tracking-wide">
-          {flagship.status}
-        </span>
-      </div>
-      <h3 class="text-2xl md:text-3xl mb-4 leading-snug">{flagship.title}</h3>
-      <p class="text-text-secondary text-base leading-relaxed max-w-3xl mb-8">{flagship.body}</p>
-      <div class="grid grid-cols-1 sm:grid-cols-3 gap-6 mb-8">
-        {flagship.stats.map((s) => (
-          <div class="bg-bg-deep border border-border rounded-xl p-6 text-center">
-            <div class="text-3xl md:text-4xl font-extrabold text-accent mb-2 tabular-nums">{s.value}</div>
-            <div class="text-text-secondary text-sm leading-snug">{s.label}</div>
-          </div>
-        ))}
-      </div>
-      <div class="flex flex-wrap gap-2">
-        {flagship.stack.map((t) => (
-          <span class="inline-flex items-center px-3 py-1 rounded-full border border-border text-text-secondary text-xs font-medium">
-            {t}
-          </span>
-        ))}
+    <div class="bg-bg-elevated border border-border rounded-2xl overflow-hidden mb-6">
+      <img
+        src={`${base}images/${flagship.img}.webp`}
+        alt=""
+        loading="lazy"
+        class="w-full h-56 md:h-64 object-cover border-b border-border"
+      />
+      <div class="p-8 md:p-12">
+        <p class="text-accent font-medium tracking-wider uppercase text-xs mb-4">{flagship.eyebrow}</p>
+        <h3 class="text-2xl md:text-3xl mb-4 leading-snug">{flagship.title}</h3>
+        <p class="text-text-secondary text-base leading-relaxed max-w-3xl mb-8">{flagship.body}</p>
+        <div class="grid grid-cols-1 sm:grid-cols-3 gap-6 mb-8">
+          {flagship.stats.map((s) => (
+            <div class="bg-bg-deep border border-border rounded-xl p-6 text-center">
+              <div class="text-3xl md:text-4xl font-extrabold text-accent mb-2 tabular-nums">{s.value}</div>
+              <div class="text-text-secondary text-sm leading-snug">{s.label}</div>
+            </div>
+          ))}
+        </div>
+        <div class="flex flex-wrap gap-2">
+          {flagship.stack.map((t) => (
+            <span class="inline-flex items-center px-3 py-1 rounded-full border border-border text-text-secondary text-xs font-medium">
+              {t}
+            </span>
+          ))}
+        </div>
       </div>
     </div>
 
     {/* Grid of further case cards */}
     <div class="grid md:grid-cols-2 gap-6">
       {cases.map((c) => (
-        <div class="flex flex-col bg-bg-elevated border border-border rounded-xl p-8 hover:-translate-y-0.5 hover:shadow-lg hover:shadow-accent/10 transition-all">
-          <div class="flex items-center justify-between gap-3 flex-wrap mb-3">
-            <p class="text-accent font-medium tracking-wider uppercase text-xs">{c.eyebrow}</p>
-            <span
-              class={`inline-flex items-center px-2.5 py-1 rounded-full text-[11px] font-semibold tracking-wide ${
-                c.status === "Currently in delivery"
-                  ? "bg-accent-2/10 text-accent-2"
-                  : c.own
-                    ? "bg-accent/10 text-accent"
-                    : "bg-success/10 text-success"
-              }`}
-            >
-              {c.status}
-            </span>
-          </div>
-          <h3 class="text-xl mb-3 leading-snug">{c.title}</h3>
-          <p class="text-text-secondary text-base leading-relaxed mb-6 flex-1">{c.body}</p>
-          <div class="flex flex-wrap gap-2">
-            {c.stack.map((t) => (
-              <span class="inline-flex items-center px-3 py-1 rounded-full border border-border text-text-secondary text-xs font-medium">
-                {t}
-              </span>
-            ))}
+        <div class="flex flex-col bg-bg-elevated border border-border rounded-xl overflow-hidden hover:-translate-y-0.5 hover:shadow-lg hover:shadow-accent/10 transition-all">
+          <img
+            src={`${base}images/${c.img}.webp`}
+            alt=""
+            loading="lazy"
+            class="w-full h-44 object-cover border-b border-border"
+          />
+          <div class="flex flex-col flex-1 p-8">
+            <p class="text-accent font-medium tracking-wider uppercase text-xs mb-3">{c.eyebrow}</p>
+            <h3 class="text-xl mb-3 leading-snug">{c.title}</h3>
+            <p class="text-text-secondary text-base leading-relaxed mb-6 flex-1">{c.body}</p>
+            <div class="flex flex-wrap gap-2">
+              {c.stack.map((t) => (
+                <span class="inline-flex items-center px-3 py-1 rounded-full border border-border text-text-secondary text-xs font-medium">
+                  {t}
+                </span>
+              ))}
+            </div>
           </div>
         </div>
       ))}
