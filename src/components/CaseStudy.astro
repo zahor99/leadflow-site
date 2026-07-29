@@ -1,87 +1,130 @@
 ---
-// Case study — our POD automation system IS the case study.
-// Spec: docs/2026-04-02-leadflow-agency-website-design.md § 4.2 (Section 8).
-const tools = ["Printify", "Etsy", "Shopify", "Supabase", "Pinterest", "Airtable"];
+// Recent work — client engagements anonymized under contract; two entries are our own products.
+// Every number here traces to a delivered system. The in-progress engagement is labelled as such.
 
-const subStats = [
-  { value: "97", label: "products created by AI agents" },
-  { value: "10", label: "listing images per product" },
-  { value: "7", label: "panel artwork per garment" },
-  { value: "4", label: "platforms: Printify → Etsy → Shopify → Pinterest" },
+const flagship = {
+  eyebrow: "Enterprise knowledge systems · US",
+  title: "Two production RAG systems for a multi-billion-dollar US electronics manufacturer",
+  body: "An engineering-SOP retrieval system and a multimodal process-engineering system (text + engineering diagrams), serving the engineering organization daily. Trust was the design requirement: cross-encoder reranking, mandatory citations on every claim, and refusal when retrieval confidence is low.",
+  stats: [
+    { value: "5,000+", label: "documents ingested, text + image" },
+    { value: "2", label: "systems in production" },
+    { value: "Daily", label: "production use since April 2026" },
+  ],
+  stack: ["n8n", "PostgreSQL · pgvector", "Gemini", "Cross-encoder reranker"],
+  status: "In production",
+};
+
+const cases = [
+  {
+    eyebrow: "Industrial ML · Automotive components",
+    title: "Sensor error-compensation on embedded systems",
+    body: "Neural-network models compensating sensor error on embedded hardware for a global automotive-components group — machine learning under real physical constraints, shipped to R&D.",
+    stack: ["Keras", "Python", "Embedded"],
+    status: "Delivered",
+    own: false,
+  },
+  {
+    eyebrow: "Full-stack SaaS · Denmark",
+    title: "Booking & credit platform for a staffing marketplace",
+    body: "A transactional web application — credit engine, booking flows, admin — built with typed APIs end to end, then verified by a scripted multi-persona UAT program: three waves, 10+ defects found and fixed before handover to the client's admin team.",
+    stack: ["React 19", "tRPC", "Drizzle · MySQL", "DigitalOcean"],
+    status: "Delivered & handed over",
+    own: false,
+  },
+  {
+    eyebrow: "Vertical AI product · Legal",
+    title: "EstateOps — AI acquisition platform for estate-planning firms",
+    body: "Our own product: a domain RAG brain built on a 494-page legal corpus, an AI voice intake agent writing live into the CRM and booking real calendar slots, and an ROI calculator that opens the conversation.",
+    stack: ["RAG", "Voice AI", "GoHighLevel", "Python"],
+    status: "Our product",
+    own: true,
+  },
+  {
+    eyebrow: "E-commerce automation",
+    title: "ScalePod — multi-agent product pipeline",
+    body: "Our own product: from a product brief to published listings across Printify, Etsy, Shopify and Pinterest — pattern, mockups, copy and publishing all agent-orchestrated. 4 hours of manual work per product became 12 minutes; 97 products shipped this way.",
+    stack: ["Multi-agent", "Shopify", "Etsy", "Supabase"],
+    status: "Our product",
+    own: true,
+  },
+  {
+    eyebrow: "Agentic ERP/CRM · Denmark",
+    title: "Supplier-pricing & quoting platform for an industrial trading company",
+    body: "An agentic pricing platform integrating Microsoft Business Central and HubSpot: supplier price collection, quote generation and order flow — every price and quote behind a human-approval gate, delivered inside the client's own Azure tenant.",
+    stack: ["Business Central", "HubSpot", "Azure AI Foundry · Claude", "MCP"],
+    status: "Currently in delivery",
+    own: false,
+  },
 ];
 ---
-<section class="border-b border-border">
+<section id="work" class="border-b border-border">
   <div class="max-w-6xl mx-auto px-6 py-24">
-    <p class="text-center text-accent font-medium tracking-wider uppercase text-xs mb-4">
-      Case study · E-commerce product automation
-    </p>
-    <h2 class="text-center mb-4">Built For Our Own Business First</h2>
+    <h2 class="text-center mb-4">Recent Work</h2>
     <p class="text-center text-text-secondary max-w-2xl mx-auto mb-16">
-      The same automation stack we sell, running every day in our own stores.
+      Client engagements are shown anonymized under contract. Two of these products are our own.
     </p>
 
-    {/* Hero before/after transition */}
-    <div class="bg-bg-elevated border border-border rounded-2xl p-8 md:p-12 mb-12">
-      <div class="grid md:grid-cols-[1fr_auto_1fr] gap-8 items-center">
-        <div class="text-center md:text-right">
-          <div class="text-xs uppercase tracking-wider text-text-secondary mb-2">Before</div>
-          <div class="text-5xl md:text-6xl font-extrabold text-text-secondary tabular-nums line-through decoration-text-secondary/40">
-            4 hours
+    {/* Flagship — full-width featured card */}
+    <div class="bg-bg-elevated border border-border rounded-2xl p-8 md:p-12 mb-6">
+      <div class="flex items-center justify-between gap-4 flex-wrap mb-4">
+        <p class="text-accent font-medium tracking-wider uppercase text-xs">{flagship.eyebrow}</p>
+        <span class="inline-flex items-center px-2.5 py-1 rounded-full bg-success/10 text-success text-[11px] font-semibold tracking-wide">
+          {flagship.status}
+        </span>
+      </div>
+      <h3 class="text-2xl md:text-3xl mb-4 leading-snug">{flagship.title}</h3>
+      <p class="text-text-secondary text-base leading-relaxed max-w-3xl mb-8">{flagship.body}</p>
+      <div class="grid grid-cols-1 sm:grid-cols-3 gap-6 mb-8">
+        {flagship.stats.map((s) => (
+          <div class="bg-bg-deep border border-border rounded-xl p-6 text-center">
+            <div class="text-3xl md:text-4xl font-extrabold text-accent mb-2 tabular-nums">{s.value}</div>
+            <div class="text-text-secondary text-sm leading-snug">{s.label}</div>
           </div>
-          <div class="text-text-secondary text-sm mt-2">per product (manual)</div>
-        </div>
-        <div class="hidden md:flex flex-col items-center justify-center text-accent">
-          <svg width="40" height="40" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
-            <path d="M5 12h14M13 5l7 7-7 7" />
-          </svg>
-        </div>
-        <div class="md:hidden flex justify-center text-accent">
-          <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
-            <path d="M12 5v14M19 12l-7 7-7-7" />
-          </svg>
-        </div>
-        <div class="text-center md:text-left">
-          <div class="text-xs uppercase tracking-wider text-accent-2 mb-2">After</div>
-          <div class="text-5xl md:text-6xl font-extrabold text-accent-2 tabular-nums">
-            12 minutes
-          </div>
-          <div class="text-text-secondary text-sm mt-2">per product (AI agents)</div>
-        </div>
+        ))}
+      </div>
+      <div class="flex flex-wrap gap-2">
+        {flagship.stack.map((t) => (
+          <span class="inline-flex items-center px-3 py-1 rounded-full border border-border text-text-secondary text-xs font-medium">
+            {t}
+          </span>
+        ))}
       </div>
     </div>
 
-    {/* Sub-stats grid */}
-    <div class="grid grid-cols-2 md:grid-cols-4 gap-6 mb-16">
-      {subStats.map((s) => (
-        <div class="bg-bg-elevated border border-border rounded-xl p-6 text-center">
-          <div class="text-3xl md:text-4xl font-extrabold text-accent mb-2 tabular-nums">
-            {s.value}
+    {/* Grid of further case cards */}
+    <div class="grid md:grid-cols-2 gap-6">
+      {cases.map((c) => (
+        <div class="flex flex-col bg-bg-elevated border border-border rounded-xl p-8 hover:-translate-y-0.5 hover:shadow-lg hover:shadow-accent/10 transition-all">
+          <div class="flex items-center justify-between gap-3 flex-wrap mb-3">
+            <p class="text-accent font-medium tracking-wider uppercase text-xs">{c.eyebrow}</p>
+            <span
+              class={`inline-flex items-center px-2.5 py-1 rounded-full text-[11px] font-semibold tracking-wide ${
+                c.status === "Currently in delivery"
+                  ? "bg-accent-2/10 text-accent-2"
+                  : c.own
+                    ? "bg-accent/10 text-accent"
+                    : "bg-success/10 text-success"
+              }`}
+            >
+              {c.status}
+            </span>
           </div>
-          <div class="text-text-secondary text-sm leading-snug">{s.label}</div>
+          <h3 class="text-xl mb-3 leading-snug">{c.title}</h3>
+          <p class="text-text-secondary text-base leading-relaxed mb-6 flex-1">{c.body}</p>
+          <div class="flex flex-wrap gap-2">
+            {c.stack.map((t) => (
+              <span class="inline-flex items-center px-3 py-1 rounded-full border border-border text-text-secondary text-xs font-medium">
+                {t}
+              </span>
+            ))}
+          </div>
         </div>
       ))}
     </div>
 
-    {/* Tool-mark row — same pattern as CredibilityBar */}
-    <p class="text-center text-xs text-text-secondary uppercase tracking-wider mb-6">
-      Stack we built it on
+    <p class="text-center text-text-secondary text-sm mt-10">
+      Named references available on request.
     </p>
-    <div class="flex flex-wrap items-center justify-center gap-x-12 gap-y-4 mb-16">
-      {tools.map((name) => (
-        <span class="font-bold text-text-secondary text-lg tracking-tight opacity-60 hover:opacity-90 transition-opacity">
-          {name}
-        </span>
-      ))}
-    </div>
-
-    {/* Pull-quote */}
-    <figure class="max-w-2xl mx-auto text-center">
-      <svg class="w-8 h-8 text-accent/40 mx-auto mb-4" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
-        <path d="M7.17 9.17A4.997 4.997 0 0 0 4 14h3v6H1v-6a8 8 0 0 1 8-8v3a4.99 4.99 0 0 0-1.83 1.17zM17.17 9.17A4.997 4.997 0 0 0 14 14h3v6h-6v-6a8 8 0 0 1 8-8v3a4.99 4.99 0 0 0-2.83 1.17z" />
-      </svg>
-      <blockquote class="text-xl md:text-2xl font-medium text-text-primary leading-relaxed">
-        We built this system for our own stores. Now we build them for you.
-      </blockquote>
-    </figure>
   </div>
 </section>

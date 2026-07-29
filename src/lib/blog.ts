@@ -97,6 +97,7 @@ export async function fetchBlogRows(): Promise<BlogRow[]> {
 
   const rows: BlogRow[] = [];
   let offset: string | undefined;
+  try {
   do {
     const u = new URL(`https://api.airtable.com/v0/${BASE_ID}/${TABLE_ID}`);
     u.search = params.toString();
@@ -106,10 +107,13 @@ export async function fetchBlogRows(): Promise<BlogRow[]> {
       headers: { Authorization: `Bearer ${pat}` },
     });
     if (!res.ok) {
+      // Fail-soft: a bad/expired token or an Airtable outage must never block
+      // deploying the rest of the site. The blog just builds empty.
       const text = await res.text();
-      throw new Error(
-        `[blog] Airtable fetch failed: ${res.status} ${res.statusText} — ${text.slice(0, 300)}`,
+      console.warn(
+        `[blog] Airtable fetch failed — building with EMPTY blog: ${res.status} ${res.statusText} — ${text.slice(0, 300)}`,
       );
+      return [];
     }
     const json = (await res.json()) as AirtableListResponse;
     for (const r of json.records) {
@@ -149,6 +153,11 @@ export async function fetchBlogRows(): Promise<BlogRow[]> {
     }
     offset = json.offset;
   } while (offset);
+  } catch (err) {
+    // Network-level failure (DNS, timeout, etc.) — same fail-soft philosophy.
+    console.warn(`[blog] Airtable fetch errored — building with EMPTY blog: ${err}`);
+    return [];
+  }
 
   return rows;
 }

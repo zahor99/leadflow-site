@@ -1,18 +1,21 @@
 ---
-// Integration logos — honest "integrates with" framing, not "trusted by".
-// Day 2 uses text-mark approximations; Day 5 polish can swap to actual SVG logos.
-const tools = ["Make", "n8n", "Zapier", "HubSpot", "Slack", "Airtable", "Cal.com"];
+// Proof-facts strip — every item is true and verifiable on request.
+const facts = [
+  "PhD, University of Cambridge",
+  "10+ years in AI",
+  "RAG in daily production at a multi-billion-dollar manufacturer",
+  "Systems delivered across the US & EU",
+  "Named references available on request",
+];
 ---
 <section class="border-y border-border bg-bg-elevated/30">
-  <div class="max-w-6xl mx-auto px-6 py-12">
-    <p class="text-center text-xs text-text-secondary uppercase tracking-wider mb-8">
-      Integrates with the tools you already use
-    </p>
-    <div class="flex flex-wrap items-center justify-center gap-x-12 gap-y-6">
-      {tools.map((name) => (
-        <span class="font-bold text-text-secondary text-lg tracking-tight opacity-60 hover:opacity-90 transition-opacity">
-          {name}
-        </span>
+  <div class="max-w-6xl mx-auto px-6 py-10">
+    <div class="flex flex-wrap items-center justify-center gap-x-10 gap-y-4">
+      {facts.map((f, i) => (
+        <>
+          {i > 0 && <span class="hidden sm:inline text-border select-none" aria-hidden="true">·</span>}
+          <span class="text-text-secondary text-sm font-medium tracking-tight">{f}</span>
+        </>
       ))}
     </div>
   </div>

@@ -138,8 +138,9 @@ async function main() {
   try {
     rows = await fetchAllBlogRows(pat);
   } catch (err) {
-    console.error(`[blog-heroes] ${err.message}`);
-    return 1;
+    // Fail-soft: hero images missing = 404 images on blog posts, never a dead deploy.
+    console.warn(`[blog-heroes] Airtable fetch failed — skipping hero bundling: ${err.message}`);
+    return 0;
   }
 
   let downloaded = 0;

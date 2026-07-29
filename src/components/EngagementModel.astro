@@ -1,0 +1,99 @@
+---
+// Ways of working — deliberately no prices. Every engagement is scoped after a
+// technical conversation; publishing tiers would misrepresent how this works.
+const models = [
+  {
+    name: "Project Delivery",
+    tagline: "A defined system, built and handed over",
+    features: [
+      "Written scope with acceptance tests per deliverable",
+      "Milestone-based delivery, demos on real data",
+      "Staging environment + scripted UAT",
+      "Documentation, handover and warranty",
+    ],
+    highlighted: true,
+  },
+  {
+    name: "Retained Engineering",
+    tagline: "Ongoing build-and-operate capacity",
+    features: [
+      "Reserved senior capacity, sprint-planned",
+      "You own the backlog and priorities",
+      "Continuous delivery into your environment",
+      "Scale up or down as phases change",
+    ],
+    highlighted: false,
+  },
+  {
+    name: "Architecture Consulting",
+    tagline: "Senior review before you commit",
+    features: [
+      "AI feasibility & architecture reviews",
+      "RAG and agent-system audits",
+      "Integration and data-security design",
+      "Build-vs-buy recommendations you can act on",
+    ],
+    highlighted: false,
+  },
+];
+---
+<section id="engagement" class="border-b border-border bg-bg-elevated/20">
+  <div class="max-w-6xl mx-auto px-6 py-24">
+    <h2 class="text-center mb-4">Ways to Work With Us</h2>
+    <p class="text-center text-text-secondary max-w-xl mx-auto mb-16">
+      Every engagement is scoped and quoted after a technical conversation — no packaged tiers.
+    </p>
+
+    <div class="grid md:grid-cols-3 gap-6 items-stretch">
+      {models.map((m) => (
+        <div
+          class={`relative flex flex-col rounded-2xl border p-8 transition-all ${
+            m.highlighted
+              ? "border-accent bg-bg-elevated shadow-2xl shadow-accent/10"
+              : "border-border bg-bg-elevated hover:-translate-y-0.5 hover:shadow-lg hover:shadow-accent/10"
+          }`}
+        >
+          <div class="mb-8">
+            <h3 class="text-2xl mb-1">{m.name}</h3>
+            <p class="text-text-secondary text-sm">{m.tagline}</p>
+          </div>
+
+          <ul class="space-y-3 mb-8 flex-1">
+            {m.features.map((f) => (
+              <li class="flex items-start gap-3 text-sm text-text-primary/90">
+                <svg
+                  class={`w-5 h-5 flex-shrink-0 mt-0.5 ${m.highlighted ? "text-accent" : "text-accent-2"}`}
+                  viewBox="0 0 24 24"
+                  fill="none"
+                  stroke="currentColor"
+                  stroke-width="2.2"
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                  aria-hidden="true"
+                >
+                  <path d="M20 6 9 17l-5-5" />
+                </svg>
+                <span>{f}</span>
+              </li>
+            ))}
+          </ul>
+
+          <a
+            href="#contact"
+            class={`mt-auto inline-flex items-center justify-center px-6 py-3 rounded-lg font-medium transition-all hover:scale-[1.02] ${
+              m.highlighted
+                ? "bg-accent text-white hover:bg-accent-hover shadow-lg shadow-accent/20"
+                : "bg-bg-deep border border-border text-text-primary hover:border-accent"
+            }`}
+          >
+            Discuss your project →
+          </a>
+        </div>
+      ))}
+    </div>
+
+    <p class="text-center text-text-secondary text-sm mt-12">
+      You own the source, the infrastructure and the data — everything is built in your environment, on your accounts.
+    </p>
+  </div>
+</section>

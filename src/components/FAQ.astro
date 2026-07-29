@@ -1,30 +1,30 @@
 ---
 // FAQ — accordion using native <details>/<summary>. No JS framework needed.
-// Each question is an objection in disguise. Answers per spec § 4.2 (Section 10).
+// Each question is what an enterprise buyer actually asks in the first call.
 const faqs = [
   {
-    q: "How is this different from just using ChatGPT?",
-    a: "ChatGPT is a tool. We build systems. Your AI agents work 24/7, connect to your CRM, follow up with leads, and get smarter over time. No prompting required.",
+    q: "What kinds of systems do you build?",
+    a: "Production software with AI inside: retrieval (RAG) systems over your documents and data, multi-agent platforms that run workflows end to end, MCP integrations into ERP and CRM systems, full-stack web applications, and applied machine-learning models. If it needs to survive daily use by a real team, it's our kind of project.",
   },
   {
-    q: "What if the AI makes mistakes?",
-    a: "Every system has human-in-the-loop checkpoints. AI handles the volume; you approve the decisions that matter. We monitor and fine-tune continuously.",
+    q: "How do you keep AI agents from acting without oversight?",
+    a: "It's designed in, not bolted on: every consequential action — a price, a quote, an order, an outbound message — sits behind a human-approval gate. Retrieval systems cite their sources and refuse to answer when confidence is low. Decision logs record what the system proposed and what a person approved.",
   },
   {
-    q: "How long until I see results?",
-    a: "Most clients see their first automated lead follow-up within 2 weeks. Full ROI typically appears within 30–60 days.",
+    q: "Can you integrate with our ERP and CRM?",
+    a: "Yes — that's most of the work we do. Current and recent integrations include Microsoft Business Central, HubSpot, GoHighLevel, Outlook/Microsoft Graph, calendars and telephony, often via Model Context Protocol (MCP) servers with tightly scoped access. Systems run in your cloud tenant, on your accounts.",
   },
   {
-    q: "Do I need technical staff to manage this?",
-    a: "No. We build it, we maintain it, we optimize it. You interact through simple dashboards and your existing tools (email, phone, CRM).",
+    q: "Who owns the code, the infrastructure and the data?",
+    a: "You do. We build in your repositories and your cloud environment, intellectual property transfers as the work is paid for, and handover with documentation is part of every project — no lock-in by design.",
   },
   {
-    q: "What happens if I want to cancel?",
-    a: "No long-term contracts. Cancel anytime. Your automations and data belong to you.",
+    q: "Why are your case studies anonymized?",
+    a: "Because our contracts promise clients confidentiality, and we keep that promise — it's the same discipline we'd apply to your data. Named references are available on request once we're in a real conversation.",
   },
   {
-    q: "Can you show me examples of your work?",
-    a: "We automated our own e-commerce operation: 97 products, 135 product variants, multi-platform publishing, 100+ social posts/week — all AI-orchestrated. We build for ourselves first, then for you.",
+    q: "How does an engagement start?",
+    a: "You email us what you're trying to build. We reply with questions, then a technical conversation — with the engineer who would do the work. If it makes sense, you get a written scope with acceptance tests per deliverable, and a quote. No discovery-call funnel, no sales team.",
   },
 ];
 
@@ -44,9 +44,9 @@ const faqSchema = JSON.stringify({
 ---
 <section id="faq" class="border-b border-border">
   <div class="max-w-3xl mx-auto px-6 py-24">
-    <h2 class="text-center mb-4">Questions? We've Got Answers.</h2>
+    <h2 class="text-center mb-4">Questions We Hear First</h2>
     <p class="text-center text-text-secondary max-w-xl mx-auto mb-16">
-      The most common ones we hear on the audit call.
+      Straight answers, before you ever get on a call.
     </p>
 
     <div class="space-y-3">
