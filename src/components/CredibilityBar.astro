@@ -1,22 +1,31 @@
 ---
 // Proof-facts strip — every item is true and verifiable on request.
-const facts = [
-  "PhD, University of Cambridge",
-  "10+ years in AI",
-  "RAG in daily production at a multi-billion-dollar manufacturer",
-  "Systems delivered across the US & EU",
-  "Named references available on request",
+// The five facts never fit one line inside max-w-6xl, so they are laid out as
+// two deliberate rows; separators only ever render between items in the same
+// row (a flat flex-wrap left a dangling "·" at the line break).
+const rows = [
+  [
+    "PhD, University of Cambridge",
+    "10+ years in AI",
+    "RAG in daily production at a multi-billion-dollar manufacturer",
+  ],
+  [
+    "Systems delivered across the US & EU",
+    "Named references available on request",
+  ],
 ];
 ---
 <section class="border-y border-border bg-bg-elevated/30">
-  <div class="max-w-6xl mx-auto px-6 py-10">
-    <div class="flex flex-wrap items-center justify-center gap-x-10 gap-y-4">
-      {facts.map((f, i) => (
-        <>
-          {i > 0 && <span class="hidden sm:inline text-border select-none" aria-hidden="true">·</span>}
-          <span class="text-text-secondary text-sm font-medium tracking-tight">{f}</span>
-        </>
-      ))}
-    </div>
+  <div class="max-w-6xl mx-auto px-6 py-10 flex flex-col gap-y-4">
+    {rows.map((row) => (
+      <div class="flex flex-wrap items-center justify-center gap-x-10 gap-y-4">
+        {row.map((f, i) => (
+          <>
+            {i > 0 && <span class="hidden lg:inline text-border select-none" aria-hidden="true">·</span>}
+            <span class="text-text-secondary text-sm font-medium tracking-tight">{f}</span>
+          </>
+        ))}
+      </div>
+    ))}
   </div>
 </section>
