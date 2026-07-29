@@ -1,31 +1,35 @@
 ---
-// Proof-facts strip — every item is true and verifiable on request.
-// The five facts never fit one line inside max-w-6xl, so they are laid out as
-// two deliberate rows; separators only ever render between items in the same
-// row (a flat flex-wrap left a dangling "·" at the line break).
-const rows = [
-  [
-    "PhD, University of Cambridge",
-    "10+ years in AI",
-    "RAG in daily production at a multi-billion-dollar manufacturer",
-  ],
-  [
-    "Systems delivered across the US & EU",
-    "Named references available on request",
-  ],
+// Proof strip — sits directly under the hero's claim and answers "why believe
+// you?". Four lockups: the claim up top in primary ink, its source or
+// qualifier beneath in secondary. Every item is true and verifiable on request.
+const proofs = [
+  {
+    lead: "PhD in Engineering",
+    sub: "University of Cambridge",
+  },
+  {
+    lead: "10+ years in AI",
+    sub: "From machine-learning research to production agents",
+  },
+  {
+    lead: "In daily production",
+    sub: "RAG systems inside a multi-billion-dollar manufacturer",
+  },
+  {
+    lead: "US & EU delivery",
+    sub: "Named references available on request",
+  },
 ];
 ---
 <section class="border-y border-border bg-bg-elevated/30">
-  <div class="max-w-6xl mx-auto px-6 py-10 flex flex-col gap-y-4">
-    {rows.map((row) => (
-      <div class="flex flex-wrap items-center justify-center gap-x-10 gap-y-4">
-        {row.map((f, i) => (
-          <>
-            {i > 0 && <span class="hidden lg:inline text-border select-none" aria-hidden="true">·</span>}
-            <span class="text-text-secondary text-sm font-medium tracking-tight">{f}</span>
-          </>
-        ))}
-      </div>
-    ))}
+  <div class="max-w-6xl mx-auto px-6 py-12">
+    <dl class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-y-8 lg:divide-x lg:divide-border">
+      {proofs.map((p) => (
+        <div class="px-2 sm:px-6 lg:px-8">
+          <dt class="text-text-primary font-semibold text-base tracking-tight">{p.lead}</dt>
+          <dd class="mt-1.5 text-text-secondary text-sm leading-relaxed">{p.sub}</dd>
+        </div>
+      ))}
+    </dl>
   </div>
 </section>
