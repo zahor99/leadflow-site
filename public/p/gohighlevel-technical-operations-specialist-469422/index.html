@@ -1,0 +1,78 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8"/>
+<meta name="viewport" content="width=device-width, initial-scale=1"/>
+<meta name="robots" content="noindex,nofollow"/>
+<title>Proposal — GHL Ops: Audit, Fix, and Extend Without Breaking · Gergely Racz</title>
+<style>
+  :root{color-scheme:dark;}
+  *{margin:0;padding:0;box-sizing:border-box;}
+  body{background:#0E1117;color:#F2F5F9;font-family:Inter,"Segoe UI",system-ui,sans-serif;
+        line-height:1.55;padding:48px 20px 80px;}
+  .wrap{max-width:940px;margin:0 auto;}
+  .eyebrow{font-size:13px;font-weight:700;letter-spacing:.22em;text-transform:uppercase;color:#4F8CFF;}
+  h1{font-size:clamp(26px,4vw,40px);font-weight:800;line-height:1.2;margin:10px 0 6px;}
+  .sub{color:#93A0B4;font-size:16px;margin-bottom:28px;}
+  video{width:100%;border-radius:16px;border:1px solid rgba(255,255,255,.10);
+         background:#000;box-shadow:0 24px 60px rgba(0,0,0,.5);}
+  .card{margin-top:28px;background:#1B2330;border:1px solid rgba(255,255,255,.10);
+         border-radius:16px;padding:26px 30px;}
+  .card h2{font-size:15px;font-weight:800;letter-spacing:.12em;text-transform:uppercase;
+            color:#7FD1AE;margin-bottom:12px;}
+  .card p{font-size:17px;color:#DCE4EF;}
+  ul{margin:10px 0 0 20px;color:#DCE4EF;font-size:16px;}
+  .assumes{margin-top:22px;font-size:14px;color:#F0B429;background:rgba(240,180,41,.07);
+            border:1px dashed rgba(240,180,41,.4);border-radius:12px;padding:14px 18px;}
+  footer{margin-top:40px;color:#6C7A8D;font-size:14px;border-top:1px solid rgba(255,255,255,.08);
+          padding-top:20px;}
+  .booking{border:1px solid rgba(79,140,255,.35);}
+  .booking h2{color:#4F8CFF;}
+  .bsub{font-size:15px;color:#93A0B4;margin-bottom:18px;}
+  .calframe{width:100%;height:660px;border:0;border-radius:12px;background:#fff;}
+  .bbtn{display:block;width:min(420px,100%);margin:18px auto 4px;text-align:center;
+        padding:16px 0;border-radius:999px;background:#4F8CFF;color:#08101F;font-weight:800;
+        font-size:18px;text-decoration:none;box-shadow:0 12px 30px rgba(79,140,255,.35);}
+  .bwarn{margin-top:12px;font-size:13px;color:#F0B429;text-align:center;}
+  .disclose{margin-top:14px;font-size:14px;color:#8A97AB;font-style:italic;text-align:center;}
+</style>
+</head>
+<body data-slug="gohighlevel-technical-operations-specialist-469422">
+<div class="wrap">
+  <div class="eyebrow">Proposal walkthrough</div>
+  <h1>GHL Ops: Audit, Fix, and Extend Without Breaking</h1>
+  <div class="sub">GoHighLevel Technical Operations
+Specialist</div>
+  <video controls preload="metadata" poster="https://v3b.fal.media/files/b/0aa72192/qG3VNiUNZkT-rDbspQidI_poster.jpg"><source src="https://v3b.fal.media/files/b/0aa72192/m21I9bL2RL6BeqI0myFdf_final.mp4" type="video/mp4"/></video>
+
+  <div class="card">
+    <h2>In short</h2>
+    <p>Gergely maintains, troubleshoot, and extends live GoHighLevel accounts — workflows, tags, custom fields, Zapier integrations, calendars, and funnels — without disrupting what&#x27;s already running. He built GHL snapshot tooling and internal-API workflow utilities, and currently runs a productized GHL + AI platform wired through GHL workflows, Zapier, and webhooks. Audit-first, document-every-change approach.</p>
+  </div>
+
+  <div class="card">
+    <h2>Architecture I'd propose</h2>
+    <ul><li><b>Audit Layer</b> — Workflows, tags, enrollment rules</li><li><b>GHL Core</b> — Contacts, fields, pipelines, calendars</li><li><b>Zapier / Webhooks</b> — Triggers, payload mapping, retries</li><li><b>Third-Party Apps</b> — Sheets, CRMs, payment, email</li><li><b>Verify &amp; Document</b> — Test contact, confirm data, log change</li></ul>
+    <div class="assumes"><b>Assumes:</b> Assumes Zapier is the primary integration layer — if you use Make or n8n, the same patterns apply · Assumes calendar timezone mismatches are diagnosed at account, calendar, and contact level · Assumes WordPress scope is page edits and embed/script updates, not custom development — tell me where I'm wrong and the design adapts.</div>
+  </div>
+
+  <div class="card">
+    <h2>Plan</h2>
+    <ul><li><b>Phase 1 - Audit &amp; Quick Fixes</b> (Week 1) — Annotated workflow map + all broken automations resolved</li><li><b>Phase 2 - Integrations &amp; Extensions</b> (Week 2+) — Zapier/webhook integrations built, tested, documented</li></ul>
+  </div>
+
+  <footer>
+    Gergely Racz — AI architect &amp; developer · PhD Engineering, Cambridge · 10+ yrs in AI.<br/>
+    Reply on Upwork and I'll walk you through any of it.
+  </footer>
+</div>
+<script data-goatcounter="https://leadflowautomation.goatcounter.com/count" async src="//gc.zgo.at/count.js"></script>
+<script>
+(function(){var v=document.querySelector("video");if(!v)return;var f={};
+v.addEventListener("timeupdate",function(){if(!v.duration)return;
+var p=v.currentTime/v.duration;[[25,.25],[75,.75]].forEach(function(m){
+if(p>=m[1]&&!f[m[0]]){f[m[0]]=1;if(window.goatcounter&&window.goatcounter.count)
+window.goatcounter.count({path:"video-"+m[0]+"-"+document.body.dataset.slug,
+title:"video "+m[0]+"%",event:true});}});});})();
+</script></body>
+</html>
