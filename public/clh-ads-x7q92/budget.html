@@ -1,0 +1,163 @@
+<!doctype html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1"><meta name="robots" content="noindex,nofollow"><title>CLH Ads Budget Model</title>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,400;0,9..144,600;1,9..144,400&family=Public+Sans:wght@400;500;600;700&display=swap">
+<style>
+  :root {
+    --ink: #2b2233; --ink-soft: #5c5266; --ground: #faf7f0; --panel: #ffffff;
+    --line: #e4ddd1; --plum: #4a2b63; --plum-soft: #ece5f2; --gold: #a07c2e;
+    --good: #2e6b45; --good-bg: #e7f0e9; --warn: #8a5a17; --warn-bg: #f5ecd9; --crit: #8c3030; --crit-bg: #f5e3e0;
+  }
+  @media (prefers-color-scheme: dark) {
+    :root:not([data-theme="light"]) {
+      --ink: #ece7f0; --ink-soft: #b0a7ba; --ground: #1c1721; --panel: #262030;
+      --line: #3a3244; --plum: #c9aede; --plum-soft: #352b42; --gold: #d4b264;
+      --good: #8fc9a4; --good-bg: #253829; --warn: #dcb56b; --warn-bg: #3a3120; --crit: #e09b93; --crit-bg: #402727;
+    }
+  }
+  :root[data-theme="dark"] {
+    --ink: #ece7f0; --ink-soft: #b0a7ba; --ground: #1c1721; --panel: #262030;
+    --line: #3a3244; --plum: #c9aede; --plum-soft: #352b42; --gold: #d4b264;
+    --good: #8fc9a4; --good-bg: #253829; --warn: #dcb56b; --warn-bg: #3a3120; --crit: #e09b93; --crit-bg: #402727;
+  }
+  * { box-sizing: border-box; margin: 0; }
+  body { background: var(--ground); color: var(--ink); font-family: "Public Sans", "Segoe UI", Arial, sans-serif; font-size: 15.5px; line-height: 1.55; padding: 0 20px 72px; }
+  .wrap { max-width: 900px; margin: 0 auto; }
+  header.masthead { padding: 52px 0 28px; border-bottom: 2px solid var(--plum); margin-bottom: 36px; }
+  .eyebrow { font-size: 11px; letter-spacing: 2.2px; text-transform: uppercase; color: var(--gold); font-weight: 700; margin-bottom: 14px; }
+  h1 { font-family: "Fraunces", Georgia, serif; font-weight: 600; font-size: clamp(30px, 5vw, 42px); line-height: 1.08; text-wrap: balance; }
+  h1 em { font-style: italic; font-weight: 400; color: var(--plum); }
+  .subtitle { margin-top: 14px; color: var(--ink-soft); max-width: 64ch; }
+  h2 { font-family: "Fraunces", Georgia, serif; font-weight: 600; font-size: 24px; margin: 48px 0 6px; text-wrap: balance; }
+  h2 + .kicker { color: var(--ink-soft); margin-bottom: 16px; max-width: 70ch; }
+  p { max-width: 72ch; }
+  ul { padding-left: 20px; max-width: 72ch; }
+  li { margin-bottom: 7px; }
+
+  .funnel { display: flex; flex-wrap: wrap; gap: 0; margin: 20px 0 8px; align-items: stretch; }
+  .stage { background: var(--panel); border: 1px solid var(--line); padding: 14px 18px; flex: 1 1 150px; position: relative; }
+  .stage:first-child { border-radius: 8px 0 0 8px; }
+  .stage:last-child { border-radius: 0 8px 8px 0; }
+  .stage .s-label { font-size: 10.5px; letter-spacing: 1.4px; text-transform: uppercase; color: var(--gold); font-weight: 700; margin-bottom: 5px; }
+  .stage .s-val { font-family: "Fraunces", Georgia, serif; font-size: 21px; font-weight: 600; color: var(--plum); }
+  .stage .s-note { font-size: 12px; color: var(--ink-soft); margin-top: 3px; }
+
+  table { width: 100%; border-collapse: collapse; font-size: 13.5px; background: var(--panel); border: 1px solid var(--line); border-radius: 6px; overflow: hidden; }
+  .table-scroll { overflow-x: auto; margin: 14px 0 6px; }
+  th { text-align: left; font-size: 11px; letter-spacing: 1.1px; text-transform: uppercase; color: var(--ink-soft); padding: 9px 12px; border-bottom: 2px solid var(--plum); background: var(--plum-soft); white-space: nowrap; }
+  th.num, td.num { text-align: right; font-variant-numeric: tabular-nums; white-space: nowrap; }
+  td { padding: 8px 12px; border-bottom: 1px solid var(--line); vertical-align: top; }
+  tr:last-child td { border-bottom: none; }
+  tr.star td { background: color-mix(in srgb, var(--gold) 8%, var(--panel)); font-weight: 600; }
+  tr.dim td { color: var(--ink-soft); }
+  .foot { font-size: 12.5px; color: var(--ink-soft); margin-top: 8px; max-width: 78ch; }
+
+  .tiers { display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 14px; margin: 18px 0; }
+  .tier { background: var(--panel); border: 1px solid var(--line); border-radius: 8px; padding: 18px 20px; }
+  .tier.rec { border: 2px solid var(--plum); }
+  .tier .t-name { font-size: 11px; letter-spacing: 1.6px; text-transform: uppercase; font-weight: 700; color: var(--gold); margin-bottom: 6px; }
+  .tier .t-price { font-family: "Fraunces", Georgia, serif; font-size: 26px; font-weight: 600; color: var(--plum); margin-bottom: 8px; }
+  .tier .t-price small { font-size: 13px; color: var(--ink-soft); font-family: "Public Sans", sans-serif; font-weight: 400; }
+  .tier ul { padding-left: 17px; font-size: 13px; }
+  .tier li { margin-bottom: 5px; }
+  .callout { background: var(--good-bg); border: 1px solid var(--good); border-radius: 6px; padding: 14px 18px; margin: 18px 0; font-size: 14px; max-width: 100%; }
+  .callout strong { color: var(--good); }
+  .warnbox { background: var(--warn-bg); border: 1px solid var(--warn); border-radius: 6px; padding: 14px 18px; margin: 18px 0; font-size: 14px; }
+  .warnbox strong { color: var(--warn); }
+  footer.colophon { margin-top: 56px; padding-top: 16px; border-top: 1px solid var(--line); font-size: 12.5px; color: var(--ink-soft); }
+</style>
+
+<div class="wrap">
+<header class="masthead">
+  <div class="eyebrow">Budget &amp; CAC model · CLH Google Ads · 31 Aug 2026</div>
+  <h1>What a customer costs, <em>and what to budget.</em></h1>
+  <p class="subtitle">Funnel economics for the recommended UK campaigns, from click to signed client — with customer acquisition cost at 20%, 30% and 50% meeting-to-close rates. CPCs are live Google Ads data; conversion rates are stated assumptions to be replaced by real numbers within the first two months.</p>
+</header>
+
+<h2>1 · The funnel and its assumptions</h2>
+<p class="kicker">Base case, shown per stage. Every rate is an assumption until measured — the three scenarios below bracket it.</p>
+<div class="funnel">
+  <div class="stage"><div class="s-label">Click</div><div class="s-val">$18–40</div><div class="s-note">Blended CPC by campaign (live data)</div></div>
+  <div class="stage"><div class="s-label">→ Operating Map request</div><div class="s-val">2–6%</div><div class="s-note">Landing conversion. 2% = page as-is · 4% = revamped page · 6% = revamped + tuned</div></div>
+  <div class="stage"><div class="s-label">→ Booked meeting</div><div class="s-val">50–70%</div><div class="s-note">Map is built from a call, so request ≈ meeting intent; loss = no-shows + disqualified</div></div>
+  <div class="stage"><div class="s-label">→ Customer</div><div class="s-val">20 / 30 / 50%</div><div class="s-note">Your three close-rate cases</div></div>
+</div>
+<p class="foot">Volume ceilings from UK search volumes at a realistic ~20–25% impression share and ~6–8% CTR: Campaign A (Diagnostic + Compliance, ~1,220 searches/mo) ≈ 80 clicks/mo; Campaign B (Core consulting, ~3,000) ≈ 140 clicks/mo; Campaign C (Firm seekers, ~560) ≈ 40 clicks/mo. You cannot usefully spend more than ~$8K/mo in the UK on these clusters — beyond that, the move is the US (5–10× volume, mostly lower competition).</p>
+
+<h2>2 · Cost per meeting by campaign and scenario</h2>
+<div class="table-scroll">
+<table>
+  <thead><tr><th>Campaign</th><th class="num">CPC</th><th class="num">Spend cap/mo</th><th>Scenario</th><th class="num">Cost / lead</th><th class="num">Cost / meeting</th><th class="num">Meetings / mo</th></tr></thead>
+  <tbody>
+    <tr class="dim"><td rowspan="3">A · Diagnostic + Compliance<br><span style="font-size:11.5px;">ai audit · roadmap · readiness · risk · gdpr</span></td><td class="num" rowspan="3">$18</td><td class="num" rowspan="3">~$1,450</td><td>Page as-is</td><td class="num">$900</td><td class="num">$1,800</td><td class="num">0.8</td></tr>
+    <tr class="star"><td>Revamped (base)</td><td class="num">$450</td><td class="num">$750</td><td class="num">1.9</td></tr>
+    <tr><td>Tuned</td><td class="num">$300</td><td class="num">$429</td><td class="num">3.4</td></tr>
+    <tr class="dim"><td rowspan="3">B · Core consulting<br><span style="font-size:11.5px;">ai consulting · services · firms · strategy</span></td><td class="num" rowspan="3">$35</td><td class="num" rowspan="3">~$4,900</td><td>Page as-is</td><td class="num">$1,750</td><td class="num">$3,500</td><td class="num">1.4</td></tr>
+    <tr class="star"><td>Revamped (base)</td><td class="num">$875</td><td class="num">$1,458</td><td class="num">3.4</td></tr>
+    <tr><td>Tuned</td><td class="num">$583</td><td class="num">$833</td><td class="num">5.9</td></tr>
+    <tr class="dim"><td rowspan="3">C · Firm seekers<br><span style="font-size:11.5px;">ai development services · integration</span></td><td class="num" rowspan="3">$40</td><td class="num" rowspan="3">~$1,600</td><td>Page as-is</td><td class="num">$2,000</td><td class="num">$4,000</td><td class="num">0.4</td></tr>
+    <tr class="star"><td>Revamped (base)</td><td class="num">$1,000</td><td class="num">$1,667</td><td class="num">1.0</td></tr>
+    <tr><td>Tuned</td><td class="num">$667</td><td class="num">$952</td><td class="num">1.7</td></tr>
+  </tbody>
+</table>
+</div>
+<p class="foot">Scenario definitions: page as-is = 2% click→lead × 50% lead→meeting · revamped base = 4% × 60% · tuned = 6% × 70%. Highlighted rows are the planning case.</p>
+
+<h2>3 · Customer acquisition cost at your three close rates</h2>
+<p class="kicker">Recommended launch mix — Campaigns A + B together (blended CPC ≈ $29, up to ~220 clicks and ~$6,300/mo at full cap).</p>
+<div class="table-scroll">
+<table>
+  <thead><tr><th>Scenario</th><th class="num">Cost / meeting</th><th class="num">Meetings / mo</th><th class="num">CAC @ 20% close</th><th class="num">CAC @ 30% close</th><th class="num">CAC @ 50% close</th></tr></thead>
+  <tbody>
+    <tr class="dim"><td>Page as-is</td><td class="num">$2,882</td><td class="num">2.2</td><td class="num">$14,400</td><td class="num">$9,600</td><td class="num">$5,760</td></tr>
+    <tr class="star"><td>Revamped page (base)</td><td class="num">$1,201</td><td class="num">5.3</td><td class="num">$6,000</td><td class="num">$4,000</td><td class="num">$2,400</td></tr>
+    <tr><td>Revamped + tuned</td><td class="num">$686</td><td class="num">9.2</td><td class="num">$3,430</td><td class="num">$2,290</td><td class="num">$1,370</td></tr>
+  </tbody>
+</table>
+</div>
+
+<div class="callout"><strong>Payback check:</strong> a CLH retainer runs €10–20K/month gross; after the delivery wage, roughly €5–10K/month stays as contribution. Even the worst planning-case CAC ($6,000 ≈ €5,500 at 20% close on the base scenario) pays back in <strong>under 6 weeks</strong>. A 12-month client is worth €60–120K in contribution — an LTV:CAC of roughly 10–20×. The economics are not the risk; the landing-page conversion rate is. That's why the page-as-is row exists: launching before the revamp roughly <strong>2.4× every cost in this document</strong>.</div>
+
+<h2>4 · Budget tiers</h2>
+<div class="tiers">
+  <div class="tier">
+    <div class="t-name">Pilot · prove the funnel</div>
+    <div class="t-price">$1,500<small> /mo · months 1–2</small></div>
+    <ul>
+      <li>Campaign A only ($25–35/day)</li>
+      <li>~80 clicks → ~2 meetings/mo (base)</li>
+      <li>First customer in ~2–3 months at 30% close</li>
+      <li>Total risk to a read on the funnel: <strong>~$3,000</strong></li>
+    </ul>
+  </div>
+  <div class="tier rec">
+    <div class="t-name">Recommended · months 2–4</div>
+    <div class="t-price">$4,500–6,500<small> /mo</small></div>
+    <ul>
+      <li>Campaigns A + B (B gated on the revamped page)</li>
+      <li>~220 clicks → ~5 meetings/mo (base)</li>
+      <li>~1–1.5 customers/mo at 30% close, CAC ≈ $4,000</li>
+      <li>Enough click volume (~450 over 2 months) to measure the true conversion rate and re-run this model with real numbers</li>
+    </ul>
+  </div>
+  <div class="tier">
+    <div class="t-name">Scale · once CAC is proven</div>
+    <div class="t-price">$8,000–12,000<small> /mo</small></div>
+    <ul>
+      <li>Add Campaign C + the US versions of clusters A/B (5–10× volume, mostly Low competition)</li>
+      <li>~8–12 meetings/mo</li>
+      <li>Capacity check first: at 30% close this signs 2–4 clients/mo — delivery must be able to absorb it</li>
+    </ul>
+  </div>
+</div>
+
+<div class="warnbox"><strong>Two honest caveats.</strong> (1) The conversion rates are assumptions — defensible for B2B services search traffic, but assumptions. The pilot's job is to replace them: ~250 clicks gives a usable read on click→lead. Judge nothing before ~150 clicks per campaign. (2) Meetings arrive 1–3 weeks behind spend and clients 2–8 weeks behind meetings — commit to a 3-month horizon and ~$15–20K total working budget for the recommended path, or don't start; a $1,500 one-month test at these CPCs reads as noise.</div>
+
+<h2>5 · The plan in one line each</h2>
+<ul>
+  <li><strong>Month 1:</strong> ship the revamped page → launch Campaign A at $1,500/mo → instrument form + booking as conversions.</li>
+  <li><strong>Month 2:</strong> add Campaign B at $3,000–5,000/mo once the page converts ≥3% → keep the $88-CPC "services/firms" ad group bid-capped.</li>
+  <li><strong>Month 3:</strong> re-run this model with measured rates → decide: scale UK, open US, or fix the funnel stage that underperforms.</li>
+  <li><strong>Kill criteria:</strong> click→lead under 1.5% after 250 clicks on the revamped page, or two months with zero meetings — stop and fix the page, not the bids.</li>
+</ul>
+
+<footer class="colophon">Companion to <em>CLH Ads Readiness</em> and <em>CLH Privacy-First Revamp</em> · CPCs and volumes: DataForSEO Google Ads data (UK, 31 Aug 2026) · Conversion rates are modeling assumptions, marked as such · Retainer economics from the CLH engagement structure. USD throughout; €/$ treated ≈ at par for planning.</footer>
+</div>

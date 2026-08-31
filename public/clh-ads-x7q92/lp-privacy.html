@@ -1,0 +1,297 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="robots" content="noindex,nofollow">
+<title>AI Without Losing Control of Your Data | CEO's Little Helpers</title>
+<style>
+  :root {
+    --paper: #fcf8f1;
+    --cream: #f2e9dc;
+    --lavender: #e7dcef;
+    --plum: #74528a;
+    --deep-plum: #4d365f;
+    --ink: #2a2030;
+    --body: #4b444e;
+    --muted: #746c76;
+    --gold: #b18a4a;
+    --gold-light: #d7bf97;
+    --line: rgba(77, 54, 95, 0.18);
+    --display: "Iowan Old Style", "Palatino Linotype", "Book Antiqua", Palatino, Georgia, serif;
+    --sans: Manrope, "Avenir Next", Avenir, Inter, "Segoe UI", sans-serif;
+  }
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  html { scroll-behavior: smooth; }
+  body { background: var(--paper); color: var(--body); font-family: var(--sans); font-size: 16px; line-height: 1.6; }
+  .wrap { max-width: 1100px; margin: 0 auto; padding: 0 20px; }
+  a { color: var(--deep-plum); }
+
+  .microlabel { font-family: var(--sans); font-size: 11px; font-weight: 700; letter-spacing: 2.2px; text-transform: uppercase; color: var(--gold); }
+  h1, h2, h3 { font-family: var(--display); color: var(--ink); font-weight: 600; text-wrap: balance; }
+  h1 { font-size: clamp(30px, 5.2vw, 50px); line-height: 1.08; }
+  h1 em, h2 em { font-style: italic; color: var(--plum); font-weight: 400; }
+  h2 { font-size: clamp(23px, 3.4vw, 32px); line-height: 1.15; margin-bottom: 10px; }
+
+  .btn { display: inline-block; background: var(--deep-plum); color: #fff; text-decoration: none; font-weight: 700; font-size: 14px; letter-spacing: 0.6px; padding: 14px 26px; border: none; border-radius: 3px; cursor: pointer; }
+  .btn:hover { background: var(--plum); }
+  .btn.small { padding: 10px 18px; font-size: 12.5px; }
+
+  header.top { display: flex; justify-content: space-between; align-items: center; padding: 18px 0; border-bottom: 1px solid var(--line); }
+  .wordmark { line-height: 1.2; }
+  .wordmark .wm1 { font-family: var(--sans); font-weight: 800; font-size: 15px; letter-spacing: 1.6px; color: var(--ink); }
+  .wordmark .wm2 { font-size: 9.5px; letter-spacing: 2.4px; color: var(--gold); font-weight: 700; }
+
+  .hero { padding: 64px 0 36px; max-width: 780px; }
+  .hero .microlabel { margin-bottom: 16px; display: block; }
+  .hero p.sub { font-size: 18px; margin: 20px 0 26px; max-width: 62ch; }
+  .cta-note { font-size: 13.5px; color: var(--muted); margin-top: 12px; max-width: 54ch; }
+  .proofstrip { font-size: 13px; color: var(--muted); border-top: 1px solid var(--line); margin-top: 30px; padding-top: 14px; max-width: 68ch; }
+
+  section { padding: 44px 0; }
+  section.alt { background: var(--cream); }
+  section.lav { background: var(--lavender); }
+
+  .cards { display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 18px; margin-top: 24px; }
+  .card { background: var(--paper); border: 1px solid var(--line); padding: 24px 24px 20px; }
+  .card .microlabel { display: block; margin-bottom: 10px; }
+  .card h3 { font-size: 19px; margin-bottom: 10px; line-height: 1.3; }
+  .card p { font-size: 14.5px; }
+  .card .closer { font-size: 13px; color: var(--muted); margin-top: 12px; border-top: 1px solid var(--line); padding-top: 10px; }
+
+  .arch .card { background: var(--paper); }
+  .arch .card h3 { font-size: 17px; }
+
+  .steps { display: grid; grid-template-columns: repeat(auto-fit, minmax(190px, 1fr)); gap: 14px; margin-top: 22px; }
+  .step { border-top: 2px solid var(--gold); padding-top: 12px; }
+  .step .n { font-family: var(--display); font-size: 22px; color: var(--gold); }
+  .step h3 { font-size: 16px; margin: 4px 0 6px; }
+  .step p { font-size: 13.5px; }
+
+  .team { display: flex; flex-wrap: wrap; gap: 26px; margin-top: 18px; }
+  .team div { font-size: 14px; min-width: 240px; flex: 1; }
+  .team strong { color: var(--ink); display: block; font-family: var(--display); font-size: 17px; }
+  .team span { color: var(--muted); font-size: 12.5px; }
+
+  .faq { margin-top: 18px; max-width: 760px; }
+  .faq details { border-bottom: 1px solid var(--line); padding: 14px 0; }
+  .faq summary { font-family: var(--display); font-size: 17px; color: var(--ink); cursor: pointer; }
+  .faq summary:focus-visible { outline: 2px solid var(--plum); outline-offset: 3px; }
+  .faq p { margin-top: 10px; font-size: 14.5px; max-width: 68ch; }
+
+  .next3 { display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 14px; margin: 22px 0 8px; }
+  .next3 div { background: var(--paper); border: 1px solid var(--line); padding: 14px 16px; font-size: 13.5px; }
+  .next3 strong { color: var(--ink); display: block; margin-bottom: 4px; }
+
+  form { max-width: 620px; margin-top: 24px; display: grid; gap: 14px; }
+  .frow { display: grid; grid-template-columns: 1fr 1fr; gap: 14px; }
+  label { font-size: 12.5px; font-weight: 700; letter-spacing: 0.8px; text-transform: uppercase; color: var(--muted); display: block; margin-bottom: 5px; }
+  input, select, textarea { width: 100%; padding: 12px 14px; border: 1px solid var(--line); background: var(--paper); font-family: var(--sans); font-size: 15px; color: var(--ink); border-radius: 2px; }
+  input:focus, select:focus, textarea:focus { outline: 2px solid var(--plum); outline-offset: 1px; }
+  .fine { font-size: 12px; color: var(--muted); max-width: 60ch; }
+
+  footer.bottom { border-top: 1px solid var(--line); padding: 26px 0 40px; font-size: 12.5px; color: var(--muted); }
+  footer.bottom a { color: var(--muted); }
+
+  @media (max-width: 620px) { .frow { grid-template-columns: 1fr; } .hero { padding-top: 44px; } }
+  @media (prefers-reduced-motion: reduce) { html { scroll-behavior: auto; } }
+</style>
+</head>
+<body>
+
+<div class="wrap">
+  <header class="top">
+    <div class="wordmark">
+      <div class="wm1">CEO'S LITTLE HELPERS</div>
+      <div class="wm2">YOUR STRATEGIC AI SECOND</div>
+    </div>
+    <a class="btn small" href="#request">Get your free AI Operating Map →</a>
+  </header>
+</div>
+
+<div class="wrap">
+  <div class="hero">
+    <span class="microlabel">GDPR-first AI · Built in your own cloud tenant</span>
+    <h1>AI inside your enterprise. <em>Your data never leaves your control.</em></h1>
+    <p class="sub">If you're weighing AI against GDPR, employee data privacy and plain operational risk: we are a software development firm that builds AI systems in your own cloud tenant, behind your permissions — so the leverage arrives and the data stays governed.</p>
+    <a class="btn" href="#request">Get your free AI Operating Map →</a>
+    <p class="cta-note">One 30-minute working session with the engineers. A written map of where AI belongs in your company — and where it must not go — within 5 business days.</p>
+    <p class="proofstrip">GDPR-gated delivery for a Western-European industrial client · Production RAG systems in daily use at a multi-billion-dollar US manufacturer · Named references on request where client agreements permit</p>
+  </div>
+</div>
+
+<section class="alt">
+  <div class="wrap">
+    <span class="microlabel">Proof, not promises</span>
+    <h2>Demonstrated on live enterprise data. <em>Under real privacy constraints.</em></h2>
+    <div class="cards">
+      <div class="card">
+        <span class="microlabel">B2B industrial trading company · Western Europe</span>
+        <h3>GDPR-gated AI on live commercial data — inside the client's own cloud tenant</h3>
+        <p>An AI platform for supplier pricing and quoting, integrated with the company's ERP and mailboxes. Personal data — names, addresses, employee and customer identifiers — is stripped by a local anonymisation gate <em>before any model call</em>, validated against golden test sets to 100% recall at acceptance. Every consequential action waits for human approval, and each stage is accepted on written evidence before the next is funded.</p>
+      </div>
+      <div class="card">
+        <span class="microlabel">US electronics manufacturer · multi-billion-dollar revenue</span>
+        <h3>Two production RAG systems in daily engineering use</h3>
+        <p>Retrieval systems over 5,000+ documents, serving the engineering organisation daily since April 2026 — with mandatory citations on every answer and refusal when retrieval confidence is low. Delivered by our Head of AI &amp; Technology (prior engagement).</p>
+      </div>
+    </div>
+    <p class="proofstrip" style="border-top:none;padding-top:0;">Engagements are anonymised under contract — the same confidentiality we would apply to yours. Named references available on request where client agreements permit.</p>
+  </div>
+</section>
+
+<section>
+  <div class="wrap">
+    <span class="microlabel">The part nobody budgets for</span>
+    <h2>The AI your company already uses <em>is the risk you haven't priced.</em></h2>
+    <div class="cards">
+      <div class="card">
+        <h3>Shadow AI is already here</h3>
+        <p>People paste customer lists, contracts and colleagues' details into public chatbots because it works. Every paste is a disclosure you didn't authorise and can't retract.</p>
+      </div>
+      <div class="card">
+        <h3>GDPR doesn't pause for pilots</h3>
+        <p>Personal data in a prompt is processing under GDPR — employee data included. "The vendor said it's fine" is not a lawful basis, and the EU AI Act is adding obligations on top.</p>
+      </div>
+      <div class="card">
+        <h3>Tool vendors want your data on their side</h3>
+        <p>Most AI products are priced on your data flowing through their infrastructure. The convenience is real. So are the dependency and the exposure.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="lav arch">
+  <div class="wrap">
+    <span class="microlabel">Control by design</span>
+    <h2>Privacy is not a policy document. <em>It's an architecture.</em></h2>
+    <div class="cards">
+      <div class="card">
+        <h3>Your tenant, your accounts</h3>
+        <p>Systems run in your cloud environment on your agreements. You can revoke our access any afternoon.</p>
+      </div>
+      <div class="card">
+        <h3>Personal data stops at the gate</h3>
+        <p>Where personal data could reach a model, an anonymisation layer strips it first — tested against golden datasets at acceptance, logged in production.</p>
+      </div>
+      <div class="card">
+        <h3>Least privilege, human approval</h3>
+        <p>Scoped, read-only access by default. Consequential actions — a quote, an order, an outbound message — wait for a named person's sign-off.</p>
+      </div>
+      <div class="card">
+        <h3>Paper trail for your lawyer</h3>
+        <p>Data-processing documentation, DPIA support and sub-processor transparency prepared as deliverables, not afterthoughts.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section>
+  <div class="wrap">
+    <span class="microlabel">How we work</span>
+    <h2>Evidence at every gate.</h2>
+    <div class="steps">
+      <div class="step"><div class="n">01</div><h3>Understand</h3><p>Map the company, its systems, data boundaries and constraints.</p></div>
+      <div class="step"><div class="n">02</div><h3>First win</h3><p>One commercially meaningful constraint — chosen for value and feasibility.</p></div>
+      <div class="step"><div class="n">03</div><h3>Build with gates</h3><p>Working software on real data, approval gates designed in from the first line.</p></div>
+      <div class="step"><div class="n">04</div><h3>Prove &amp; decide</h3><p>Demonstrated against agreed acceptance conditions before the next stage is funded.</p></div>
+    </div>
+  </div>
+</section>
+
+<section class="alt">
+  <div class="wrap">
+    <span class="microlabel">A small senior team</span>
+    <h2>The people you scope with <em>are the people who build.</em></h2>
+    <div class="team">
+      <div><strong>Mohammed Ali</strong><span>DIRECTOR · CEO CONTEXT &amp; COMMERCIAL ARCHITECTURE</span></div>
+      <div><strong>Gergely Racz, PhD</strong><span>HEAD OF AI &amp; TECHNOLOGY · PHD, CAMBRIDGE · AI ARCHITECTURE &amp; DELIVERY</span></div>
+      <div><strong>Dr Asmi Ali</strong><span>HEAD OF PROCESSES &amp; SYSTEMS · TRANSFORMATION &amp; PROCESS DESIGN</span></div>
+    </div>
+  </div>
+</section>
+
+<section>
+  <div class="wrap">
+    <span class="microlabel">Straight answers</span>
+    <h2>Asked before every engagement.</h2>
+    <div class="faq">
+      <details>
+        <summary>Where does our data go?</summary>
+        <p>It stays in your cloud tenant, on your accounts and agreements. Where a model call could involve personal data, an anonymisation gate strips it first. What is logged, what may leave, and who can approve what are design decisions we make with you — in writing — before go-live.</p>
+      </details>
+      <details>
+        <summary>Do you replace our IT team or partners?</summary>
+        <p>No. We design around the systems, permissions and technology partners you already have, with tightly scoped access.</p>
+      </details>
+      <details>
+        <summary>Why are your case studies anonymised?</summary>
+        <p>Because our contracts promise clients confidentiality and we keep that promise — it's the same discipline we'd apply to your data. Named references are available on request where client agreements permit.</p>
+      </details>
+      <details>
+        <summary>What does the Operating Map cost?</summary>
+        <p>Nothing. It's how we scope — a structured view of where AI can help your company and where it must not go. If a first project makes sense, you'll see it there; if it doesn't, the map is still yours.</p>
+      </details>
+    </div>
+  </div>
+</section>
+
+<section class="lav" id="request">
+  <div class="wrap">
+    <span class="microlabel">A tangible first step</span>
+    <h2>Get your free AI Operating Map.</h2>
+    <p style="max-width:62ch;">Where AI can create leverage in your company, where it must not go, what your data boundaries require — and the one controlled first move worth funding.</p>
+    <div class="next3">
+      <div><strong>1 · Request</strong>Tell us who you are below — two minutes.</div>
+      <div><strong>2 · 30-minute session</strong>A working conversation with the engineers, not a sales team.</div>
+      <div><strong>3 · Written map</strong>Your Operating Map, in writing, within 5 business days.</div>
+    </div>
+    <!-- WIRE: point to existing form handler / CRM before launch -->
+    <form action="#" method="post">
+      <div class="frow">
+        <div><label for="f-name">Name</label><input id="f-name" name="name" type="text" autocomplete="name" required></div>
+        <div><label for="f-email">Work email</label><input id="f-email" name="email" type="email" autocomplete="email" required></div>
+      </div>
+      <div class="frow">
+        <div>
+          <label for="f-size">Company size</label>
+          <select id="f-size" name="company_size" required>
+            <option value="">Select…</option>
+            <option>Under 20</option>
+            <option>20–100</option>
+            <option>100–500</option>
+            <option>500+</option>
+          </select>
+        </div>
+        <div>
+          <label for="f-role">Your role</label>
+          <select id="f-role" name="role" required>
+            <option value="">Select…</option>
+            <option>CEO / founder</option>
+            <option>Operations</option>
+            <option>IT / Technology</option>
+            <option>Other</option>
+          </select>
+        </div>
+      </div>
+      <div class="frow">
+        <div><label for="f-country">Country</label><input id="f-country" name="country" type="text" autocomplete="country-name" required></div>
+        <div><label for="f-msg">Anything specific? (optional)</label><input id="f-msg" name="message" type="text"></div>
+      </div>
+      <button class="btn" type="submit">Get your free AI Operating Map →</button>
+      <p class="fine">We use these details to prepare your Operating Map and follow up about it — nothing else. See our <a href="https://www.ceoslittlehelpers.com/privacy">privacy policy</a>.</p>
+      <p class="fine">Please do not submit sensitive operational, personal, regulated or confidential data through this form.</p>
+      <p class="fine">If the form does not load, <a href="https://www.ceoslittlehelpers.com/strategy-session">use the secure request form</a>.</p>
+    </form>
+  </div>
+</section>
+
+<footer class="bottom">
+  <div class="wrap">
+    The Business Philosopher Ltd, trading as CEO's Little Helpers · Registered in England and Wales · Company no. 09811089 · <a href="mailto:hello@ceoslittlehelpers.com">hello@ceoslittlehelpers.com</a><br>
+    <a href="https://www.ceoslittlehelpers.com/privacy">Privacy policy</a> · <a href="https://www.ceoslittlehelpers.com/security-data-principles">Security &amp; data principles</a>
+  </div>
+</footer>
+
+</body>
+</html>

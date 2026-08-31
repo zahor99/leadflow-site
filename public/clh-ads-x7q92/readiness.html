@@ -1,0 +1,223 @@
+<!doctype html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1"><meta name="robots" content="noindex,nofollow"><title>CLH Ads Readiness</title>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,400;0,9..144,600;1,9..144,400&family=Public+Sans:wght@400;500;600;700&display=swap">
+<style>
+  :root {
+    --ink: #2b2233;
+    --ink-soft: #5c5266;
+    --ground: #faf7f0;
+    --panel: #ffffff;
+    --line: #e4ddd1;
+    --plum: #4a2b63;
+    --plum-soft: #ece5f2;
+    --gold: #a07c2e;
+    --good: #2e6b45;
+    --good-bg: #e7f0e9;
+    --warn: #8a5a17;
+    --warn-bg: #f5ecd9;
+    --crit: #8c3030;
+    --crit-bg: #f5e3e0;
+  }
+  @media (prefers-color-scheme: dark) {
+    :root:not([data-theme="light"]) {
+      --ink: #ece7f0; --ink-soft: #b0a7ba; --ground: #1c1721; --panel: #262030;
+      --line: #3a3244; --plum: #c9aede; --plum-soft: #352b42; --gold: #d4b264;
+      --good: #8fc9a4; --good-bg: #253829; --warn: #dcb56b; --warn-bg: #3a3120; --crit: #e09b93; --crit-bg: #402727;
+    }
+  }
+  :root[data-theme="dark"] {
+    --ink: #ece7f0; --ink-soft: #b0a7ba; --ground: #1c1721; --panel: #262030;
+    --line: #3a3244; --plum: #c9aede; --plum-soft: #352b42; --gold: #d4b264;
+    --good: #8fc9a4; --good-bg: #253829; --warn: #dcb56b; --warn-bg: #3a3120; --crit: #e09b93; --crit-bg: #402727;
+  }
+  * { box-sizing: border-box; margin: 0; }
+  body {
+    background: var(--ground); color: var(--ink);
+    font-family: "Public Sans", "Segoe UI", Arial, sans-serif;
+    font-size: 15.5px; line-height: 1.55; padding: 0 20px 72px;
+  }
+  .wrap { max-width: 880px; margin: 0 auto; }
+  header.masthead { padding: 52px 0 28px; border-bottom: 2px solid var(--plum); margin-bottom: 36px; }
+  .eyebrow { font-size: 11px; letter-spacing: 2.2px; text-transform: uppercase; color: var(--gold); font-weight: 700; margin-bottom: 14px; }
+  h1 { font-family: "Fraunces", Georgia, serif; font-weight: 600; font-size: clamp(30px, 5vw, 44px); line-height: 1.08; text-wrap: balance; }
+  h1 em { font-style: italic; font-weight: 400; color: var(--plum); }
+  .subtitle { margin-top: 14px; color: var(--ink-soft); max-width: 62ch; }
+  h2 { font-family: "Fraunces", Georgia, serif; font-weight: 600; font-size: 25px; margin: 52px 0 6px; text-wrap: balance; }
+  h2 + .kicker { color: var(--ink-soft); margin-bottom: 18px; max-width: 68ch; }
+  h3 { font-size: 16px; font-weight: 700; margin: 26px 0 8px; }
+  p { max-width: 70ch; }
+  p + p { margin-top: 10px; }
+
+  .verdict { display: grid; grid-template-columns: repeat(auto-fit, minmax(240px, 1fr)); gap: 14px; margin: 30px 0 6px; }
+  .verdict-card { background: var(--panel); border: 1px solid var(--line); border-radius: 6px; padding: 18px 20px; }
+  .verdict-card .tag { display: inline-block; font-size: 11px; font-weight: 700; letter-spacing: 1.2px; text-transform: uppercase; padding: 3px 9px; border-radius: 999px; margin-bottom: 10px; }
+  .tag.good { background: var(--good-bg); color: var(--good); }
+  .tag.warn { background: var(--warn-bg); color: var(--warn); }
+  .tag.crit { background: var(--crit-bg); color: var(--crit); }
+  .verdict-card strong.head { display: block; font-size: 15px; margin-bottom: 6px; }
+  .verdict-card p { font-size: 13.5px; color: var(--ink-soft); }
+
+  table { width: 100%; border-collapse: collapse; font-size: 13.5px; background: var(--panel); border: 1px solid var(--line); border-radius: 6px; overflow: hidden; }
+  .table-scroll { overflow-x: auto; margin: 14px 0 6px; }
+  th { text-align: left; font-size: 11px; letter-spacing: 1.1px; text-transform: uppercase; color: var(--ink-soft); padding: 9px 12px; border-bottom: 2px solid var(--plum); background: var(--plum-soft); white-space: nowrap; }
+  th.num, td.num { text-align: right; font-variant-numeric: tabular-nums; white-space: nowrap; }
+  td { padding: 8px 12px; border-bottom: 1px solid var(--line); vertical-align: top; }
+  tr:last-child td { border-bottom: none; }
+  td .kw { font-weight: 600; }
+  .pill { display: inline-block; font-size: 10.5px; font-weight: 700; letter-spacing: 0.6px; padding: 2px 8px; border-radius: 999px; }
+  .pill.low { background: var(--good-bg); color: var(--good); }
+  .pill.med { background: var(--warn-bg); color: var(--warn); }
+  .pill.high { background: var(--crit-bg); color: var(--crit); }
+  tr.star td { background: color-mix(in srgb, var(--gold) 8%, var(--panel)); }
+  .foot { font-size: 12.5px; color: var(--ink-soft); margin-top: 8px; }
+
+  .cols { display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 22px; margin-top: 14px; }
+  ul { padding-left: 20px; max-width: 70ch; }
+  li { margin-bottom: 8px; }
+  li strong { color: var(--ink); }
+  .quiet { color: var(--ink-soft); }
+
+  .quote { border-left: 3px solid var(--gold); background: var(--panel); border-radius: 0 6px 6px 0; padding: 12px 18px; margin: 16px 0; font-family: "Fraunces", Georgia, serif; font-style: italic; font-size: 16px; max-width: 66ch; }
+
+  .fix { display: flex; gap: 16px; background: var(--panel); border: 1px solid var(--line); border-radius: 6px; padding: 18px 20px; margin-bottom: 12px; }
+  .fix .n { font-family: "Fraunces", Georgia, serif; font-size: 26px; font-weight: 600; color: var(--gold); line-height: 1; min-width: 34px; }
+  .fix p { font-size: 14px; color: var(--ink-soft); margin-top: 4px; }
+  .fix strong.t { font-size: 15px; }
+
+  .campaign { background: var(--panel); border: 1px solid var(--line); border-left: 4px solid var(--plum); border-radius: 6px; padding: 18px 20px; margin-bottom: 14px; }
+  .campaign h3 { margin: 0 0 4px; }
+  .campaign .meta { font-size: 12.5px; color: var(--gold); font-weight: 700; letter-spacing: 0.8px; text-transform: uppercase; margin-bottom: 8px; }
+  .campaign p, .campaign li { font-size: 14px; }
+  .campaign ul { margin-top: 6px; }
+  code { font-family: Consolas, "Courier New", monospace; font-size: 13px; background: var(--plum-soft); padding: 1px 6px; border-radius: 4px; }
+
+  footer.colophon { margin-top: 60px; padding-top: 16px; border-top: 1px solid var(--line); font-size: 12.5px; color: var(--ink-soft); }
+</style>
+
+<div class="wrap">
+<header class="masthead">
+  <div class="eyebrow">Google Ads readiness review · ceoslittlehelpers.com · 31 Aug 2026</div>
+  <h1>Strong brand. <em>Not yet an ads landing page.</em></h1>
+  <p class="subtitle">Review of the CEO's Little Helpers site as a Google Ads destination, with DataForSEO keyword data (Google Ads volumes, CPCs, competition) for the UK and US. Bottom line: the keyword economics work, but three fixes are needed before paid clicks will convert.</p>
+</header>
+
+<div class="verdict">
+  <div class="verdict-card">
+    <span class="tag good">Works</span>
+    <strong class="head">The offer &amp; the brand</strong>
+    <p>"Request your AI Operating Map" is a real, named, low-commitment conversion asset — better for cold traffic than "book a call". Positioning is senior, distinctive, anti-hype. Team page is credible (two PhDs). Security/trust pages exist.</p>
+  </div>
+  <div class="verdict-card">
+    <span class="tag warn">Risky</span>
+    <strong class="head">The keyword economics</strong>
+    <p>UK head terms run $30–45 real CPC. Viable only against a €10–20K/mo retainer — which means every click has to land on a page built to convert, not a brand essay. A cheap "diagnostic" cluster ($5–35 CPC) matches the Operating Map almost word-for-word.</p>
+  </div>
+  <div class="verdict-card">
+    <span class="tag crit">Blocks launch</span>
+    <strong class="head">Zero public proof</strong>
+    <p>The site openly promises "permissioned public proof" — and currently shows none. No case study, no numbers, no logos, no testimonial. Cold paid traffic converts on evidence; this is the single biggest conversion risk on the site.</p>
+  </div>
+</div>
+
+<h2>1 · Sales copy review</h2>
+<p class="kicker">The homepage is written for a reader who arrives warm — a referral, a LinkedIn follow, someone handed the URL. It rewards slow reading. A paid click behaves differently: it cost $30+, it arrived with a query in mind, and it bounces in 10 seconds if the page doesn't echo that query back.</p>
+
+<div class="cols">
+  <div>
+    <h3>What the copy does well</h3>
+    <ul>
+      <li><strong>A genuinely differentiated angle.</strong> "Your company does not need more AI tools. It needs an AI strategy that fits the company you already have" — this is a real position against the tool-seller market, and it's held consistently through every section.</li>
+      <li><strong>ICP named in the first screen.</strong> "CEOs running established businesses with real people, real systems, real data" — self-selects the right reader.</li>
+      <li><strong>One CTA, everywhere.</strong> The Operating Map is the only ask, repeated top and bottom. No competing CTAs.</li>
+      <li><strong>Trust architecture.</strong> "Control, not theatre", least-privilege, human approval, defined data boundaries, a real security-principles page and a form that warns against submitting sensitive data. For this buyer, that's persuasive.</li>
+      <li><strong>The white paper</strong> gives colder visitors a no-commitment step.</li>
+    </ul>
+  </div>
+  <div>
+    <h3>Gaps that hurt paid traffic</h3>
+    <ul>
+      <li><strong>No proof anywhere.</strong> "Demonstrated, not asserted. Measured, not promised" — but nothing is demonstrated on the page itself. Production AI in daily use at a $3B/yr US multinational, and a European B2B trading company on a monthly retainer, both exist as anonymised, claim-safe stories. Neither appears.</li>
+      <li><strong>The vocabulary avoids the buyer's search terms.</strong> "Consulting", "consultancy", "services" barely occur in body copy. Google's Quality Score scores the landing page against the query; a page that refuses the word "consulting" pays more per click for "ai consulting".</li>
+      <li><strong>Abstraction before concreteness.</strong> "A company is not a workflow. It is an operating system" is elegant — but the first concrete deliverable appears far below the fold. Paid visitors need the tangible thing sooner.</li>
+      <li><strong>No qualifier on the form.</strong> No company-size, revenue band or budget signal. At $30+ CPC, unqualified SMB tire-kicker leads are expensive noise.</li>
+      <li><strong>No geographic anchor.</strong> Nothing says who this serves geographically; ad traffic converts better when the page confirms "yes, you, here".</li>
+    </ul>
+  </div>
+</div>
+
+<div class="quote">The wording of the offer is a gift for search: an "AI Operating Map" is what people typing "ai roadmap", "ai audit" and "ai readiness assessment" are literally asking for — at a fraction of the head-term CPC.</div>
+
+<h2>2 · Keyword analysis</h2>
+<p class="kicker">Live Google Ads data via DataForSEO (search volume, average CPC, advertiser competition, top-of-page bid ranges). UK shown as primary market; US for comparison. Highlighted rows are the recommended core.</p>
+
+<h3>United Kingdom — recommended universe</h3>
+<div class="table-scroll">
+<table>
+  <thead><tr><th>Keyword</th><th class="num">Vol/mo</th><th class="num">Avg CPC</th><th>Competition</th><th class="num">Top-of-page bid</th><th>Note</th></tr></thead>
+  <tbody>
+    <tr class="star"><td class="kw">ai consulting / consultancy / consultant</td><td class="num">2,400 ea</td><td class="num">$34</td><td><span class="pill med">Medium</span></td><td class="num">$7–40</td><td>Head cluster. One ad group, exact match.</td></tr>
+    <tr class="star"><td class="kw">ai consulting services / firms / company</td><td class="num">390 ea</td><td class="num">$74–88</td><td><span class="pill low">Low</span></td><td class="num">$10–294</td><td>Highest intent. Expensive but low competition.</td></tr>
+    <tr class="star"><td class="kw">ai audit</td><td class="num">480</td><td class="num">$20</td><td><span class="pill med">Medium</span></td><td class="num">$7–23</td><td>Direct Operating-Map match.</td></tr>
+    <tr class="star"><td class="kw">ai roadmap</td><td class="num">170</td><td class="num">$5</td><td><span class="pill low">Low</span></td><td class="num">$2–11</td><td>Cheapest click in the set; exact offer match.</td></tr>
+    <tr class="star"><td class="kw">ai readiness assessment</td><td class="num">110</td><td class="num">$35</td><td><span class="pill med">Medium</span></td><td class="num">$12–46</td><td>Diagnostic intent, senior buyer.</td></tr>
+    <tr><td class="kw">ai strategy consulting / consultant</td><td class="num">140 ea</td><td class="num">~$33*</td><td><span class="pill med">Medium</span></td><td class="num">$7–65</td><td>Exact positioning match.</td></tr>
+    <tr><td class="kw">ai implementation consulting</td><td class="num">90</td><td class="num">$46</td><td><span class="pill med">Medium</span></td><td class="num">$7–36</td><td>Matches "Implementation" in the site's own header.</td></tr>
+    <tr><td class="kw">ai consulting uk / near me</td><td class="num">140 / 110</td><td class="num">$21–32</td><td><span class="pill med">Medium</span></td><td class="num">—</td><td>Local variants; cheap and qualified.</td></tr>
+    <tr><td class="kw">ai business consulting</td><td class="num">170</td><td class="num">$55</td><td><span class="pill med">Medium</span></td><td class="num">—</td><td>From suggestion sweep.</td></tr>
+    <tr><td class="kw">ai for business</td><td class="num">1,600</td><td class="num">$24</td><td><span class="pill med">Medium</span></td><td class="num">$6–27</td><td>Broad/ambiguous — phrase-match test only.</td></tr>
+    <tr><td class="kw">ai automation agency (+ uk)</td><td class="num">720 / 210</td><td class="num">$20 / $12</td><td><span class="pill med">Medium</span></td><td class="num">$5–15</td><td>Different buyer (SMB automation shopper). Test or exclude.</td></tr>
+    <tr><td class="kw">ai agency</td><td class="num">9,900</td><td class="num">$15</td><td><span class="pill med">Medium</span></td><td class="num">$4–14</td><td>Big but mixed intent (jobs, creative agencies). Skip at launch.</td></tr>
+  </tbody>
+</table>
+</div>
+<p class="foot">*Google returns no averaged CPC for some low-volume terms; bid range shown instead. US comparison: same clusters at 5–10× volume, mostly <em>lower</em> competition ("ai consulting" 8,100/mo @ $41, Low; "ai consulting services" 2,400/mo @ $77, Low) — a real option later, but UK/EU matches delivery reality and burns budget 5× slower while the funnel is unproven.</p>
+
+<h3>Negative keywords (add before the first impression)</h3>
+<p><code>jobs</code> <code>salary</code> <code>course</code> <code>courses</code> <code>training</code> <code>certification</code> <code>internship</code> <code>free</code> <code>what is</code> <code>meaning</code> — the suggestion sweep shows "ai consulting jobs" (480/mo) and "ai automation course" (320/mo) sitting right beside the money terms.</p>
+
+<h2>3 · Recommended campaign structure</h2>
+
+<div class="campaign">
+  <div class="meta">Campaign A · launch first</div>
+  <h3>Diagnostic — "AI Operating Map"</h3>
+  <p><strong>Keywords:</strong> ai audit · ai roadmap · ai readiness assessment · ai opportunity assessment (exact + phrase). ~770 UK searches/mo at $5–35 CPC.</p>
+  <ul>
+    <li>Lands on <code>/strategy-session</code> almost as-is — the message match is already excellent.</li>
+    <li>Ad copy leads with the named deliverable: "Get a CEO AI Operating Map — where AI belongs in your company, where it doesn't, and what to do first."</li>
+    <li>~$500–750/mo budget proves the funnel before the expensive cluster spends anything.</li>
+  </ul>
+</div>
+
+<div class="campaign">
+  <div class="meta">Campaign B · after the landing-page fix</div>
+  <h3>Core — "AI Consulting"</h3>
+  <p><strong>Ad group 1:</strong> ai consulting / consultancy / consultant / ai consulting uk. <strong>Ad group 2:</strong> ai consulting services / firms / company. <strong>Ad group 3:</strong> ai strategy consulting / consultant · ai implementation consulting.</p>
+  <ul>
+    <li>Needs a dedicated landing page (see fix #1) — sending these to the homepage means poor Quality Score and paying $50+ for $34 clicks.</li>
+    <li>Realistic maths: at ~$35 blended CPC and a 4% conversion to Operating-Map requests, a lead costs ≈ $875. One retainer client covers years of that — but only if the page converts at that rate, which requires proof on the page.</li>
+  </ul>
+</div>
+
+<div class="campaign">
+  <div class="meta">Campaign C · optional test</div>
+  <h3>Automation shoppers</h3>
+  <p>ai automation agency/services/consulting (~880 UK/mo, $12–42). A different, usually smaller buyer. Only worth testing with a qualifying line on the page ("for established companies") — otherwise add these as negatives to keep Campaign B clean.</p>
+</div>
+
+<h2>4 · Three fixes before spending on Campaign B</h2>
+
+<div class="fix"><div class="n">1</div><div><strong class="t">Build one keyword-matched landing page.</strong><p>"AI consulting for established companies" — same brand, same restraint, but it uses the buyer's words ("consulting", "services"), states the deliverable and process in the first screen, and keeps the Operating Map as the single CTA. This one page serves every ad group in Campaign B and is the difference between paying $34 and $50+ per click.</p></div></div>
+
+<div class="fix"><div class="n">2</div><div><strong class="t">Put proof on the page.</strong><p>Two anonymised, claim-safe stories already exist and clear the confidentiality rules: production AI used daily by the engineering team of a $3B/yr US multinational, and a Western-European B2B trading company on an ongoing retainer with evidence-gated delivery. Problem → what was built → what management can now see. No names needed. Without this block, expect cold-traffic conversion under 2% and lead costs to roughly double.</p></div></div>
+
+<div class="fix"><div class="n">3</div><div><strong class="t">Qualify the form.</strong><p>Add company size / revenue band / role to the Operating-Map request, and one line of positioning above it ("built for established companies, typically 20–500 people"). Cuts unqualified submissions before they cost sales-call time, and gives Google's conversion learning cleaner signals.</p></div></div>
+
+<h2>5 · Suggested sequence</h2>
+<ul>
+  <li><strong>Week 1:</strong> negatives list + conversion tracking (form submit as primary conversion) + launch Campaign A at ~$25/day.</li>
+  <li><strong>Weeks 1–2:</strong> build the Campaign B landing page + proof block + form qualifiers.</li>
+  <li><strong>Week 3:</strong> launch Campaign B ad groups 1 and 3 at ~$50/day; hold ad group 2 (the $74–88 terms) until the page shows a ≥3% conversion rate.</li>
+  <li><strong>Week 6:</strong> read: cost per Operating-Map request, request→call rate, call quality. Then decide on US expansion (volumes 5–10×, competition lower) or scale UK.</li>
+</ul>
+
+<footer class="colophon">Prepared for the CEO's Little Helpers team · Keyword data: DataForSEO Google Ads endpoints (search_volume + keyword_suggestions), pulled 31 Aug 2026, locations UK (2826) and US (2840), language EN · Copy reviewed from ceoslittlehelpers.com (home, /problems, /strategy-session) as rendered 31 Aug 2026.</footer>
+</div>

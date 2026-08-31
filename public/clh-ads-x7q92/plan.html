@@ -1,0 +1,216 @@
+<!doctype html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1"><meta name="robots" content="noindex,nofollow"><title>CLH Campaign Implementation Plan</title>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,400;0,9..144,600;1,9..144,400&family=Public+Sans:wght@400;500;600;700&display=swap">
+<style>
+  :root {
+    --ink: #2b2233; --ink-soft: #5c5266; --ground: #faf7f0; --panel: #ffffff;
+    --line: #e4ddd1; --plum: #4a2b63; --plum-soft: #ece5f2; --gold: #a07c2e;
+    --good: #2e6b45; --good-bg: #e7f0e9; --warn: #8a5a17; --warn-bg: #f5ecd9; --crit: #8c3030; --crit-bg: #f5e3e0;
+  }
+  @media (prefers-color-scheme: dark) {
+    :root:not([data-theme="light"]) {
+      --ink: #ece7f0; --ink-soft: #b0a7ba; --ground: #1c1721; --panel: #262030;
+      --line: #3a3244; --plum: #c9aede; --plum-soft: #352b42; --gold: #d4b264;
+      --good: #8fc9a4; --good-bg: #253829; --warn: #dcb56b; --warn-bg: #3a3120; --crit: #e09b93; --crit-bg: #402727;
+    }
+  }
+  :root[data-theme="dark"] {
+    --ink: #ece7f0; --ink-soft: #b0a7ba; --ground: #1c1721; --panel: #262030;
+    --line: #3a3244; --plum: #c9aede; --plum-soft: #352b42; --gold: #d4b264;
+    --good: #8fc9a4; --good-bg: #253829; --warn: #dcb56b; --warn-bg: #3a3120; --crit: #e09b93; --crit-bg: #402727;
+  }
+  * { box-sizing: border-box; margin: 0; }
+  body { background: var(--ground); color: var(--ink); font-family: "Public Sans", "Segoe UI", Arial, sans-serif; font-size: 15.5px; line-height: 1.55; padding: 0 20px 72px; }
+  .wrap { max-width: 920px; margin: 0 auto; }
+  header.masthead { padding: 52px 0 28px; border-bottom: 2px solid var(--plum); margin-bottom: 36px; }
+  .eyebrow { font-size: 11px; letter-spacing: 2.2px; text-transform: uppercase; color: var(--gold); font-weight: 700; margin-bottom: 14px; }
+  h1 { font-family: "Fraunces", Georgia, serif; font-weight: 600; font-size: clamp(30px, 5vw, 42px); line-height: 1.08; text-wrap: balance; }
+  h1 em { font-style: italic; font-weight: 400; color: var(--plum); }
+  .subtitle { margin-top: 14px; color: var(--ink-soft); max-width: 66ch; }
+  h2 { font-family: "Fraunces", Georgia, serif; font-weight: 600; font-size: 24px; margin: 48px 0 6px; text-wrap: balance; }
+  h2 + .kicker { color: var(--ink-soft); margin-bottom: 16px; max-width: 72ch; }
+  h3 { font-size: 16px; font-weight: 700; margin: 24px 0 8px; }
+  p { max-width: 74ch; }
+  ul, ol { padding-left: 20px; max-width: 74ch; }
+  li { margin-bottom: 7px; }
+  table { width: 100%; border-collapse: collapse; font-size: 13.5px; background: var(--panel); border: 1px solid var(--line); border-radius: 6px; overflow: hidden; }
+  .table-scroll { overflow-x: auto; margin: 14px 0 6px; }
+  th { text-align: left; font-size: 11px; letter-spacing: 1.1px; text-transform: uppercase; color: var(--ink-soft); padding: 9px 12px; border-bottom: 2px solid var(--plum); background: var(--plum-soft); white-space: nowrap; }
+  td { padding: 8px 12px; border-bottom: 1px solid var(--line); vertical-align: top; }
+  tr:last-child td { border-bottom: none; }
+  td.c { white-space: nowrap; }
+  .tag { display: inline-block; font-size: 10.5px; font-weight: 700; letter-spacing: 0.6px; padding: 2px 8px; border-radius: 999px; }
+  .tag.done { background: var(--good-bg); color: var(--good); }
+  .tag.new { background: var(--warn-bg); color: var(--warn); }
+  .tag.dec { background: var(--crit-bg); color: var(--crit); }
+  .warnbox { background: var(--warn-bg); border: 1px solid var(--warn); border-radius: 6px; padding: 14px 18px; margin: 18px 0; font-size: 14px; }
+  .warnbox strong { color: var(--warn); }
+  .callout { background: var(--good-bg); border: 1px solid var(--good); border-radius: 6px; padding: 14px 18px; margin: 18px 0; font-size: 14px; }
+  .callout strong { color: var(--good); }
+  code { font-family: Consolas, "Courier New", monospace; font-size: 13px; background: var(--plum-soft); padding: 1px 6px; border-radius: 4px; }
+  .lm { background: var(--panel); border: 1px solid var(--line); border-left: 4px solid var(--plum); border-radius: 6px; padding: 18px 20px; margin-bottom: 14px; }
+  .lm h3 { margin: 0 0 4px; }
+  .lm .meta { font-size: 12px; color: var(--gold); font-weight: 700; letter-spacing: 0.8px; text-transform: uppercase; margin-bottom: 8px; }
+  .lm p, .lm li { font-size: 14px; }
+  footer.colophon { margin-top: 56px; padding-top: 16px; border-top: 1px solid var(--line); font-size: 12.5px; color: var(--ink-soft); }
+</style>
+
+<div class="wrap">
+<header class="masthead">
+  <div class="eyebrow">Implementation plan · CLH Google Ads program · 31 Aug 2026</div>
+  <h1>From research to live campaigns: <em>the build plan.</em></h1>
+  <p class="subtitle">What gets built, in what order, by whom, and what needs a decision first — covering landing pages, final keyword targets, lead magnets and their content plan. Nothing in this document is built yet; it is the plan to approve before building.</p>
+</header>
+
+<h2>0 · What already exists vs. what's new</h2>
+<div class="table-scroll">
+<table>
+  <thead><tr><th>Asset</th><th>Status</th><th>Note</th></tr></thead>
+  <tbody>
+    <tr><td>Revamped homepage copy (privacy-first)</td><td class="c"><span class="tag done">Written</span></td><td>Section-by-section in the Privacy-First Revamp artifact — needs implementation on the site</td></tr>
+    <tr><td>Keyword research UK / US / EU (16 markets)</td><td class="c"><span class="tag done">Done</span></td><td>All volumes/CPCs pulled; no further API spend needed</td></tr>
+    <tr><td>Budget &amp; CAC model</td><td class="c"><span class="tag done">Done</span></td><td>Budget Model + EU Keyword Map artifacts</td></tr>
+    <tr><td>/strategy-session page + Operating Map form</td><td class="c"><span class="tag done">Live</span></td><td>Needs qualifier fields added</td></tr>
+    <tr><td>/white-paper page with email-gated request form</td><td class="c"><span class="tag done">Live</span></td><td>Form + "sent to your inbox" flow exist. <strong>Verify with Mo:</strong> is the actual PDF written, and where do submissions land?</td></tr>
+    <tr><td>Keyword-matched EN landing page ("AI consulting")</td><td class="c"><span class="tag new">To build</span></td><td>Workstream 1</td></tr>
+    <tr><td>German page + German white paper</td><td class="c"><span class="tag new">To build</span></td><td>Workstreams 1 &amp; 3</td></tr>
+    <tr><td>EU AI Act briefing (the 12,100/mo magnet)</td><td class="c"><span class="tag new">To build</span></td><td>Workstream 3 — raw material largely exists internally</td></tr>
+    <tr><td>Nurture email sequence + sending platform</td><td class="c"><span class="tag dec">Decision needed</span></td><td>ESP choice is open (see §5)</td></tr>
+    <tr><td>Conversion tracking + consent banner</td><td class="c"><span class="tag new">To build</span></td><td>Prerequisite for spending anything</td></tr>
+  </tbody>
+</table>
+</div>
+
+<h2>1 · Workstream 1 — Landing pages</h2>
+<p class="kicker">Five page tasks, ordered by dependency. All copy derives from the Privacy-First Revamp artifact; the German assets are translations of it, not new writing.</p>
+<div class="table-scroll">
+<table>
+  <thead><tr><th>#</th><th>Page</th><th>What happens</th><th>Serves</th><th>Effort</th></tr></thead>
+  <tbody>
+    <tr><td>P1</td><td class="c"><code>/</code> homepage revamp</td><td>Implement the revamp: new hero, Shadow-AI problem section, <strong>two anonymised proof blocks</strong>, privacy-architecture cards, capabilities block; demote the chess framing. Keep design system as-is.</td><td>All campaigns (Quality Score anchor)</td><td class="c">2–3 days</td></tr>
+    <tr><td>P2</td><td class="c"><code>/ai-consulting</code></td><td>New keyword-matched page: "AI consulting for established companies" — same brand, buyer vocabulary ("consulting", "services", "development firm"), proof blocks reused, single Operating-Map CTA, no nav distractions.</td><td>Campaigns B + C (firm seekers)</td><td class="c">1 day (copy exists as sections)</td></tr>
+    <tr><td>P3</td><td class="c"><code>/strategy-session</code> upgrade</td><td>Add qualifiers (company size band, role, country) + one positioning line ("for established companies, typically 20–500 people"). Wire submissions to the agreed CRM destination (§5 decision).</td><td>All meeting CTAs</td><td class="c">0.5 day</td></tr>
+    <tr><td>P4</td><td class="c"><code>/de/</code> German page</td><td>Professional German translation of P1+P2 content on one page ("KI-Beratung und -Entwicklung für den Mittelstand — DSGVO-first"). Native review required — machine translation alone is off-brand for a privacy-first firm selling into Germany.</td><td>DACH campaigns</td><td class="c">Translation ~1 wk incl. review</td></tr>
+    <tr><td>P5</td><td class="c"><code>/de/eu-ai-act</code></td><td>German landing page for the EU-AI-Act briefing: gated download form, double opt-in, minimal page.</td><td>Nurture campaign F</td><td class="c">0.5 day after LM3 exists</td></tr>
+    <tr><td>P6</td><td class="c"><code>/ai-readiness-score</code></td><td>Interactive self-assessment page for LM5 (CEO AI Readiness &amp; Exposure Score): 10–12 questions, instant score, email-gated detailed report. Alternate landing page for the "ai readiness assessment" / "ai risk assessment" keywords in Campaign A.</td><td>Campaign A + retargeting</td><td class="c">1–2 days after questions agreed</td></tr>
+  </tbody>
+</table>
+</div>
+<p class="foot" style="font-size:12.5px;color:var(--ink-soft);">Open question for Mo before P1 starts: who has the site repo / hosting access, and does Gergely implement directly or hand copy to Mo's developer? This determines whether pages ship in days or weeks.</p>
+
+<h2>2 · Workstream 2 — Final keyword targets</h2>
+<p class="kicker">Consolidated from all research. Six campaigns; every keyword below has verified volume ≥ its market's noise floor. Match types: exact + phrase only, no broad at launch.</p>
+<div class="table-scroll">
+<table>
+  <thead><tr><th>Campaign</th><th>Geo</th><th>Keywords (exact + phrase)</th><th>Lands on</th><th class="num">Est. CPC</th><th class="num">Budget/mo</th></tr></thead>
+  <tbody>
+    <tr><td><strong>A · Diagnostic + Compliance</strong> <em>(launch first)</em></td><td class="c">UK + IE</td><td>ai audit · ai roadmap · ai readiness assessment · ai risk assessment · gdpr and ai · gdpr compliant ai · eu ai act compliance</td><td class="c">/strategy-session</td><td class="c">~$18</td><td class="c">$750–1,500</td></tr>
+    <tr><td><strong>B · Core consulting</strong> <em>(gated on P2)</em></td><td class="c">UK + IE</td><td>ai consulting · ai consultancy · ai consultant · ai consulting services · ai consulting firms · ai consulting company · ai consulting uk · ai strategy consulting · ai implementation consulting · ai business consulting</td><td class="c">/ai-consulting</td><td class="c">~$35</td><td class="c">$3,000–4,500</td></tr>
+    <tr><td><strong>C · DACH German</strong> <em>(gated on P4)</em></td><td class="c">DE + AT + CH</td><td>ki beratung · künstliche intelligenz beratung · ki consulting · ki für unternehmen · ki agentur · ki entwicklung · ki softwareentwicklung · ki implementierung · ki datenschutz · dsgvo ki · ki dsgvo konform · ki dienstleister</td><td class="c">/de/</td><td class="c">~$10</td><td class="c">$1,500–2,500</td></tr>
+    <tr><td><strong>D · DACH English</strong></td><td class="c">DE + AT + CH</td><td>ai consulting · ai consultant · ai for business · ai audit · ai roadmap · ai strategy consulting</td><td class="c">/ai-consulting</td><td class="c">~$12</td><td class="c">$500–1,000</td></tr>
+    <tr><td><strong>E · EU North English</strong></td><td class="c">NL BE DK SE NO FI</td><td>ai consulting · ai consultant · ai consultancy · ai audit · gdpr and ai · ai for business (+ NL loanwords: ai bureau · ai implementatie · ai voor bedrijven)</td><td class="c">/ai-consulting</td><td class="c">~$9</td><td class="c">$750–1,500</td></tr>
+    <tr><td><strong>F · EU AI Act nurture</strong> <em>(gated on LM3 + P5)</em></td><td class="c">DE (then NL/SE/DK)</td><td>eu ai act (German) · related long-tails from the local sets</td><td class="c">/de/eu-ai-act</td><td class="c">~$3.25</td><td class="c">$300–500</td></tr>
+  </tbody>
+</table>
+</div>
+<h3>Shared negative-keyword list (apply to all campaigns before first impression)</h3>
+<p><code>jobs</code> <code>job</code> <code>salary</code> <code>gehalt</code> <code>course</code> <code>courses</code> <code>kurs</code> <code>training</code> <code>certification</code> <code>zertifikat</code> <code>internship</code> <code>praktikum</code> <code>free</code> <code>kostenlos</code> <code>what is</code> <code>was ist</code> <code>definition</code> <code>open source</code> <code>github</code> <code>ollama</code> <code>studium</code> <code>study</code></p>
+
+<h2>3 · Workstream 3 — Lead magnets &amp; content plan</h2>
+<p class="kicker">Two-magnet stack plus the diagnostic. Each entry: what it is, what content must be produced, source material, production owner, and the claim gate.</p>
+
+<div class="lm">
+  <div class="meta">LM1 · exists · conversion asset, not content</div>
+  <h3>CEO AI Operating Map</h3>
+  <p>The meeting-generating offer — a structured diagnostic delivered from a call. <strong>Content to produce: none.</strong> Process to document: a one-page internal fulfillment SOP (intake → call → map template → delivery within X days) so ad-driven volume doesn't improvise. Owner: Gergely + Mo, 1 hour.</p>
+</div>
+
+<div class="lm">
+  <div class="meta">LM2 · exists as a page — verify the asset · English</div>
+  <h3>The CEO's AI Leverage Blueprint (executive white paper)</h3>
+  <p>The site promises immediate delivery by email. <strong>Verify with Mo:</strong> (a) the PDF actually exists and matches the promised outline (counsel before tools · AI/code/automation/humans division · first operational win · leadership questions); (b) where form submissions land; (c) whether delivery is automated. If the PDF is thin or missing, production plan: ~14 pages from the revamp's argument + the proof stories, drafted in 2 days, designed via the client-report pipeline, Mo reviews voice. This is the mid-funnel asset for UK campaigns A/B retargeting and email capture.</p>
+</div>
+
+<div class="lm">
+  <div class="meta">LM3 · new · German · the 12,100-searches/mo play</div>
+  <h3>„Der EU AI Act für Geschäftsführer" — the CEO briefing</h3>
+  <p><strong>The asset the cheapest audience in the dataset downloads.</strong> 12–16 pages, German, executive register — a briefing, not a legal treatise.</p>
+  <ul>
+    <li><strong>Outline:</strong> 1) What the AI Act actually requires and when (timeline incl. current Digital-Omnibus state) · 2) Which obligations hit ordinary companies vs. AI vendors · 3) The GDPR × AI Act overlap — employee and customer data in AI tools · 4) The five decisions a CEO owns (not IT) · 5) The compliant-by-architecture pattern: in-tenant AI, anonymisation gates, human approval, audit trails · 6) A 90-day readiness checklist · 7) One anonymised worked example (the flagship engagement — wording cleared for identifiability, not just naming).</li>
+    <li><strong>Source material advantage:</strong> a sourced GDPR/DPIA/AI-Act legal research package incl. Digital-Omnibus status was produced internally on 28 Aug — the legal skeleton exists; this is editing and translation, not research from scratch.</li>
+    <li><strong>Production:</strong> English draft 2–3 days → professional German translation + native review ~1 week → designed PDF via the report pipeline, 1 day.</li>
+    <li><strong>Claim gate:</strong> prominent "this is a briefing, not legal advice" disclaimer; no compliance guarantees; every legal statement carries its source and an as-of date. <strong>German-qualified legal review is a ship gate, not optional</strong> (per devil's-advocate review: RDG exposure + the AI Act timeline is in active flux) — the lawyer-review RFQ groundwork from Aug 28 can serve double duty.</li>
+  </ul>
+</div>
+
+<div class="lm">
+  <div class="meta">LM4 · optional · fast follow</div>
+  <h3>GDPR-compliant AI checklist (1 page, EN + DE)</h3>
+  <p>A one-page architecture checklist ("10 questions before any AI tool touches company data"). Half a day to produce from the revamp's privacy-architecture section. Secondary magnet for compliance-cluster ads and a LinkedIn share asset.</p>
+</div>
+
+<div class="lm">
+  <div class="meta">LM5 · new · interactive tool — the highest-engagement magnet</div>
+  <h3>CEO AI Readiness &amp; Exposure Score (self-assessment)</h3>
+  <p>An interactive 10–12 question self-evaluation a CEO completes in 3 minutes, scoring the company on two axes: <strong>AI leverage readiness</strong> (data accessibility, process documentation, system integration, ownership) and <strong>AI privacy exposure</strong> (shadow-AI usage, employee/customer data in tools, GDPR/AI-Act posture, vendor dependency). Instant on-screen score with a per-dimension gap readout; the detailed report + recommended first moves delivered by email (the capture).</p>
+  <ul>
+    <li><strong>Why it earns its place:</strong> it's the interactive twin of the Operating Map — the searcher typing "ai readiness assessment" or "ai risk assessment" (Campaign A keywords, both verified volume) gets exactly what they searched, self-qualifies through their own answers, and arrives at the meeting CTA with their gaps already named. Assessment tools typically out-convert static PDFs by a wide margin, and the answers themselves are qualification data for the sales call.</li>
+    <li><strong>Question design:</strong> drawn from the Operating Map's own dimensions (§ site copy: where intelligence belongs / must not go / which constraint first) + the revamp's privacy architecture — so the tool teaches the CLH worldview while scoring. Every question answerable by a CEO without asking IT.</li>
+    <li><strong>Scoring &amp; output:</strong> four bands per axis (e.g. "Exposed / Aware / Governed / Architected"), each band mapping to 2–3 concrete first moves; the "Architected" description doubles as the CLH pitch. No fabricated benchmarks — scores compare against the rubric, not invented peer data.</li>
+    <li><strong>Build:</strong> self-contained page on the site (P6, no backend needed beyond the form handler), EN first, DE version with Wave 2. ~1–2 days build once questions are agreed. CTA at result: "Your score suggests where to look — the Operating Map tells you what to do. Request it."</li>
+    <li><strong>Claim gate:</strong> results framed as directional self-reflection, not audit findings; no compliance verdicts ("you are GDPR-compliant" is never an output).</li>
+  </ul>
+</div>
+
+<h3>Nurture sequence (post-download, LM2 + LM3 lists)</h3>
+<ol>
+  <li><strong>Day 0</strong> — delivery email: the PDF + one line on who wrote it (PhD-led firm, production AI at a multi-billion-dollar manufacturer).</li>
+  <li><strong>Day 3</strong> — the worked example: how one European industrial company runs AI on live commercial data with zero personal records leaving its tenant (anonymised story).</li>
+  <li><strong>Day 8</strong> — the employee-data angle: what shadow AI does with staff data, three questions to ask internally this week.</li>
+  <li><strong>Day 14</strong> — the architecture email: tenant / gate / approval / audit-trail pattern in five paragraphs.</li>
+  <li><strong>Day 21</strong> — the Operating Map offer: "if the briefing raised questions about your company specifically" → /strategy-session.</li>
+</ol>
+<p>German list gets the sequence in German. Cadence stops on reply or booking. Emails drafted alongside the magnets (all five fit in a day once LM3 exists).</p>
+
+<div class="warnbox"><strong>Compliance on our own funnel (non-negotiable given the positioning):</strong> double opt-in for the German list (German law + deliverability), a real unsubscribe in every send, privacy-policy update naming the ESP as processor, and Google Consent Mode v2 with a proper consent banner before any ad traffic lands. A privacy-first firm whose own funnel is sloppy on GDPR loses the pitch in the first click.</div>
+
+<h2>4 · Tracking foundation (prerequisite, week 1)</h2>
+<ul>
+  <li>Google Ads account + billing (Mo) · conversion actions: <em>Operating-Map request</em> (primary), <em>white-paper download</em> (secondary), <em>booked call</em> (imported, if Cal/Calendly used).</li>
+  <li>GA4 + Consent Mode v2 banner on ceoslittlehelpers.com.</li>
+  <li>Form destinations unified: submissions → one inbox/CRM + notification (today's destination unknown — verify).</li>
+  <li>UTM convention: <code>utm_campaign=clh-{a..f}</code> · <code>utm_term={keyword}</code>.</li>
+</ul>
+
+<h2>5 · Decisions needed before building</h2>
+<div class="table-scroll">
+<table>
+  <thead><tr><th>#</th><th>Decision</th><th>Owner</th><th>Blocks</th><th>Recommendation</th></tr></thead>
+  <tbody>
+    <tr><td>1</td><td>Site access: who implements pages — Gergely directly or Mo's developer?</td><td class="c">Mo</td><td class="c">P1–P5</td><td>Gergely implements (fastest; copy is his)</td></tr>
+    <tr><td>2</td><td>Where do form submissions go (CRM/inbox), and does the Blueprint PDF exist?</td><td class="c">Mo</td><td class="c">P3, LM2, nurture</td><td>Audit current flow first — 30-min call item</td></tr>
+    <tr><td>3</td><td>ESP for nurture (Instantly is cold-outreach tooling — wrong for inbound opt-in)</td><td class="c">Mo + Gergely</td><td class="c">Nurture, F</td><td>Brevo or MailerLite — EU-hosted, GDPR-clean, free tier covers pilot volume</td></tr>
+    <tr><td>4</td><td>Translation vendor for German (P4, LM3) — agency, freelancer, or AI-draft + native review</td><td class="c">Mo</td><td class="c">Wave 2</td><td>AI draft + paid native reviewer (fast, controlled cost)</td></tr>
+    <tr><td>5</td><td>Budget sign-off: Wave 1 $1.5K/mo → ramp to $6–8K/mo per the budget model</td><td class="c">Mo</td><td class="c">Everything</td><td>Commit 3 months, ~$15–20K total, kill criteria as defined</td></tr>
+    <tr><td>6</td><td>Ads account ownership + billing card</td><td class="c">Mo</td><td class="c">All campaigns</td><td>CLH-owned account, Gergely as manager access</td></tr>
+  </tbody>
+</table>
+</div>
+
+<h2>6 · Timeline</h2>
+<div class="table-scroll">
+<table>
+  <thead><tr><th>Week</th><th>Ships</th><th>Gate to next</th></tr></thead>
+  <tbody>
+    <tr><td class="c"><strong>1</strong></td><td>Decisions 1–6 closed · tracking + consent live · P1 homepage revamp · negatives + Campaign A built (paused)</td><td>Tracking verified end-to-end</td></tr>
+    <tr><td class="c"><strong>2</strong></td><td>Campaign A live ($25–35/day) · P2 /ai-consulting + P3 form qualifiers · LM2 audit done · LM3 English draft</td><td>First conversions recorded correctly</td></tr>
+    <tr><td class="c"><strong>3</strong></td><td>Campaign B live · German translation of P4 + LM3 in review · nurture emails drafted · ESP configured with double opt-in</td><td>Page converting ≥3% before B ad-group 2 (the $74–88 terms) unpauses</td></tr>
+    <tr><td class="c"><strong>4–5</strong></td><td>P4 + P5 live · Campaigns C, D, F live · LM4 checklist · <strong>P6 self-assessment live, A's readiness/risk keywords re-pointed at it</strong> · Campaign E last</td><td>—</td></tr>
+    <tr><td class="c"><strong>8</strong></td><td>First full read: real click→lead→meeting rates replace the model's assumptions; scale/kill per the budget model's criteria</td><td>—</td></tr>
+  </tbody>
+</table>
+</div>
+
+<div class="callout"><strong>What I can build without further input once approved:</strong> P2's full page, the LM3/LM2 drafts, all five nurture emails, RSA ad copy for all six campaigns, and the campaign structures as an editable Google Ads Editor import. What needs Mo first: decisions 1–6 above — none of them are more than a short call.</div>
+
+<footer class="colophon">Companion to the four research artifacts (Ads Readiness · Privacy-First Revamp · Budget Model · European Keyword Map) · All volumes/CPCs from the completed DataForSEO research — no further API spend required for this plan · 31 Aug 2026.</footer>
+</div>

@@ -1,0 +1,379 @@
+<!doctype html>
+<!--
+  V3 · AI Readiness & Exposure Check — CEO's Little Helpers
+  PURPOSE (per devil's-advocate review verdicts): NOT a cold-traffic ad destination.
+  Use as a nurture / retargeting asset and as the destination for the small
+  readiness/risk keyword set only. Instant score is UN-GATED; only the written
+  readout is email-gated. Bands are non-verdict by design.
+-->
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="robots" content="noindex,nofollow">
+<title>AI Readiness &amp; Exposure Check | CEO's Little Helpers</title>
+<style>
+  :root{
+    --paper:#fcf8f1; --cream:#f2e9dc; --lavender:#e7dcef; --plum:#74528a;
+    --deep-plum:#4d365f; --ink:#2a2030; --body:#4b444e; --muted:#746c76;
+    --gold:#b18a4a; --gold-light:#d7bf97; --line:#4d365f2e;
+    --display:"Iowan Old Style","Palatino Linotype","Book Antiqua",Palatino,Georgia,serif;
+    --sans:Manrope,"Avenir Next",Avenir,Inter,"Segoe UI",sans-serif;
+  }
+  *{box-sizing:border-box;margin:0}
+  body{background:var(--paper);color:var(--body);font-family:var(--sans);font-size:16px;line-height:1.6;-webkit-font-smoothing:antialiased}
+  a{color:var(--deep-plum)}
+  .wrap{max-width:760px;margin:0 auto;padding:0 20px}
+  header.top{border-bottom:1px solid var(--line);padding:18px 0;background:var(--paper)}
+  .wordmark{font-family:var(--sans);font-weight:700;letter-spacing:.16em;font-size:14px;color:var(--ink);text-transform:uppercase}
+  .wordmark small{display:block;font-size:9px;letter-spacing:.22em;color:var(--gold);font-weight:700;margin-top:2px}
+  .hero{padding:56px 0 34px}
+  .eyebrow{font-size:11px;letter-spacing:.2em;text-transform:uppercase;color:var(--gold);font-weight:700;margin-bottom:14px}
+  h1{font-family:var(--display);font-weight:600;color:var(--ink);font-size:clamp(30px,5.5vw,42px);line-height:1.12;text-wrap:balance}
+  h1 em{font-style:italic;color:var(--plum);font-weight:400}
+  .hero p.lead{margin-top:16px;max-width:56ch;font-size:17px}
+  .hero .smallnote{margin-top:12px;font-size:13px;color:var(--muted);max-width:60ch}
+  .axes{display:grid;grid-template-columns:1fr 1fr;gap:12px;margin-top:24px}
+  @media(max-width:560px){.axes{grid-template-columns:1fr}}
+  .axis-card{background:#fff;border:1px solid var(--line);border-radius:8px;padding:14px 16px;font-size:13.5px}
+  .axis-card strong{display:block;color:var(--deep-plum);font-size:12px;letter-spacing:.12em;text-transform:uppercase;margin-bottom:5px}
+  .progress-shell{position:sticky;top:0;z-index:5;background:var(--paper);border-bottom:1px solid var(--line);padding:10px 0}
+  .progress-row{display:flex;align-items:center;gap:14px}
+  .bar{flex:1;height:6px;background:var(--cream);border-radius:999px;overflow:hidden}
+  .bar span{display:block;height:100%;width:0;background:var(--plum);border-radius:999px;transition:width .25s ease}
+  .count{font-size:12.5px;color:var(--muted);white-space:nowrap;font-variant-numeric:tabular-nums}
+  form.quiz{padding:26px 0 8px}
+  fieldset{border:1px solid var(--line);border-radius:10px;background:#fff;padding:20px 22px;margin-bottom:16px}
+  legend{font-family:var(--display);font-size:18.5px;color:var(--ink);font-weight:600;padding:0 6px;line-height:1.3}
+  .qnum{font-size:11px;color:var(--gold);font-weight:700;letter-spacing:.15em;display:block;margin-bottom:2px}
+  .opts{display:grid;gap:8px;margin-top:12px}
+  .opt{position:relative}
+  .opt input{position:absolute;opacity:0;pointer-events:none}
+  .opt label{display:block;border:1px solid var(--line);border-radius:7px;padding:11px 14px;font-size:14.5px;cursor:pointer;background:var(--paper);transition:border-color .15s,background .15s}
+  .opt label:hover{border-color:var(--plum)}
+  .opt input:checked+label{background:var(--lavender);border-color:var(--plum);color:var(--ink)}
+  .opt input:focus-visible+label{outline:3px solid var(--gold);outline-offset:2px}
+  .actions{padding:6px 0 30px;text-align:center}
+  .btn{display:inline-block;background:var(--deep-plum);color:#fff;border:none;font-family:var(--sans);font-weight:700;font-size:15px;letter-spacing:.04em;padding:15px 30px;border-radius:6px;cursor:pointer}
+  .btn:hover{background:var(--plum)}
+  .btn:focus-visible{outline:3px solid var(--gold);outline-offset:2px}
+  .btn[disabled]{background:var(--muted);cursor:not-allowed}
+  .hint{font-size:13px;color:var(--muted);margin-top:10px}
+  #results{display:none;padding:8px 0 10px}
+  #results.show{display:block}
+  .res-head{font-family:var(--display);font-size:26px;color:var(--ink);font-weight:600;margin:26px 0 6px;text-wrap:balance}
+  .res-sub{font-size:13.5px;color:var(--muted);max-width:62ch;margin-bottom:18px}
+  .res-grid{display:grid;grid-template-columns:1fr 1fr;gap:16px}
+  @media(max-width:640px){.res-grid{grid-template-columns:1fr}}
+  .res-card{background:#fff;border:1px solid var(--line);border-top:4px solid var(--plum);border-radius:8px;padding:20px 22px}
+  .res-card .axis{font-size:11px;letter-spacing:.16em;text-transform:uppercase;color:var(--muted);font-weight:700}
+  .res-card .band{font-family:var(--display);font-size:28px;color:var(--deep-plum);font-weight:600;margin:4px 0 2px}
+  .res-card .score{font-size:12.5px;color:var(--gold);font-weight:700;font-variant-numeric:tabular-nums;margin-bottom:10px}
+  .res-card p{font-size:14px;margin-bottom:10px}
+  .res-card h4{font-size:11.5px;letter-spacing:.14em;text-transform:uppercase;color:var(--gold);margin:12px 0 6px}
+  .res-card ul{padding-left:18px;font-size:13.5px}
+  .res-card li{margin-bottom:5px}
+  .next{display:grid;grid-template-columns:1fr 1fr;gap:16px;margin:26px 0 10px}
+  @media(max-width:640px){.next{grid-template-columns:1fr}}
+  .next-card{border-radius:8px;padding:22px}
+  .next-card.report{background:#fff;border:1px solid var(--line)}
+  .next-card.map{background:var(--deep-plum);color:var(--cream)}
+  .next-card h3{font-family:var(--display);font-size:20px;font-weight:600;margin-bottom:8px}
+  .next-card.report h3{color:var(--ink)}
+  .next-card.map h3{color:#fff}
+  .next-card p{font-size:13.5px;margin-bottom:12px}
+  .next-card.map p{color:var(--lavender)}
+  .fld{margin-bottom:10px}
+  .fld label{display:block;font-size:12px;font-weight:700;letter-spacing:.06em;color:var(--ink);margin-bottom:4px}
+  .fld input,.fld select{width:100%;border:1px solid var(--line);border-radius:6px;padding:10px 12px;font-family:var(--sans);font-size:14px;background:var(--paper);color:var(--ink)}
+  .fld input:focus-visible,.fld select:focus-visible{outline:3px solid var(--gold);outline-offset:1px}
+  .micro{font-size:11.5px;color:var(--muted);line-height:1.5;margin-top:10px}
+  .btn-lite{display:inline-block;background:var(--gold);color:var(--ink);font-weight:700;font-size:14px;padding:12px 22px;border-radius:6px;border:none;cursor:pointer}
+  .btn-lite:hover{background:var(--gold-light)}
+  .btn-lite:focus-visible{outline:3px solid var(--deep-plum);outline-offset:2px}
+  .map-cta{display:inline-block;background:var(--gold);color:var(--ink);font-weight:700;font-size:15px;padding:13px 24px;border-radius:6px;text-decoration:none}
+  .map-cta:hover{background:var(--gold-light)}
+  .map-cta:focus-visible{outline:3px solid #fff;outline-offset:2px}
+  .proofline{border-left:3px solid var(--gold);padding:10px 16px;background:var(--cream);border-radius:0 6px 6px 0;font-size:13px;color:var(--body);margin:22px 0;max-width:66ch}
+  footer.bottom{border-top:1px solid var(--line);margin-top:44px;padding:22px 0 34px;font-size:12px;color:var(--muted)}
+  footer.bottom a{color:var(--muted)}
+  @media (prefers-reduced-motion: reduce){*{transition:none !important;scroll-behavior:auto !important}}
+</style>
+</head>
+<body>
+
+<header class="top"><div class="wrap">
+  <div class="wordmark">CEO's Little Helpers<small>Your Strategic AI Second</small></div>
+</div></header>
+
+<section class="hero"><div class="wrap">
+  <div class="eyebrow">A 3-minute self-evaluation · 10 questions</div>
+  <h1>How ready is your company for AI — <em>and how exposed is it already?</em></h1>
+  <p class="lead">Ten questions you (or whoever knows your operations best) can answer without asking IT. You get an instant reading on two axes — where AI could create leverage, and where company data may already be reaching AI tools without design.</p>
+  <p class="smallnote">This is directional self-reflection, not an audit. Your answers stay in your browser unless you choose to request the written readout at the end.</p>
+  <div class="axes">
+    <div class="axis-card"><strong>Axis 1 · AI leverage readiness</strong>Whether your processes, data and ownership are in a shape AI could actually work with.</div>
+    <div class="axis-card"><strong>Axis 2 · AI data exposure</strong>How much structure sits between your company's information and the AI tools people already use.</div>
+  </div>
+</div></section>
+
+<div class="progress-shell"><div class="wrap"><div class="progress-row">
+  <div class="bar" aria-hidden="true"><span id="barfill"></span></div>
+  <div class="count" id="counter" aria-live="polite">0 of 10 answered</div>
+</div></div></div>
+
+<form class="quiz" id="quiz" novalidate><div class="wrap">
+
+  <fieldset>
+    <legend><span class="qnum">QUESTION 1 · READINESS</span>Is your critical process knowledge written down — or does it live mainly in a few people's heads?</legend>
+    <div class="opts">
+      <div class="opt"><input type="radio" name="q1" id="q1a" value="0"><label for="q1a">Mainly in people's heads — if two key people left, we'd struggle</label></div>
+      <div class="opt"><input type="radio" name="q1" id="q1b" value="1"><label for="q1b">Partly documented, but often outdated or scattered</label></div>
+      <div class="opt"><input type="radio" name="q1" id="q1c" value="2"><label for="q1c">Documented and maintained for the processes that matter</label></div>
+    </div>
+  </fieldset>
+
+  <fieldset>
+    <legend><span class="qnum">QUESTION 2 · READINESS</span>Can the data in your core systems (ERP, CRM, files) be reached by other software — or only by manual export?</legend>
+    <div class="opts">
+      <div class="opt"><input type="radio" name="q2" id="q2a" value="0"><label for="q2a">Manual export and copy-paste only</label></div>
+      <div class="opt"><input type="radio" name="q2" id="q2b" value="1"><label for="q2b">Some systems have usable connections; others are closed</label></div>
+      <div class="opt"><input type="radio" name="q2" id="q2c" value="2"><label for="q2c">Most core systems can be connected through APIs or integrations</label></div>
+    </div>
+  </fieldset>
+
+  <fieldset>
+    <legend><span class="qnum">QUESTION 3 · READINESS</span>Do your key workflows have a clear owner who could approve changing or automating them?</legend>
+    <div class="opts">
+      <div class="opt"><input type="radio" name="q3" id="q3a" value="0"><label for="q3a">No — ownership is fuzzy; changes stall</label></div>
+      <div class="opt"><input type="radio" name="q3" id="q3b" value="1"><label for="q3b">Some workflows do; many don't</label></div>
+      <div class="opt"><input type="radio" name="q3" id="q3c" value="2"><label for="q3c">Yes — for the important flows, one person could say yes</label></div>
+    </div>
+  </fieldset>
+
+  <fieldset>
+    <legend><span class="qnum">QUESTION 4 · READINESS</span>Do you know which three processes consume the most skilled-person hours each week?</legend>
+    <div class="opts">
+      <div class="opt"><input type="radio" name="q4" id="q4a" value="0"><label for="q4a">No — gut feel only</label></div>
+      <div class="opt"><input type="radio" name="q4" id="q4b" value="1"><label for="q4b">Roughly — we could guess, not size them</label></div>
+      <div class="opt"><input type="radio" name="q4" id="q4c" value="2"><label for="q4c">Yes — we could name them and estimate the hours</label></div>
+    </div>
+  </fieldset>
+
+  <fieldset>
+    <legend><span class="qnum">QUESTION 5 · READINESS</span>Has any AI initiative in your company moved past a demo into daily use?</legend>
+    <div class="opts">
+      <div class="opt"><input type="radio" name="q5" id="q5a" value="0"><label for="q5a">None tried — or demos that impressed and then faded</label></div>
+      <div class="opt"><input type="radio" name="q5" id="q5b" value="1"><label for="q5b">One or two tools in limited, individual use</label></div>
+      <div class="opt"><input type="radio" name="q5" id="q5c" value="2"><label for="q5c">Yes — at least one is part of how a team works daily</label></div>
+    </div>
+  </fieldset>
+
+  <fieldset>
+    <legend><span class="qnum">QUESTION 6 · EXPOSURE</span>Do employees use public AI chatbots (ChatGPT and similar) with company information today?</legend>
+    <div class="opts">
+      <div class="opt"><input type="radio" name="q6" id="q6a" value="0"><label for="q6a">Probably yes — and there's no guidance in place</label></div>
+      <div class="opt"><input type="radio" name="q6" id="q6b" value="1"><label for="q6b">Unsure — we haven't looked into it</label></div>
+      <div class="opt"><input type="radio" name="q6" id="q6c" value="2"><label for="q6c">It's addressed — guidance exists and/or a governed alternative is provided</label></div>
+    </div>
+  </fieldset>
+
+  <fieldset>
+    <legend><span class="qnum">QUESTION 7 · EXPOSURE</span>Has anyone defined which company data must never reach an AI tool?</legend>
+    <div class="opts">
+      <div class="opt"><input type="radio" name="q7" id="q7a" value="0"><label for="q7a">No — it hasn't come up</label></div>
+      <div class="opt"><input type="radio" name="q7" id="q7b" value="1"><label for="q7b">Discussed informally, nothing written</label></div>
+      <div class="opt"><input type="radio" name="q7" id="q7c" value="2"><label for="q7c">Yes — written down and communicated</label></div>
+    </div>
+  </fieldset>
+
+  <fieldset>
+    <legend><span class="qnum">QUESTION 8 · EXPOSURE</span>If personal or customer data appeared in an AI prompt, would anyone in the company know?</legend>
+    <div class="opts">
+      <div class="opt"><input type="radio" name="q8" id="q8a" value="0"><label for="q8a">No — there's no way to know</label></div>
+      <div class="opt"><input type="radio" name="q8" id="q8b" value="1"><label for="q8b">We could probably reconstruct it after the fact</label></div>
+      <div class="opt"><input type="radio" name="q8" id="q8c" value="2"><label for="q8c">We have controls or visibility designed for exactly this</label></div>
+    </div>
+  </fieldset>
+
+  <fieldset>
+    <legend><span class="qnum">QUESTION 9 · EXPOSURE</span>Where do the AI tools your company uses process your data?</legend>
+    <div class="opts">
+      <div class="opt"><input type="radio" name="q9" id="q9a" value="0"><label for="q9a">On the vendors' infrastructure — terms never really reviewed</label></div>
+      <div class="opt"><input type="radio" name="q9" id="q9b" value="1"><label for="q9b">On their infrastructure, but we've reviewed the terms</label></div>
+      <div class="opt"><input type="radio" name="q9" id="q9c" value="2"><label for="q9c">Largely in our own environment, or under agreements we control</label></div>
+    </div>
+  </fieldset>
+
+  <fieldset>
+    <legend><span class="qnum">QUESTION 10 · EXPOSURE</span>Has your GDPR / EU AI Act position on AI use been assessed?</legend>
+    <div class="opts">
+      <div class="opt"><input type="radio" name="q10" id="q10a" value="0"><label for="q10a">Not yet</label></div>
+      <div class="opt"><input type="radio" name="q10" id="q10b" value="1"><label for="q10b">Started — questions raised, not concluded</label></div>
+      <div class="opt"><input type="radio" name="q10" id="q10c" value="2"><label for="q10c">Yes — assessed, with records kept</label></div>
+    </div>
+  </fieldset>
+
+  <div class="actions">
+    <button type="submit" class="btn" id="seeBtn">See my reading</button>
+    <p class="hint" id="formHint">Answer all 10 questions to see your result — it appears right here, no email needed.</p>
+  </div>
+</div></form>
+
+<section id="results" aria-live="polite"><div class="wrap">
+  <h2 class="res-head">Your reading</h2>
+  <p class="res-sub">Two directional signals from your own answers — worth examining, not a verdict on your company. The same questions asked of your ops or IT lead may score differently; that difference is itself useful information.</p>
+  <div class="res-grid">
+    <div class="res-card">
+      <div class="axis">Axis 1 · AI leverage readiness</div>
+      <div class="band" id="r-band"></div>
+      <div class="score" id="r-score"></div>
+      <p id="r-desc"></p>
+      <h4>First moves worth considering</h4>
+      <ul id="r-moves"></ul>
+    </div>
+    <div class="res-card">
+      <div class="axis">Axis 2 · AI data exposure</div>
+      <div class="band" id="e-band"></div>
+      <div class="score" id="e-score"></div>
+      <p id="e-desc"></p>
+      <h4>First moves worth considering</h4>
+      <ul id="e-moves"></ul>
+    </div>
+  </div>
+
+  <div class="proofline">Built by the team that ships GDPR-gated AI for European enterprises — delivered by our Head of AI &amp; Technology, whose production RAG systems serve a multi-billion-dollar US manufacturer daily (prior engagement).</div>
+
+  <div class="next">
+    <div class="next-card report">
+      <h3>Get the written readout</h3>
+      <p>A short document expanding your two scores: what each signal tends to mean in companies like yours, and how to examine it properly.</p>
+      <!-- WIRE: point action at the form handler / CRM endpoint; include the two axis scores as hidden fields when wiring. -->
+      <form action="#" method="post" id="reportForm">
+        <div class="fld"><label for="f-name">Name</label><input id="f-name" name="name" type="text" autocomplete="name" required></div>
+        <div class="fld"><label for="f-email">Work email</label><input id="f-email" name="email" type="email" autocomplete="email" required></div>
+        <div class="fld"><label for="f-role">Your role</label>
+          <select id="f-role" name="role" required>
+            <option value="">Select…</option>
+            <option>CEO / Founder</option>
+            <option>Operations</option>
+            <option>IT / Technology</option>
+            <option>Other</option>
+          </select></div>
+        <div class="fld"><label for="f-size">Company size</label>
+          <select id="f-size" name="size" required>
+            <option value="">Select…</option>
+            <option>Under 20 people</option>
+            <option>20–100 people</option>
+            <option>100–500 people</option>
+            <option>500+ people</option>
+          </select></div>
+        <button type="submit" class="btn-lite">Send my readout</button>
+        <p class="micro">Your answers are used to prepare your readout and inform any follow-up conversation you request — nothing else. Retained per our <a href="/privacy">privacy policy</a>. Please don't submit sensitive operational, personal, regulated or confidential data through this form.</p>
+      </form>
+    </div>
+    <div class="next-card map">
+      <h3>Or go straight to the real thing</h3>
+      <p>The self-check points at where to look. The CEO AI Operating Map tells you what to do: where AI belongs in your company, where it must not go, and the one first move worth funding.</p>
+      <a class="map-cta" href="https://www.ceoslittlehelpers.com/strategy-session">Get your free AI Operating Map →</a>
+      <p style="margin-top:12px;font-size:12px;">One 30-minute working session with the engineers. A written map within 5 business days.</p>
+    </div>
+  </div>
+</div></section>
+
+<footer class="bottom"><div class="wrap">
+  The Business Philosopher Ltd, trading as CEO's Little Helpers · Registered in England and Wales · Company no. 09811089 · <a href="/privacy">Privacy policy</a><br>
+  This self-check offers directional self-reflection only. It is not an audit, a compliance assessment, or legal advice.
+</div></footer>
+
+<script>
+(function(){
+  var TOTAL=10;
+  var quiz=document.getElementById('quiz');
+  var barfill=document.getElementById('barfill');
+  var counter=document.getElementById('counter');
+  var results=document.getElementById('results');
+  var hint=document.getElementById('formHint');
+
+  var BANDS=['Early','Developing','Structured','Architected'];
+  function bandIdx(s){ if(s<=3)return 0; if(s<=6)return 1; if(s<=8)return 2; return 3; }
+
+  var R_DESC=[
+    'The knowledge and data AI would need are hard to reach — mostly in heads and manual exports. That doesn’t block AI; it means the first wins come from making one process legible before any tool is chosen.',
+    'Parts of the company are AI-workable today; others would fight any tool you brought in. The signal worth examining: which single documented, owned process carries the most repeated skilled hours.',
+    'Your operations have the shape AI works with: documentation, reachable data, real owners. The question is no longer “can we” but “which constraint first, and with what evidence of payback.”',
+    'Rare shape: documented processes, connectable systems, clear ownership, and AI already surviving daily use. The leverage question becomes architectural — what to build on top of what already works.'
+  ];
+  var R_MOVES=[
+    ['Write down ONE critical process end-to-end — the one that would hurt most if its key person left','Ask which 3 processes consume the most skilled hours; even rough numbers change the conversation'],
+    ['Pick one documented workflow with a clear owner as the candidate for a first controlled win','Check which core system data is reachable by API before anyone proposes a tool that needs it'],
+    ['Size the top 3 skilled-hour processes and rank them by frequency × effort × data availability','Define what evidence would justify a first AI investment — before talking to any vendor'],
+    ['Choose the next constraint by commercial value, not by what demos well','Document the acceptance conditions a new capability must meet before it earns production use']
+  ];
+  var E_DESC=[
+    'Company information is likely reaching AI tools without anyone having designed for it — the signals suggest nobody would currently know. Worth examining before it’s examined for you.',
+    'Some awareness exists, but little of it is written down or enforced by design. The gap between “we discussed it” and “it’s defined” is where most surprises live.',
+    'You’ve done what most companies haven’t: drawn lines and reviewed where data goes. The remaining question is whether the lines are enforced by architecture or by trust.',
+    'Data boundaries are defined, visible and largely under your control — the posture that makes AI adoption a design decision instead of a risk decision.'
+  ];
+  var E_MOVES=[
+    ['Ask 5 employees this week — without blame — which AI tools they use and for what','Write a one-page interim guideline: what may and may never go into a public AI tool'],
+    ['Turn the informal understanding into one written page, and tell everyone it exists','List every AI tool in use and where each one processes your data — the list is usually longer than expected'],
+    ['Test whether your defined boundaries would actually catch a slip, or just discourage one','Extend the review to employee data specifically — it’s the category most often missed'],
+    ['Keep the register current as tools change — posture decays quietly','Consider making your boundaries a stated requirement for any new AI vendor']
+  ];
+
+  function answered(){
+    var n=0;
+    for(var i=1;i<=TOTAL;i++){ if(quiz.querySelector('input[name=q'+i+']:checked')) n++; }
+    return n;
+  }
+  function refresh(){
+    var n=answered();
+    barfill.style.width=(n*10)+'%';
+    counter.textContent=n+' of '+TOTAL+' answered';
+  }
+  quiz.addEventListener('change',refresh);
+  refresh();
+
+  quiz.addEventListener('submit',function(ev){
+    ev.preventDefault();
+    if(answered()<TOTAL){
+      hint.textContent='Please answer the remaining '+(TOTAL-answered())+' question(s) — the result appears instantly, no email needed.';
+      var first;
+      for(var i=1;i<=TOTAL;i++){ if(!quiz.querySelector('input[name=q'+i+']:checked')){ first=quiz.querySelector('input[name=q'+i+']'); break; } }
+      if(first){ first.focus(); }
+      return;
+    }
+    var r=0,e=0;
+    for(var i=1;i<=5;i++){ r+=parseInt(quiz.querySelector('input[name=q'+i+']:checked').value,10); }
+    for(var j=6;j<=10;j++){ e+=parseInt(quiz.querySelector('input[name=q'+j+']:checked').value,10); }
+    var ri=bandIdx(r), ei=bandIdx(e);
+    document.getElementById('r-band').textContent=BANDS[ri];
+    document.getElementById('r-score').textContent='Score '+r+' / 10';
+    document.getElementById('r-desc').textContent=R_DESC[ri];
+    document.getElementById('e-band').textContent=BANDS[ei];
+    document.getElementById('e-score').textContent='Score '+e+' / 10';
+    document.getElementById('e-desc').textContent=E_DESC[ei];
+    var rm=document.getElementById('r-moves'); rm.innerHTML='';
+    R_MOVES[ri].forEach(function(m){ var li=document.createElement('li'); li.textContent=m; rm.appendChild(li); });
+    var em=document.getElementById('e-moves'); em.innerHTML='';
+    E_MOVES[ei].forEach(function(m){ var li=document.createElement('li'); li.textContent=m; em.appendChild(li); });
+    results.classList.add('show');
+    var reduce=window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+    results.scrollIntoView({behavior:reduce?'auto':'smooth'});
+  });
+
+  document.getElementById('reportForm').addEventListener('submit',function(ev){
+    ev.preventDefault();
+    /* WIRE: replace with real submission. Until wired, acknowledge without pretending to send. */
+    var f=ev.target;
+    if(!f.checkValidity()){ f.reportValidity(); return; }
+    var btn=f.querySelector('button');
+    btn.textContent='Form not yet connected';
+    btn.disabled=true;
+  });
+})();
+</script>
+</body>
+</html>

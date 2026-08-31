@@ -1,0 +1,266 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="robots" content="noindex,nofollow">
+<!-- V2 "Consulting firm" — flagship LP for Campaigns B (UK core consulting) and D (DACH-EN).
+     Intent-routed destination, NOT part of a parallel A/B split (see devil's-advocate review).
+     WIRE BEFORE LAUNCH: form action, conversion tracking (form submit = primary conversion), consent banner. -->
+<title>AI Consulting &amp; Development for Established Companies | CEO's Little Helpers</title>
+<style>
+  :root{
+    --paper:#fcf8f1; --cream:#f2e9dc; --lavender:#e7dcef; --plum:#74528a; --deep-plum:#4d365f;
+    --ink:#2a2030; --body:#4b444e; --muted:#746c76; --gold:#b18a4a; --gold-light:#d7bf97;
+    --line:rgba(77,54,95,.18);
+    --display:"Iowan Old Style","Palatino Linotype","Book Antiqua",Palatino,Georgia,serif;
+    --sans:Manrope,"Avenir Next",Avenir,Inter,"Segoe UI",sans-serif;
+  }
+  *{box-sizing:border-box;margin:0}
+  html{scroll-behavior:smooth}
+  @media (prefers-reduced-motion:reduce){html{scroll-behavior:auto}}
+  body{background:var(--paper);color:var(--body);font-family:var(--sans);font-size:16px;line-height:1.6}
+  .wrap{max-width:1080px;margin:0 auto;padding:0 22px}
+  a{color:var(--deep-plum)}
+  a:focus-visible,button:focus-visible,input:focus-visible,select:focus-visible,textarea:focus-visible{outline:3px solid var(--gold);outline-offset:2px}
+
+  header.top{display:flex;justify-content:space-between;align-items:center;padding:18px 0;border-bottom:1px solid var(--line)}
+  .wordmark{font-family:var(--sans);font-weight:700;letter-spacing:.14em;font-size:13px;color:var(--ink);text-transform:uppercase;line-height:1.3}
+  .wordmark small{display:block;font-weight:600;font-size:8.5px;letter-spacing:.22em;color:var(--plum)}
+  .btn{display:inline-block;background:var(--deep-plum);color:#fff;text-decoration:none;font-weight:700;font-size:13px;letter-spacing:.06em;text-transform:uppercase;padding:13px 22px;border:0;border-radius:3px;cursor:pointer}
+  .btn:hover{background:var(--plum)}
+  .btn.small{padding:10px 16px;font-size:11.5px}
+  .btn-note{font-size:12.5px;color:var(--muted);margin-top:8px}
+
+  .hero{display:grid;grid-template-columns:1.15fr .85fr;gap:44px;padding:64px 0 48px;align-items:center}
+  @media (max-width:840px){.hero{grid-template-columns:1fr;padding:40px 0 32px}}
+  .kicker{font-size:11px;font-weight:700;letter-spacing:.24em;text-transform:uppercase;color:var(--gold);margin-bottom:16px}
+  h1{font-family:var(--display);font-weight:600;color:var(--ink);font-size:clamp(30px,4.6vw,46px);line-height:1.1;text-wrap:balance;margin-bottom:16px}
+  h1 em{font-style:italic;color:var(--deep-plum)}
+  .hero .sub{font-size:17px;max-width:56ch;margin-bottom:22px}
+  .proofstrip{font-size:13px;color:var(--muted);margin-top:14px;max-width:52ch}
+  .hero-card{background:var(--cream);border-radius:6px;padding:26px 26px 20px;border:1px solid var(--line)}
+  .hero-card h3{font-family:var(--display);font-size:19px;color:var(--ink);margin-bottom:12px}
+  .steps{list-style:none;padding:0}
+  .steps li{display:flex;gap:12px;padding:9px 0;border-top:1px solid var(--line);font-size:14px}
+  .steps li:first-child{border-top:0}
+  .steps .n{font-family:var(--display);font-size:19px;color:var(--gold);min-width:22px;line-height:1.2}
+  .steps strong{color:var(--ink)}
+
+  section{padding:52px 0}
+  section.alt{background:var(--cream)}
+  .eyebrow{font-size:11px;font-weight:700;letter-spacing:.24em;text-transform:uppercase;color:var(--gold);margin-bottom:10px}
+  h2{font-family:var(--display);font-weight:600;color:var(--ink);font-size:clamp(24px,3.4vw,33px);line-height:1.15;text-wrap:balance;margin-bottom:10px;max-width:26ch}
+  .lede{max-width:64ch;margin-bottom:26px}
+
+  .cards{display:grid;grid-template-columns:repeat(auto-fit,minmax(250px,1fr));gap:16px}
+  .card{background:var(--paper);border:1px solid var(--line);border-radius:6px;padding:22px}
+  section:not(.alt) .card{background:var(--cream)}
+  .card h3{font-family:var(--display);font-size:18px;color:var(--ink);margin-bottom:8px}
+  .card p{font-size:14px}
+  .card .tagline{font-size:10.5px;font-weight:700;letter-spacing:.18em;text-transform:uppercase;color:var(--plum);margin-bottom:8px}
+
+  .proof{display:grid;grid-template-columns:1fr 1fr;gap:16px}
+  @media (max-width:760px){.proof{grid-template-columns:1fr}}
+  .proof .card{border-top:3px solid var(--deep-plum)}
+  .proof .stat{font-family:var(--display);font-size:26px;color:var(--deep-plum)}
+  .proof .statline{font-size:12.5px;color:var(--muted);margin-top:10px;border-top:1px solid var(--line);padding-top:10px}
+  .conf{font-size:13px;color:var(--muted);margin-top:14px;max-width:70ch}
+
+  .caplist{display:grid;grid-template-columns:repeat(auto-fit,minmax(230px,1fr));gap:2px;background:var(--line);border:1px solid var(--line);border-radius:6px;overflow:hidden}
+  .cap{background:var(--paper);padding:16px 18px}
+  .cap strong{display:block;color:var(--ink);font-size:14.5px;margin-bottom:3px}
+  .cap span{font-size:13px}
+
+  .team{display:grid;grid-template-columns:repeat(auto-fit,minmax(230px,1fr));gap:16px}
+  .team .card p{font-size:13.5px}
+  .team .role{font-size:10.5px;font-weight:700;letter-spacing:.18em;text-transform:uppercase;color:var(--gold);margin-bottom:4px}
+
+  details{border-top:1px solid var(--line);padding:14px 0}
+  details:last-of-type{border-bottom:1px solid var(--line)}
+  summary{font-weight:700;color:var(--ink);cursor:pointer;font-size:15px}
+  details p{margin-top:8px;font-size:14px;max-width:70ch}
+
+  .final{display:grid;grid-template-columns:1fr 1fr;gap:40px;align-items:start}
+  @media (max-width:840px){.final{grid-template-columns:1fr}}
+  form{background:var(--paper);border:1px solid var(--line);border-radius:6px;padding:24px}
+  label{display:block;font-size:12px;font-weight:700;letter-spacing:.08em;text-transform:uppercase;color:var(--ink);margin:14px 0 5px}
+  label:first-of-type{margin-top:0}
+  input,select,textarea{width:100%;padding:11px 12px;border:1px solid var(--line);border-radius:3px;background:#fff;font-family:var(--sans);font-size:15px;color:var(--ink)}
+  textarea{min-height:74px;resize:vertical}
+  .micro{font-size:11.5px;color:var(--muted);margin-top:12px;line-height:1.5}
+  .fallback{font-size:13px;margin-top:10px}
+
+  footer.site{border-top:1px solid var(--line);padding:26px 0 40px;font-size:12.5px;color:var(--muted)}
+  footer.site a{color:var(--muted)}
+</style>
+</head>
+<body>
+
+<div class="wrap">
+  <header class="top">
+    <div class="wordmark">CEO's Little Helpers<small>Your Strategic AI Second</small></div>
+    <a class="btn small" href="#request">Get your free AI Operating Map</a>
+  </header>
+</div>
+
+<div class="wrap">
+  <section class="hero">
+    <div>
+      <div class="kicker">AI consulting · Operating design · Software delivery</div>
+      <h1>AI consulting and development for established companies — <em>built in your own cloud tenant.</em></h1>
+      <p class="sub">We are a software development firm that takes AI from strategy to daily production use: consulting, architecture, and the build itself — delivered inside your environment, behind your permissions, with a human approval gate on every consequential action.</p>
+      <a class="btn" href="#request">Get your free AI Operating Map →</a>
+      <p class="btn-note">One 30-minute working session with the engineers. A written map within 5 business days.</p>
+      <p class="proofstrip">Production AI in daily use at a multi-billion-dollar US manufacturer · GDPR-gated delivery for a Western-European industrial company · Named references on request where client agreements permit</p>
+    </div>
+    <aside class="hero-card">
+      <h3>What happens when you enquire</h3>
+      <ol class="steps">
+        <li><span class="n">1</span><span><strong>Request the Operating Map.</strong> Two minutes — no sales sequence, no obligation.</span></li>
+        <li><span class="n">2</span><span><strong>One 30-minute working session.</strong> With the engineers who would do the work — not a sales team.</span></li>
+        <li><span class="n">3</span><span><strong>Your written AI Operating Map.</strong> Where AI belongs in your company, where it must not go, and the first win worth funding — within 5 business days.</span></li>
+      </ol>
+    </aside>
+  </section>
+</div>
+
+<section class="alt">
+  <div class="wrap">
+    <div class="eyebrow">Demonstrated, not asserted</div>
+    <h2>What we've actually built.</h2>
+    <div class="proof">
+      <div class="card">
+        <div class="tagline">B2B industrial trading company · Western Europe</div>
+        <h3>GDPR-gated AI on live commercial data — in the client's own cloud tenant</h3>
+        <p>An AI platform for supplier pricing and quoting, integrated with the company's ERP and mailboxes. Personal data — names, addresses, employee and customer identifiers — is stripped by a local anonymisation gate before any model call, validated against golden test sets to 100% recall at acceptance. Every price and quote waits for a named person's approval. Each stage is accepted on written evidence before the next is funded.</p>
+        <p class="statline"><span class="stat">0</span>&nbsp; personal records in any model call — by design, validated at acceptance</p>
+      </div>
+      <div class="card">
+        <div class="tagline">US electronics manufacturer · multi-billion-dollar revenue</div>
+        <h3>Two production RAG systems in daily engineering use</h3>
+        <p>An engineering-SOP retrieval system and a multimodal process-engineering system over 5,000+ documents — text and engineering diagrams — serving the engineering organisation daily since April 2026. Delivered by our Head of AI &amp; Technology (prior engagement). Trust was the design requirement: reranking, mandatory citations on every answer, refusal when confidence is low.</p>
+        <p class="statline"><span class="stat">5,000+</span>&nbsp; documents · daily production use since April 2026</p>
+      </div>
+    </div>
+    <p class="conf">Engagements are anonymised under contract — the same confidentiality we would apply to yours. Named references available on request where client agreements permit.</p>
+  </div>
+</section>
+
+<section>
+  <div class="wrap">
+    <div class="eyebrow">A software firm, not a slide deck</div>
+    <h2>Consulting that ends in working software.</h2>
+    <p class="lede">The people who map where AI belongs in your company are the engineers who then build it — one team from architecture to daily production use.</p>
+    <div class="caplist">
+      <div class="cap"><strong>AI strategy &amp; architecture</strong><span>Operating-reality mapping, feasibility, build-vs-buy, control boundaries</span></div>
+      <div class="cap"><strong>Retrieval (RAG) systems</strong><span>Your documents and data, with citations and refusal on low confidence</span></div>
+      <div class="cap"><strong>AI agent platforms</strong><span>Real workflows end to end — every consequential action behind human approval</span></div>
+      <div class="cap"><strong>ERP / CRM integration</strong><span>Microsoft Business Central, HubSpot, Microsoft 365, Dataverse — scoped, least-privilege access</span></div>
+      <div class="cap"><strong>Full-stack engineering</strong><span>Data model to shipped interface — engineered, tested, documented, handed over</span></div>
+      <div class="cap"><strong>In-tenant deployment</strong><span>Your cloud, your accounts, your agreements. You can revoke our access any afternoon</span></div>
+    </div>
+  </div>
+</section>
+
+<section class="alt">
+  <div class="wrap">
+    <div class="eyebrow">Control, not theatre</div>
+    <h2>Privacy is not a policy document. It's an architecture.</h2>
+    <div class="cards">
+      <div class="card"><h3>Your tenant, your accounts</h3><p>Systems run in your cloud environment on your agreements — models reached through your own enterprise endpoints, not our infrastructure.</p></div>
+      <div class="card"><h3>Personal data stops at the gate</h3><p>Where personal data could reach a model, an anonymisation layer strips it first — tested against golden datasets before go-live, logged in production.</p></div>
+      <div class="card"><h3>Least privilege, human approval</h3><p>Scoped, read-only access by default. Consequential actions — a quote, an order, an outbound message — wait for a named person's sign-off.</p></div>
+      <div class="card"><h3>Paper trail for your lawyer</h3><p>Data-processing documentation, DPIA support and sub-processor transparency prepared as deliverables — aligned to GDPR and the EU AI Act as it lands.</p></div>
+    </div>
+  </div>
+</section>
+
+<section>
+  <div class="wrap">
+    <div class="eyebrow">How we work</div>
+    <h2>Evidence at every gate.</h2>
+    <div class="cards">
+      <div class="card"><div class="tagline">01 · Understand</div><p>Map the company as it is: systems, data, hand-offs, constraints, and the decisions that cannot be handed to a tool.</p></div>
+      <div class="card"><div class="tagline">02 · First win</div><p>One commercially meaningful constraint — chosen for value, feasibility, and measurability. Not because a demo looks clever.</p></div>
+      <div class="card"><div class="tagline">03 · Build with gates</div><p>Working software in short cycles, demonstrated on real data, human approval designed in from the first line.</p></div>
+      <div class="card"><div class="tagline">04 · Prove &amp; decide</div><p>Measured against the agreed baseline. You decide whether the next stage has been earned — continue, change, pause or stop.</p></div>
+    </div>
+  </div>
+</section>
+
+<section class="alt">
+  <div class="wrap">
+    <div class="eyebrow">Who you'll work with</div>
+    <h2>A small senior team. No handoffs.</h2>
+    <div class="team">
+      <div class="card"><div class="role">Founder &amp; CEO</div><h3>Mohammed Ali</h3><p>Director, The Business Philosopher Ltd. CEO context, commercial architecture, and the working relationship.</p></div>
+      <div class="card"><div class="role">Head of AI &amp; Technology</div><h3>Gergely Racz, PhD</h3><p>PhD in Engineering, Cambridge. Architect of production RAG systems in daily use at a multi-billion-dollar US manufacturer. Designs and builds every engagement personally.</p></div>
+      <div class="card"><div class="role">Head of Processes &amp; Systems</div><h3>Dr Asmi Ali</h3><p>PhD, Brunel · MBA. Makes the work clean, logical and worth automating before technology is added.</p></div>
+    </div>
+  </div>
+</section>
+
+<section>
+  <div class="wrap">
+    <div class="eyebrow">Straight answers</div>
+    <h2>Before you ever get on a call.</h2>
+    <details open><summary>What does the Operating Map cost?</summary><p>Nothing. It's how we scope — a diagnostic before any prescription. You get a written view of where AI can create leverage in your company, where it must not go, and which first step is worth funding. If nothing there is worth building, that's a useful answer too.</p></details>
+    <details><summary>Where does our data go?</summary><p>For delivered systems: it stays in your cloud tenant, on your accounts and agreements, with personal data stripped before any model call. For this form: we use your details to prepare your Operating Map and follow up about it — nothing else.</p></details>
+    <details><summary>Do you replace our IT team or partners?</summary><p>No. We design around the environment you already run — ERP, CRM, Microsoft 365, your security policies and your existing technology partners — with scoped, least-privilege access.</p></details>
+    <details><summary>Why are your case studies anonymised?</summary><p>Our contracts promise clients confidentiality, and we keep that promise — the same discipline we'd apply to your engagement. Named references are available on request where client agreements permit.</p></details>
+  </div>
+</section>
+
+<section class="alt" id="request">
+  <div class="wrap final">
+    <div>
+      <div class="eyebrow">A tangible first conversation</div>
+      <h2>Start with your free AI Operating Map.</h2>
+      <p class="lede">A structured, written view of where intelligence belongs in your company, where it should not go, and which operating constraint deserves investigation first — built from one 30-minute working session with the engineers.</p>
+      <p class="proofstrip">Built for established companies — typically 20–500 people with real systems, real data, and real consequences when technology is implemented badly.</p>
+    </div>
+    <form action="#" method="post">
+      <!-- WIRE: point action to the existing form handler / CRM destination before launch; form submit = primary Google Ads conversion -->
+      <label for="f-name">Your name</label>
+      <input id="f-name" name="name" type="text" autocomplete="name" required>
+      <label for="f-email">Work email</label>
+      <input id="f-email" name="email" type="email" autocomplete="email" required>
+      <label for="f-size">Company size</label>
+      <select id="f-size" name="company_size" required>
+        <option value="">Select…</option>
+        <option>Under 20 people</option>
+        <option>20–100 people</option>
+        <option>100–500 people</option>
+        <option>500+ people</option>
+      </select>
+      <label for="f-role">Your role</label>
+      <select id="f-role" name="role" required>
+        <option value="">Select…</option>
+        <option>CEO / Founder / Managing Director</option>
+        <option>Operations</option>
+        <option>IT / Technology</option>
+        <option>Other</option>
+      </select>
+      <label for="f-country">Country</label>
+      <input id="f-country" name="country" type="text" autocomplete="country-name">
+      <label for="f-msg">Anything you'd like us to know (optional)</label>
+      <textarea id="f-msg" name="message"></textarea>
+      <p style="margin-top:16px"><button class="btn" type="submit">Request my Operating Map →</button></p>
+      <p class="fallback">If the form does not load, <a href="https://www.ceoslittlehelpers.com/strategy-session">use the secure request form</a>.</p>
+      <p class="micro">We use these details to prepare your Operating Map and follow up about it — nothing else. See our <a href="https://www.ceoslittlehelpers.com/privacy">privacy policy</a>.<br>Please do not submit sensitive operational, personal, regulated or confidential data through this form.</p>
+    </form>
+  </div>
+</section>
+
+<footer class="site">
+  <div class="wrap">
+    © 2026 The Business Philosopher Ltd, trading as CEO's Little Helpers · Registered in England and Wales · Company no. 09811089 ·
+    <a href="mailto:hello@ceoslittlehelpers.com">hello@ceoslittlehelpers.com</a> ·
+    <a href="https://www.ceoslittlehelpers.com/privacy">Privacy policy</a> ·
+    <a href="https://www.ceoslittlehelpers.com/security-data-principles">Security &amp; data principles</a>
+  </div>
+</footer>
+
+</body>
+</html>

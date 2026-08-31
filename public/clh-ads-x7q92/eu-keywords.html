@@ -1,0 +1,179 @@
+<!doctype html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1"><meta name="robots" content="noindex,nofollow"><title>CLH European Keyword Map</title>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,400;0,9..144,600;1,9..144,400&family=Public+Sans:wght@400;500;600;700&display=swap">
+<style>
+  :root {
+    --ink: #2b2233; --ink-soft: #5c5266; --ground: #faf7f0; --panel: #ffffff;
+    --line: #e4ddd1; --plum: #4a2b63; --plum-soft: #ece5f2; --gold: #a07c2e;
+    --good: #2e6b45; --good-bg: #e7f0e9; --warn: #8a5a17; --warn-bg: #f5ecd9; --crit: #8c3030; --crit-bg: #f5e3e0;
+  }
+  @media (prefers-color-scheme: dark) {
+    :root:not([data-theme="light"]) {
+      --ink: #ece7f0; --ink-soft: #b0a7ba; --ground: #1c1721; --panel: #262030;
+      --line: #3a3244; --plum: #c9aede; --plum-soft: #352b42; --gold: #d4b264;
+      --good: #8fc9a4; --good-bg: #253829; --warn: #dcb56b; --warn-bg: #3a3120; --crit: #e09b93; --crit-bg: #402727;
+    }
+  }
+  :root[data-theme="dark"] {
+    --ink: #ece7f0; --ink-soft: #b0a7ba; --ground: #1c1721; --panel: #262030;
+    --line: #3a3244; --plum: #c9aede; --plum-soft: #352b42; --gold: #d4b264;
+    --good: #8fc9a4; --good-bg: #253829; --warn: #dcb56b; --warn-bg: #3a3120; --crit: #e09b93; --crit-bg: #402727;
+  }
+  * { box-sizing: border-box; margin: 0; }
+  body { background: var(--ground); color: var(--ink); font-family: "Public Sans", "Segoe UI", Arial, sans-serif; font-size: 15.5px; line-height: 1.55; padding: 0 20px 72px; }
+  .wrap { max-width: 920px; margin: 0 auto; }
+  header.masthead { padding: 52px 0 28px; border-bottom: 2px solid var(--plum); margin-bottom: 36px; }
+  .eyebrow { font-size: 11px; letter-spacing: 2.2px; text-transform: uppercase; color: var(--gold); font-weight: 700; margin-bottom: 14px; }
+  h1 { font-family: "Fraunces", Georgia, serif; font-weight: 600; font-size: clamp(30px, 5vw, 42px); line-height: 1.08; text-wrap: balance; }
+  h1 em { font-style: italic; font-weight: 400; color: var(--plum); }
+  .subtitle { margin-top: 14px; color: var(--ink-soft); max-width: 66ch; }
+  h2 { font-family: "Fraunces", Georgia, serif; font-weight: 600; font-size: 24px; margin: 48px 0 6px; text-wrap: balance; }
+  h2 + .kicker { color: var(--ink-soft); margin-bottom: 16px; max-width: 72ch; }
+  h3 { font-size: 16px; font-weight: 700; margin: 26px 0 8px; }
+  p { max-width: 74ch; }
+  ul { padding-left: 20px; max-width: 74ch; }
+  li { margin-bottom: 7px; }
+  table { width: 100%; border-collapse: collapse; font-size: 13.5px; background: var(--panel); border: 1px solid var(--line); border-radius: 6px; overflow: hidden; }
+  .table-scroll { overflow-x: auto; margin: 14px 0 6px; }
+  th { text-align: left; font-size: 11px; letter-spacing: 1.1px; text-transform: uppercase; color: var(--ink-soft); padding: 9px 12px; border-bottom: 2px solid var(--plum); background: var(--plum-soft); white-space: nowrap; }
+  th.num, td.num { text-align: right; font-variant-numeric: tabular-nums; white-space: nowrap; }
+  td { padding: 8px 12px; border-bottom: 1px solid var(--line); vertical-align: top; }
+  tr:last-child td { border-bottom: none; }
+  tr.star td { background: color-mix(in srgb, var(--gold) 8%, var(--panel)); font-weight: 600; }
+  tr.dim td { color: var(--ink-soft); }
+  .pill { display: inline-block; font-size: 10.5px; font-weight: 700; letter-spacing: 0.6px; padding: 2px 8px; border-radius: 999px; }
+  .pill.low { background: var(--good-bg); color: var(--good); }
+  .pill.med { background: var(--warn-bg); color: var(--warn); }
+  .pill.high { background: var(--crit-bg); color: var(--crit); }
+  .foot { font-size: 12.5px; color: var(--ink-soft); margin-top: 8px; max-width: 80ch; }
+  .callout { background: var(--good-bg); border: 1px solid var(--good); border-radius: 6px; padding: 14px 18px; margin: 18px 0; font-size: 14px; }
+  .callout strong { color: var(--good); }
+  .warnbox { background: var(--warn-bg); border: 1px solid var(--warn); border-radius: 6px; padding: 14px 18px; margin: 18px 0; font-size: 14px; }
+  .warnbox strong { color: var(--warn); }
+  .tiers { display: grid; grid-template-columns: repeat(auto-fit, minmax(260px, 1fr)); gap: 14px; margin: 18px 0; }
+  .tier { background: var(--panel); border: 1px solid var(--line); border-radius: 8px; padding: 18px 20px; }
+  .tier.rec { border: 2px solid var(--plum); }
+  .tier .t-name { font-size: 11px; letter-spacing: 1.6px; text-transform: uppercase; font-weight: 700; color: var(--gold); margin-bottom: 6px; }
+  .tier .t-head { font-family: "Fraunces", Georgia, serif; font-size: 21px; font-weight: 600; color: var(--plum); margin-bottom: 8px; }
+  .tier ul { padding-left: 17px; font-size: 13px; }
+  .tier li { margin-bottom: 5px; }
+  footer.colophon { margin-top: 56px; padding-top: 16px; border-top: 1px solid var(--line); font-size: 12.5px; color: var(--ink-soft); }
+</style>
+
+<div class="wrap">
+<header class="masthead">
+  <div class="eyebrow">European keyword research · CLH Google Ads · 31 Aug 2026</div>
+  <h1>Same buyer, <em>a third of the click price.</em></h1>
+  <p class="subtitle">In-depth keyword sweep across 10 Northern/Western European markets plus native-language keyword sets for German, Dutch, Danish, Swedish and French. The finding: the exact commercial queries that cost $34–88 per click in the UK cost $7–14 across the continent — and Germany alone has a larger addressable search market than the UK.</p>
+</header>
+
+<h2>1 · Market comparison — the arbitrage</h2>
+<p class="kicker">"Money volume" = monthly searches on commercial-intent terms only (consulting, development, integration, audit, GDPR/privacy — excludes the generic "ai agency" and informational queries). Weighted CPC is volume-weighted across those terms.</p>
+<div class="table-scroll">
+<table>
+  <thead><tr><th>Market</th><th>Language</th><th class="num">Money vol/mo</th><th class="num">Weighted CPC</th><th class="num">"ai consulting" CPC</th><th>Landing page</th></tr></thead>
+  <tbody>
+    <tr class="dim"><td>United Kingdom (baseline)</td><td>English</td><td class="num">~4,800</td><td class="num">$18–35</td><td class="num">$34.16</td><td>English (exists)</td></tr>
+    <tr class="star"><td>Germany — English searches</td><td>English</td><td class="num">3,830</td><td class="num">~$12</td><td class="num">$13.52</td><td>English works</td></tr>
+    <tr class="star"><td>Germany — German searches</td><td>German</td><td class="num">~8,100</td><td class="num">~$10</td><td class="num">$13.78 (ki beratung)</td><td><strong>Translate — highest ROI</strong></td></tr>
+    <tr class="star"><td>Netherlands</td><td>EN + NL mix</td><td class="num">~3,300</td><td class="num">~$11</td><td class="num">$14.11</td><td>English fine (NL B2B norm)</td></tr>
+    <tr><td>France</td><td>French</td><td class="num">~4,000</td><td class="num">~$7</td><td class="num">$4.86 (consultant ia)</td><td>Translate only if delivering in French</td></tr>
+    <tr><td>Belgium</td><td>EN (+FR/NL)</td><td class="num">580 EN</td><td class="num">~$11</td><td class="num">$11.63</td><td>English fine</td></tr>
+    <tr><td>Ireland</td><td>English</td><td class="num">560</td><td class="num">~$15</td><td class="num">$22.65</td><td>UK page as-is</td></tr>
+    <tr><td>Denmark</td><td>EN + DA mix</td><td class="num">~1,200</td><td class="num">~$7</td><td class="num">$16.43 EN / $7.74 DA</td><td>Danish worth it (strategic fit)</td></tr>
+    <tr><td>Sweden</td><td>EN + SV mix</td><td class="num">~1,600</td><td class="num">~$7</td><td class="num">$7.65 EN / $7.87 SV</td><td>English first</td></tr>
+    <tr><td>Norway · Finland · Austria</td><td>English</td><td class="num">~1,000</td><td class="num">$8–11</td><td class="num">$9.65–11.85</td><td>English fine</td></tr>
+    <tr><td>Switzerland</td><td>EN + DE</td><td class="num">~1,150</td><td class="num">$12–15</td><td class="num">$29.51 EN / $21.92 DE</td><td>Rides the German page</td></tr>
+  </tbody>
+</table>
+</div>
+<p class="foot">Combined Northern/Western Europe money volume ≈ <strong>15,000+ searches/mo at $6–14 CPC</strong>, versus the UK's ~4,800 at $18–35. Roughly 3× the addressable clicks at a third of the price.</p>
+
+<div class="callout"><strong>What this does to the budget model:</strong> the base-case funnel (4% click→lead × 60% lead→meeting) at a ~$11 European blended CPC gives a <strong>cost per booked meeting of ≈ $460</strong> — versus $1,201 for the UK blend. CAC becomes ≈ $2,290 at 20% close, <strong>≈ $1,530 at 30%</strong>, ≈ $920 at 50%. The same $4,500–6,500/month recommended budget buys ~12–14 meetings instead of ~5.</p>
+
+<h2>2 · Germany — the priority market</h2>
+<p class="kicker">Germany is the single biggest opportunity in the sweep: real volume in both languages, mid-single-digit to low-teens CPCs, and the privacy/GDPR angle is culturally native — Datenschutz sells in Germany like nowhere else.</p>
+<div class="table-scroll">
+<table>
+  <thead><tr><th>German keyword</th><th class="num">Vol/mo</th><th class="num">Avg CPC</th><th>Comp.</th><th>Cluster</th></tr></thead>
+  <tbody>
+    <tr class="star"><td>ki beratung / künstliche intelligenz beratung</td><td class="num">2,400</td><td class="num">$13.78</td><td><span class="pill med">Med</span></td><td>Consulting head term</td></tr>
+    <tr class="star"><td>ki consulting</td><td class="num">480</td><td class="num">$11.41</td><td><span class="pill med">Med</span></td><td>Consulting</td></tr>
+    <tr class="star"><td>ki für unternehmen / ki im unternehmen</td><td class="num">870</td><td class="num">$10–14</td><td><span class="pill med">Med</span></td><td>Business intent</td></tr>
+    <tr class="star"><td>ki datenschutz / dsgvo ki / ki dsgvo (+konform) / datenschutz KI</td><td class="num">~1,250</td><td class="num">$6–8</td><td><span class="pill med">Med</span>–<span class="pill high">High</span></td><td><strong>Privacy — the revamp's home turf</strong></td></tr>
+    <tr><td>ki entwicklung / ki softwareentwicklung</td><td class="num">1,090</td><td class="num">$6–12</td><td><span class="pill low">Low</span>–<span class="pill high">High</span></td><td>Development firm</td></tr>
+    <tr><td>ki agentur</td><td class="num">1,000</td><td class="num">$11.98</td><td><span class="pill med">Med</span></td><td>Agency seekers</td></tr>
+    <tr><td>ki strategie / ki implementierung / ki integration / ki einführung</td><td class="num">840</td><td class="num">$4–14</td><td><span class="pill med">Med</span></td><td>Strategy &amp; implementation</td></tr>
+    <tr><td>ki lösungen für unternehmen / ki dienstleister</td><td class="num">320</td><td class="num">$13–25</td><td><span class="pill med">Med</span></td><td>Solution seekers</td></tr>
+    <tr><td>ki governance / ki audit</td><td class="num">570</td><td class="num">$3–11</td><td><span class="pill med">Med</span></td><td>Governance / diagnostic</td></tr>
+    <tr class="dim"><td>eu ai act (German searches)</td><td class="num">12,100</td><td class="num">$3.23</td><td><span class="pill med">Med</span></td><td>Top-funnel — white paper, not meetings</td></tr>
+  </tbody>
+</table>
+</div>
+<p class="foot">Plus the English-language German market: "ai consulting/consultant" 1,300/mo @ $13.52, "ai for business" 480 @ $14, "ai roadmap" 170 @ $4.54, "ai audit" 140 @ $6.78. A German landing page also unlocks Austria (ai consulting 90 @ $9.65 EN + German searches) and Switzerland (ki beratung 170 @ $21.92, wealthy market) at near-zero extra cost — one DACH campaign group.</p>
+
+<div class="warnbox"><strong>The "eu ai act" 12,100/mo is a different animal:</strong> $3.23 clicks at enormous volume, but the intent is largely informational — companies reading up on the law, not hiring yet. Don't point it at the meeting CTA. Point it at a German version of the CEO's AI Leverage Blueprint white paper and nurture. It's the cheapest qualified-audience builder in the entire dataset (also 2,400/mo NL, 1,000 SE, 720 DK).</div>
+
+<h2>3 · The other translated markets — worth it or not</h2>
+<div class="cols">
+<h3>Netherlands — English page, Dutch keywords</h3>
+<p>The Dutch search "ai consultancy / ai consultant" (880/mo @ $14.11) in English loanwords; Dutch B2B comfortably converts on English pages. Run NL as an English campaign with both English and Dutch-loanword keywords (ai bureau 140, ai implementatie 170, ai voor bedrijven 110). Translation optional later. "ai wetgeving" (210 @ $3.95) and "ai privacy" (110) feed the compliance angle.</p>
+<h3>Denmark — small, cheap, but handle with care</h3>
+<p>Volumes are modest (ai konsulent 140+140 @ $7.74, ai rådgivning 90, gdpr og ai ~40 EN) and clicks are cheap. ⚠ Any localisation that leans on the flagship engagement's home market risks making that client identifiable — which contract confidentiality forbids. A Danish page is therefore gated on the client's written sign-off of the exact wording; until then, serve Denmark through the English EU-North campaign only.</p>
+<h3>Sweden · Norway · Finland — English, opportunistic</h3>
+<p>ai konsult(er) 520/mo @ $7.87 SV, artificiell intelligens företag 210 @ $5.26; EN terms $7–12. Add as English campaigns with local keyword sprinkle; translate nothing yet.</p>
+<h3>France — cheapest clicks, biggest caveat</h3>
+<p>agence ia 1,900 @ $5.65 · consultant ia 590 @ $4.86 · audit ia 320 @ $9.88 · rgpd ia + ia et rgpd 280 @ $7–10. Genuinely cheap and the RGPD angle mirrors the revamp. But French buyers expect French sales conversations end-to-end. Only enter if Mo wants to sell in French — otherwise park it.</p>
+<h3>Ireland — free extension</h3>
+<p>Same language, same page; ai consulting 90 @ $22.65. Add to the UK campaign's geo-targeting, done.</p>
+</div>
+
+<h2>4 · Revised rollout</h2>
+<div class="tiers">
+  <div class="tier">
+    <div class="t-name">Wave 1 · now</div>
+    <div class="t-head">UK+IE English</div>
+    <ul>
+      <li>Campaigns A+B per the budget model</li>
+      <li>Revamped English page</li>
+      <li>$1,500 → $4,500/mo</li>
+      <li>Proves the funnel in the home market</li>
+    </ul>
+  </div>
+  <div class="tier rec">
+    <div class="t-name">Wave 2 · +2–4 weeks</div>
+    <div class="t-head">DACH German + EN</div>
+    <ul>
+      <li>Translate the revamped page to German (professional translation, ~1 week)</li>
+      <li>German campaign: ki beratung · ki datenschutz cluster · ki für unternehmen · ki entwicklung</li>
+      <li>English campaign: DE/AT/CH money terms @ ~$12</li>
+      <li>~$2,000–3,500/mo → est. 6–9 meetings/mo at ≈$430/meeting</li>
+      <li>White-paper campaign on "eu ai act" @ $3.23 ($300–500/mo, nurture list)</li>
+    </ul>
+  </div>
+  <div class="tier">
+    <div class="t-name">Wave 3 · month 2–3</div>
+    <div class="t-head">Benelux + Nordics EN</div>
+    <ul>
+      <li>One English campaign, geo NL/BE/SE/NO/FI/DK @ $7–12 CPC</li>
+      <li>Danish translated page only with the flagship client's written consent on wording (identifiability risk — see Denmark note)</li>
+      <li>~$1,500–2,500/mo</li>
+      <li>France: parked until a French sales path exists</li>
+    </ul>
+  </div>
+</div>
+
+<h2>5 · Combined budget picture (replaces the UK-only model)</h2>
+<div class="table-scroll">
+<table>
+  <thead><tr><th>Configuration</th><th class="num">Spend/mo</th><th class="num">Blended CPC</th><th class="num">Clicks/mo</th><th class="num">Meetings/mo (base)</th><th class="num">CAC @ 30%</th></tr></thead>
+  <tbody>
+    <tr><td>UK only (previous model)</td><td class="num">$4,500–6,300</td><td class="num">$29</td><td class="num">~220</td><td class="num">~5</td><td class="num">$4,000</td></tr>
+    <tr class="star"><td>UK + DACH (waves 1–2)</td><td class="num">$6,000–8,000</td><td class="num">~$17</td><td class="num">~430</td><td class="num">~10</td><td class="num">~$2,400</td></tr>
+    <tr><td>Full Northern/Western EU (waves 1–3)</td><td class="num">$8,000–10,500</td><td class="num">~$14</td><td class="num">~650</td><td class="num">~15</td><td class="num">~$1,950</td></tr>
+  </tbody>
+</table>
+</div>
+<p class="foot">Same funnel assumptions as the budget model (base: 4% click→lead × 60% lead→meeting; conversion on translated pages assumed equal — German pages typically convert German traffic <em>better</em> than English ones). Capacity warning stands: 15 meetings/mo at 30% close ≈ 4–5 new clients/mo, far beyond current delivery capacity — the EU expansion is a throttle to open gradually, not a switch.</p>
+
+<footer class="colophon">Companion to <em>CLH Ads Readiness</em>, <em>Privacy-First Revamp</em> and <em>Ads Budget Model</em> · Data: DataForSEO Google Ads search_volume, 16 market/language pulls (10 EN markets + DE/CH German, NL Dutch, DK Danish, SE Swedish, FR French), 31 Aug 2026, total API cost $1.44 · Volumes are country-level monthly averages; CPCs in USD.</footer>
+</div>

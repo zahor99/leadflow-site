@@ -1,0 +1,253 @@
+<!doctype html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1"><meta name="robots" content="noindex,nofollow"><title>CLH Privacy-First Revamp</title>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,400;0,9..144,600;1,9..144,400;1,9..144,600&family=Public+Sans:wght@400;500;600;700&display=swap">
+<style>
+  :root {
+    --ink: #2b2233; --ink-soft: #5c5266; --ground: #faf7f0; --panel: #ffffff;
+    --line: #e4ddd1; --plum: #4a2b63; --plum-soft: #ece5f2; --gold: #a07c2e;
+    --good: #2e6b45; --good-bg: #e7f0e9; --warn: #8a5a17; --warn-bg: #f5ecd9; --crit: #8c3030; --crit-bg: #f5e3e0;
+  }
+  @media (prefers-color-scheme: dark) {
+    :root:not([data-theme="light"]) {
+      --ink: #ece7f0; --ink-soft: #b0a7ba; --ground: #1c1721; --panel: #262030;
+      --line: #3a3244; --plum: #c9aede; --plum-soft: #352b42; --gold: #d4b264;
+      --good: #8fc9a4; --good-bg: #253829; --warn: #dcb56b; --warn-bg: #3a3120; --crit: #e09b93; --crit-bg: #402727;
+    }
+  }
+  :root[data-theme="dark"] {
+    --ink: #ece7f0; --ink-soft: #b0a7ba; --ground: #1c1721; --panel: #262030;
+    --line: #3a3244; --plum: #c9aede; --plum-soft: #352b42; --gold: #d4b264;
+    --good: #8fc9a4; --good-bg: #253829; --warn: #dcb56b; --warn-bg: #3a3120; --crit: #e09b93; --crit-bg: #402727;
+  }
+  * { box-sizing: border-box; margin: 0; }
+  body { background: var(--ground); color: var(--ink); font-family: "Public Sans", "Segoe UI", Arial, sans-serif; font-size: 15.5px; line-height: 1.55; padding: 0 20px 72px; }
+  .wrap { max-width: 880px; margin: 0 auto; }
+  header.masthead { padding: 52px 0 28px; border-bottom: 2px solid var(--plum); margin-bottom: 36px; }
+  .eyebrow { font-size: 11px; letter-spacing: 2.2px; text-transform: uppercase; color: var(--gold); font-weight: 700; margin-bottom: 14px; }
+  h1 { font-family: "Fraunces", Georgia, serif; font-weight: 600; font-size: clamp(30px, 5vw, 44px); line-height: 1.08; text-wrap: balance; }
+  h1 em { font-style: italic; font-weight: 400; color: var(--plum); }
+  .subtitle { margin-top: 14px; color: var(--ink-soft); max-width: 64ch; }
+  h2 { font-family: "Fraunces", Georgia, serif; font-weight: 600; font-size: 25px; margin: 52px 0 6px; text-wrap: balance; }
+  h2 + .kicker { color: var(--ink-soft); margin-bottom: 18px; max-width: 68ch; }
+  h3 { font-size: 16px; font-weight: 700; margin: 24px 0 8px; }
+  p { max-width: 72ch; }
+  p + p { margin-top: 10px; }
+  ul { padding-left: 20px; max-width: 72ch; }
+  li { margin-bottom: 7px; }
+
+  .rulebox { background: var(--crit-bg); border: 1px solid var(--crit); border-radius: 6px; padding: 14px 18px; margin: 20px 0; font-size: 14px; }
+  .rulebox strong { color: var(--crit); }
+
+  table { width: 100%; border-collapse: collapse; font-size: 13.5px; background: var(--panel); border: 1px solid var(--line); border-radius: 6px; overflow: hidden; }
+  .table-scroll { overflow-x: auto; margin: 14px 0 6px; }
+  th { text-align: left; font-size: 11px; letter-spacing: 1.1px; text-transform: uppercase; color: var(--ink-soft); padding: 9px 12px; border-bottom: 2px solid var(--plum); background: var(--plum-soft); white-space: nowrap; }
+  th.num, td.num { text-align: right; font-variant-numeric: tabular-nums; white-space: nowrap; }
+  td { padding: 8px 12px; border-bottom: 1px solid var(--line); vertical-align: top; }
+  tr:last-child td { border-bottom: none; }
+  td .kw { font-weight: 600; }
+  .pill { display: inline-block; font-size: 10.5px; font-weight: 700; letter-spacing: 0.6px; padding: 2px 8px; border-radius: 999px; }
+  .pill.low { background: var(--good-bg); color: var(--good); }
+  .pill.med { background: var(--warn-bg); color: var(--warn); }
+  .pill.high { background: var(--crit-bg); color: var(--crit); }
+  .foot { font-size: 12.5px; color: var(--ink-soft); margin-top: 8px; max-width: 76ch; }
+
+  /* page-copy mock blocks */
+  .mock { background: var(--panel); border: 1px solid var(--line); border-radius: 8px; margin: 18px 0 26px; overflow: hidden; }
+  .mock .label { background: var(--plum); color: var(--ground); font-size: 11px; font-weight: 700; letter-spacing: 1.6px; text-transform: uppercase; padding: 7px 18px; }
+  :root[data-theme="dark"] .mock .label, :root:not([data-theme="light"]) .mock .label { color: var(--ground); }
+  .mock .inner { padding: 24px 28px; }
+  .mock .m-eyebrow { font-size: 11px; letter-spacing: 2px; text-transform: uppercase; color: var(--gold); font-weight: 700; margin-bottom: 10px; }
+  .mock h4.m-head { font-family: "Fraunces", Georgia, serif; font-weight: 600; font-size: 26px; line-height: 1.15; margin-bottom: 10px; text-wrap: balance; }
+  .mock h4.m-head em { font-style: italic; font-weight: 400; color: var(--plum); }
+  .mock .m-sub { color: var(--ink-soft); font-size: 15px; max-width: 66ch; }
+  .mock .m-cta { display: inline-block; margin-top: 14px; background: var(--plum); color: var(--ground); font-weight: 700; font-size: 13px; letter-spacing: 0.8px; padding: 10px 20px; border-radius: 4px; }
+  .mock .m-body { font-size: 14.5px; margin-top: 10px; max-width: 68ch; }
+  .mock .m-cards { display: grid; grid-template-columns: repeat(auto-fit, minmax(230px, 1fr)); gap: 12px; margin-top: 14px; }
+  .mock .m-card { border: 1px solid var(--line); border-radius: 6px; padding: 14px 16px; font-size: 13.5px; }
+  .mock .m-card strong { display: block; margin-bottom: 5px; font-size: 14px; }
+  .mock .m-card .stat { font-family: "Fraunces", Georgia, serif; font-size: 22px; color: var(--plum); font-weight: 600; }
+  .note { border-left: 3px solid var(--gold); padding: 8px 16px; margin: 12px 0; font-size: 13.5px; color: var(--ink-soft); background: color-mix(in srgb, var(--gold) 6%, var(--panel)); border-radius: 0 6px 6px 0; max-width: 76ch; }
+  .note strong { color: var(--ink); }
+  .alt { font-size: 13.5px; color: var(--ink-soft); margin-top: 8px; }
+  .alt b { color: var(--ink); }
+
+  .keepcut { display: grid; grid-template-columns: repeat(auto-fit, minmax(240px, 1fr)); gap: 14px; margin-top: 16px; }
+  .kc { background: var(--panel); border: 1px solid var(--line); border-radius: 6px; padding: 16px 18px; font-size: 13.5px; }
+  .kc h3 { margin: 0 0 8px; }
+  .kc.keep h3 { color: var(--good); } .kc.cut h3 { color: var(--crit); } .kc.add h3 { color: var(--gold); }
+  .kc ul { padding-left: 18px; } .kc li { margin-bottom: 5px; }
+  footer.colophon { margin-top: 60px; padding-top: 16px; border-top: 1px solid var(--line); font-size: 12.5px; color: var(--ink-soft); }
+</style>
+
+<div class="wrap">
+<header class="masthead">
+  <div class="eyebrow">Positioning revamp · ceoslittlehelpers.com · 31 Aug 2026</div>
+  <h1>The privacy-first <em>enterprise AI firm.</em></h1>
+  <p class="subtitle">Repositioning brief and full page copy: from abstract AI strategy to the firm CEOs hire when they want AI inside the enterprise <em>without</em> their data leaving it. Built on two real deployments and validated against fresh Google Ads keyword data.</p>
+</header>
+
+<h2>1 · The new position</h2>
+<p class="kicker">One sentence the whole page argues for:</p>
+<div class="mock"><div class="inner">
+  <h4 class="m-head">We build AI systems inside your enterprise — your data never leaves your control, and every claim is demonstrated before you pay for the next stage.</h4>
+</div></div>
+<p>This beats the current "Strategic AI Second" framing for paid traffic on three counts: it names the fear that makes CEOs hesitate (data leaving the building, GDPR exposure, employee data in prompts), it claims the identity buyers actually search for (a software development firm with enterprise AI experience — not a strategy house), and it is provable with the two references below. The current site's control-and-evidence DNA survives fully; it stops being philosophy and becomes the product.</p>
+
+<div class="rulebox"><strong>Naming rules (non-negotiable):</strong> the flagship client is never named or made identifiable — contract confidentiality. The manufacturer reference stays anonymized in public copy exactly as on leadflowautomation.net ("multi-billion-dollar US electronics manufacturer") and is attributed to the Head of AI's prior delivery, not to CLH as an entity. Both stories below are written inside those rules; the exact anonymised wording should additionally get the flagship client's written sign-off before going live.</div>
+
+<h2>2 · Keyword evidence for the angle</h2>
+<p class="kicker">Fresh DataForSEO pull (Google Ads volumes/CPCs, UK, with US noted). The privacy angle splits into three usable clusters plus one to handle carefully.</p>
+
+<div class="table-scroll">
+<table>
+  <thead><tr><th>Cluster / keyword</th><th class="num">UK vol/mo</th><th class="num">Avg CPC</th><th>Comp.</th><th>Read</th></tr></thead>
+  <tbody>
+    <tr><td colspan="5" style="background:var(--plum-soft);font-weight:700;font-size:12px;letter-spacing:1px;text-transform:uppercase;">A · Compliance &amp; privacy (the decision-maker cluster — core of the revamp)</td></tr>
+    <tr><td class="kw">gdpr and ai / ai and gdpr</td><td class="num">210</td><td class="num">$17</td><td><span class="pill med">Med</span></td><td>Exact angle match</td></tr>
+    <tr><td class="kw">ai risk assessment</td><td class="num">140</td><td class="num">$18</td><td><span class="pill high">High</span></td><td>Feeds the Operating Map</td></tr>
+    <tr><td class="kw">ai privacy / ai data privacy / ai data protection</td><td class="num">230</td><td class="num">$7–11</td><td><span class="pill low">Low</span>–<span class="pill high">High</span></td><td>Mixed informational — phrase match</td></tr>
+    <tr><td class="kw">eu ai act compliance / ai act compliance</td><td class="num">80</td><td class="num">$15–38</td><td><span class="pill med">Med</span></td><td>Rising theme; CLH has real DPIA groundwork</td></tr>
+    <tr><td class="kw">gdpr compliant ai / ai gdpr compliance</td><td class="num">30</td><td class="num">$41–56</td><td><span class="pill med">Med</span></td><td>Tiny UK volume but purest intent (US: 740/mo, Low)</td></tr>
+    <tr><td colspan="5" style="background:var(--plum-soft);font-weight:700;font-size:12px;letter-spacing:1px;text-transform:uppercase;">B · Firm seekers (the "hire a development firm" cluster)</td></tr>
+    <tr><td class="kw">ai software development company</td><td class="num">140</td><td class="num">$186</td><td><span class="pill med">Med</span></td><td>Brutal CPC in UK; US: 1,000/mo @ $45 Low</td></tr>
+    <tr><td class="kw">ai development services</td><td class="num">260</td><td class="num">bid $40+</td><td><span class="pill low">Low</span></td><td>High intent, low comp</td></tr>
+    <tr><td class="kw">ai integration services / company</td><td class="num">100</td><td class="num">$34–38</td><td><span class="pill low">Low</span>–<span class="pill med">Med</span></td><td>Direct capability match</td></tr>
+    <tr><td class="kw">enterprise ai development / integration / rag development / rag consulting / enterprise rag</td><td class="num">~60</td><td class="num">$14–27</td><td><span class="pill low">Low</span></td><td>Long-tail, near-zero competition; US 5–10×</td></tr>
+    <tr><td colspan="5" style="background:var(--plum-soft);font-weight:700;font-size:12px;letter-spacing:1px;text-transform:uppercase;">C · Private deployment (cheap volume, mixed intent — qualify hard)</td></tr>
+    <tr><td class="kw">private ai</td><td class="num">390</td><td class="num">$4</td><td><span class="pill low">Low</span></td><td>US: 8,100/mo @ $4. Part hobbyist — ad copy must say "for your company"</td></tr>
+    <tr><td class="kw">self hosted ai / llm · private llm · on premise ai / llm</td><td class="num">~660</td><td class="num">$4–10</td><td><span class="pill low">Low</span></td><td>Technical searchers; test small, watch lead quality</td></tr>
+    <tr><td colspan="5" style="background:var(--plum-soft);font-weight:700;font-size:12px;letter-spacing:1px;text-transform:uppercase;">D · Handle with care</td></tr>
+    <tr><td class="kw">ai governance</td><td class="num">1,300</td><td class="num">$23</td><td><span class="pill high">High</span></td><td>Big but owned by GRC platform vendors (OneTrust et al.) — skip at launch</td></tr>
+  </tbody>
+</table>
+</div>
+<p class="foot">Previous review's clusters still stand: the diagnostic set (ai audit 480 · ai roadmap 170 · ai readiness assessment 110) now doubles as the entry point for cluster A — "AI risk assessment" traffic lands on the same Operating Map. US comparison across all clusters: 5–10× volume, mostly Low competition; expand there once the UK funnel converts. Negatives to add for the new clusters: <em>jobs, course, free, open source, github, ollama, llama, download</em>.</p>
+
+<h2>3 · The revamped page, section by section</h2>
+<p class="kicker">Copy written to ship. Voice kept from the current site — declarative, anti-hype, short sentences — but every abstraction now backed by something concrete. Annotations under each block.</p>
+
+<div class="mock">
+  <div class="label">Hero</div>
+  <div class="inner">
+    <div class="m-eyebrow">Enterprise AI · Engineered for data privacy</div>
+    <h4 class="m-head">AI inside your enterprise. <em>Your data never leaves your control.</em></h4>
+    <p class="m-sub">We are a software development firm that builds AI systems in your own cloud tenant, behind your permissions, under GDPR — for CEOs who want the leverage of AI without handing their company's data, or their employees' data, to a tool vendor.</p>
+    <span class="m-cta">Request your AI Operating Map →</span>
+    <p class="m-body quiet" style="font-size:12.5px;color:var(--ink-soft);margin-top:10px;">Production AI in daily use at a multi-billion-dollar US manufacturer · GDPR-gated delivery for European enterprises · Named references on request</p>
+  </div>
+</div>
+<div class="note"><strong>Why:</strong> the headline is the {outcome} without {pain} formula, stated in the buyer's own fear. "Software development firm" appears in the first sentence — that's the identity searched in cluster B and the Quality Score anchor. The proof strip under the CTA answers "who are you?" before the first scroll.</div>
+<p class="alt"><b>Headline alternates:</b> A) "Enterprise AI your DPO can sign off on." — sharper, but narrows to the compliance officer rather than the CEO. B) "Adopt AI. Keep your data." — punchier, weaker on the enterprise register. Recommend the main version; test A as an RSA headline.</p>
+
+<div class="mock">
+  <div class="label">Problem — name the fear precisely</div>
+  <div class="inner">
+    <h4 class="m-head">The AI your company already uses is the risk you haven't priced.</h4>
+    <div class="m-cards">
+      <div class="m-card"><strong>Shadow AI is already here</strong>Employees paste customer lists, contracts and colleagues' data into public chatbots because it works. Every paste is a disclosure you didn't authorise and can't retract.</div>
+      <div class="m-card"><strong>GDPR doesn't pause for pilots</strong>Personal data in a prompt is processing under GDPR — employee data included. "The vendor said it's fine" is not a lawful basis, and the EU AI Act is adding obligations on top.</div>
+      <div class="m-card"><strong>Tool vendors want your data on their side</strong>Most AI products are priced on your data flowing through their infrastructure. The convenience is real. So is the dependency — and the exposure.</div>
+    </div>
+    <p class="m-body">The answer isn't banning AI. It's building it where your data already lives — inside your tenant, behind your permissions, with personal data stripped before any model ever sees it.</p>
+  </div>
+</div>
+<div class="note"><strong>Why:</strong> recognition section — articulates the problem better than the reader can. Each card is factual and checkable; no invented statistics. "Employee data" gets explicit billing per the new targeting. The pivot line sets up the architecture section as the resolution.</div>
+
+<div class="mock">
+  <div class="label">Proof — two engagements (new section, the launch blocker fixed)</div>
+  <div class="inner">
+    <h4 class="m-head">Demonstrated, not asserted. <em>Here is what that looks like.</em></h4>
+    <div class="m-cards">
+      <div class="m-card">
+        <div class="m-eyebrow">B2B industrial trading company · Western Europe</div>
+        <strong>GDPR-gated AI on live commercial data — inside the client's own cloud tenant</strong>
+        An AI platform for supplier pricing and quoting, integrated with the company's ERP and mailboxes. Personal data — names, addresses, employee and customer identifiers — is stripped by a local anonymisation gate <em>before any model call</em>, validated against golden test sets to 100% recall at acceptance. Every price and quote sits behind a human-approval gate. Each stage is accepted on written evidence before the next is funded.
+        <p style="margin-top:8px;"><span class="stat">0</span>&nbsp; personal records in any model call — by design, validated at acceptance</p>
+      </div>
+      <div class="m-card">
+        <div class="m-eyebrow">Electronics manufacturer · US, multi-billion-dollar revenue</div>
+        <strong>Two production RAG systems in daily engineering use — delivered by our Head of AI &amp; Technology (prior engagement)</strong>
+        An engineering-SOP retrieval system and a multimodal process-engineering system over 5,000+ documents (text and engineering diagrams), serving the engineering organisation daily since April 2026. Trust was the design requirement: reranking, mandatory citations on every answer, and refusal when retrieval confidence is low.
+        <p style="margin-top:8px;"><span class="stat">5,000+</span>&nbsp; documents · daily production use</p>
+      </div>
+    </div>
+    <p class="m-body">Engagements are anonymised under contract — the same confidentiality we would apply to yours. Named references available on request where client agreements permit.</p>
+  </div>
+</div>
+<div class="note"><strong>Why:</strong> this is the section the current site lacks entirely, and the single highest-leverage change for paid conversion. Every number is real and evidence-backed (golden-set recall from the accepted deliverable; document scale and daily-use from the deployed systems). The anonymisation line converts a weakness into a trust signal — same move as leadflowautomation.net's FAQ.</div>
+
+<div class="mock">
+  <div class="label">Architecture — privacy as a design decision (sharpened from current "Trust &amp; Control")</div>
+  <div class="inner">
+    <h4 class="m-head">Privacy is not a policy document. It's an architecture.</h4>
+    <div class="m-cards">
+      <div class="m-card"><strong>Your tenant, your accounts</strong>Systems run in your cloud environment on your agreements — models reached through your own enterprise endpoints, not our infrastructure. You can revoke our access any afternoon.</div>
+      <div class="m-card"><strong>Personal data stops at the gate</strong>Where personal data could reach a model, an anonymisation layer strips it first — tested against golden datasets before go-live, logged in production.</div>
+      <div class="m-card"><strong>Least privilege, human approval</strong>Scoped read-only access by default. Consequential actions — a quote, an order, an outbound message — wait for a named person's sign-off.</div>
+      <div class="m-card"><strong>Paper trail for your lawyer</strong>Data-processing documentation, DPIA support and sub-processor transparency prepared as deliverables, not afterthoughts — aligned to GDPR and the EU AI Act as it lands.</div>
+    </div>
+  </div>
+</div>
+<div class="note"><strong>Why:</strong> the current site's best material, recut from abstract principle to four concrete commitments a buyer can verify in a call. The fourth card is new — it converts the flagship engagement's legal groundwork (DPIA/DPA authoring, processing records) into a stated capability, which almost no dev shop offers.</div>
+
+<div class="mock">
+  <div class="label">Capabilities — what we build (the "development firm" evidence)</div>
+  <div class="inner">
+    <h4 class="m-head">A software firm, not a slide deck.</h4>
+    <p class="m-sub">Retrieval (RAG) systems over your documents and data · AI agent platforms with human-approval gates · Deep ERP/CRM integration (Microsoft Business Central, HubSpot, Microsoft 365, Dataverse) · Full-stack product engineering · Deployment in Azure and your existing estate.</p>
+    <p class="m-body">Strategy and build are one team here: the people who map where AI belongs in your company are the engineers who then ship it — architecture first, working software every cycle, scripted acceptance tests before handover.</p>
+  </div>
+</div>
+<div class="note"><strong>Why:</strong> cluster-B searchers ("ai software development company", "ai integration services") need to see the word "firm/software/integration" and named systems. Naming Business Central and Microsoft 365 also pre-qualifies the Microsoft-estate mid-market companies CLH actually serves.</div>
+
+<div class="mock">
+  <div class="label">Method + team (kept from current site, condensed)</div>
+  <div class="inner">
+    <p class="m-body"><strong>How we work:</strong> keep the seven-gate evidence model but compress to four steps on this page (Understand → First win → Build with gates → Prove &amp; decide), each with its one-line evidence output. <strong>Team:</strong> keep as-is — two PhDs and a named founder are strong; add one line to Gergely's bio: "architect of the RAG systems in daily use at a multi-billion-dollar US manufacturer."</p>
+  </div>
+</div>
+
+<div class="mock">
+  <div class="label">Final CTA</div>
+  <div class="inner">
+    <h4 class="m-head">Start with a CEO AI Operating Map.</h4>
+    <p class="m-sub">Where AI can create leverage in your company, where it must not go, what your data boundaries require — and the one controlled first win worth funding. A structured document, built from a conversation with the engineers, not a sales team.</p>
+    <span class="m-cta">Request your AI Operating Map →</span>
+    <p class="m-body quiet" style="font-size:12.5px;color:var(--ink-soft);margin-top:10px;">For established companies, typically 20–500 people. Please don't submit sensitive operational or personal data through this form.</p>
+  </div>
+</div>
+<div class="note"><strong>Why:</strong> the Operating Map now explicitly includes "what your data boundaries require" — which makes it the natural landing asset for cluster-A searches (ai risk assessment, gdpr and ai, ai audit). The size qualifier filters SMB tire-kickers before they cost a call.</div>
+
+<h2>4 · Keep / cut / add on the current site</h2>
+<div class="keepcut">
+  <div class="kc keep"><h3>Keep</h3><ul>
+    <li>"Control, not theatre" voice and restraint</li>
+    <li>Operating Map as the single CTA</li>
+    <li>Trust &amp; control page, security principles, form warning</li>
+    <li>People page (add the RAG credential line)</li>
+    <li>White paper as the colder-traffic step</li>
+  </ul></div>
+  <div class="kc cut"><h3>Cut / demote</h3><ul>
+    <li>"Strategic Second" chess metaphor as the lead frame — keep it as a section, not the identity; it doesn't survive a paid click</li>
+    <li>The 12-item "operating system" enumeration above the fold</li>
+    <li>Abstraction-first ordering — concrete deliverable moves up</li>
+  </ul></div>
+  <div class="kc add"><h3>Add</h3><ul>
+    <li>Proof section (two engagements) — the launch blocker</li>
+    <li>Shadow-AI / GDPR problem section</li>
+    <li>"Paper trail" capability (DPIA / processing records)</li>
+    <li>Capabilities block with named systems</li>
+    <li>Form qualifiers (size band, role)</li>
+    <li>FAQ: "Where does our data go?" / "Do you replace our IT partner?" (no) / "Why anonymised case studies?"</li>
+  </ul></div>
+</div>
+
+<h2>5 · Campaign fit after the revamp</h2>
+<ul>
+  <li><strong>Launch first — Diagnostic + Compliance (merged):</strong> ai audit · ai roadmap · ai readiness assessment · ai risk assessment · gdpr and ai · gdpr compliant ai · eu ai act compliance → revamped homepage or /strategy-session. ~$25–35/day. These now land on a page that speaks their language.</li>
+  <li><strong>Second — Firm seekers:</strong> ai development services · ai integration services/company · ai software development company (phrase, capped bids) · enterprise rag · rag development → the Capabilities section anchor or a thin dedicated LP. UK first; the US versions of this cluster (1,000+/mo, Low comp, $45 CPC) are the expansion play.</li>
+  <li><strong>Test — Private deployment:</strong> private ai · on premise ai · private llm at $4–10 CPC with ad copy that says "for your company, in your tenant" to shed hobbyists. Kill fast if lead quality is poor.</li>
+  <li><strong>Skip:</strong> ai governance (platform-vendor war), ai agency (mixed intent).</li>
+</ul>
+
+<footer class="colophon">Companion to the <em>CLH Ads Readiness</em> review · Keyword data: DataForSEO Google Ads endpoints, UK (2826) + US (2840), pulled 31 Aug 2026 · Proof-block facts sourced from delivered engagements; confidentiality rules applied throughout — flagship client never named or made identifiable, manufacturer anonymised and attributed, references line scoped to what agreements permit.</footer>
+</div>
