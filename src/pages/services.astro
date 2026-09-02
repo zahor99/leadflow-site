@@ -1,0 +1,161 @@
+---
+import Base from "../layouts/Base.astro";
+---
+
+<Base
+  title="What We Build"
+  description="Custom AI development for established companies: pseudonymisation gates for sensitive data, supplier and quote automation, MCP tool servers over ERP/CRM, RAG systems, and AI skill development."
+  noindex={true}
+>
+  <header class="top">
+    <div class="wrap">
+      <a class="wordmark" href="/">LEADFLOW<span>AUTOMATION</span></a>
+    </div>
+  </header>
+
+  <section class="hero">
+    <div class="wrap">
+      <div class="eyebrow">Custom AI development · built in your own cloud tenant</div>
+      <h1>Consulting that ends in <em>working software</em>.</h1>
+      <p class="lead">
+        The person who maps where AI belongs in your company is the engineer who then builds it.
+        Gergely Racz — PhD in Engineering (University of Cambridge), 10+ years in AI, 7 patents,
+        architect of production AI systems in daily enterprise use.
+      </p>
+    </div>
+  </section>
+
+  <section>
+    <div class="wrap">
+      <div class="eyebrow">What we build</div>
+      <div class="svc">
+        <div class="card">
+          <h3>Sensitive data scrubbed before any model call</h3>
+          <p>Where personal or commercially sensitive data could reach a model, a pseudonymisation gate strips it first — tested against golden datasets before go-live, logged in production. Your data never leaves your control.</p>
+        </div>
+        <div class="card">
+          <h3>Supplier management &amp; quote automation</h3>
+          <p>For trading and distribution companies: supplier-pricing collection, quote generation and order workflows integrated with your ERP and mailboxes. Prices are computed in deterministic, testable code — AI never invents the number, and every quote waits for a named person's approval.</p>
+        </div>
+        <div class="card">
+          <h3>MCP tool servers over your systems</h3>
+          <p>Model Context Protocol servers that give AI assistants safe, typed, least-privilege tools over your ERP, CRM and internal data — so your team's AI works with your actual business context instead of guessing.</p>
+        </div>
+        <div class="card">
+          <h3>Retrieval (RAG) systems</h3>
+          <p>AI answers grounded in your documents and data — with mandatory citations on every answer and refusal when confidence is low.</p>
+        </div>
+        <div class="card">
+          <h3>AI skill development for your team</h3>
+          <p>Your people learn to work with the systems we build — captured procedures, reusable AI skills for repeated tasks, and guidance on what may and may never go into an AI tool.</p>
+        </div>
+        <div class="card">
+          <h3>In-tenant deployment</h3>
+          <p>Everything runs in your cloud, on your accounts and your agreements — models reached through your own enterprise endpoints. You can revoke our access any afternoon.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="alt">
+    <div class="wrap">
+      <div class="eyebrow">Demonstrated, not asserted</div>
+      <h2>What we've actually built.</h2>
+      <div class="proof">
+        <div class="card">
+          <div class="tagline">B2B industrial trading company · Western Europe</div>
+          <h3>GDPR-gated AI on live commercial data — in the client's own cloud tenant</h3>
+          <p>An AI platform for supplier pricing and quoting, integrated with the company's ERP and mailboxes. Personal data — names, addresses, employee and customer identifiers — is stripped by a local pseudonymisation gate before any model call, validated against golden test sets to 100% recall at acceptance. Every price and quote waits for a named person's approval. Each stage is accepted on written evidence before the next is funded.</p>
+          <p class="statline"><span class="stat">0</span>&nbsp; personal records in any model call — by design, validated at acceptance</p>
+        </div>
+        <div class="card">
+          <div class="tagline">US electronics manufacturer · multi-billion-dollar revenue</div>
+          <h3>Two production RAG systems in daily engineering use</h3>
+          <p>An engineering-SOP retrieval system and a multimodal process-engineering system over 5,000+ documents — text and engineering diagrams — serving the engineering organisation daily since April 2026. Trust was the design requirement: reranking, mandatory citations on every answer, refusal when confidence is low.</p>
+          <p class="statline"><span class="stat">5,000+</span>&nbsp; documents · daily production use since April 2026</p>
+        </div>
+      </div>
+      <p class="conf">Engagements are anonymised under contract — the same confidentiality we would apply to yours. Named references available on request where client agreements permit.</p>
+    </div>
+  </section>
+
+  <section>
+    <div class="wrap">
+      <div class="eyebrow">Control, not theatre</div>
+      <h2>Privacy is not a policy document. It's an architecture.</h2>
+      <div class="cards4">
+        <div class="card"><h3>Your tenant, your accounts</h3><p>Systems run in your cloud environment on your agreements — models reached through your own enterprise endpoints, not our infrastructure.</p></div>
+        <div class="card"><h3>Personal data stops at the gate</h3><p>Where personal data could reach a model, a pseudonymisation layer strips it first — tested against golden datasets before go-live, logged in production.</p></div>
+        <div class="card"><h3>Least privilege, human approval</h3><p>Scoped, read-only access by default. Consequential actions — a quote, an order, an outbound message — wait for a named person's sign-off.</p></div>
+        <div class="card"><h3>Paper trail for your lawyer</h3><p>Data-processing documentation, DPIA support and sub-processor transparency prepared as deliverables — aligned to GDPR and the EU AI Act as it lands.</p></div>
+      </div>
+    </div>
+  </section>
+
+  <section class="alt">
+    <div class="wrap">
+      <div class="eyebrow">How we work</div>
+      <h2>Evidence at every gate.</h2>
+      <div class="cards4">
+        <div class="card"><div class="tagline">01 · Understand</div><p>Map the company as it is: systems, data, hand-offs, constraints, and the decisions that cannot be handed to a tool.</p></div>
+        <div class="card"><div class="tagline">02 · First win</div><p>One commercially meaningful constraint — chosen for value, feasibility, and measurability. Not because a demo looks clever.</p></div>
+        <div class="card"><div class="tagline">03 · Build with gates</div><p>Working software in short cycles, demonstrated on real data, human approval designed in from the first line.</p></div>
+        <div class="card"><div class="tagline">04 · Prove &amp; decide</div><p>Measured against the agreed baseline. You decide whether the next stage has been earned — continue, change, pause or stop.</p></div>
+      </div>
+    </div>
+  </section>
+
+  <section class="cta">
+    <div class="wrap">
+      <h2>Start with your free AI Operating Map.</h2>
+      <p class="lead">
+        A structured, written view of where AI belongs in your company, where it must not go, and which
+        first move is worth funding — built from one 30-minute working session. Written map within 5
+        business days.
+      </p>
+      <a class="btn" href="https://calendly.com/gergely-estateops/30min" target="_blank" rel="noopener">Book the 30-minute session →</a>
+      <p class="alt-cta">Not ready to talk? <a href="/check">Take the 3-minute AI Readiness &amp; Exposure Check</a> first.</p>
+    </div>
+  </section>
+
+  <footer class="bottom">
+    <div class="wrap">
+      Lead Flow Automation · Gergely Racz · <a href="/privacy">Privacy notice</a> · <a href="/">leadflowautomation.net</a>
+    </div>
+  </footer>
+</Base>
+
+<style>
+  .wrap { max-width: 860px; margin: 0 auto; padding: 0 20px; }
+  .top { border-bottom: 1px solid var(--color-border); padding: 18px 0; }
+  .wordmark { font-weight: 800; letter-spacing: 0.08em; font-size: 15px; color: var(--color-text-primary); text-decoration: none; }
+  .wordmark span { color: var(--color-accent); }
+  section { padding: 44px 0; }
+  section.alt { background: var(--color-bg-elevated); border-top: 1px solid var(--color-border); border-bottom: 1px solid var(--color-border); }
+  .hero { padding: 56px 0 24px; }
+  .eyebrow { font-size: 11px; letter-spacing: 0.2em; text-transform: uppercase; color: var(--color-accent); font-weight: 700; margin-bottom: 14px; }
+  h1 { font-weight: 800; color: var(--color-text-primary); font-size: clamp(30px, 5.5vw, 44px); line-height: 1.12; text-wrap: balance; }
+  h1 em { font-style: normal; color: var(--color-accent); }
+  h2 { font-weight: 700; color: var(--color-text-primary); font-size: clamp(22px, 4vw, 30px); line-height: 1.2; margin-bottom: 18px; text-wrap: balance; }
+  .lead { margin-top: 16px; max-width: 62ch; font-size: 16.5px; color: var(--color-text-secondary); }
+  .svc, .proof, .cards4 { display: grid; gap: 14px; }
+  .svc { grid-template-columns: 1fr 1fr; margin-top: 6px; }
+  .proof { grid-template-columns: 1fr 1fr; }
+  .cards4 { grid-template-columns: 1fr 1fr; }
+  @media (max-width: 680px) { .svc, .proof, .cards4 { grid-template-columns: 1fr; } }
+  .card { background: var(--color-bg-subtle); border: 1px solid var(--color-border); border-radius: 10px; padding: 20px 22px; }
+  section.alt .card { background: var(--color-bg-deep); }
+  .card h3 { font-size: 17px; font-weight: 700; color: var(--color-text-primary); margin-bottom: 8px; line-height: 1.3; }
+  .card p { font-size: 14px; color: var(--color-text-secondary); line-height: 1.55; }
+  .tagline { font-size: 11px; letter-spacing: 0.14em; text-transform: uppercase; color: var(--color-accent); font-weight: 700; margin-bottom: 8px; }
+  .statline { margin-top: 12px; font-size: 13px; color: var(--color-text-primary); }
+  .stat { font-size: 20px; font-weight: 800; color: var(--color-accent); }
+  .conf { margin-top: 16px; font-size: 12.5px; color: var(--color-text-secondary); opacity: 0.85; max-width: 70ch; }
+  .cta { text-align: left; padding-bottom: 60px; }
+  .btn { display: inline-block; margin-top: 18px; background: var(--color-accent); color: #06131f; font-weight: 700; font-size: 15px; padding: 14px 26px; border-radius: 6px; text-decoration: none; }
+  .btn:hover { background: var(--color-accent-hover); }
+  .alt-cta { margin-top: 16px; font-size: 13.5px; color: var(--color-text-secondary); }
+  .alt-cta a { color: var(--color-accent); }
+  .bottom { border-top: 1px solid var(--color-border); padding: 22px 0 34px; font-size: 12px; color: var(--color-text-secondary); }
+  .bottom a { color: var(--color-text-secondary); }
+</style>

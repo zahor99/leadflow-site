@@ -9,7 +9,13 @@ import tailwindcss from '@tailwindcss/vite';
 // (.com was lost in late-2025 expiry; recovered with .net 2026-05-14.)
 export default defineConfig({
   site: 'https://www.leadflowautomation.net',
-  integrations: [sitemap()],
+  integrations: [
+    sitemap({
+      // Summit funnel pages are noindex — keep them out of the sitemap too.
+      filter: (page) =>
+        !['/check/', '/thanks/', '/services/'].some((p) => page.endsWith(p)),
+    }),
+  ],
   vite: {
     plugins: [tailwindcss()],
   },

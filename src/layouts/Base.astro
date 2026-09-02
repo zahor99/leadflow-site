@@ -10,6 +10,8 @@ interface Props {
   canonical?: string;
   /** Extra JSON-LD blocks (already-stringified objects). */
   schema?: string[];
+  /** Campaign/funnel pages that should stay out of search engines. */
+  noindex?: boolean;
 }
 
 const SITE_URL = "https://www.leadflowautomation.net";
@@ -22,6 +24,7 @@ const {
   ogImage = DEFAULT_OG,
   canonical = Astro.url.href,
   schema = [],
+  noindex = false,
 } = Astro.props;
 
 const fullTitle = title.includes(SITE_NAME) ? title : `${title} | ${SITE_NAME}`;
@@ -64,6 +67,7 @@ const orgSchema = JSON.stringify({
 
     <title>{fullTitle}</title>
     <meta name="description" content={description} />
+    {noindex && <meta name="robots" content="noindex,nofollow" />}
     <link rel="canonical" href={canonical} />
 
     <!-- Brand mark favicons (wave mark from the Lead Flow Automation logo) -->
