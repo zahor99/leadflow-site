@@ -227,27 +227,63 @@ export function extractAeoMeta(md: string): Record<string, string> {
  */
 export function extractAeoSchemaBlocks(md: string): string[] {
   const blocks: string[] = [];
-  const re = /<!--\s*aeo:schema:[a-z]+\s*([\s\S]*?)-->/g;
-  let match: RegExpExecArray | null;
-  while ((match = re.exec(md)) !== null) {
-    const raw = match[1].trim();
-    if (!raw) continue;
+  const push = (raw: string) => {
+    const trimmed = raw.trim();
+    if (!trimmed) return;
     try {
       // Round-trip through JSON.parse to validate + minify.
-      const parsed = JSON.parse(raw);
-      blocks.push(JSON.stringify(parsed));
+      const parsed = JSON.parse(trimmed) as Record<string, unknown>;
+      blocks.push(JSON.stringify(normalizeSchemaAuthor(parsed)));
     } catch {
-      // If it's not valid JSON (e.g. a stray `aeo:claim-audit` table),
-      // skip silently — only structured JSON-LD belongs in <head>.
+      // Not valid JSON — only structured JSON-LD belongs in <head>.
     }
-  }
+  };
+  // Format A (legacy): JSON inside a single comment:
+  //   <!-- aeo:schema:article {…} -->
+  const inlineRe = /<!--\s*aeo:schema:[a-z]+\s*([\s\S]*?)-->/g;
+  // Format B (what the writer actually emits): marker PAIR around bare JSON:
+  //   <!-- aeo:schema:article -->\n{…}\n<!-- /aeo:schema:article -->
+  const pairRe = /<!--\s*aeo:schema:([a-z]+)\s*-->([\s\S]*?)<!--\s*\/aeo:schema:\1\s*-->/g;
+  let match: RegExpExecArray | null;
+  while ((match = pairRe.exec(md)) !== null) push(match[2]);
+  // Blank out pair matches so the inline pass can't re-match their markers.
+  const rest = md.replace(pairRe, "");
+  while ((match = inlineRe.exec(rest)) !== null) push(match[1]);
   return blocks;
 }
 
 /**
- * Remove all `<!-- aeo:* -->` HTML comments from the markdown so they
- * don't appear in the rendered article body.
+ * The article generator has repeatedly hallucinated a wrong (real) person as
+ * the author. Force the author identity in any extracted JSON-LD to the site
+ * owner, whatever the row says.
+ */
+function normalizeSchemaAuthor(obj: Record<string, unknown>): Record<string, unknown> {
+  const author = obj["author"];
+  if (author && typeof author === "object") {
+    (author as Record<string, unknown>)["name"] = "Gergely Racz";
+    (author as Record<string, unknown>)["url"] = "https://www.leadflowautomation.net/";
+  }
+  return obj;
+}
+
+/**
+ * Remove all AEO machinery from the markdown so none of it appears in the
+ * rendered article body:
+ *  - marker-PAIR blocks (schema JSON, claim-audit table) — content included
+ *  - single `<!-- aeo:… -->` comments (legacy inline schema, faq markers) —
+ *    markers only, their surrounding content stays
+ *  - a trailing `## About the author` section (generator hallucinates bios;
+ *    the template renders a correct static author box instead)
+ *  - belt-and-braces: any leftover comment mentioning `aeo:` (malformed or
+ *    split blocks must never reach readers)
  */
 export function stripAeoComments(md: string): string {
-  return md.replace(/<!--\s*aeo:[\s\S]*?-->/g, "").replace(/\n{3,}/g, "\n\n");
+  return md
+    .replace(/<!--\s*aeo:(schema:[a-z]+|claim-audit)\s*-->[\s\S]*?<!--\s*\/aeo:\1\s*-->/g, "")
+    // claim-audit is always the last section; if its closing marker is
+    // missing, drop everything from the opening marker to end-of-document.
+    .replace(/<!--\s*aeo:claim-audit\s*-->[\s\S]*$/g, "")
+    .replace(/<!--\s*\/?aeo:[\s\S]*?-->/g, "")
+    .replace(/^##\s+About the author\s*$[\s\S]*?(?=^#{1,2}\s|\n<!--|$(?![\s\S]))/gim, "")
+    .replace(/\n{3,}/g, "\n\n");
 }

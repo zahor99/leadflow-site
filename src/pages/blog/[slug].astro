@@ -78,9 +78,17 @@ const isDraft = status === "draft";
       )}
       <div class="article-body" set:html={bodyHtml} />
       <hr class="my-12 border-border" />
+      <div class="mb-10 rounded-lg border border-border bg-bg-elevated p-5 text-sm text-text-secondary">
+        <p class="font-semibold text-text-primary mb-1">About the author</p>
+        <p>
+          Gergely Racz runs Lead Flow Automation — PhD in Engineering (University of Cambridge),
+          10+ years in AI, 7 patents. Architect of production RAG systems in daily use at a
+          multi-billion-dollar US manufacturer; builds AI agent systems for European B2B companies.
+        </p>
+      </div>
       <p class="text-text-secondary text-sm">
         Want this kind of system in your business?
-        <a href="/#contact" class="text-accent hover:text-accent-hover">
+        <a href="https://calendly.com/gergely-estateops/30min" target="_blank" rel="noopener" class="text-accent hover:text-accent-hover">
           Book a free AI audit →
         </a>
       </p>

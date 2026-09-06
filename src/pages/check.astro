@@ -308,18 +308,18 @@ import Base from "../layouts/Base.astro";
   .map-note { margin-top: 12px; font-size: 12px; }
   .bottom { border-top: 1px solid var(--color-border); margin-top: 44px; padding: 22px 0 34px; font-size: 12px; color: var(--color-text-secondary); }
   .bottom a { color: var(--color-text-secondary); }
-  #tally-slot iframe { width: 100%; border: 0; min-height: 420px; }
+  #tally-slot iframe { width: 100%; border: 0; min-height: 780px; background: transparent; }
   @media (prefers-reduced-motion: reduce) { * { transition: none !important; scroll-behavior: auto !important; } }
 </style>
 
 <script is:inline>
 (function(){
-  /* ── Tally wiring ──
-     Set TALLY_FORM_ID once the operator's Tally form exists. While empty, the
-     native form below stays visible and submits are stored nowhere — the button
-     says so honestly. When set, the native form is hidden and the Tally embed
-     (with quiz scores as hidden fields) takes its place after the quiz. */
-  var TALLY_FORM_ID = '';
+  /* ── Lead-capture wiring (Airtable form, replaces the never-built Tally) ──
+     "Summit QR — starter pack" form view on Website Leads (tblNHM3YMqLoiyehf).
+     Quiz scores ride along as prefilled hidden fields; the form itself
+     redirects to /thanks after submit, and because /thanks is same-origin we
+     can detect that inside the iframe and move the whole page there. */
+  var AIRTABLE_FORM = 'https://airtable.com/embed/appEiEdrHTeKFxBWJ/shrPkp6bhRtM1psSK';
 
   var TOTAL=10;
   var quiz=document.getElementById('quiz');
@@ -329,6 +329,7 @@ import Base from "../layouts/Base.astro";
   var hint=document.getElementById('formHint');
 
   var BANDS=['Early','Developing','Structured','Architected'];
+  var LAST=null; // [readiness, exposure, readinessBandIdx, exposureBandIdx] once computed
   function bandIdx(s){ if(s<=3)return 0; if(s<=6)return 1; if(s<=8)return 2; return 3; }
 
   var R_DESC=[
@@ -370,22 +371,34 @@ import Base from "../layouts/Base.astro";
   refresh();
 
   function mountTally(r,e,ri,ei){
-    if(!TALLY_FORM_ID) return;
+    if(!AIRTABLE_FORM) return;
     var slot=document.getElementById('tally-slot');
     var native=document.getElementById('reportForm');
-    var params=new URLSearchParams({
-      alignLeft:'1', hideTitle:'1', transparentBackground:'1', dynamicHeight:'1',
-      readiness_score:String(r), exposure_score:String(e),
-      readiness_band:BANDS[ri], exposure_band:BANDS[ei],
-      source:'summit_qr'
-    });
+    var params=new URLSearchParams();
+    params.set('prefill_Source','summit_qr');           params.set('hide_Source','true');
+    params.set('prefill_Readiness Score',String(r));    params.set('hide_Readiness Score','true');
+    params.set('prefill_Exposure Score',String(e));     params.set('hide_Exposure Score','true');
+    params.set('prefill_Readiness Band',BANDS[ri]);     params.set('hide_Readiness Band','true');
+    params.set('prefill_Exposure Band',BANDS[ei]);      params.set('hide_Exposure Band','true');
     var iframe=document.createElement('iframe');
-    iframe.src='https://tally.so/embed/'+TALLY_FORM_ID+'?'+params.toString();
+    iframe.src=AIRTABLE_FORM+'?'+params.toString();
     iframe.title='Request the starter pack';
     iframe.loading='lazy';
     slot.innerHTML='';
     slot.appendChild(iframe);
     if(native) native.style.display='none';
+    /* After submit the form redirects the IFRAME to /thanks (same origin as
+       us) — detect that and promote it to a top-level navigation. While the
+       iframe is on airtable.com the location read throws; that's the signal
+       to keep waiting. */
+    var watch=setInterval(function(){
+      try{
+        if(iframe.contentWindow.location.pathname.indexOf('/thanks')===0){
+          clearInterval(watch);
+          window.location.href='/thanks';
+        }
+      }catch(err){/* cross-origin: still on the form */}
+    },500);
   }
 
   quiz.addEventListener('submit',function(ev){
@@ -411,20 +424,29 @@ import Base from "../layouts/Base.astro";
     R_MOVES[ri].forEach(function(m){ var li=document.createElement('li'); li.textContent=m; rm.appendChild(li); });
     var em=document.getElementById('e-moves'); em.innerHTML='';
     E_MOVES[ei].forEach(function(m){ var li=document.createElement('li'); li.textContent=m; em.appendChild(li); });
+    LAST=[r,e,ri,ei];
     mountTally(r,e,ri,ei);
     results.classList.add('show');
     var reduce=window.matchMedia('(prefers-reduced-motion: reduce)').matches;
     results.scrollIntoView({behavior:reduce?'auto':'smooth'});
   });
 
+  /* Fallback only (shown if the embed did not mount): open the real form in a
+     new tab, carrying over whatever was typed plus the scores. Never dead-end. */
   document.getElementById('reportForm').addEventListener('submit',function(ev){
     ev.preventDefault();
     var f=ev.target;
     if(!f.checkValidity()){ f.reportValidity(); return; }
-    /* Interim behavior until TALLY_FORM_ID is set — never pretend to send. */
-    var btn=f.querySelector('button');
-    btn.textContent='Form opens soon — grab the pack at the event booth';
-    btn.disabled=true;
+    var p=new URLSearchParams();
+    p.set('prefill_Name',f.name.value); p.set('prefill_Email',f.email.value);
+    p.set('prefill_Role',f.role.value); p.set('prefill_Company Size',f.size.value);
+    if(f.optin.checked) p.set('prefill_Marketing Opt-In','1');
+    if(LAST){
+      p.set('prefill_Source','summit_qr');
+      p.set('prefill_Readiness Score',String(LAST[0])); p.set('prefill_Exposure Score',String(LAST[1]));
+      p.set('prefill_Readiness Band',BANDS[LAST[2]]);   p.set('prefill_Exposure Band',BANDS[LAST[3]]);
+    }
+    window.open('https://airtable.com/appEiEdrHTeKFxBWJ/shrPkp6bhRtM1psSK?'+p.toString(),'_blank');
   });
 })();
 </script>
