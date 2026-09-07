@@ -1,0 +1,205 @@
+---
+import fs from "node:fs";
+import path from "node:path";
+import Base from "../layouts/Base.astro";
+import Nav from "../components/Nav.astro";
+import Footer from "../components/Footer.astro";
+
+// ────────────────────────────────────────────────────────────────
+// Build-time: read the hosted lead-magnet templates from public/downloads.
+// Adding/removing a .json there updates this page automatically.
+// This page is intentionally UNLISTED — not linked from Nav/Footer,
+// noindex'd, and excluded from the sitemap (see astro.config.mjs).
+// ────────────────────────────────────────────────────────────────
+const downloadsDir = path.join(process.cwd(), "public", "downloads");
+const files = fs
+  .readdirSync(downloadsDir)
+  .filter((f) => f.endsWith(".json"))
+  .map((f) => f.replace(/\.json$/, ""))
+  .sort();
+
+// Categories → ordered slug lists. Anything not listed falls into "More Templates".
+const CATEGORY_MAP: { name: string; blurb: string; slugs: string[] }[] = [
+  {
+    name: "RAG & Knowledge Base",
+    blurb: "Retrieval, embeddings, and chat-over-your-docs pipelines.",
+    slugs: ["rag-agent","rag-pipelines","rag-evaluation","rag-reranking","pdf-pinecone","data-to-pinecone","pinecone-assistant","voice-rag-agent","gemini-file-search","zep-memory","data-tables"],
+  },
+  {
+    name: "AI Agents",
+    blurb: "Autonomous and multi-agent workflows that take action.",
+    slugs: ["agent-swarm","multi-ai-agents","jarvis","personal-assistant-ai-agent-2-0","research-agent","ultimate-browser-agent","projects-agent","contact-agent","calendar-agent","human-in-the-loop-calendar-agent","demo-restaurant-agent"],
+  },
+  {
+    name: "Email, Inbox & Outreach",
+    blurb: "Turn inboxes and missed calls into booked, qualified work.",
+    slugs: ["outbound-lead-qualifier","email-agent","voice-email-agent","inbox-management-agent","from-zero-to-inbox-agent","customer-support-email-agent"],
+  },
+  {
+    name: "Content & Social",
+    blurb: "Draft, repurpose, and publish across channels on autopilot.",
+    slugs: ["content-creator-agent","linkedin-agent","youtube-strategist","youtube-chat-metadata","newsletter-automation","ai-newsletter-system","blotato-posting","openai-image-gen-linkedin-post"],
+  },
+  {
+    name: "Image & Video Generation",
+    blurb: "Generate and edit visual assets — stills, avatars, and shorts.",
+    slugs: ["nano-banana-pro","nano-photoshop-agent","combine-images-nanobanana","edit-image-nanobanana-tool","heygen-avatar","create-anything-with-sora-2","ugc-ads-veo-sora","glass-fruit-asmr","famous-brands-shorts-template"],
+  },
+  {
+    name: "Sales & Business Ops",
+    blurb: "Proposals, invoicing, and back-office ticket routing.",
+    slugs: ["invoice-agent","gamma-proposal-generation","ticket-tagging-evaluation"],
+  },
+  {
+    name: "Data, Infra & Scraping",
+    blurb: "Move, store, and harvest data across your stack.",
+    slugs: ["supabase-postgres","update-database","apify","grab-profiles","base44"],
+  },
+  {
+    name: "Foundations & Patterns",
+    blurb: "Reusable building blocks: error handling, guardrails, parallelism.",
+    slugs: ["17-nodes-to-master","5-error-handling-techniques","parallelization","guardrails","webhook-protection","dynamic-models","voice-workflows","gemini-3-pro"],
+  },
+];
+
+// The one magnet wired to a delivery keyword (X comment → DM).
+const FEATURED = new Set(["outbound-lead-qualifier"]);
+
+// slug → nice display title
+const WORD_FIXES: Record<string, string> = {
+  ai:"AI", rag:"RAG", pdf:"PDF", ugc:"UGC", api:"API", crm:"CRM",
+  sora:"Sora", veo:"Veo", asmr:"ASMR", heygen:"HeyGen", linkedin:"LinkedIn",
+  youtube:"YouTube", openai:"OpenAI", gemini:"Gemini", supabase:"Supabase",
+  postgres:"Postgres", pinecone:"Pinecone", zep:"Zep", base44:"Base44",
+  apify:"Apify", jarvis:"Jarvis", gamma:"Gamma", blotato:"Blotato",
+  nanobanana:"Nano-Banana", nano:"Nano",
+};
+const SMALL = new Set(["to","the","of","and","with","a","for","in","on","from"]);
+function pretty(slug: string): string {
+  return slug
+    .replace(/2-0/g, "2.0")
+    .split("-")
+    .map((w, i) => {
+      const lw = w.toLowerCase();
+      if (WORD_FIXES[lw]) return WORD_FIXES[lw];
+      if (i > 0 && SMALL.has(lw)) return lw;
+      return lw.charAt(0).toUpperCase() + lw.slice(1);
+    })
+    .join(" ");
+}
+
+// Build the rendered groups; collect any file not in the map into "More Templates".
+const known = new Set(CATEGORY_MAP.flatMap((c) => c.slugs));
+const groups = CATEGORY_MAP
+  .map((c) => ({ ...c, items: c.slugs.filter((s) => files.includes(s)) }))
+  .filter((c) => c.items.length > 0);
+
+const leftover = files.filter((s) => !known.has(s));
+if (leftover.length) {
+  groups.push({ name: "More Templates", blurb: "Freshly added workflows.", slugs: leftover, items: leftover });
+}
+
+const total = files.length;
+---
+<Base
+  title="Free n8n Automation Templates"
+  description={`${total} free, ready-to-import n8n workflow templates — AI agents, RAG pipelines, outreach, content, and more. Import the JSON straight into n8n.`}
+  noindex={true}
+>
+  <Nav />
+  <main>
+    <!-- Hero -->
+    <section class="bg-hero-glow border-b border-border">
+      <div class="max-w-5xl mx-auto px-6 pt-24 pb-14 text-center">
+        <p class="text-accent font-medium tracking-wider uppercase text-xs mb-6">
+          Free Resource Library
+        </p>
+        <h1 class="mb-6">
+          {total} n8n Automation Templates<br class="hidden sm:block" />
+          <span class="text-accent">— free to import</span>
+        </h1>
+        <p class="text-lg sm:text-xl text-text-secondary leading-relaxed max-w-2xl mx-auto">
+          Production-grade workflows we actually build for clients — cleaned up and
+          ready to drop into n8n. No signup. Grab the JSON, import, and wire in your keys.
+        </p>
+        <div class="mt-8 flex flex-wrap items-center justify-center gap-3 text-sm text-text-secondary">
+          <span class="font-mono px-3 py-1 rounded-full bg-bg-subtle border border-border">{total} templates</span>
+          <span class="font-mono px-3 py-1 rounded-full bg-bg-subtle border border-border">{groups.length} categories</span>
+          <span class="font-mono px-3 py-1 rounded-full bg-bg-subtle border border-border">n8n · JSON</span>
+        </div>
+      </div>
+    </section>
+
+    <!-- How to use -->
+    <section class="max-w-5xl mx-auto px-6 pt-12">
+      <div class="rounded-xl border border-border bg-bg-elevated p-6 text-sm text-text-secondary leading-relaxed">
+        <span class="text-text-primary font-semibold">How to use:</span>
+        download a template → in n8n open
+        <span class="font-mono text-accent-2">Workflows → Import from File</span>
+        → select the JSON → add your own credentials on the flagged nodes. Affiliate links,
+        author branding, and any embedded secrets have been stripped.
+      </div>
+    </section>
+
+    <!-- Category sections -->
+    {groups.map((group) => (
+      <section class="max-w-5xl mx-auto px-6 pt-16">
+        <div class="mb-6">
+          <h2 class="text-2xl sm:text-3xl font-bold">{group.name}</h2>
+          <p class="text-text-secondary mt-1">{group.blurb}</p>
+        </div>
+        <ul class="grid sm:grid-cols-2 lg:grid-cols-3 gap-4">
+          {group.items.map((slug) => (
+            <li>
+              <div class="h-full flex flex-col justify-between bg-bg-elevated border border-border rounded-xl p-5 hover:border-accent transition-colors group">
+                <div>
+                  <div class="flex items-start gap-2 mb-2">
+                    <h3 class="text-base font-semibold leading-snug group-hover:text-accent transition-colors">
+                      {pretty(slug)}
+                    </h3>
+                    {FEATURED.has(slug) && (
+                      <span class="shrink-0 text-[10px] font-mono uppercase tracking-wider px-2 py-0.5 rounded-full bg-accent/15 text-accent border border-accent/30">
+                        ★ Featured
+                      </span>
+                    )}
+                  </div>
+                  <p class="font-mono text-xs text-text-secondary break-all">{slug}.json</p>
+                </div>
+                <a
+                  href={`/downloads/${slug}.json`}
+                  download
+                  class="mt-4 inline-flex items-center justify-center gap-2 px-4 py-2 rounded-lg bg-accent text-white text-sm font-medium hover:bg-accent-hover transition-all hover:scale-[1.02]"
+                >
+                  <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                    <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4" />
+                    <polyline points="7 10 12 15 17 10" />
+                    <line x1="12" y1="15" x2="12" y2="3" />
+                  </svg>
+                  Download
+                </a>
+              </div>
+            </li>
+          ))}
+        </ul>
+      </section>
+    ))}
+
+    <!-- CTA -->
+    <section class="max-w-5xl mx-auto px-6 pt-20 pb-24">
+      <div class="rounded-2xl border border-border bg-bg-elevated p-8 sm:p-12 text-center">
+        <h2 class="text-2xl sm:text-3xl font-bold mb-3">Want one of these built <span class="text-accent">for</span> you?</h2>
+        <p class="text-text-secondary max-w-xl mx-auto mb-6 leading-relaxed">
+          Templates get you 80% there. We build, host, and maintain the production version —
+          wired into your CRM, your data, and your calendar.
+        </p>
+        <a
+          href="https://calendly.com/gergelyracz0/30min"
+          class="inline-flex items-center justify-center px-6 py-3 rounded-lg bg-accent text-white font-medium hover:bg-accent-hover transition-all hover:scale-[1.02] shadow-lg shadow-accent/20"
+        >
+          Book a 30-min call →
+        </a>
+      </div>
+    </section>
+  </main>
+  <Footer />
+</Base>

@@ -11,9 +11,9 @@ export default defineConfig({
   site: 'https://www.leadflowautomation.net',
   integrations: [
     sitemap({
-      // Summit funnel pages are noindex — keep them out of the sitemap too.
+      // Summit funnel + unlisted pages are noindex — keep them out of the sitemap too.
       filter: (page) =>
-        !['/check/', '/thanks/', '/services/'].some((p) => page.endsWith(p)),
+        !['/check/', '/thanks/', '/services/', '/resources/'].some((p) => page.endsWith(p)),
     }),
   ],
   vite: {
