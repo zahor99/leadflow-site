@@ -1,0 +1,520 @@
+<!doctype html><html lang="hu"><head>
+<meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<meta name="robots" content="noindex,nofollow,noarchive"><title>Meeting deckek — 2026-09-23</title>
+<style>
+
+*{box-sizing:border-box;margin:0;padding:0}
+:root{--bg:#0A0A0F;--elev:#111118;--subtle:#1A1A24;--border:#2A2A36;--text:#F0F0F5;--muted:#B9B9C8;--b:#2E9BE8;--p:#E9308A}
+@page{size:1280px 720px;margin:0}
+html,body{background:var(--bg);font-family:'Inter','Segoe UI',Arial,sans-serif;color:var(--text)}
+.slide{width:1280px;height:720px;position:relative;overflow:hidden;page-break-after:always;padding:46px 58px 54px;display:flex;flex-direction:column;
+ background:radial-gradient(ellipse at 78% 10%,rgba(46,155,232,.10) 0%,transparent 58%),radial-gradient(ellipse at 10% 94%,rgba(233,48,138,.09) 0%,transparent 55%),var(--bg)}
+.grad{position:absolute;left:0;top:0;height:4px;width:100%;background:linear-gradient(90deg,var(--p),var(--b));opacity:.75}
+.eyebrow{font-size:12.5px;font-weight:800;letter-spacing:.22em;text-transform:uppercase;color:var(--b)}
+.eyebrow.p{color:var(--p)}
+h1{font-size:52px;font-weight:800;line-height:1.1;letter-spacing:-.02em}
+h2{font-size:34px;font-weight:800;line-height:1.15;letter-spacing:-.01em;margin-top:5px}
+.lead{margin-top:14px;font-size:19px;font-weight:500;color:var(--muted);line-height:1.5;max-width:1000px}
+.lead b{color:var(--text);font-weight:700}
+.body{flex:1;display:flex;flex-direction:column;justify-content:center}
+.cards{display:grid;gap:14px;margin-top:16px}
+.c2{grid-template-columns:1fr 1fr}.c3{grid-template-columns:repeat(3,1fr)}
+.card{background:var(--elev);border:1px solid var(--border);border-radius:13px;padding:17px 19px}
+.card.ghost{background:transparent;border-style:dashed}
+.ch{display:flex;align-items:center;gap:11px;margin-bottom:7px}
+.ico{flex:0 0 34px}
+.card h3{font-size:17px;font-weight:800;line-height:1.25}
+.card h3 span{color:var(--b)} .card.p h3 span{color:var(--p)}
+.card p{margin-top:7px;font-size:14.2px;font-weight:500;color:var(--muted);line-height:1.42}
+.card p b{color:var(--text)}
+.card p.mini{margin-top:9px;font-size:13px;opacity:.85}
+.chip{display:inline-block;margin:9px 5px 0 0;background:var(--bg);border:1px solid var(--border);border-radius:99px;padding:4px 11px;font-size:12px;font-weight:700;color:var(--muted)}
+.chip b{color:var(--b)} .chip.p b{color:var(--p)}
+ul{list-style:none}
+li{position:relative;padding-left:22px;margin-bottom:12px;font-size:16px;font-weight:500;color:var(--muted);line-height:1.42}
+li b{color:var(--text);font-weight:700}
+li:before{content:"";position:absolute;left:0;top:8px;width:8px;height:8px;border-radius:2px;background:linear-gradient(135deg,var(--p),var(--b))}
+table{width:100%;border-collapse:collapse;margin-top:14px;font-size:14.5px}
+th,td{border:1px solid var(--border);padding:9px 11px;text-align:left;color:var(--muted);vertical-align:top}
+th{background:var(--subtle);color:var(--text);font-weight:800;font-size:13px}
+td b{color:var(--text)} td.num{color:var(--b);font-weight:800;white-space:nowrap}
+.foot{position:absolute;left:58px;right:58px;bottom:22px;display:flex;justify-content:space-between;font-size:12px;color:var(--muted);opacity:.6}
+.note{margin-top:14px;font-size:14.5px;color:var(--muted);line-height:1.45;border-left:3px solid var(--p);padding-left:13px}
+.note b{color:var(--text)}
+.title-wrap{flex:1;display:flex;flex-direction:column;justify-content:center}
+.brandline{font-size:19px;font-weight:800}.brandline span{color:var(--b)}
+svg text{font-family:'Inter','Segoe UI',Arial,sans-serif}
+
+html,body{background:#0A0A0F;margin:0}
+.bar{position:sticky;top:0;z-index:9;display:flex;gap:8px;padding:10px 12px;background:rgba(10,10,15,.94);
+ border-bottom:1px solid #2A2A36;backdrop-filter:blur(8px);overflow-x:auto}
+.bar button{flex:0 0 auto;background:#111118;color:#B9B9C8;border:1px solid #2A2A36;border-radius:99px;
+ padding:9px 15px;font:700 13.5px Inter,system-ui,sans-serif}
+.bar button.on{background:linear-gradient(90deg,#E9308A,#2E9BE8);color:#fff;border-color:transparent}
+.meta{padding:12px 14px 4px;font:600 13px Inter,system-ui,sans-serif;color:#B9B9C8}
+.meta a{color:#2E9BE8}
+.slideBox{overflow:hidden;margin:12px auto;border:1px solid #2A2A36;border-radius:10px;width:100%;max-width:1280px}
+.scaler{width:1280px;transform-origin:top left}
+.slide{page-break-after:auto}
+</style></head><body>
+<div class="bar"><button data-k="A" class='on'>Pénzjegynyomda</button><button data-k="B">WS Hungary + Diageo</button></div>
+<div class="pane" data-k="A"><div class="meta">10 dia · <a href="deck-penzjegynyomda-HU.pdf" download>PDF letöltése</a></div><div class="slideBox"><div class="scaler"><section class="slide"><div class="grad"></div>
+<div class="title-wrap"><div class="brandline">Lead<span>Flow</span> Automation</div>
+<h1 style="margin-top:24px">AI-rendszerek,<br>amelyek a cég <span style="color:#2E9BE8">saját adatain</span> futnak</h1>
+<p class="lead" style="font-size:20px;margin-top:20px">Zárt hálózaton futó AI: kódbázis-térkép, tudásbázis és fejlesztői ügynökök — külső szolgáltatás nélkül.</p>
+<div style="margin-top:30px"><span class="chip"><b>PhD</b> · Cambridge</span><span class="chip"><b>7</b> szabadalom</span><span class="chip"><b>10+</b> év AI</span><span class="chip p"><b>zárt hálózaton</b> is futtatható</span></div></div>
+<div class="foot"><span>Rácz Zsigmond Gergely, PhD · +36 30 813 6202</span><span>2026. szeptember 23.</span></div></section></div></div><div class="slideBox"><div class="scaler"><section class="slide"><div class="grad"></div>
+<div class="eyebrow">Háttér</div><h2>Ki áll a munka mögött</h2>
+<div class="body">
+<div class="cards c2">
+<div class="card"><h3><span>Biztonságkritikus mérnöki múlt</span></h3>
+<p><b>15 év kutatás-fejlesztés</b> ipari környezetben: biztonságkritikus szoftverfejlesztés, <b>redundáns rendszerek</b>, jelfeldolgozás.</p>
+<p>Vezetéstámogató és <b>önvezető rendszerek algoritmusfejlesztése</b> — ahol a hibás kimenetnek fizikai következménye van, és ezt a fejlesztési folyamatnak kell kizárnia.</p>
+<p class="mini"><b>PhD, Cambridge</b> · MEng, UCL · <b>7 szabadalom</b></p></div>
+<div class="card p"><h3><span>10+ év AI-fejlesztés</span></h3>
+<p>Gépi tanulási modellek · <b>AI-integráció kkv-knál</b> · értékesítés-automatizálás · előrejelzés · <b>AI-ügynökcsapatok fejlesztése</b> · vállalati tudásbázisok (RAG).</p>
+<p>Az elmúlt három év kizárólag <b>nagy nyelvi modellekre épülő rendszerekről</b> szól: kormányzott AI-kapuk, ügynökrétegek, saját környezetben futó megoldások.</p></div></div>
+</div>
+<div class="foot"><span>LeadFlow Automation · Rácz Zsigmond Gergely, PhD</span><span>2 / 8</span></div></section></div></div><div class="slideBox"><div class="scaler"><section class="slide"><div class="grad"></div>
+<div class="eyebrow">Referenciák</div><h2>Éles rendszerek, napi használatban</h2>
+<div class="body">
+<div class="cards c3" style="margin-top:14px">
+<div class="card"><div class="ch"><svg class="ico" viewBox="0 0 36 36" width="34" height="34"><path d="M7 3h14l8 8v18a2 2 0 0 1-2 2H7a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2z" fill="none" stroke="#2E9BE8" stroke-width="2.2"/><path d="M21 3v9h8" fill="none" stroke="#2E9BE8" stroke-width="2.2"/></svg><h3><span>Amerikai elektronikai gyártó</span></h3></div>
+<p>Két éles RAG-rendszer a mérnöki szervezetnél, <b>5000+ dokumentumon</b>, napi használatban <b>2026 áprilisa óta</b>.</p>
+<p>Kötelező forrásmegjelölés, kiértékelő keretrendszer a bevezetés előtt.</p>
+<span class="chip"><b>5000+</b> dokumentum</span><span class="chip"><b>napi</b> használat</span></div>
+
+<div class="card p"><div class="ch"><svg class="ico" viewBox="0 0 36 36" width="34" height="34"><rect x="5" y="7" width="26" height="22" rx="4" fill="none" stroke="#E9308A" stroke-width="2.2"/><path d="M18 7v22M5 18h26" stroke="#E9308A" stroke-width="2.2"/></svg><h3><span>Európai ipari kereskedőcég</span></h3></div>
+<p>Szabályozott AI-platform a megrendelő <b>saját felhőkörnyezetében</b>: egyetlen ellenőrzött hívási pont, adatkitakarás, naplózás, emberi jóváhagyás.</p>
+<p><b>Egy héttel az élesítés után az AI-használat 10%-ról 90%-ra nőtt.</b></p>
+<span class="chip p"><b>10% → 90%</b> egy hét alatt</span><span class="chip p"><b>0</b> személyes adat a hívásban</span></div>
+
+<div class="card"><div class="ch"><svg class="ico" viewBox="0 0 36 36" width="34" height="34"><path d="M18 5v26M8 31h20M6 12h24M11 12l-5 9h10zM25 12l-5 9h10z" fill="none" stroke="#2E9BE8" stroke-width="2.2" stroke-linejoin="round"/></svg><h3><span>Magyar ügyvédi iroda</span></h3></div>
+<p>Saját fejlesztésű <b>„AI ügyvédjelölt”</b>: precedenskeresés, <b>érvelési ügynökök</b>, és teljes <b>fellebbezéstervezetet előállító ügynökcsapat</b>.</p>
+<p>Minden hivatkozás visszavezethető a forrásig; a jogi felelősség az ügyvédé marad.</p>
+<span class="chip"><b>jogpilot.ai</b></span><span class="chip"><b>precedens</b> + érvelés</span></div>
+
+<div class="card p"><div class="ch"><svg class="ico" viewBox="0 0 36 36" width="34" height="34"><rect x="7" y="11" width="22" height="16" rx="5" fill="none" stroke="#E9308A" stroke-width="2.2"/><path d="M18 5v6M13 19h.01M23 19h.01" stroke="#E9308A" stroke-width="3" stroke-linecap="round"/></svg><h3><span>Brit tanácsadó cég</span></h3></div>
+<p>A cég <b>teljes módszertana</b> tudásbázisban, ügynökökkel — a csapat a <b>megszokott ChatGPT-felületről</b> éri el.</p>
+<p>Az ügyfél a tőlünk kapott forráskódra <b>saját eszközöket is épített</b>.</p>
+<span class="chip p"><b>napi</b> használat</span></div>
+
+<div class="card"><div class="ch"><svg class="ico" viewBox="0 0 36 36" width="34" height="34"><path d="M5 6h5l4 16h14l3-11H12" fill="none" stroke="#2E9BE8" stroke-width="2.2" stroke-linejoin="round"/><circle cx="16" cy="28" r="2.4" fill="#2E9BE8"/><circle cx="26" cy="28" r="2.4" fill="#2E9BE8"/></svg><h3><span>Saját termék · e-kereskedelem</span></h3></div>
+<p>Többügynökös gyártási lánc a koncepciótól a publikálható termékig.</p>
+<span class="chip"><b>4 óra → 12 perc</b> / termék</span><span class="chip"><b>97</b> leszállított termék</span></div>
+
+<div class="card ghost"><div class="ch"><h3><span>Közös bennük</span></h3></div>
+<p>Mindegyik a megrendelő <b>saját környezetében</b> fut, <b>forrásmegjelöléssel</b> dolgozik, és a következményekkel járó lépésnél <b>embert kérdez</b>.</p></div>
+</div>
+</div>
+<div class="foot"><span>LeadFlow Automation · Rácz Zsigmond Gergely, PhD</span><span>3 / 8</span></div></section></div></div><div class="slideBox"><div class="scaler"><section class="slide"><div class="grad"></div>
+<div class="eyebrow">Architektúra</div><h2>Hol vannak az ügynökök — és mi fogja őket vissza</h2>
+<div class="body"><svg viewBox="0 0 1150 400" width="100%" height="392">
+<defs>
+<linearGradient id="fl" x1="0" x2="1"><stop offset="0" stop-color="#E9308A" stop-opacity=".2"/><stop offset="1" stop-color="#E9308A" stop-opacity=".85"/></linearGradient>
+<linearGradient id="fr" x1="0" x2="1"><stop offset="0" stop-color="#2E9BE8" stop-opacity=".9"/><stop offset="1" stop-color="#2E9BE8" stop-opacity=".15"/></linearGradient>
+<linearGradient id="gt" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#E9308A"/><stop offset="1" stop-color="#2E9BE8"/></linearGradient>
+<filter id="sf" x="-40%" y="-40%" width="180%" height="180%"><feGaussianBlur stdDeviation="2.2" result="b"/><feMerge><feMergeNode in="b"/><feMergeNode in="SourceGraphic"/></feMerge></filter>
+</defs>
+<text x="118" y="20" text-anchor="middle" font-size="13.5" font-weight="800" letter-spacing="2.4" fill="#E9308A">AZ ÖNÖK CSAPATA</text>
+<text x="1000" y="20" text-anchor="middle" font-size="13.5" font-weight="800" letter-spacing="2.4" fill="#2E9BE8">AZ ÖNÖK RENDSZEREI</text>
+<g filter="url(#sf)">
+<path d="M238 78 C 300 78, 305 150, 360 162" stroke="url(#fl)" stroke-width="3.2" fill="none"/>
+<path d="M238 150 C 295 150, 305 180, 360 190" stroke="url(#fl)" stroke-width="3.2" fill="none"/>
+<path d="M238 222 C 295 222, 305 215, 360 218" stroke="url(#fl)" stroke-width="3.2" fill="none"/>
+<path d="M238 294 C 300 294, 305 265, 360 248" stroke="url(#fl)" stroke-width="3.2" fill="none"/>
+</g>
+<g filter="url(#sf)">
+<path d="M792 150 C 850 130, 860 70, 918 66" stroke="url(#fr)" stroke-width="3.2" fill="none"/>
+<path d="M792 180 C 850 172, 860 140, 918 138" stroke="url(#fr)" stroke-width="3.2" fill="none"/>
+<path d="M792 210 C 850 208, 860 208, 918 210" stroke="url(#fr)" stroke-width="3.2" fill="none"/>
+<path d="M792 240 C 850 248, 860 280, 918 282" stroke="url(#fr)" stroke-width="3.2" fill="none"/>
+</g>
+<g font-size="17" font-weight="700" fill="#F0F0F5">
+<rect x="28" y="52" width="210" height="52" rx="10" fill="#111118" stroke="#E9308A" stroke-opacity=".45" stroke-width="1.4"/><text x="133" y="84" text-anchor="middle">ChatGPT</text>
+<rect x="28" y="124" width="210" height="52" rx="10" fill="#111118" stroke="#E9308A" stroke-opacity=".45" stroke-width="1.4"/><text x="133" y="156" text-anchor="middle">Claude</text>
+<rect x="28" y="196" width="210" height="52" rx="10" fill="#111118" stroke="#E9308A" stroke-opacity=".45" stroke-width="1.4"/><text x="133" y="228" text-anchor="middle">Saját chat-felület</text>
+<rect x="28" y="268" width="210" height="52" rx="10" fill="#111118" stroke="#E9308A" stroke-opacity=".45" stroke-width="1.4"/><text x="133" y="300" text-anchor="middle">Ügynökcsapatok</text>
+</g>
+<rect x="360" y="36" width="432" height="300" rx="16" fill="#14101c" stroke="url(#gt)" stroke-width="2.2"/>
+<text x="576" y="66" text-anchor="middle" font-size="20" font-weight="800" fill="#F0F0F5">AI-KAPU</text>
+<rect x="382" y="82" width="388" height="58" rx="10" fill="#0A0A0F" stroke="#E9308A" stroke-opacity=".5"/>
+<text x="576" y="106" text-anchor="middle" font-size="15.5" font-weight="800" fill="#E9308A">Készség-réteg (skill layer)</text>
+<text x="576" y="128" text-anchor="middle" font-size="13.5" fill="#B9B9C8">folyamatonként leírt, verziózott ügynök-készségek</text>
+<rect x="382" y="150" width="388" height="58" rx="10" fill="#0A0A0F" stroke="#2E9BE8" stroke-opacity=".5"/>
+<text x="576" y="174" text-anchor="middle" font-size="15.5" font-weight="800" fill="#2E9BE8">Eszköz-szerver (MCP)</text>
+<text x="576" y="196" text-anchor="middle" font-size="13.5" fill="#B9B9C8">legszűkebb jogosultság · minden eszközhívás naplózva</text>
+<rect x="382" y="218" width="388" height="100" rx="10" fill="#0A0A0F" stroke="#2A2A36"/>
+<text x="576" y="242" text-anchor="middle" font-size="14.5" font-weight="700" fill="#F0F0F5">Kormányzás</text>
+<text x="576" y="266" text-anchor="middle" font-size="13.5" fill="#B9B9C8">személyes adat kitakarása a hívás előtt</text>
+<text x="576" y="288" text-anchor="middle" font-size="13.5" fill="#B9B9C8">emberi jóváhagyás a következményes lépéseknél</text>
+<text x="576" y="310" text-anchor="middle" font-size="13.5" fill="#B9B9C8">teljes, visszakövethető auditnyomvonal</text>
+<g font-size="16" font-weight="700" fill="#F0F0F5">
+<rect x="918" y="40" width="214" height="52" rx="10" fill="#111118" stroke="#2E9BE8" stroke-opacity=".4"/><text x="1025" y="72" text-anchor="middle">Dokumentumok</text>
+<rect x="918" y="112" width="214" height="52" rx="10" fill="#111118" stroke="#2E9BE8" stroke-opacity=".4"/><text x="1025" y="144" text-anchor="middle">Kódbázis</text>
+<rect x="918" y="184" width="214" height="52" rx="10" fill="#111118" stroke="#2E9BE8" stroke-opacity=".4"/><text x="1025" y="216" text-anchor="middle">ERP · belső rendszerek</text>
+<rect x="918" y="256" width="214" height="52" rx="10" fill="#111118" stroke="#2E9BE8" stroke-opacity=".4"/><text x="1025" y="288" text-anchor="middle">Levelezés · fájlszerver</text>
+</g>
+<text x="576" y="370" text-anchor="middle" font-size="14.5" font-weight="700" fill="#B9B9C8">A modell soha nem ér hozzá közvetlenül semmihez — mindig a kapun keresztül dolgozik</text>
+</svg></div>
+<div class="foot"><span>LeadFlow Automation · Rácz Zsigmond Gergely, PhD</span><span>4 / 8</span></div></section></div></div><div class="slideBox"><div class="scaler"><section class="slide"><div class="grad"></div>
+<div class="eyebrow p">A helyzet</div><h2>Ma emberek fejében van, ami a gépen is lehetne</h2>
+<div class="body">
+<div style="display:flex;gap:26px;align-items:flex-start">
+<div style="flex:0 0 300px">
+<ul style="margin-top:4px">
+<li><b>Több évtizedes kódbázis</b>, vegyes nyelvek és korok — teljes térkép nincs róla.</li>
+<li><b>Felhős AI kizárva</b>: nem kockázatkezelés, hanem előfeltétel.</li>
+<li>A dokumentáció és a kód <b>külön világ</b>: ami össze van kötve, az a fejekben van.</li>
+</ul></div>
+<div style="flex:1"><svg viewBox="0 0 1120 380" width="100%" height="372"><line x1="170" y1="92" x2="300" y2="190" stroke="#2A2A36" stroke-width="1.6"/><text x="235.0" y="136.0" text-anchor="middle" font-size="11.5" fill="#7A7A8C">hívja</text><line x1="405" y1="60" x2="300" y2="190" stroke="#2A2A36" stroke-width="1.6"/><text x="352.5" y="120.0" text-anchor="middle" font-size="11.5" fill="#7A7A8C">hívja</text><line x1="640" y1="96" x2="545" y2="196" stroke="#2A2A36" stroke-width="1.6"/><text x="592.5" y="141.0" text-anchor="middle" font-size="11.5" fill="#7A7A8C">írja</text><line x1="170" y1="92" x2="545" y2="196" stroke="#2A2A36" stroke-width="1.6"/><text x="357.5" y="139.0" text-anchor="middle" font-size="11.5" fill="#7A7A8C">olvassa</text><line x1="300" y1="190" x2="545" y2="196" stroke="#2A2A36" stroke-width="1.6"/><text x="422.5" y="188.0" text-anchor="middle" font-size="11.5" fill="#7A7A8C">közös séma</text><line x1="845" y1="170" x2="545" y2="196" stroke="#2A2A36" stroke-width="1.6"/><text x="695.0" y="178.0" text-anchor="middle" font-size="11.5" fill="#7A7A8C">éjszaka tölti</text><line x1="150" y1="300" x2="170" y2="92" stroke="#2A2A36" stroke-width="1.6"/><text x="160.0" y="191.0" text-anchor="middle" font-size="11.5" fill="#7A7A8C">leírja</text><line x1="420" y1="322" x2="300" y2="190" stroke="#2A2A36" stroke-width="1.6"/><text x="360.0" y="251.0" text-anchor="middle" font-size="11.5" fill="#7A7A8C">dokumentálja</text><line x1="700" y1="316" x2="405" y2="60" stroke="#2A2A36" stroke-width="1.6"/><text x="552.5" y="183.0" text-anchor="middle" font-size="11.5" fill="#7A7A8C">módosította</text><line x1="845" y1="170" x2="940" y2="268" stroke="#2A2A36" stroke-width="1.6"/><text x="892.5" y="214.0" text-anchor="middle" font-size="11.5" fill="#7A7A8C">maradék</text><line x1="640" y1="96" x2="845" y2="170" stroke="#2A2A36" stroke-width="1.6"/><text x="742.5" y="128.0" text-anchor="middle" font-size="11.5" fill="#7A7A8C">indítja</text><line x1="420" y1="322" x2="545" y2="196" stroke="#2A2A36" stroke-width="1.6"/><text x="482.5" y="254.0" text-anchor="middle" font-size="11.5" fill="#7A7A8C">hivatkozik</text><circle cx="170" cy="92" r="9" fill="#2E9BE8" stroke="#2E9BE8" stroke-width="2"/><text x="170" y="76" text-anchor="middle" font-size="13.5" font-weight="700" fill="#F0F0F5">Számlázó modul</text><circle cx="405" cy="60" r="9" fill="#2E9BE8" stroke="#2E9BE8" stroke-width="2"/><text x="405" y="44" text-anchor="middle" font-size="13.5" font-weight="700" fill="#F0F0F5">Nyomdai ütemezés</text><circle cx="640" cy="96" r="9" fill="#2E9BE8" stroke="#2E9BE8" stroke-width="2"/><text x="640" y="80" text-anchor="middle" font-size="13.5" font-weight="700" fill="#F0F0F5">Készletkezelés</text><circle cx="300" cy="190" r="9" fill="#E9308A" stroke="#E9308A" stroke-width="2"/><text x="300" y="174" text-anchor="middle" font-size="13.5" font-weight="700" fill="#F0F0F5">Közös könyvtár</text><circle cx="545" cy="196" r="9" fill="#E9308A" stroke="#E9308A" stroke-width="2"/><text x="545" y="180" text-anchor="middle" font-size="13.5" font-weight="700" fill="#F0F0F5">Adatbázis-séma</text><circle cx="845" cy="170" r="9" fill="#2E9BE8" stroke="#2E9BE8" stroke-width="2"/><text x="845" y="154" text-anchor="middle" font-size="13.5" font-weight="700" fill="#F0F0F5">Kötegelt éjszakai job</text><circle cx="150" cy="300" r="7" fill="#0A0A0F" stroke="#B9B9C8" stroke-width="2"/><text x="150" y="284" text-anchor="middle" font-size="13.5" font-weight="700" fill="#F0F0F5">Üzemeltetési SOP</text><circle cx="420" cy="322" r="7" fill="#0A0A0F" stroke="#B9B9C8" stroke-width="2"/><text x="420" y="306" text-anchor="middle" font-size="13.5" font-weight="700" fill="#F0F0F5">Műszaki leírás 2011</text><circle cx="700" cy="316" r="7" fill="#0A0A0F" stroke="#B9B9C8" stroke-width="2"/><text x="700" y="300" text-anchor="middle" font-size="13.5" font-weight="700" fill="#F0F0F5">Változáskérés #4412</text><circle cx="940" cy="268" r="7" fill="#0A0A0F" stroke="#7A7A8C" stroke-width="2"/><text x="940" y="252" text-anchor="middle" font-size="13.5" font-weight="700" fill="#F0F0F5">Holt kód (2 éve nem fut)</text><text x="560" y="368" text-anchor="middle" font-size="14" font-weight="700" fill="#B9B9C8">Ugyanez a háló géppel olvasható — ezért lehet rákérdezni, és ezért látszik, mit visz magával egy változtatás</text></svg></div></div>
+</div>
+<div class="foot"><span>LeadFlow Automation · Rácz Zsigmond Gergely, PhD</span><span>5 / 8</span></div></section></div></div><div class="slideBox"><div class="scaler"><section class="slide"><div class="grad"></div>
+<div class="eyebrow">Amit építenénk</div><h2>Négy réteg, mind a zárt hálózaton belül</h2>
+<div class="body"><svg viewBox="0 0 1120 340" width="100%" height="330">
+<defs><marker id="ar2" markerWidth="9" markerHeight="9" refX="8" refY="4.5" orient="auto"><path d="M0,0 L9,4.5 L0,9 z" fill="#2E9BE8"/></marker></defs>
+<rect x="6" y="6" width="1108" height="296" rx="18" fill="none" stroke="#E9308A" stroke-width="2" stroke-dasharray="10 8"/>
+<text x="560" y="328" fill="#E9308A" font-size="14.5" font-weight="800" text-anchor="middle">A szaggatott kereten belül minden az Önök hálózatán fut — kifelé nincs hívás</text>
+<rect x="34" y="110" width="182" height="118" rx="13" fill="#111118" stroke="#2A2A36"/>
+<text x="125" y="150" fill="#F0F0F5" font-size="17.5" font-weight="700" text-anchor="middle">Kódbázis</text>
+<text x="125" y="176" fill="#B9B9C8" font-size="13.5" text-anchor="middle">több évtized,</text>
+<text x="125" y="197" fill="#B9B9C8" font-size="13.5" text-anchor="middle">vegyes nyelvek</text>
+<rect x="258" y="50" width="210" height="108" rx="13" fill="#14101c" stroke="#2E9BE8" stroke-width="1.6"/>
+<text x="363" y="86" fill="#2E9BE8" font-size="17" font-weight="800" text-anchor="middle">Kód-gráf</text>
+<text x="363" y="112" fill="#B9B9C8" font-size="13.5" text-anchor="middle">függőségek, holt kód,</text>
+<text x="363" y="133" fill="#B9B9C8" font-size="13.5" text-anchor="middle">kockázatos modulok</text>
+<rect x="258" y="182" width="210" height="108" rx="13" fill="#14101c" stroke="#2E9BE8" stroke-width="1.6"/>
+<text x="363" y="218" fill="#2E9BE8" font-size="17" font-weight="800" text-anchor="middle">Tudásbázis</text>
+<text x="363" y="244" fill="#B9B9C8" font-size="13.5" text-anchor="middle">kód + magyar</text>
+<text x="363" y="265" fill="#B9B9C8" font-size="13.5" text-anchor="middle">dokumentáció</text>
+<rect x="516" y="110" width="196" height="118" rx="13" fill="#111118" stroke="#2A2A36"/>
+<text x="614" y="148" fill="#F0F0F5" font-size="17" font-weight="700" text-anchor="middle">Helyi modell</text>
+<text x="614" y="174" fill="#B9B9C8" font-size="13.5" text-anchor="middle">nyílt súlyú, saját</text>
+<text x="614" y="195" fill="#B9B9C8" font-size="13.5" text-anchor="middle">GPU-n</text>
+<rect x="760" y="50" width="324" height="108" rx="13" fill="#111118" stroke="#2A2A36"/>
+<text x="922" y="86" fill="#F0F0F5" font-size="17" font-weight="700" text-anchor="middle">Programozástámogató ügynök</text>
+<text x="922" y="113" fill="#2E9BE8" font-size="14" font-weight="700" text-anchor="middle">csak olvas és keres</text>
+<text x="922" y="136" fill="#B9B9C8" font-size="13.5" text-anchor="middle">válasz mellett mindig ott a forrás</text>
+<rect x="760" y="182" width="324" height="108" rx="13" fill="#111118" stroke="#2A2A36"/>
+<text x="922" y="218" fill="#F0F0F5" font-size="17" font-weight="700" text-anchor="middle">Helyi kódoló ügynök</text>
+<text x="922" y="245" fill="#E9308A" font-size="14" font-weight="700" text-anchor="middle">először csak javasol</text>
+<text x="922" y="268" fill="#B9B9C8" font-size="13.5" text-anchor="middle">a fejlesztő dönt és hagy jóvá</text>
+<line x1="218" y1="148" x2="252" y2="110" stroke="#2E9BE8" stroke-width="2.2" marker-end="url(#ar2)"/>
+<line x1="218" y1="192" x2="252" y2="228" stroke="#2E9BE8" stroke-width="2.2" marker-end="url(#ar2)"/>
+<line x1="470" y1="110" x2="512" y2="148" stroke="#2E9BE8" stroke-width="2.2" marker-end="url(#ar2)"/>
+<line x1="470" y1="228" x2="512" y2="192" stroke="#2E9BE8" stroke-width="2.2" marker-end="url(#ar2)"/>
+<line x1="714" y1="148" x2="754" y2="110" stroke="#2E9BE8" stroke-width="2.2" marker-end="url(#ar2)"/>
+<line x1="714" y1="192" x2="754" y2="228" stroke="#2E9BE8" stroke-width="2.2" marker-end="url(#ar2)"/>
+</svg></div>
+<div class="foot"><span>LeadFlow Automation · Rácz Zsigmond Gergely, PhD</span><span>6 / 8</span></div></section></div></div><div class="slideBox"><div class="scaler"><section class="slide"><div class="grad"></div>
+<div class="eyebrow">Bevezetés</div><h2>Először a kicsi lépés — és igen, ehhez is kell gép</h2>
+<div class="body">
+<div class="cards c3">
+<div class="card"><h3><span>0. fázis</span> · 2–3 hét</h3>
+<p><b>Egy munkaállomás-kategóriájú GPU elég</b> — kölcsöngépen vagy egy meglévő fejlesztői vason, az Önök hálózatán belül. Kis modell, egy reprezentatív modul.</p>
+<p>Eredmény: első kód-gráf <b>lefedettségi mutatóval</b> (nyelvenként hány % oldható fel gépileg), és egy működő, zárt láncú prototípus.</p>
+<p class="mini">Ha ez nem győz meg, itt megállunk — ez a lépés önmagában is értéket ad.</p></div>
+<div class="card"><h3><span>1. fázis</span> · 2–3 hónap</h3>
+<p><b>A 0. fázis mérései alapján méretezett szerver.</b> Nem előre veszünk hardvert: a lefedettség és a tényleges terhelés dönti el, egy vagy két GPU kell.</p>
+<p>Offline modell- és csomagtükör, teljes kód-gráf, tudásbázis, és <b>csak olvasó</b> programozástámogató ügynök egy pilotcsoportnak.</p></div>
+<div class="card p"><h3><span>2. fázis</span></h3>
+<p>Helyi kódoló ügynök, <b>először csak javaslattevő módban</b>. Bővítés kizárólag nem kritikus kódon, mért eredmény alapján.</p>
+<p class="mini">Biztonságkritikus modulon az ügynök nem dolgozik önállóan.</p></div></div>
+<div class="note"><b>A sorrend nem véletlen.</b> A hardverdöntés a legdrágább és a legnehezebben visszacsinálható lépés — ezért az utolsó, nem az első. A 0. fázisban azt mérjük meg, amiből a méretezés egyáltalán számolható.</div>
+</div>
+<div class="foot"><span>LeadFlow Automation · Rácz Zsigmond Gergely, PhD</span><span>7 / 8</span></div></section></div></div><div class="slideBox"><div class="scaler"><section class="slide"><div class="grad"></div>
+<div class="eyebrow p">Javaslat</div><h2>Konkrétan mi legyen az első három hét</h2>
+<div class="body">
+<div class="cards c2">
+<div class="card"><h3><span>Amit mi csinálunk</span></h3>
+<p>1. Kiválasztunk Önökkel <b>egy modult</b>, ami elég fontos, hogy számítson, és elég kicsi, hogy átlátható legyen.</p>
+<p>2. Felépítjük rá a <b>kód-gráfot</b>, és megmérjük, nyelvenként hány százalékot sikerült gépileg feloldani.</p>
+<p>3. Betöltjük a modulhoz tartozó <b>dokumentációt</b>, és felállítunk egy zárt láncú kérdező prototípust.</p>
+<p>4. Írásban átadjuk, <b>mi nem működött</b>, és mi az, ami csak kézzel oldható meg.</p></div>
+<div class="card p"><h3><span>Amit Önök kapnak</span></h3>
+<p><b>Lefedettségi jelentés</b> — nyelvenkénti számokkal, nem szöveges ígérettel.</p>
+<p><b>Működő prototípus</b> a saját hálózatukon, a saját kódjukon és dokumentációjukon.</p>
+<p><b>Méretezési számítás</b> — ebből derül ki, mekkora gép kell az éles rendszerhez, és mennyibe kerül.</p>
+<p><b>Kockázati jegyzék</b>: hol lesz kézi munka, mit nem vállalunk, és mit kell Önöknek eldönteni.</p>
+<p class="mini">Ez az anyag akkor is az Önöké, ha nem megyünk tovább.</p></div></div>
+<div class="note"><b>Amire szükségünk lesz:</b> hozzáférés egy modulhoz és a hozzá tartozó dokumentációhoz, egy kapcsolattartó fejlesztő heti 2–3 órában, és egy gép a hálózaton belül, amin futtathatunk. Semmi más.</div>
+</div>
+<div class="foot"><span>LeadFlow Automation · Rácz Zsigmond Gergely, PhD</span><span>8 / 8</span></div></section></div></div><div class="slideBox"><div class="scaler"><section class="slide"><div class="grad"></div>
+<div class="eyebrow">Függelék</div><h2>Méretezés — a számítás, nem csak a végeredmény</h2>
+<div class="body">
+<table>
+<tr><th style="width:230px">Feltételezés (pesszimista)</th><th>Érték</th><th>Miből jön</th></tr>
+<tr><td><b>Elvárt sebesség</b></td><td class="num">40–50 token/mp / fő</td><td>Ennél lassabb esetén a fejlesztő elkapcsol — ez a használhatóság küszöbe</td></tr>
+<tr><td><b>Egyidejűség</b></td><td class="num">a csapat 40%-a</td><td>Nem mindenki küld egyszerre kérést; 40% terhelési csúcsnak pesszimista</td></tr>
+<tr><td><b>Egy 96 GB-os GPU összesített áteresztése</b></td><td class="num">≈ 4 000–6 000 token/mp</td><td>30B körüli, kvantált nyílt kódmodellen, kötegelt kiszolgálással</td></tr>
+<tr><td><b>RAG-válasz</b></td><td class="num">300–800 token, 30 token/mp</td><td>Rövid, hivatkozott válasz — nem hosszú generálás</td></tr>
+</table>
+<div class="cards c3" style="margin-top:14px">
+<div class="card"><h3><span>10 fejlesztő</span></h3><p>Csúcson 4 egyidejű kérés × 50 token/mp = <b>200 token/mp</b> — egy GPU áteresztésének töredéke.</p></div>
+<div class="card"><h3><span>30 fejlesztő</span></h3><p>Csúcson 12 × 50 = <b>600 token/mp</b>. Áteresztésben még elférne egy kártyán, de <b>kontextus és tartalék miatt kettő a javaslat</b>.</p></div>
+<div class="card p"><h3><span>150 RAG-felhasználó</span></h3><p>50 egyidejű × 30 = <b>1 500 token/mp</b>. Egy GPU elég; a szűk keresztmetszet itt <b>a keresés, nem a modell</b>.</p></div></div>
+<div class="note">A számok <b>mai listaár-nagyságrendek és mérés nélküli becslések</b>, nem ajánlat. A 0. fázis pont azért van, hogy ezeket a saját kódjukon mért adatokra cseréljük.</div>
+</div>
+<div class="foot"><span>LeadFlow Automation · Rácz Zsigmond Gergely, PhD</span><span>Függelék 1</span></div></section></div></div><div class="slideBox"><div class="scaler"><section class="slide"><div class="grad"></div>
+<div class="eyebrow">Függelék</div><h2>Három méret — ugyanaz a szoftver, más vas</h2>
+<div class="body">
+<svg viewBox="0 0 1120 210" width="100%" height="200">
+<rect x="10" y="26" width="330" height="150" rx="13" fill="#111118" stroke="#2A2A36"/>
+<text x="175" y="56" text-anchor="middle" font-size="16.5" font-weight="800" fill="#2E9BE8">0. fázis — mérés</text>
+<text x="175" y="84" text-anchor="middle" font-size="14" fill="#B9B9C8">1 db munkaállomás-GPU (24–48 GB)</text>
+<text x="175" y="108" text-anchor="middle" font-size="14" fill="#B9B9C8">kis kódmodell, egy modul</text>
+<text x="175" y="132" text-anchor="middle" font-size="14" fill="#B9B9C8">meglévő vagy kölcsöngép</text>
+<text x="175" y="160" text-anchor="middle" font-size="15" font-weight="800" fill="#F0F0F5">≈ 0 beruházás</text>
+<rect x="392" y="26" width="330" height="150" rx="13" fill="#111118" stroke="#2A2A36"/>
+<text x="557" y="56" text-anchor="middle" font-size="16.5" font-weight="800" fill="#2E9BE8">5–10 fejlesztő</text>
+<text x="557" y="84" text-anchor="middle" font-size="14" fill="#B9B9C8">1× 96 GB GPU</text>
+<text x="557" y="108" text-anchor="middle" font-size="14" fill="#B9B9C8">32 mag CPU · 256 GB RAM · 4 TB NVMe</text>
+<text x="557" y="132" text-anchor="middle" font-size="14" fill="#B9B9C8">ugyanez kiszolgál 100–150 RAG-felhasználót</text>
+<text x="557" y="160" text-anchor="middle" font-size="15" font-weight="800" fill="#F0F0F5">≈ €25–30 ezer</text>
+<rect x="774" y="26" width="336" height="150" rx="13" fill="#14101c" stroke="#E9308A" stroke-width="1.6"/>
+<text x="942" y="56" text-anchor="middle" font-size="16.5" font-weight="800" fill="#E9308A">20–30 fejlesztő</text>
+<text x="942" y="84" text-anchor="middle" font-size="14" fill="#B9B9C8">2× 96 GB GPU</text>
+<text x="942" y="108" text-anchor="middle" font-size="14" fill="#B9B9C8">64 mag CPU · 512 GB RAM · 8 TB NVMe</text>
+<text x="942" y="132" text-anchor="middle" font-size="14" fill="#B9B9C8">tartalék kapacitás és nagyobb kontextus</text>
+<text x="942" y="160" text-anchor="middle" font-size="15" font-weight="800" fill="#F0F0F5">≈ €45–55 ezer</text>
+</svg>
+<div class="cards c2" style="margin-top:12px">
+<div class="card"><h3><span>Ami az árban nincs benne</span></h3><p>Szünetmentes táp, hálózat, rack, hűtés és üzemeltetés. Terhelés alatt <b>1–1,5 kW</b> fogyasztással érdemes számolni GPU-nként.</p></div>
+<div class="card p"><h3><span>Miért nem H100-cal számolunk</span></h3><p>Ezen a terhelésen <b>nem az áteresztés a szűk keresztmetszet</b>, hanem a memória és az üzemeltetés. A drágább adatközponti kártya itt nem vásárol több használhatóságot.</p></div></div>
+</div>
+<div class="foot"><span>LeadFlow Automation · Rácz Zsigmond Gergely, PhD</span><span>Függelék 2</span></div></section></div></div></div><div class="pane" data-k="B" hidden><div class="meta">10 dia · <a href="deck-ws-diageo-HU.pdf" download>PDF letöltése</a></div><div class="slideBox"><div class="scaler"><section class="slide"><div class="grad"></div>
+<div class="title-wrap"><div class="brandline">Lead<span>Flow</span> Automation</div>
+<h1 style="margin-top:24px">AI-rendszerek,<br>amelyek a cég <span style="color:#2E9BE8">saját adatain</span> futnak</h1>
+<p class="lead" style="font-size:20px;margin-top:20px">Márkabiztos AI-tartalom: gyors generálás, automatikus megfelelőségi ellenőrzés, emberi jóváhagyás.</p>
+<div style="margin-top:30px"><span class="chip"><b>PhD</b> · Cambridge</span><span class="chip"><b>7</b> szabadalom</span><span class="chip"><b>10+</b> év AI</span><span class="chip p"><b>márkabiztos</b> kimenet</span></div></div>
+<div class="foot"><span>Rácz Zsigmond Gergely, PhD · +36 30 813 6202</span><span>2026. szeptember 23.</span></div></section></div></div><div class="slideBox"><div class="scaler"><section class="slide"><div class="grad"></div>
+<div class="eyebrow">Háttér</div><h2>Ki áll a munka mögött</h2>
+<div class="body">
+<div class="cards c2">
+<div class="card"><h3><span>Biztonságkritikus mérnöki múlt</span></h3>
+<p><b>15 év kutatás-fejlesztés</b> ipari környezetben: biztonságkritikus szoftverfejlesztés, <b>redundáns rendszerek</b>, jelfeldolgozás.</p>
+<p>Vezetéstámogató és <b>önvezető rendszerek algoritmusfejlesztése</b> — ahol a hibás kimenetnek fizikai következménye van, és ezt a fejlesztési folyamatnak kell kizárnia.</p>
+<p class="mini"><b>PhD, Cambridge</b> · MEng, UCL · <b>7 szabadalom</b></p></div>
+<div class="card p"><h3><span>10+ év AI-fejlesztés</span></h3>
+<p>Gépi tanulási modellek · <b>AI-integráció kkv-knál</b> · értékesítés-automatizálás · előrejelzés · <b>AI-ügynökcsapatok fejlesztése</b> · vállalati tudásbázisok (RAG).</p>
+<p>Az elmúlt három év kizárólag <b>nagy nyelvi modellekre épülő rendszerekről</b> szól: kormányzott AI-kapuk, ügynökrétegek, saját környezetben futó megoldások.</p></div></div>
+</div>
+<div class="foot"><span>LeadFlow Automation · Rácz Zsigmond Gergely, PhD</span><span>2 / 8</span></div></section></div></div><div class="slideBox"><div class="scaler"><section class="slide"><div class="grad"></div>
+<div class="eyebrow">Referenciák</div><h2>Éles rendszerek, napi használatban</h2>
+<div class="body">
+<div class="cards c3" style="margin-top:14px">
+<div class="card"><div class="ch"><svg class="ico" viewBox="0 0 36 36" width="34" height="34"><path d="M7 3h14l8 8v18a2 2 0 0 1-2 2H7a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2z" fill="none" stroke="#2E9BE8" stroke-width="2.2"/><path d="M21 3v9h8" fill="none" stroke="#2E9BE8" stroke-width="2.2"/></svg><h3><span>Amerikai elektronikai gyártó</span></h3></div>
+<p>Két éles RAG-rendszer a mérnöki szervezetnél, <b>5000+ dokumentumon</b>, napi használatban <b>2026 áprilisa óta</b>.</p>
+<p>Kötelező forrásmegjelölés, kiértékelő keretrendszer a bevezetés előtt.</p>
+<span class="chip"><b>5000+</b> dokumentum</span><span class="chip"><b>napi</b> használat</span></div>
+
+<div class="card p"><div class="ch"><svg class="ico" viewBox="0 0 36 36" width="34" height="34"><rect x="5" y="7" width="26" height="22" rx="4" fill="none" stroke="#E9308A" stroke-width="2.2"/><path d="M18 7v22M5 18h26" stroke="#E9308A" stroke-width="2.2"/></svg><h3><span>Európai ipari kereskedőcég</span></h3></div>
+<p>Szabályozott AI-platform a megrendelő <b>saját felhőkörnyezetében</b>: egyetlen ellenőrzött hívási pont, adatkitakarás, naplózás, emberi jóváhagyás.</p>
+<p><b>Egy héttel az élesítés után az AI-használat 10%-ról 90%-ra nőtt.</b></p>
+<span class="chip p"><b>10% → 90%</b> egy hét alatt</span><span class="chip p"><b>0</b> személyes adat a hívásban</span></div>
+
+<div class="card"><div class="ch"><svg class="ico" viewBox="0 0 36 36" width="34" height="34"><path d="M18 5v26M8 31h20M6 12h24M11 12l-5 9h10zM25 12l-5 9h10z" fill="none" stroke="#2E9BE8" stroke-width="2.2" stroke-linejoin="round"/></svg><h3><span>Magyar ügyvédi iroda</span></h3></div>
+<p>Saját fejlesztésű <b>„AI ügyvédjelölt”</b>: precedenskeresés, <b>érvelési ügynökök</b>, és teljes <b>fellebbezéstervezetet előállító ügynökcsapat</b>.</p>
+<p>Minden hivatkozás visszavezethető a forrásig; a jogi felelősség az ügyvédé marad.</p>
+<span class="chip"><b>jogpilot.ai</b></span><span class="chip"><b>precedens</b> + érvelés</span></div>
+
+<div class="card p"><div class="ch"><svg class="ico" viewBox="0 0 36 36" width="34" height="34"><rect x="7" y="11" width="22" height="16" rx="5" fill="none" stroke="#E9308A" stroke-width="2.2"/><path d="M18 5v6M13 19h.01M23 19h.01" stroke="#E9308A" stroke-width="3" stroke-linecap="round"/></svg><h3><span>Brit tanácsadó cég</span></h3></div>
+<p>A cég <b>teljes módszertana</b> tudásbázisban, ügynökökkel — a csapat a <b>megszokott ChatGPT-felületről</b> éri el.</p>
+<p>Az ügyfél a tőlünk kapott forráskódra <b>saját eszközöket is épített</b>.</p>
+<span class="chip p"><b>napi</b> használat</span></div>
+
+<div class="card"><div class="ch"><svg class="ico" viewBox="0 0 36 36" width="34" height="34"><path d="M5 6h5l4 16h14l3-11H12" fill="none" stroke="#2E9BE8" stroke-width="2.2" stroke-linejoin="round"/><circle cx="16" cy="28" r="2.4" fill="#2E9BE8"/><circle cx="26" cy="28" r="2.4" fill="#2E9BE8"/></svg><h3><span>Saját termék · e-kereskedelem</span></h3></div>
+<p>Többügynökös gyártási lánc a koncepciótól a publikálható termékig.</p>
+<span class="chip"><b>4 óra → 12 perc</b> / termék</span><span class="chip"><b>97</b> leszállított termék</span></div>
+
+<div class="card ghost"><div class="ch"><h3><span>Közös bennük</span></h3></div>
+<p>Mindegyik a megrendelő <b>saját környezetében</b> fut, <b>forrásmegjelöléssel</b> dolgozik, és a következményekkel járó lépésnél <b>embert kérdez</b>.</p></div>
+</div>
+</div>
+<div class="foot"><span>LeadFlow Automation · Rácz Zsigmond Gergely, PhD</span><span>3 / 8</span></div></section></div></div><div class="slideBox"><div class="scaler"><section class="slide"><div class="grad"></div>
+<div class="eyebrow">Architektúra</div><h2>Hol vannak az ügynökök — és mi fogja őket vissza</h2>
+<div class="body"><svg viewBox="0 0 1150 400" width="100%" height="392">
+<defs>
+<linearGradient id="fl" x1="0" x2="1"><stop offset="0" stop-color="#E9308A" stop-opacity=".2"/><stop offset="1" stop-color="#E9308A" stop-opacity=".85"/></linearGradient>
+<linearGradient id="fr" x1="0" x2="1"><stop offset="0" stop-color="#2E9BE8" stop-opacity=".9"/><stop offset="1" stop-color="#2E9BE8" stop-opacity=".15"/></linearGradient>
+<linearGradient id="gt" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#E9308A"/><stop offset="1" stop-color="#2E9BE8"/></linearGradient>
+<filter id="sf" x="-40%" y="-40%" width="180%" height="180%"><feGaussianBlur stdDeviation="2.2" result="b"/><feMerge><feMergeNode in="b"/><feMergeNode in="SourceGraphic"/></feMerge></filter>
+</defs>
+<text x="118" y="20" text-anchor="middle" font-size="13.5" font-weight="800" letter-spacing="2.4" fill="#E9308A">AZ ÖNÖK CSAPATA</text>
+<text x="1000" y="20" text-anchor="middle" font-size="13.5" font-weight="800" letter-spacing="2.4" fill="#2E9BE8">AZ ÖNÖK RENDSZEREI</text>
+<g filter="url(#sf)">
+<path d="M238 78 C 300 78, 305 150, 360 162" stroke="url(#fl)" stroke-width="3.2" fill="none"/>
+<path d="M238 150 C 295 150, 305 180, 360 190" stroke="url(#fl)" stroke-width="3.2" fill="none"/>
+<path d="M238 222 C 295 222, 305 215, 360 218" stroke="url(#fl)" stroke-width="3.2" fill="none"/>
+<path d="M238 294 C 300 294, 305 265, 360 248" stroke="url(#fl)" stroke-width="3.2" fill="none"/>
+</g>
+<g filter="url(#sf)">
+<path d="M792 150 C 850 130, 860 70, 918 66" stroke="url(#fr)" stroke-width="3.2" fill="none"/>
+<path d="M792 180 C 850 172, 860 140, 918 138" stroke="url(#fr)" stroke-width="3.2" fill="none"/>
+<path d="M792 210 C 850 208, 860 208, 918 210" stroke="url(#fr)" stroke-width="3.2" fill="none"/>
+<path d="M792 240 C 850 248, 860 280, 918 282" stroke="url(#fr)" stroke-width="3.2" fill="none"/>
+</g>
+<g font-size="17" font-weight="700" fill="#F0F0F5">
+<rect x="28" y="52" width="210" height="52" rx="10" fill="#111118" stroke="#E9308A" stroke-opacity=".45" stroke-width="1.4"/><text x="133" y="84" text-anchor="middle">ChatGPT</text>
+<rect x="28" y="124" width="210" height="52" rx="10" fill="#111118" stroke="#E9308A" stroke-opacity=".45" stroke-width="1.4"/><text x="133" y="156" text-anchor="middle">Claude</text>
+<rect x="28" y="196" width="210" height="52" rx="10" fill="#111118" stroke="#E9308A" stroke-opacity=".45" stroke-width="1.4"/><text x="133" y="228" text-anchor="middle">Saját chat-felület</text>
+<rect x="28" y="268" width="210" height="52" rx="10" fill="#111118" stroke="#E9308A" stroke-opacity=".45" stroke-width="1.4"/><text x="133" y="300" text-anchor="middle">Ügynökcsapatok</text>
+</g>
+<rect x="360" y="36" width="432" height="300" rx="16" fill="#14101c" stroke="url(#gt)" stroke-width="2.2"/>
+<text x="576" y="66" text-anchor="middle" font-size="20" font-weight="800" fill="#F0F0F5">AI-KAPU</text>
+<rect x="382" y="82" width="388" height="58" rx="10" fill="#0A0A0F" stroke="#E9308A" stroke-opacity=".5"/>
+<text x="576" y="106" text-anchor="middle" font-size="15.5" font-weight="800" fill="#E9308A">Készség-réteg (skill layer)</text>
+<text x="576" y="128" text-anchor="middle" font-size="13.5" fill="#B9B9C8">folyamatonként leírt, verziózott ügynök-készségek</text>
+<rect x="382" y="150" width="388" height="58" rx="10" fill="#0A0A0F" stroke="#2E9BE8" stroke-opacity=".5"/>
+<text x="576" y="174" text-anchor="middle" font-size="15.5" font-weight="800" fill="#2E9BE8">Eszköz-szerver (MCP)</text>
+<text x="576" y="196" text-anchor="middle" font-size="13.5" fill="#B9B9C8">legszűkebb jogosultság · minden eszközhívás naplózva</text>
+<rect x="382" y="218" width="388" height="100" rx="10" fill="#0A0A0F" stroke="#2A2A36"/>
+<text x="576" y="242" text-anchor="middle" font-size="14.5" font-weight="700" fill="#F0F0F5">Kormányzás</text>
+<text x="576" y="266" text-anchor="middle" font-size="13.5" fill="#B9B9C8">személyes adat kitakarása a hívás előtt</text>
+<text x="576" y="288" text-anchor="middle" font-size="13.5" fill="#B9B9C8">emberi jóváhagyás a következményes lépéseknél</text>
+<text x="576" y="310" text-anchor="middle" font-size="13.5" fill="#B9B9C8">teljes, visszakövethető auditnyomvonal</text>
+<g font-size="16" font-weight="700" fill="#F0F0F5">
+<rect x="918" y="40" width="214" height="52" rx="10" fill="#111118" stroke="#2E9BE8" stroke-opacity=".4"/><text x="1025" y="72" text-anchor="middle">Dokumentumok</text>
+<rect x="918" y="112" width="214" height="52" rx="10" fill="#111118" stroke="#2E9BE8" stroke-opacity=".4"/><text x="1025" y="144" text-anchor="middle">Kódbázis</text>
+<rect x="918" y="184" width="214" height="52" rx="10" fill="#111118" stroke="#2E9BE8" stroke-opacity=".4"/><text x="1025" y="216" text-anchor="middle">ERP · belső rendszerek</text>
+<rect x="918" y="256" width="214" height="52" rx="10" fill="#111118" stroke="#2E9BE8" stroke-opacity=".4"/><text x="1025" y="288" text-anchor="middle">Levelezés · fájlszerver</text>
+</g>
+<text x="576" y="370" text-anchor="middle" font-size="14.5" font-weight="700" fill="#B9B9C8">A modell soha nem ér hozzá közvetlenül semmihez — mindig a kapun keresztül dolgozik</text>
+</svg></div>
+<div class="foot"><span>LeadFlow Automation · Rácz Zsigmond Gergely, PhD</span><span>4 / 8</span></div></section></div></div><div class="slideBox"><div class="scaler"><section class="slide"><div class="grad"></div>
+<div class="eyebrow p">A helyzet</div><h2>Nem az a kérdés, tud-e az AI tartalmat gyártani</h2>
+<div class="body">
+<div class="cards c2">
+<div class="card"><h3><span>A képesség már megvan</span></h3><p>A nagy ügynökségi hálózatoknak van saját AI-eszköztáruk — figyelés, elemzés, krízisjelzés. <b>Nem ezzel versenyzünk.</b></p>
+<p>A kérdés az, hogy ez <b>helyben, a napi munkafolyamatban és a helyi ügyfélen</b> hogyan fut.</p></div>
+<div class="card p"><h3><span>A márka oldalán bizalmatlanság van</span></h3><p>A PR-szakemberek túlnyomó többsége már használ generatív AI-t — <b>miközben a márkák jelentős része aggódik amiatt, ahogy az ügynöksége használja.</b></p>
+<p>Ez nem technológiai, hanem <b>kontroll- és felelősségi kérdés.</b></p></div></div>
+<div class="note">Szabályozott kategóriában — korhatár, tiltott állítások, piaconként eltérő kódexek — <b>egy generikus AI-eszköz önmagában nem használható.</b> Ami hiányzik: a kapu a generálás és a publikálás között.</div>
+</div>
+<div class="foot"><span>LeadFlow Automation · Rácz Zsigmond Gergely, PhD</span><span>5 / 8</span></div></section></div></div><div class="slideBox"><div class="scaler"><section class="slide"><div class="grad"></div>
+<div class="eyebrow">A megoldás</div><h2>Megfelelőségi kapu a generálás és a publikálás között</h2>
+<div class="body"><svg viewBox="0 0 1120 330" width="100%" height="322">
+<defs><marker id="a3" markerWidth="9" markerHeight="9" refX="8" refY="4.5" orient="auto"><path d="M0,0 L9,4.5 L0,9 z" fill="#2E9BE8"/></marker>
+<marker id="a4" markerWidth="9" markerHeight="9" refX="8" refY="4.5" orient="auto"><path d="M0,0 L9,4.5 L0,9 z" fill="#E9308A"/></marker></defs>
+<rect x="6" y="96" width="176" height="104" rx="13" fill="#111118" stroke="#2A2A36"/>
+<text x="94" y="134" fill="#F0F0F5" font-size="17" font-weight="700" text-anchor="middle">Brief</text>
+<text x="94" y="160" fill="#B9B9C8" font-size="13.5" text-anchor="middle">kampány, piac,</text>
+<text x="94" y="180" fill="#B9B9C8" font-size="13.5" text-anchor="middle">célközönség</text>
+<rect x="222" y="96" width="206" height="104" rx="13" fill="#111118" stroke="#2A2A36"/>
+<text x="325" y="130" fill="#F0F0F5" font-size="17" font-weight="700" text-anchor="middle">Generálás</text>
+<text x="325" y="156" fill="#B9B9C8" font-size="13.5" text-anchor="middle">márkahang, tiltott állítások,</text>
+<text x="325" y="176" fill="#B9B9C8" font-size="13.5" text-anchor="middle">korábbi kampányok</text>
+<rect x="468" y="34" width="330" height="228" rx="16" fill="#14101c" stroke="#E9308A" stroke-width="2"/>
+<text x="633" y="68" fill="#F0F0F5" font-size="19" font-weight="800" text-anchor="middle">Megfelelőségi kapu</text>
+<text x="633" y="106" fill="#E9308A" font-size="14.5" font-weight="700" text-anchor="middle">korhatár és megjelenés</text>
+<text x="633" y="136" fill="#E9308A" font-size="14.5" font-weight="700" text-anchor="middle">tiltott állítások</text>
+<text x="633" y="166" fill="#E9308A" font-size="14.5" font-weight="700" text-anchor="middle">kötelező üzenetek</text>
+<text x="633" y="196" fill="#E9308A" font-size="14.5" font-weight="700" text-anchor="middle">piaconkénti kódex</text>
+<text x="633" y="226" fill="#2E9BE8" font-size="14.5" font-weight="700" text-anchor="middle">AI-jelölés</text>
+<rect x="838" y="34" width="276" height="104" rx="13" fill="#111118" stroke="#2A2A36"/>
+<text x="976" y="70" fill="#F0F0F5" font-size="17" font-weight="700" text-anchor="middle">Emberi jóváhagyás</text>
+<text x="976" y="97" fill="#B9B9C8" font-size="13.5" text-anchor="middle">nem megkerülhető lépés</text>
+<text x="976" y="118" fill="#B9B9C8" font-size="13.5" text-anchor="middle">— és naplózva van</text>
+<rect x="838" y="176" width="276" height="86" rx="13" fill="#111118" stroke="#2A2A36"/>
+<text x="976" y="212" fill="#2E9BE8" font-size="17" font-weight="700" text-anchor="middle">Publikálás</text>
+<text x="976" y="238" fill="#B9B9C8" font-size="13.5" text-anchor="middle">csak jóváhagyás után</text>
+<line x1="184" y1="148" x2="216" y2="148" stroke="#2E9BE8" stroke-width="2.4" marker-end="url(#a3)"/>
+<line x1="430" y1="148" x2="462" y2="148" stroke="#2E9BE8" stroke-width="2.4" marker-end="url(#a3)"/>
+<line x1="800" y1="110" x2="832" y2="86" stroke="#2E9BE8" stroke-width="2.4" marker-end="url(#a3)"/>
+<line x1="976" y1="140" x2="976" y2="170" stroke="#2E9BE8" stroke-width="2.4" marker-end="url(#a3)"/>
+<path d="M838 60 L812 60 L812 288 L325 288 L325 206" fill="none" stroke="#E9308A" stroke-width="2.2" stroke-dasharray="7 6" marker-end="url(#a4)"/>
+<text x="560" y="308" fill="#E9308A" font-size="13.5" font-weight="700" text-anchor="middle">elutasítás → javítás, a megsértett szabállyal együtt</text>
+</svg>
+<div class="note" style="margin-top:10px">A gyorsaság a generálásból jön, <b>a védelem a kapuból.</b> Az elutasítás nem zsákutca: a rendszer megmondja, melyik szabályba ütközött.</div>
+</div>
+<div class="foot"><span>LeadFlow Automation · Rácz Zsigmond Gergely, PhD</span><span>6 / 8</span></div></section></div></div><div class="slideBox"><div class="scaler"><section class="slide"><div class="grad"></div>
+<div class="eyebrow p">Alkalmazások</div><h2>Amit érdemes megépíteni — sorrendben</h2>
+<div class="body">
+<table>
+<tr><th style="width:32px">#</th><th>Mi</th><th style="width:150px">Kinek jó</th><th style="width:120px">Méret</th></tr>
+<tr><td class="num">1</td><td><b>Megfelelőségi kapu</b> — automatikus ellenőrzés és emberi jóváhagyás minden kimenő anyagra</td><td>ügynökség + márka</td><td>közepes</td></tr>
+<tr><td class="num">2</td><td><b>Márka- és módszertan-betöltés</b> — a márkaszabályok és a ház módszertana élő, kereshető tudásbázisként</td><td>ügynökség + márka</td><td>közepes–nagy</td></tr>
+<tr><td class="num">3</td><td><b>Kampány-adaptáció helyi piacokra</b> — globális anyagból helyi változat, emberi lektorálással</td><td>ügynökség</td><td>kicsi–közepes</td></tr>
+<tr><td class="num">4</td><td><b>Krízis-előrejelzés és AI-válaszfigyelés</b> — mit mondanak a nagy AI-asszisztensek a márkáról</td><td>ügynökség + márka</td><td>közepes</td></tr>
+<tr><td class="num">5</td><td><b>Sajtóanyagok és szóvivői briefek</b> jóváhagyási folyamattal</td><td>ügynökség</td><td>kicsi</td></tr>
+</table>
+<div class="note">Az 1. és a 2. egy projekt: <b>a kapu csak akkor tud ellenőrizni, ha a szabályok gépi formában megvannak.</b></div>
+</div>
+<div class="foot"><span>LeadFlow Automation · Rácz Zsigmond Gergely, PhD</span><span>7 / 8</span></div></section></div></div><div class="slideBox"><div class="scaler"><section class="slide"><div class="grad"></div>
+<div class="eyebrow p">Javaslat</div><h2>Konkrétan mi legyen az első három hét</h2>
+<div class="body">
+<div class="cards c2">
+<div class="card"><h3><span>Amit mi csinálunk</span></h3>
+<p>1. Kiválasztunk <b>egy kampánytípust</b> és <b>egy piacot</b>, ahol a szabályrendszer éles.</p>
+<p>2. Gépi formába visszük a szabályokat: <b>tiltott állítások, kötelező üzenetek, korhatár, jelölés</b>.</p>
+<p>3. Felépítünk egy <b>működő kaput</b>: generálás, automatikus ellenőrzés, jóváhagyási lépés.</p>
+<p>4. Végigfuttatjuk <b>korábbi, már publikált anyagokon</b> — és megnézzük, mit fogott volna meg.</p></div>
+<div class="card p"><h3><span>Amit Önök kapnak</span></h3>
+<p><b>Működő kapu</b> egy valódi kampánytípusra, nem demó adatokon.</p>
+<p><b>Visszateszt</b>: a korábbi anyagokon mért találati és téves riasztási arány.</p>
+<p><b>Szabálykönyv gépi formában</b> — ez marad akkor is, ha a rendszert nem velünk építik tovább.</p>
+<p class="mini">A jogi felelősség végig a jóváhagyónál marad; a kapu nem dönt, hanem felkészít a döntésre.</p></div></div>
+</div>
+<div class="foot"><span>LeadFlow Automation · Rácz Zsigmond Gergely, PhD</span><span>8 / 8</span></div></section></div></div><div class="slideBox"><div class="scaler"><section class="slide"><div class="grad"></div>
+<div class="eyebrow">Függelék</div><h2>Méretezés — a számítás, nem csak a végeredmény</h2>
+<div class="body">
+<table>
+<tr><th style="width:230px">Feltételezés (pesszimista)</th><th>Érték</th><th>Miből jön</th></tr>
+<tr><td><b>Elvárt sebesség</b></td><td class="num">40–50 token/mp / fő</td><td>Ennél lassabb esetén a fejlesztő elkapcsol — ez a használhatóság küszöbe</td></tr>
+<tr><td><b>Egyidejűség</b></td><td class="num">a csapat 40%-a</td><td>Nem mindenki küld egyszerre kérést; 40% terhelési csúcsnak pesszimista</td></tr>
+<tr><td><b>Egy 96 GB-os GPU összesített áteresztése</b></td><td class="num">≈ 4 000–6 000 token/mp</td><td>30B körüli, kvantált nyílt kódmodellen, kötegelt kiszolgálással</td></tr>
+<tr><td><b>RAG-válasz</b></td><td class="num">300–800 token, 30 token/mp</td><td>Rövid, hivatkozott válasz — nem hosszú generálás</td></tr>
+</table>
+<div class="cards c3" style="margin-top:14px">
+<div class="card"><h3><span>10 fejlesztő</span></h3><p>Csúcson 4 egyidejű kérés × 50 token/mp = <b>200 token/mp</b> — egy GPU áteresztésének töredéke.</p></div>
+<div class="card"><h3><span>30 fejlesztő</span></h3><p>Csúcson 12 × 50 = <b>600 token/mp</b>. Áteresztésben még elférne egy kártyán, de <b>kontextus és tartalék miatt kettő a javaslat</b>.</p></div>
+<div class="card p"><h3><span>150 RAG-felhasználó</span></h3><p>50 egyidejű × 30 = <b>1 500 token/mp</b>. Egy GPU elég; a szűk keresztmetszet itt <b>a keresés, nem a modell</b>.</p></div></div>
+<div class="note">A számok <b>mai listaár-nagyságrendek és mérés nélküli becslések</b>, nem ajánlat. A 0. fázis pont azért van, hogy ezeket a saját kódjukon mért adatokra cseréljük.</div>
+</div>
+<div class="foot"><span>LeadFlow Automation · Rácz Zsigmond Gergely, PhD</span><span>Függelék 1</span></div></section></div></div><div class="slideBox"><div class="scaler"><section class="slide"><div class="grad"></div>
+<div class="eyebrow">Függelék</div><h2>Három méret — ugyanaz a szoftver, más vas</h2>
+<div class="body">
+<svg viewBox="0 0 1120 210" width="100%" height="200">
+<rect x="10" y="26" width="330" height="150" rx="13" fill="#111118" stroke="#2A2A36"/>
+<text x="175" y="56" text-anchor="middle" font-size="16.5" font-weight="800" fill="#2E9BE8">0. fázis — mérés</text>
+<text x="175" y="84" text-anchor="middle" font-size="14" fill="#B9B9C8">1 db munkaállomás-GPU (24–48 GB)</text>
+<text x="175" y="108" text-anchor="middle" font-size="14" fill="#B9B9C8">kis kódmodell, egy modul</text>
+<text x="175" y="132" text-anchor="middle" font-size="14" fill="#B9B9C8">meglévő vagy kölcsöngép</text>
+<text x="175" y="160" text-anchor="middle" font-size="15" font-weight="800" fill="#F0F0F5">≈ 0 beruházás</text>
+<rect x="392" y="26" width="330" height="150" rx="13" fill="#111118" stroke="#2A2A36"/>
+<text x="557" y="56" text-anchor="middle" font-size="16.5" font-weight="800" fill="#2E9BE8">5–10 fejlesztő</text>
+<text x="557" y="84" text-anchor="middle" font-size="14" fill="#B9B9C8">1× 96 GB GPU</text>
+<text x="557" y="108" text-anchor="middle" font-size="14" fill="#B9B9C8">32 mag CPU · 256 GB RAM · 4 TB NVMe</text>
+<text x="557" y="132" text-anchor="middle" font-size="14" fill="#B9B9C8">ugyanez kiszolgál 100–150 RAG-felhasználót</text>
+<text x="557" y="160" text-anchor="middle" font-size="15" font-weight="800" fill="#F0F0F5">≈ €25–30 ezer</text>
+<rect x="774" y="26" width="336" height="150" rx="13" fill="#14101c" stroke="#E9308A" stroke-width="1.6"/>
+<text x="942" y="56" text-anchor="middle" font-size="16.5" font-weight="800" fill="#E9308A">20–30 fejlesztő</text>
+<text x="942" y="84" text-anchor="middle" font-size="14" fill="#B9B9C8">2× 96 GB GPU</text>
+<text x="942" y="108" text-anchor="middle" font-size="14" fill="#B9B9C8">64 mag CPU · 512 GB RAM · 8 TB NVMe</text>
+<text x="942" y="132" text-anchor="middle" font-size="14" fill="#B9B9C8">tartalék kapacitás és nagyobb kontextus</text>
+<text x="942" y="160" text-anchor="middle" font-size="15" font-weight="800" fill="#F0F0F5">≈ €45–55 ezer</text>
+</svg>
+<div class="cards c2" style="margin-top:12px">
+<div class="card"><h3><span>Ami az árban nincs benne</span></h3><p>Szünetmentes táp, hálózat, rack, hűtés és üzemeltetés. Terhelés alatt <b>1–1,5 kW</b> fogyasztással érdemes számolni GPU-nként.</p></div>
+<div class="card p"><h3><span>Miért nem H100-cal számolunk</span></h3><p>Ezen a terhelésen <b>nem az áteresztés a szűk keresztmetszet</b>, hanem a memória és az üzemeltetés. A drágább adatközponti kártya itt nem vásárol több használhatóságot.</p></div></div>
+</div>
+<div class="foot"><span>LeadFlow Automation · Rácz Zsigmond Gergely, PhD</span><span>Függelék 2</span></div></section></div></div></div>
+<script>
+function fit(){
+  document.querySelectorAll('.pane:not([hidden]) .slideBox').forEach(function(b){
+    var w=b.clientWidth, s=Math.min(w/1280,1);
+    var sc=b.querySelector('.scaler');
+    sc.style.transform='scale('+s+')';
+    b.style.height=(720*s)+'px';
+  });
+}
+document.querySelectorAll('.bar button').forEach(function(btn){
+  btn.onclick=function(){
+    document.querySelectorAll('.bar button').forEach(function(x){x.classList.remove('on')});
+    btn.classList.add('on');
+    document.querySelectorAll('.pane').forEach(function(p){p.hidden = p.dataset.k!==btn.dataset.k});
+    fit(); window.scrollTo(0,0);
+  };
+});
+addEventListener('resize',fit); addEventListener('orientationchange',fit); fit();
+</script></body></html>
