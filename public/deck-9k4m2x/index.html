@@ -241,48 +241,36 @@ html,body{background:#0A0A0F;margin:0}
 <div class="note"><b>Amire szükségünk lesz:</b> hozzáférés egy modulhoz és a dokumentációjához · egy <b>a régi nyelveket ismerő fejlesztő</b> heti 2–3 órában · egy gép a hálózaton belül · és egy <b>biztonsági jóváhagyás</b> arra, hogyan visszük be a modellsúlyokat és a csomagokat a zárt hálózatba (aláírt csomagként, egyirányú átvitellel).</div>
 </div>
 <div class="foot"><span>LeadFlow Automation · Rácz Zsigmond Gergely, PhD</span><span>8 / 8</span></div></section></div></div><div class="slideBox"><div class="scaler"><section class="slide"><div class="grad"></div>
-<div class="eyebrow">Függelék</div><h2>Méretezés — a számítás, nem csak a végeredmény</h2>
+<div class="eyebrow">Függelék</div><h2>Méretezés 50 fejlesztőre — memóriából visszafelé</h2>
 <div class="body">
 <table>
-<tr><th style="width:230px">Feltételezés (pesszimista)</th><th>Érték</th><th>Miből jön</th></tr>
-<tr><td><b>Elvárt sebesség</b></td><td class="num">40–50 token/mp / fő</td><td>Ennyit ad ma a felhős Claude Sonnet is (~41–53 token/mp, Artificial Analysis 2026) — <b>helyben ugyanennyi paritást jelent, nem visszalépést</b>. Puszta olvasáshoz 20–25 is elég volna, de ügynökös munkánál a fejlesztő nem olvas, hanem vár</td></tr>
-<tr><td><b>Egyidejűség</b></td><td class="num">a csapat 40%-a</td><td>Nem mindenki küld egyszerre kérést; 40% terhelési csúcsnak pesszimista</td></tr>
-<tr><td><b>Egy 96 GB-os GPU összesített áteresztése</b></td><td class="num">≈ 4 000–6 000 token/mp</td><td>30B körüli, kvantált nyílt kódmodellen, kötegelt kiszolgálással</td></tr>
-<tr><td><b>RAG-válasz</b></td><td class="num">300–800 token, 30 token/mp</td><td>Rövid, hivatkozott válasz — nem hosszú generálás</td></tr>
-<tr><td><b>Kontextusablak memóriaigénye</b></td><td class="num">több GB / egyidejű munkamenet</td><td>Ez korlátoz előbb, mint a sebesség — ezért kell a második kártya</td></tr>
+<tr><th style="width:250px">Amit feltételezünk</th><th style="width:150px">Érték</th><th>Miből jön</th></tr>
+<tr><td><b>Egyidejűség</b></td><td class="num">50 munkamenet</td><td>Napi 5–7 óra folyamatos ügynökös munka — ez nem csúcs, hanem tartós állapot. <b>A korábbi 40%-os becslés 2–2,5×-sel alábecsülte a terhelést</b></td></tr>
+<tr><td><b>Ebből egyszerre generál</b></td><td class="num">~41</td><td>Az ügynök idejének nagy része modellgenerálás; a várakozó munkamenet memóriát foglal, sávszélességet nem</td></tr>
+<tr><td><b>Kontextus munkamenetenként</b></td><td class="num">64 ezer token</td><td>Ügynökös munkánál reális; ez határozza meg a gyorsítótár méretét</td></tr>
+<tr><td><b>Elvárt sebesség</b></td><td class="num">40–50 token/mp</td><td>Ennyit ad ma a felhős Claude Sonnet is — helyben ugyanennyi paritás, nem visszalépés</td></tr>
 </table>
-<div class="cards c3" style="margin-top:14px">
-<div class="card"><h3><span>10 fejlesztő</span></h3><p>Csúcson 4 egyidejű kérés × 50 token/mp = <b>200 token/mp</b> — egy GPU áteresztésének töredéke.</p></div>
-<div class="card"><h3><span>30 fejlesztő</span></h3><p>Csúcson 12 × 50 = <b>600 token/mp</b> — egy kártya sebességének töredéke. <b>A korlát nem itt van:</b> 12 párhuzamos, hosszú kontextusú munkamenet memóriája nem fér el egy kártyán, és tartalék sincs. <b>Ezért kettő.</b></p></div>
-<div class="card p"><h3><span>100–150 RAG-felhasználó</span></h3><p>Belőlük <b>15–20 kérdez egyszerre</b> × 30 token/mp = <b>450–600 token/mp</b>. Egy GPU elég; a szűk keresztmetszet <b>a keresés és az indexelés, nem a modell</b>.</p></div></div>
-<div class="note">A sebesség <b>munkamenetenként, csúcsterhelésen</b> értendő — nem egyetlen felhasználóra mért csúcsérték. Hosszú kontextusnál a <b>válasz előtti feldolgozási idő</b> külön tétel, ezt a 0. fázisban mérjük. A számok <b>mai nagyságrendek, mérés nélkül</b>, nem ajánlat.</div>
+<div class="cards c3" style="margin-top:13px">
+<div class="card"><h3><span>A gyorsítótár mérete a modelltől függ</span></h3><p>64 ezres kontextuson munkamenetenként <b>3 GB</b> egy jól megválasztott modellnél — de rossz választással <b>11,5 GB</b>. Nem a paraméterszám dönt, hanem a rétegszám és a figyelmi felépítés.</p></div>
+<div class="card p"><h3><span>A férőhely csal</span></h3><p>Egy 96 GB-os kártyán <b>19 munkamenet elfér</b>, de csak <b>7-et tud 40 token/mp-pel kiszolgálni</b>. A korlát a memória sávszélessége, nem a hely — <b>a kapacitás 2,7-szeresen túlbecsüli a valóságot</b>.</p></div>
+<div class="card"><h3><span>Ezért 50 főre</span></h3><p>Nem egy-két kártya kell, hanem <b>8 professzionális kártya vagy 2 DGX Station</b> nagyságrend. A pontos szám a saját kódjukon mért kontextushossztól függ.</p></div></div>
+<div class="note">A számítás módszere: modell súlyai → gyorsítótár munkamenetenként → ebből a férőhely → és csak ezután a sebesség. <b>Levezetve, ellenőrizhető formában átadjuk.</b></div>
 </div>
 <div class="foot"><span>LeadFlow Automation · Rácz Zsigmond Gergely, PhD</span><span>Függelék 1</span></div></section></div></div><div class="slideBox"><div class="scaler"><section class="slide"><div class="grad"></div>
-<div class="eyebrow">Függelék</div><h2>Három méret — ugyanaz a szoftver, más vas</h2>
+<div class="eyebrow">Függelék</div><h2>Mit kapunk a pénzért — és mi a valódi korlát</h2>
 <div class="body">
-<svg viewBox="0 0 1120 210" width="100%" height="200">
-<rect x="10" y="26" width="330" height="150" rx="13" fill="#111118" stroke="#2A2A36"/>
-<text x="175" y="56" text-anchor="middle" font-size="16.5" font-weight="800" fill="#2E9BE8">0. fázis — mérés</text>
-<text x="175" y="84" text-anchor="middle" font-size="14" fill="#B9B9C8">1 db munkaállomás-GPU (24–48 GB)</text>
-<text x="175" y="108" text-anchor="middle" font-size="14" fill="#B9B9C8">kis kódmodell, egy modul</text>
-<text x="175" y="132" text-anchor="middle" font-size="14" fill="#B9B9C8">meglévő vagy kölcsöngép</text>
-<text x="175" y="160" text-anchor="middle" font-size="15" font-weight="800" fill="#F0F0F5">≈ 0 beruházás</text>
-<rect x="392" y="26" width="330" height="150" rx="13" fill="#111118" stroke="#2A2A36"/>
-<text x="557" y="56" text-anchor="middle" font-size="16.5" font-weight="800" fill="#2E9BE8">5–10 fejlesztő</text>
-<text x="557" y="84" text-anchor="middle" font-size="14" fill="#B9B9C8">1× 96 GB GPU</text>
-<text x="557" y="108" text-anchor="middle" font-size="14" fill="#B9B9C8">32 mag CPU · 256 GB RAM · 4 TB NVMe</text>
-<text x="557" y="132" text-anchor="middle" font-size="14" fill="#B9B9C8">ugyanez kiszolgál 100–150 RAG-felhasználót</text>
-<text x="557" y="160" text-anchor="middle" font-size="15" font-weight="800" fill="#F0F0F5">≈ €25–30 ezer</text>
-<rect x="774" y="26" width="336" height="150" rx="13" fill="#14101c" stroke="#E9308A" stroke-width="1.6"/>
-<text x="942" y="56" text-anchor="middle" font-size="16.5" font-weight="800" fill="#E9308A">20–30 fejlesztő</text>
-<text x="942" y="84" text-anchor="middle" font-size="14" fill="#B9B9C8">2× 96 GB GPU</text>
-<text x="942" y="108" text-anchor="middle" font-size="14" fill="#B9B9C8">64 mag CPU · 512 GB RAM · 8 TB NVMe</text>
-<text x="942" y="132" text-anchor="middle" font-size="14" fill="#B9B9C8">tartalék kapacitás és nagyobb kontextus</text>
-<text x="942" y="160" text-anchor="middle" font-size="15" font-weight="800" fill="#F0F0F5">≈ €45–55 ezer</text>
-</svg>
+<table>
+<tr><th>Konfiguráció</th><th style="width:120px">Beruházás</th><th style="width:130px">Kiszolgált munkamenet</th><th style="width:95px">Fogyasztás</th><th>Amit tudni kell</th></tr>
+<tr><td><b>1 kártyás pilot</b></td><td class="num">≈ €33 ezer</td><td class="num">5–8 fő</td><td>0,9 kW</td><td>Ezen mérjük meg a valódi számokat</td></tr>
+<tr><td><b>4 kártyás szerver</b></td><td class="num">€95–108 ezer</td><td class="num">34</td><td>3 kW</td><td>50 főhöz kevés, tartalék nélkül</td></tr>
+<tr><td><b>8 kártyás szerver</b></td><td class="num">€177–199 ezer</td><td class="num">68</td><td><b>6 kW</b></td><td><b>32A / 3 fázis és 6 kW hűtés kell</b> — ez a leggyakoribb elakadás</td></tr>
+<tr><td><b>1 DGX Station</b></td><td class="num">€107–134 ezer</td><td class="num">42</td><td>1,6 kW</td><td>Normál áramkörről megy, de egy gép — nincs tartalék</td></tr>
+<tr><td><b>2 DGX Station</b></td><td class="num">€214–269 ezer</td><td class="num">85</td><td>3,2 kW</td><td>Drágább, cserébe normál betáp és van tartalék</td></tr>
+</table>
 <div class="cards c2" style="margin-top:12px">
-<div class="card"><h3><span>Ami az árban nincs benne</span></h3><p>Szünetmentes táp, hálózat, rack, hűtés és üzemeltetés. Egy GPU-s <b>gép</b> terhelés alatt nagyságrendileg <b>1–1,5 kW</b>, a kétkártyás ennek közel a duplája.</p></div>
-<div class="card p"><h3><span>Miért nem adatközponti kártyával számolunk</span></h3><p>Ezen a terhelésen <b>nem az áteresztés a szűk keresztmetszet</b>, hanem a memória és az üzemeltetés. A drágább adatközponti kártya itt nem vásárol több használhatóságot.</p></div></div>
+<div class="card"><h3><span>Egy munkamenet ára mindenhol ugyanaz</span></h3><p><b>€2 500–3 300 munkamenetenként</b>, bármelyik komoly konfigurációt nézzük. <b>Nincs trükkös összeállítás, ami ezt megkerüli</b> — a döntés az áramról, a tartalékról és az üzemeltetésről szól, nem az ár-érték arányról.</p></div>
+<div class="card p"><h3><span>Mikor kell DGX</span></h3><p>Ha a választott modell <b>elfér egy 96 GB-os kártyán</b>, akkor munkaállomás-kategóriájú kártyák a jó választás. Ha <b>nem fér el</b>, akkor DGX — az egységes memóriája miatt nem kell a modellt szétvágni.</p></div></div>
+<div class="note">Az árak tartalmazzák a teljes gépet és a szünetmentes tápot; <b>a rack, a hűtés bővítése és az üzemeltetés nem</b>. Tisztán költségalapon a felhős szolgáltatás minden méretnél olcsóbb — <b>itt a szuverenitás az indok, nem a megtakarítás</b>, és ezt nem is állítjuk másképp.</div>
 </div>
 <div class="foot"><span>LeadFlow Automation · Rácz Zsigmond Gergely, PhD</span><span>Függelék 2</span></div></section></div></div></div><div class="pane" data-k="B" hidden><div class="meta">9 dia · <a href="deck-ws-diageo-HU.pdf" download>PDF letöltése</a></div><div class="slideBox"><div class="scaler"><section class="slide"><div class="grad"></div>
 <div class="title-wrap"><div class="brandline">Lead<span>Flow</span> Automation</div>
