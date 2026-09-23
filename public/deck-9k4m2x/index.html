@@ -245,7 +245,7 @@ html,body{background:#0A0A0F;margin:0}
 <div class="body">
 <table>
 <tr><th style="width:230px">Feltételezés (pesszimista)</th><th>Érték</th><th>Miből jön</th></tr>
-<tr><td><b>Elvárt sebesség</b></td><td class="num">40–50 token/mp / fő</td><td>Ennél lassabb esetén a fejlesztő elkapcsol — ez a használhatóság küszöbe</td></tr>
+<tr><td><b>Elvárt sebesség</b></td><td class="num">40–50 token/mp / fő</td><td>Ennyit ad ma a felhős Claude Sonnet is (~41–53 token/mp, Artificial Analysis 2026) — <b>helyben ugyanennyi paritást jelent, nem visszalépést</b>. Puszta olvasáshoz 20–25 is elég volna, de ügynökös munkánál a fejlesztő nem olvas, hanem vár</td></tr>
 <tr><td><b>Egyidejűség</b></td><td class="num">a csapat 40%-a</td><td>Nem mindenki küld egyszerre kérést; 40% terhelési csúcsnak pesszimista</td></tr>
 <tr><td><b>Egy 96 GB-os GPU összesített áteresztése</b></td><td class="num">≈ 4 000–6 000 token/mp</td><td>30B körüli, kvantált nyílt kódmodellen, kötegelt kiszolgálással</td></tr>
 <tr><td><b>RAG-válasz</b></td><td class="num">300–800 token, 30 token/mp</td><td>Rövid, hivatkozott válasz — nem hosszú generálás</td></tr>
@@ -255,7 +255,7 @@ html,body{background:#0A0A0F;margin:0}
 <div class="card"><h3><span>10 fejlesztő</span></h3><p>Csúcson 4 egyidejű kérés × 50 token/mp = <b>200 token/mp</b> — egy GPU áteresztésének töredéke.</p></div>
 <div class="card"><h3><span>30 fejlesztő</span></h3><p>Csúcson 12 × 50 = <b>600 token/mp</b> — egy kártya sebességének töredéke. <b>A korlát nem itt van:</b> 12 párhuzamos, hosszú kontextusú munkamenet memóriája nem fér el egy kártyán, és tartalék sincs. <b>Ezért kettő.</b></p></div>
 <div class="card p"><h3><span>100–150 RAG-felhasználó</span></h3><p>Belőlük <b>15–20 kérdez egyszerre</b> × 30 token/mp = <b>450–600 token/mp</b>. Egy GPU elég; a szűk keresztmetszet <b>a keresés és az indexelés, nem a modell</b>.</p></div></div>
-<div class="note">A számok <b>mai listaár-nagyságrendek és mérés nélküli becslések</b>, nem ajánlat. A 0. fázis pont azért van, hogy ezeket a saját kódjukon mért adatokra cseréljük.</div>
+<div class="note">A sebesség <b>munkamenetenként, csúcsterhelésen</b> értendő — nem egyetlen felhasználóra mért csúcsérték. Hosszú kontextusnál a <b>válasz előtti feldolgozási idő</b> külön tétel, ezt a 0. fázisban mérjük. A számok <b>mai nagyságrendek, mérés nélkül</b>, nem ajánlat.</div>
 </div>
 <div class="foot"><span>LeadFlow Automation · Rácz Zsigmond Gergely, PhD</span><span>Függelék 1</span></div></section></div></div><div class="slideBox"><div class="scaler"><section class="slide"><div class="grad"></div>
 <div class="eyebrow">Függelék</div><h2>Három méret — ugyanaz a szoftver, más vas</h2>
