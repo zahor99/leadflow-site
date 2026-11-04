@@ -13,7 +13,7 @@ export default defineConfig({
     sitemap({
       // Summit funnel + unlisted pages are noindex — keep them out of the sitemap too.
       filter: (page) =>
-        !['/check/', '/thanks/', '/services/', '/resources/'].some((p) => page.endsWith(p)),
+        !['/check/', '/thanks/', '/services/', '/resources/', '/work/', '/ai-marketing-desk/'].some((p) => page.endsWith(p)),
     }),
   ],
   vite: {

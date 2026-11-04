@@ -1,0 +1,170 @@
+---
+import Base from "../layouts/Base.astro";
+
+// AI marketing desk: outputs we deliver today + waitlist for the Marketing MCP server (not built yet).
+// Waitlist posts to the VPS waitlist service (ops.leadflowautomation.net/waitlist/signup),
+// which stores the signup and e-mails the operator.
+const WAITLIST_URL = "https://ops.leadflowautomation.net/waitlist/signup";
+
+const outputs = [
+  { kind: "White paper", title: "AI-run discovery for ERP implementations", note: "How an agent over MCP turns 6–8 days of fit-gap workshops into a reviewable backlog. 9 pages.", href: "/work/whitepapers/erp-discovery-agent.pdf", img: "/work/whitepapers/erp-discovery-agent-cover.png" },
+  { kind: "White paper", title: "MCP servers as a product channel", note: "Lessons from ScalePOD's decorator server: real logos on real blanks inside Claude.", href: "/work/whitepapers/merch-mcp-server.pdf", img: "/work/whitepapers/merch-mcp-server-cover.png" },
+];
+const videos = [
+  { kind: "UGC ad · AI avatar hook + product demo", title: "ScalePOD for print-on-demand sellers", src: "/work/videos/scalepod-ugc.mp4", poster: "/work/videos/scalepod-ugc.jpg" },
+  { kind: "UGC product review · fictional brand", title: "Nocta magnesium gummies", src: "/work/videos/nocta-review-ugc.mp4", poster: "/work/videos/nocta-review-ugc.jpg" },
+];
+---
+
+<Base
+  title="AI marketing desk"
+  description="White papers, UGC videos with AI avatars, product demo videos and research reports, produced by an AI marketing desk run by Gergely Racz."
+  noindex={true}
+>
+  <header class="top">
+    <div class="wrap"><a class="wordmark" href="/">LEADFLOW<span>AUTOMATION</span></a></div>
+  </header>
+
+  <main class="body">
+    <div class="wrap">
+      <p class="eyebrow">AI marketing desk</p>
+      <h1>Marketing content, researched and produced by AI agents, checked by a human</h1>
+      <p class="lede">
+        White papers, UGC-style videos with AI presenters, product demo videos and competitive reports.
+        Every number is sourced, every AI presenter is labelled, and nothing goes out before a person has read it.
+      </p>
+
+      <h2>White papers</h2>
+      <div class="grid">
+        {outputs.map((o) => (
+          <a class="card" href={o.href} target="_blank" rel="noopener">
+            <img src={o.img} alt="" loading="lazy" />
+            <span class="kind">{o.kind}</span>
+            <span class="card-title">{o.title}</span>
+            <span class="card-note">{o.note}</span>
+          </a>
+        ))}
+      </div>
+
+      <h2>Videos</h2>
+      <div class="grid vids">
+        {videos.map((v) => (
+          <figure class="vid">
+            <video src={v.src} poster={v.poster} controls preload="none" playsinline></video>
+            <figcaption><span class="kind">{v.kind}</span><b>{v.title}</b></figcaption>
+          </figure>
+        ))}
+      </div>
+      <p class="small">AI presenters and the Nocta brand are generated and fictional, and labelled as such in the videos.</p>
+
+      <h2>More samples</h2>
+      <p>Articles, explainer videos and PDF guides: <a href="/work/">see all work samples →</a></p>
+
+      <h2>How it works</h2>
+      <ol class="steps">
+        <li><b>Brief and sources.</b> Your site, product, customers' words (reviews, forums), search demand and competitor data.</li>
+        <li><b>Agents draft.</b> Research, script, white paper or video cut, each from a fixed recipe.</li>
+        <li><b>Checks.</b> Claim check against sources, brand and tone check, AI labels on synthetic people.</li>
+        <li><b>A person approves.</b> You get a review link: accept, change or reject each piece.</li>
+      </ol>
+
+      <section class="wait" id="waitlist">
+        <h2>Coming next: the Marketing MCP server</h2>
+        <p>
+          Run the same desk from inside your own Claude or ChatGPT: brief it in plain language, get the
+          white paper, the video or the SEO report back, in your brand. We are building it now.
+          Join the waitlist and we'll e-mail you when the first seats open.
+        </p>
+        <form id="wl" novalidate>
+          <div class="row">
+            <label>E-mail<input name="email" type="email" required autocomplete="email" /></label>
+            <label>Name<input name="name" type="text" autocomplete="name" /></label>
+          </div>
+          <div class="row">
+            <label>Company<input name="company" type="text" autocomplete="organization" /></label>
+            <label>What would you use it for?<input name="interest" type="text" placeholder="e.g. weekly UGC ads, SEO reports" /></label>
+          </div>
+          <label class="hp" aria-hidden="true">Website<input name="website" type="text" tabindex="-1" autocomplete="off" /></label>
+          <button type="submit">Join the waitlist</button>
+          <p class="msg" id="wl-msg" role="status"></p>
+          <p class="small">We use your e-mail only to tell you about this server. <a href="/privacy/">Privacy</a></p>
+        </form>
+      </section>
+    </div>
+  </main>
+
+  <footer class="bottom">
+    <div class="wrap">© Lead Flow Automation · Gergely Racz, PhD (Cambridge) · Budapest · <a href="/privacy/">Privacy</a></div>
+  </footer>
+
+  <script define:vars={{ WAITLIST_URL }}>
+    const form = document.getElementById("wl");
+    const msg = document.getElementById("wl-msg");
+    form.addEventListener("submit", async (e) => {
+      e.preventDefault();
+      const data = Object.fromEntries(new FormData(form).entries());
+      data.page = "ai-marketing-desk";
+      if (!/^[^@\s]+@[^@\s]+\.[A-Za-z]{2,}$/.test(data.email || "")) {
+        msg.textContent = "Please enter a valid e-mail.";
+        return;
+      }
+      const btn = form.querySelector("button");
+      btn.disabled = true;
+      msg.textContent = "Sending…";
+      try {
+        const r = await fetch(WAITLIST_URL, { method: "POST", headers: { "Content-Type": "application/json" }, body: JSON.stringify(data) });
+        const j = await r.json().catch(() => ({}));
+        if (r.ok && j.ok) { form.reset(); msg.textContent = "You're on the list. We'll be in touch."; }
+        else { msg.textContent = j.error || "Something went wrong. Please try again."; }
+      } catch {
+        msg.textContent = "Network error. Please try again.";
+      } finally {
+        btn.disabled = false;
+      }
+    });
+  </script>
+</Base>
+
+<style>
+  .wrap { max-width: 900px; margin: 0 auto; padding: 0 16px; }
+  .top { border-bottom: 1px solid var(--color-border); padding: 18px 0; }
+  .wordmark { font-weight: 800; letter-spacing: 0.08em; font-size: 15px; color: var(--color-text-primary); text-decoration: none; }
+  .wordmark span { color: var(--color-accent); }
+  .body { padding: 44px 0 32px; }
+  .eyebrow { font-family: var(--font-mono); font-size: 12px; letter-spacing: 0.12em; text-transform: uppercase; color: var(--color-accent); margin-bottom: 8px; }
+  h1 { font-weight: 800; color: var(--color-text-primary); font-size: clamp(26px, 5vw, 40px); line-height: 1.15; margin-bottom: 14px; }
+  .lede { font-size: 16.5px; color: var(--color-text-secondary); line-height: 1.65; max-width: 700px; }
+  h2 { font-weight: 700; color: var(--color-text-primary); font-size: 21px; margin: 44px 0 14px; }
+  p, li { font-size: 15px; color: var(--color-text-secondary); line-height: 1.65; }
+  a { color: var(--color-accent); }
+  .small { font-size: 12.5px; }
+  .grid { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 16px; }
+  .grid.vids { grid-template-columns: repeat(2, minmax(0, 300px)); }
+  @media (max-width: 640px) { .grid, .grid.vids { grid-template-columns: 1fr; } }
+  .card { display: flex; flex-direction: column; gap: 6px; padding: 14px; background: var(--color-bg-elevated); border: 1px solid var(--color-border); border-radius: 12px; text-decoration: none; transition: border-color .15s; }
+  .card:hover { border-color: var(--color-accent); }
+  .card img { width: 100%; aspect-ratio: 4 / 3; object-fit: cover; object-position: top; border-radius: 8px; background: var(--color-bg-subtle); }
+  .kind { font-family: var(--font-mono); font-size: 11.5px; letter-spacing: .06em; text-transform: uppercase; color: var(--color-accent); }
+  .card-title { color: var(--color-text-primary); font-weight: 650; font-size: 16px; }
+  .card-note { color: var(--color-text-secondary); font-size: 13.5px; line-height: 1.5; }
+  .vid { margin: 0; background: var(--color-bg-elevated); border: 1px solid var(--color-border); border-radius: 12px; overflow: hidden; }
+  .vid video { width: 100%; display: block; aspect-ratio: 9 / 16; background: #000; }
+  .vid figcaption { padding: 10px 12px; display: flex; flex-direction: column; gap: 4px; color: var(--color-text-primary); font-size: 14px; }
+  .steps { padding-left: 20px; }
+  .steps b { color: var(--color-text-primary); }
+  .wait { margin-top: 48px; padding: 24px; border: 1px solid var(--color-accent); border-radius: 14px; background: var(--color-bg-elevated); }
+  .wait h2 { margin-top: 0; }
+  form { display: flex; flex-direction: column; gap: 12px; margin-top: 12px; }
+  .row { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; }
+  @media (max-width: 640px) { .row { grid-template-columns: 1fr; } }
+  label { display: flex; flex-direction: column; gap: 6px; font-size: 13px; color: var(--color-text-secondary); }
+  input { background: var(--color-bg-deep); border: 1px solid var(--color-border); border-radius: 8px; padding: 11px 12px; color: var(--color-text-primary); font: inherit; font-size: 15px; }
+  input:focus { outline: 2px solid var(--color-accent); outline-offset: 1px; }
+  .hp { position: absolute; left: -9999px; width: 1px; height: 1px; overflow: hidden; }
+  button { align-self: flex-start; background: var(--color-accent); color: #fff; border: 0; border-radius: 8px; padding: 12px 20px; font-weight: 650; font-size: 15px; cursor: pointer; }
+  button:hover { background: var(--color-accent-hover); }
+  button:disabled { opacity: .6; cursor: default; }
+  .msg { min-height: 1.2em; color: var(--color-text-primary); }
+  .bottom { border-top: 1px solid var(--color-border); margin-top: 30px; padding: 22px 0 34px; font-size: 12px; color: var(--color-text-secondary); }
+  .bottom a { color: var(--color-text-secondary); }
+</style>
