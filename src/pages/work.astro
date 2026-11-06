@@ -29,6 +29,25 @@ const articles = [
   { href: "/blog/ai-agents-for-small-business-the-5-use-cases-that-actually-make-money-in-2026/", title: "AI Agents for Small Business: The 5 Use Cases That Make Money", tag: "SEO article" },
 ];
 
+// Data & research samples (Upwork catalog listings link to these anchors). Built from our own stores' data.
+const research = [
+  { id: "keyword-research", img: "/work/reports/keyword-research/cover.png", title: "E-commerce keyword research",
+    note: "Keyword universe with volume, CPC, competition and intent, clusters, country comparison, and rewritten listing titles and tags. Built from our own Shopify store's data.",
+    links: [{ href: "/work/reports/keyword-research/ecommerce-keyword-research-sample.pdf", label: "Sample report (PDF)" }] },
+  { id: "product-research", img: "/work/reports/product-research/cover.png", title: "E-commerce product & market research",
+    note: "Product ideas scored on demand and competition, Google Shopping price bands, niche deep dives and a launch shortlist. From research for our own print-on-demand stores.",
+    links: [{ href: "/work/reports/product-research/ecommerce-product-research-sample.pdf", label: "Sample report (PDF)" }] },
+  { id: "seo-audit", img: "/work/reports/seo-audit/cover.png", title: "Shopify SEO audit + AI-search baseline",
+    note: "Health score, crawl and indexing, on-page, schema and trust pages, then a prioritised fix plan. Plus an AI-search (GEO) baseline: how AI answers describe a brand against competitors.",
+    links: [{ href: "/work/reports/seo-audit/shopify-seo-audit-sample.pdf", label: "SEO audit (PDF)" },
+            { href: "/work/reports/geo-baseline/seo-geo-baseline-sample.pdf", label: "AI-search baseline (PDF)" }] },
+  { id: "web-scraping", img: "/work/reports/web-scraping/cover.png", title: "Web scraping to a clean dataset",
+    note: "A large public catalogue scraped, cleaned and de-duplicated, with a data dictionary, QA checks and insight charts.",
+    links: [{ href: "/work/reports/web-scraping/web-scraping-sample-report.pdf", label: "Sample report (PDF)" },
+            { href: "/work/reports/web-scraping/sample-dataset.xlsx", label: "Sample dataset (Excel)" },
+            { href: "/work/reports/web-scraping/sample-dataset.csv", label: "CSV" }] },
+];
+
 const reports = [
   { href: "/downloads/leadflow-ai-leverage-blueprint.pdf", title: "AI Leverage Blueprint", note: "Designed PDF guide: where AI saves time in a small company, with a self-check" },
   { href: "/downloads/leadflow-gdpr-ai-checklist.pdf", title: "GDPR & AI Checklist", note: "Designed PDF checklist for using AI tools with personal data" },
@@ -37,7 +56,7 @@ const reports = [
 
 <Base
   title="Work samples — Gergely Racz"
-  description="Writing, video and report samples by Gergely Racz: technical articles, research reports, scripts and AI-produced explainer videos."
+  description="Samples by Gergely Racz: e-commerce keyword and product research, SEO audits, web scraping datasets, technical articles and AI UGC videos."
   noindex={true}
 >
   <header class="top">
@@ -49,12 +68,26 @@ const reports = [
   <main class="body">
     <div class="wrap">
       <p class="eyebrow">Work samples</p>
-      <h1>Gergely Racz — writing, research &amp; AI video</h1>
+      <h1>Gergely Racz — research, SEO, data &amp; AI video</h1>
       <p class="lede">
-        PhD in Engineering (Cambridge), 10+ years in AI, based in Budapest (CET). I write technical
-        articles, research and competitive reports, video scripts, and produce AI videos. Everything below
+        PhD in Engineering (Cambridge), 10+ years in AI, based in Budapest (CET). I make keyword and
+        product research reports, SEO audits, scraped datasets, technical articles and AI UGC videos. Everything below
         is my own published work.
       </p>
+
+      <h2>Research, SEO &amp; data samples</h2>
+      <div class="research">
+        {research.map((r) => (
+          <section class="card rs" id={r.id}>
+            <a href={r.links[0].href} target="_blank" rel="noopener"><img src={r.img} alt={`${r.title} sample cover`} loading="lazy" /></a>
+            <div>
+              <span class="card-title">{r.title}</span>
+              <span class="card-note">{r.note}</span>
+              <span class="rs-links">{r.links.map((l) => <a href={l.href} target="_blank" rel="noopener">{l.label}</a>)}</span>
+            </div>
+          </section>
+        ))}
+      </div>
 
       <h2>White papers</h2>
       <div class="grid two">
@@ -67,7 +100,7 @@ const reports = [
         ))}
       </div>
 
-      <h2>UGC-style videos with AI presenters</h2>
+      <h2 id="ugc">UGC-style videos with AI presenters</h2>
       <div class="grid ugc">
         {ugc.map((v) => (
           <figure class="vid">
@@ -118,7 +151,7 @@ const reports = [
       <h2>How I work</h2>
       <ol class="steps">
         <li><b>Brief.</b> Goal, audience, length, tone and the one action the reader should take.</li>
-        <li><b>Research with real data.</b> Search demand and competitor data (DataForSEO), archived pages, reviews, forums. Every number is sourced.</li>
+        <li><b>Research with real data.</b> Google search demand and competitor data, archived pages, reviews, forums. Every number is sourced.</li>
         <li><b>Draft.</b> Clear structure, short sentences, written for one reader. Code is run before it goes in.</li>
         <li><b>Check.</b> Fact check against the sources, then an edit for clarity and length.</li>
         <li><b>Deliver.</b> Google Doc, Markdown, PDF or video file, with one round of changes included.</li>
@@ -174,6 +207,12 @@ const reports = [
   .steps { padding-left: 20px; }
   .steps li { margin-bottom: 6px; }
   .steps b { color: var(--color-text-primary); }
+  .research { display: flex; flex-direction: column; gap: 16px; }
+  .card.rs { display: grid; grid-template-columns: 180px 1fr; gap: 18px; align-items: start; scroll-margin-top: 20px; }
+  .card.rs img { width: 100%; aspect-ratio: 3 / 4; object-fit: cover; object-position: top; border-radius: 6px; border: 1px solid var(--color-border); }
+  .card.rs > div { display: flex; flex-direction: column; gap: 6px; }
+  .rs-links { display: flex; flex-wrap: wrap; gap: 6px 16px; font-size: 13.5px; font-weight: 600; margin-top: 4px; }
+  @media (max-width: 640px) { .card.rs { grid-template-columns: 1fr; } .card.rs img { max-width: 220px; } }
   .bottom { border-top: 1px solid var(--color-border); margin-top: 30px; padding: 22px 0 34px; font-size: 12px; color: var(--color-text-secondary); }
   .bottom a { color: var(--color-text-secondary); }
 </style>
