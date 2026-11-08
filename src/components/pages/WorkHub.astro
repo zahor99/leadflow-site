@@ -1,0 +1,102 @@
+---
+// Samples hub body (EN /work/, HU /hu/work/): hero with real pieces, sticky category menu, one shelf per category.
+import WorkFrame from "../WorkFrame.astro";
+import SampleShelf from "../SampleShelf.astro";
+import { categories, total, t, type Lang } from "../../data/samples";
+
+interface Props { lang: Lang }
+const { lang } = Astro.props;
+const G = "/work/gallery";
+const C = {
+  en: {
+    title: "Work samples",
+    desc: "Open real samples: SEO reports, research, articles, social posts, UGC ads and videos, white papers, lead magnets, product mockups and print design.",
+    h1: "Open the work before you book the call",
+    lede: `${total} finished samples in ${categories.length} categories. Reports open as PDFs, videos play on this page, posts open full size. Each one was made for our own products or for a made-up demo brand, because client work stays private.`,
+    who: "Gergely Racz (PhD, Cambridge) builds the AI agents that produce this work and checks every piece before it ships.",
+    menu: "Sample categories", collage: "A few of the samples",
+  },
+  hu: {
+    title: "Munkaminták",
+    desc: "Nyisson meg valódi mintákat: SEO-jelentések, kutatások, cikkek, közösségimédia-posztok, UGC-hirdetések és videók, szakmai anyagok, termékmockupok és nyomdai anyagok.",
+    h1: "Nézze meg a munkát, mielőtt időpontot foglal",
+    lede: `${total} kész minta, ${categories.length} kategóriában. A jelentések PDF-ként nyílnak meg, a videók itt az oldalon indulnak, a posztok teljes méretben. Mindegyik a saját termékeinkhez vagy kitalált demómárkához készült, mert az ügyfélmunkák bizalmasak. Maguk a minták angol nyelvűek.`,
+    who: "Az anyagokat előállító AI-ügynököket Rácz Gergely (PhD, Cambridge) fejleszti, és minden darabot ő ellenőriz, mielőtt kiadja a kezéből.",
+    menu: "Mintakategóriák", collage: "Néhány minta",
+  },
+}[lang];
+const collage = [
+  { img: `${G}/social/medspa-myth-or-fact.webp`, to: "#social", cls: "c1" },
+  { img: `${G}/highlights/seo-audit.webp`, to: "#seo", cls: "c2" },
+  { img: "/work/videos/scalepod-ugc.jpg", to: "#video", cls: "c3" },
+  { img: `${G}/highlights/kw.webp`, to: "#seo", cls: "c4" },
+  { img: `${G}/merch/pod-4-listing.webp`, to: "#products", cls: "c5" },
+  { img: `${G}/highlights/wp-erp.webp`, to: "#papers", cls: "c6" },
+];
+---
+
+<WorkFrame title={C.title} description={C.desc} lang={lang}>
+  <section class="hero">
+    <div class="wf-wrap hero-in">
+      <div class="copy">
+        <h1>{C.h1}</h1>
+        <p class="lede">{C.lede}</p>
+        <p class="who">{C.who}</p>
+      </div>
+      <div class="collage" aria-label={C.collage}>
+        {collage.map((c) => (
+          <a class={`tile ${c.cls}`} href={c.to} tabindex="-1" aria-hidden="true"><img src={c.img} alt="" loading="eager" decoding="async" /></a>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <nav class="cats" aria-label={C.menu}>
+    <div class="wf-wrap cats-in">
+      {categories.map((c) => (<a href={`#${c.slug}`}>{t(c.title, lang)}<span>{c.items.length}</span></a>))}
+    </div>
+  </nav>
+
+  <div class="wf-wrap shelves">
+    {categories.map((c, i) => <SampleShelf category={c} lang={lang} eager={i === 0} />)}
+  </div>
+</WorkFrame>
+
+<style>
+  .hero { padding-block: clamp(40px, 6vw, 88px) clamp(32px, 4vw, 56px); overflow: hidden; }
+  .hero-in { display: grid; grid-template-columns: minmax(0, 1fr) minmax(0, 1fr); gap: clamp(28px, 5vw, 72px); align-items: center; }
+  @media (max-width: 900px) { .hero-in { grid-template-columns: minmax(0, 1fr); } }
+  h1 { font-size: clamp(38px, 5.4vw, 66px); line-height: 1.03; letter-spacing: -0.03em; margin: 0 0 22px; text-wrap: balance; }
+  .lede { font-size: clamp(16.5px, 1.4vw, 18.5px); line-height: 1.7; color: #b4b4c2; max-width: 56ch; margin: 0 0 16px; text-wrap: pretty; }
+  .who { font-size: 15px; line-height: 1.6; color: var(--color-text-primary); max-width: 52ch; margin: 0; padding-top: 16px; border-top: 1px solid var(--color-border); }
+
+  .collage { display: grid; grid-template-columns: repeat(6, minmax(0, 1fr)); grid-template-rows: repeat(6, clamp(40px, 5.2vw, 66px)); gap: 10px; }
+  .tile { display: block; overflow: hidden; border-radius: 12px; border: 1px solid var(--color-border); background: #fff;
+    animation: rise .8s cubic-bezier(.22, 1, .36, 1) both; transition: transform .35s cubic-bezier(.22, 1, .36, 1), border-color .2s; }
+  .tile img { width: 100%; height: 100%; object-fit: cover; object-position: top left; display: block; }
+  .tile:hover { transform: translateY(-4px); border-color: var(--color-accent); }
+  .c1 { grid-area: 1 / 1 / 5 / 3; animation-delay: .05s; }
+  .c2 { grid-area: 1 / 3 / 4 / 5; animation-delay: .12s; }
+  .c2 img { object-position: left center; }
+  .c3 { grid-area: 1 / 5 / 6 / 7; animation-delay: .19s; }
+  .c4 { grid-area: 4 / 3 / 7 / 5; animation-delay: .26s; }
+  .c5 { grid-area: 5 / 1 / 7 / 3; animation-delay: .33s; }
+  .c6 { grid-area: 6 / 5 / 7 / 7; animation-delay: .4s; }
+  .c6 img { object-position: center 20%; }
+  @keyframes rise { from { opacity: 0; transform: translateY(14px) scale(.98); } to { opacity: 1; transform: none; } }
+  @media (max-width: 520px) { .collage { grid-template-rows: repeat(6, 44px); gap: 8px; } }
+
+  .cats { position: sticky; top: 60px; z-index: 10; background: color-mix(in oklch, var(--color-bg-deep) 94%, transparent);
+    backdrop-filter: blur(10px); border-block: 1px solid var(--color-border); }
+  .cats-in { display: flex; gap: 6px; overflow-x: auto; padding-block: 10px; scrollbar-width: none; }
+  .cats-in::-webkit-scrollbar { display: none; }
+  .cats a { flex: 0 0 auto; display: inline-flex; align-items: center; gap: 8px; font-size: 13.5px; color: #b4b4c2; text-decoration: none;
+    padding: 7px 12px; border-radius: 999px; border: 1px solid transparent; transition: color .2s, border-color .2s, background .2s; }
+  .cats a:hover { color: var(--color-text-primary); border-color: var(--color-border); background: var(--color-bg-elevated); }
+  .cats a:focus-visible { outline: 2px solid var(--color-accent); outline-offset: 1px; }
+  .cats span { font-size: 11.5px; font-weight: 650; color: var(--color-text-primary); background: var(--color-bg-subtle); border-radius: 999px; padding: 1px 7px; }
+
+  .shelves { padding-bottom: 40px; }
+  .shelves :global(.shelf:first-child) { border-top: 0; }
+  @media (prefers-reduced-motion: reduce) { .tile { animation: none; } }
+</style>

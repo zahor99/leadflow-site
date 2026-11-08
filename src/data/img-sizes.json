@@ -1,0 +1,554 @@
+{
+"/work/gallery/highlights/cold.webp": [
+1200,
+752
+],
+"/work/gallery/highlights/geo.webp": [
+1200,
+401
+],
+"/work/gallery/highlights/kw.webp": [
+1200,
+979
+],
+"/work/gallery/highlights/lm-blue.webp": [
+1200,
+666
+],
+"/work/gallery/highlights/lm-gdpr.webp": [
+1200,
+849
+],
+"/work/gallery/highlights/prod.webp": [
+1200,
+895
+],
+"/work/gallery/highlights/scrape.webp": [
+1200,
+1108
+],
+"/work/gallery/highlights/seo-audit.webp": [
+1200,
+707
+],
+"/work/gallery/highlights/seodesk-lf.webp": [
+1200,
+359
+],
+"/work/gallery/highlights/seodesk-sp.webp": [
+1200,
+359
+],
+"/work/gallery/highlights/social-set.webp": [
+1400,
+427
+],
+"/work/gallery/highlights/wp-erp.webp": [
+1200,
+886
+],
+"/work/gallery/highlights/wp-mcp.webp": [
+1200,
+693
+],
+"/work/gallery/lead/deck-skin-barrier.webp": [
+640,
+360
+],
+"/work/gallery/lead/ebook-glow-guide.webp": [
+640,
+905
+],
+"/work/gallery/lead/ebook-skin-barrier.webp": [
+640,
+905
+],
+"/work/gallery/lead/leadflow-ai-leverage-blueprint.webp": [
+640,
+905
+],
+"/work/gallery/lead/leadflow-gdpr-ai-checklist.webp": [
+640,
+905
+],
+"/work/gallery/lead/manual-lash-extension.webp": [
+640,
+905
+],
+"/work/gallery/lead/manual-lash-mapping.webp": [
+640,
+905
+],
+"/work/gallery/merch/pod-1-pattern.webp": [
+640,
+640
+],
+"/work/gallery/merch/pod-2-print-file.webp": [
+640,
+640
+],
+"/work/gallery/merch/pod-3-mockup.webp": [
+640,
+640
+],
+"/work/gallery/merch/pod-4-listing.webp": [
+640,
+640
+],
+"/work/gallery/merch/pod-5-lifestyle.webp": [
+640,
+640
+],
+"/work/gallery/merch/ui-chat-board.webp": [
+640,
+400
+],
+"/work/gallery/merch/ui-print-pack.webp": [
+640,
+400
+],
+"/work/gallery/merch/ui-review-list.webp": [
+640,
+1385
+],
+"/work/gallery/merch/ui-review-mobile.webp": [
+640,
+1385
+],
+"/work/gallery/print/summit-fascia.webp": [
+640,
+323
+],
+"/work/gallery/print/summit-flyer.webp": [
+640,
+1786
+],
+"/work/gallery/print/summit-poster.webp": [
+620,
+1236
+],
+"/work/gallery/social/b2b-carousel-1.webp": [
+640,
+800
+],
+"/work/gallery/social/b2b-carousel-2.webp": [
+640,
+800
+],
+"/work/gallery/social/b2b-carousel-4.webp": [
+640,
+800
+],
+"/work/gallery/social/b2b-webinar-title.webp": [
+640,
+360
+],
+"/work/gallery/social/barber-fresh-fade.webp": [
+640,
+800
+],
+"/work/gallery/social/coach-ig-post.webp": [
+640,
+800
+],
+"/work/gallery/social/esthetician-before-after.webp": [
+640,
+800
+],
+"/work/gallery/social/facial-carousel-cover.webp": [
+640,
+800
+],
+"/work/gallery/social/fitness-ig-post.webp": [
+640,
+800
+],
+"/work/gallery/social/fitness-yt-thumb.webp": [
+640,
+360
+],
+"/work/gallery/social/lash-fills.webp": [
+640,
+800
+],
+"/work/gallery/social/medspa-carousel-1.webp": [
+640,
+800
+],
+"/work/gallery/social/medspa-myth-or-fact.webp": [
+640,
+800
+],
+"/work/gallery/social/nails-cuticle-care.webp": [
+640,
+640
+],
+"/work/gallery/social/skincare-glow-ritual.webp": [
+640,
+800
+],
+"/work/gallery/social/x-infographic-five-cases.webp": [
+640,
+640
+],
+"/work/gallery/social/x-infographic-five-walls.webp": [
+640,
+640
+],
+"/work/gallery/lead/deck-skin-barrier.jpg": [
+1800,
+1013
+],
+"/work/gallery/lead/ebook-glow-guide.jpg": [
+1240,
+1754
+],
+"/work/gallery/lead/ebook-skin-barrier.jpg": [
+1240,
+1754
+],
+"/work/gallery/lead/manual-lash-extension.jpg": [
+1240,
+1754
+],
+"/work/gallery/lead/manual-lash-mapping.jpg": [
+1240,
+1754
+],
+"/work/gallery/merch/pod-1-pattern.jpg": [
+640,
+640
+],
+"/work/gallery/merch/pod-2-print-file.jpg": [
+640,
+640
+],
+"/work/gallery/merch/pod-3-mockup.jpg": [
+640,
+640
+],
+"/work/gallery/merch/pod-4-listing.jpg": [
+640,
+640
+],
+"/work/gallery/merch/pod-5-lifestyle.jpg": [
+900,
+900
+],
+"/work/gallery/merch/ui-chat-board.jpg": [
+1800,
+1125
+],
+"/work/gallery/merch/ui-print-pack.jpg": [
+1800,
+1125
+],
+"/work/gallery/merch/ui-review-list.jpg": [
+780,
+1688
+],
+"/work/gallery/merch/ui-review-mobile.jpg": [
+780,
+1688
+],
+"/work/gallery/print/summit-fascia.jpg": [
+1800,
+908
+],
+"/work/gallery/print/summit-flyer.jpg": [
+840,
+2344
+],
+"/work/gallery/print/summit-poster.jpg": [
+620,
+1236
+],
+"/work/gallery/social/b2b-carousel-1.jpg": [
+1080,
+1350
+],
+"/work/gallery/social/b2b-carousel-2.jpg": [
+1080,
+1350
+],
+"/work/gallery/social/b2b-carousel-4.jpg": [
+1080,
+1350
+],
+"/work/gallery/social/b2b-webinar-title.jpg": [
+1800,
+1013
+],
+"/work/gallery/social/barber-fresh-fade.jpg": [
+1080,
+1350
+],
+"/work/gallery/social/coach-ig-post.jpg": [
+1080,
+1350
+],
+"/work/gallery/social/esthetician-before-after.jpg": [
+1080,
+1350
+],
+"/work/gallery/social/facial-carousel-cover.jpg": [
+1080,
+1350
+],
+"/work/gallery/social/fitness-ig-post.jpg": [
+1080,
+1350
+],
+"/work/gallery/social/fitness-yt-thumb.jpg": [
+1280,
+720
+],
+"/work/gallery/social/lash-fills.jpg": [
+1080,
+1350
+],
+"/work/gallery/social/medspa-carousel-1.jpg": [
+1080,
+1350
+],
+"/work/gallery/social/medspa-myth-or-fact.jpg": [
+1080,
+1350
+],
+"/work/gallery/social/nails-cuticle-care.jpg": [
+1080,
+1080
+],
+"/work/gallery/social/skincare-glow-ritual.jpg": [
+1080,
+1350
+],
+"/work/gallery/social/x-infographic-five-cases.jpg": [
+1800,
+1800
+],
+"/work/gallery/social/x-infographic-five-walls.jpg": [
+1800,
+1800
+],
+"/work/videos/nocta-review-ugc.jpg": [
+540,
+960
+],
+"/work/videos/scalepod-ai-demo-review.jpg": [
+1280,
+720
+],
+"/work/videos/scalepod-ai-demo.jpg": [
+960,
+540
+],
+"/work/videos/scalepod-ugc.jpg": [
+540,
+960
+],
+"/work/reports/thumb-cold-email.png": [
+1600,
+1200
+],
+"/work/reports/thumb-keyword-research.png": [
+1600,
+1200
+],
+"/work/reports/thumb-product-research.png": [
+1600,
+1200
+],
+"/work/reports/thumb-seo-audit.png": [
+1600,
+1200
+],
+"/work/reports/thumb-ugc.png": [
+1600,
+1200
+],
+"/work/reports/thumb-web-scraping.png": [
+1600,
+1200
+],
+"/work/reports/cold-email/cover.png": [
+1600,
+2264
+],
+"/work/reports/cold-email/page-2.png": [
+1600,
+2264
+],
+"/work/reports/cold-email/page-3.png": [
+1600,
+2264
+],
+"/work/reports/geo-baseline/cover.png": [
+1600,
+2264
+],
+"/work/reports/keyword-research/cover.png": [
+1240,
+1755
+],
+"/work/reports/keyword-research/page-2.png": [
+1600,
+2265
+],
+"/work/reports/keyword-research/page-3.png": [
+1600,
+2265
+],
+"/work/reports/product-research/cover.png": [
+1600,
+2263
+],
+"/work/reports/product-research/page-2.png": [
+1600,
+2265
+],
+"/work/reports/product-research/page-3.png": [
+1600,
+2265
+],
+"/work/reports/seo-audit/cover.png": [
+1600,
+2265
+],
+"/work/reports/seo-audit/page-2.png": [
+1600,
+2265
+],
+"/work/reports/seo-audit/page-3.png": [
+1600,
+2265
+],
+"/work/reports/web-scraping/cover.png": [
+1600,
+2263
+],
+"/work/reports/web-scraping/page-2.png": [
+1600,
+2265
+],
+"/work/reports/web-scraping/page-3.png": [
+1600,
+902
+],
+"/work/reports/seo-desk/seo-desk-baseline-leadflowautomation.webp": [
+640,
+906
+],
+"/work/reports/seo-desk/seo-desk-baseline-scalepod.webp": [
+640,
+906
+],
+"/work/whitepapers/erp-discovery-agent-cover.png": [
+600,
+848
+],
+"/work/whitepapers/merch-mcp-server-cover.png": [
+600,
+849
+],
+"/videos/poster_anonymizer.jpg": [
+960,
+540
+],
+"/videos/poster_quoting.jpg": [
+960,
+540
+],
+"/videos/poster_rag.jpg": [
+960,
+540
+],
+"/videos/poster_shadowai.jpg": [
+960,
+540
+],
+"/blog-heroes/rec5tFThD9vduEXCs.png": [
+1024,
+1024
+],
+"/blog-heroes/rec8OPAJ2FHCgEcP4.png": [
+1024,
+1024
+],
+"/blog-heroes/recBGgqw673LepaAV.png": [
+3000,
+3000
+],
+"/blog-heroes/recELK8mOUFtqB9nr.png": [
+1024,
+1024
+],
+"/blog-heroes/recerbt2LyZDjmXbo.png": [
+1024,
+1024
+],
+"/blog-heroes/recH5Cc9OohYaJ6vo.png": [
+1024,
+1024
+],
+"/blog-heroes/recHfNKjWHfkSPEDN.png": [
+1024,
+1024
+],
+"/blog-heroes/recIfvNaCzHdhAd8z.png": [
+1024,
+1024
+],
+"/blog-heroes/recJPiwxgvfYou0mC.png": [
+1024,
+1024
+],
+"/blog-heroes/reclookejX27sWob2.png": [
+3000,
+3000
+],
+"/blog-heroes/recM59nCafPzP3suz.png": [
+1024,
+1024
+],
+"/blog-heroes/recnptCeZu7P6t73z.png": [
+1024,
+1024
+],
+"/blog-heroes/recvcDf1JBDnPxnJA.png": [
+1024,
+1024
+],
+"/blog-heroes/recwxaOydEfhjHx1M.png": [
+1024,
+1024
+],
+"/blog-heroes/recXQSpsY4IBLDSz5.png": [
+1024,
+1024
+],
+"/images/case-erp.webp": [
+1024,
+576
+],
+"/images/case-estateops.webp": [
+1024,
+576
+],
+"/images/case-ml.webp": [
+1024,
+576
+],
+"/images/case-rag.webp": [
+1024,
+576
+],
+"/images/case-saas.webp": [
+1024,
+576
+],
+"/images/case-scalepod.webp": [
+1024,
+576
+]
+}

@@ -1,0 +1,7 @@
+---
+import WorkCategory from "../../../components/pages/WorkCategory.astro";
+import { categories } from "../../../data/samples";
+export function getStaticPaths() { return categories.map((c) => ({ params: { slug: c.slug } })); }
+const { slug } = Astro.params;
+---
+<WorkCategory lang="hu" slug={slug!} />
