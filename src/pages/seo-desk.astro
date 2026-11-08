@@ -1,150 +1,138 @@
 ---
-import Base from "../layouts/Base.astro";
+// SEO Desk product page (brand LeadFlow Automation, operator 2026-11-08). Server built, not deployed: the call to
+// action is a free sample digest (feeds the 20-site test) via the existing waitlist service. Prices = RATE-CARD-2026-11-08.
+// noindex until the server is live and the terms are final.
+import WorkFrame from "../components/WorkFrame.astro";
+import SampleShelf from "../components/SampleShelf.astro";
+import { bySlug } from "../data/samples";
 
-// SEO Desk product page (operator 2026-11-08: brand LeadFlow Automation, page on our own site).
-// The MCP server is built but not deployed yet, so the call to action is "a free sample digest for your site"
-// (feeds the 20-site digest test) and posts to the existing waitlist service. Prices = RATE-CARD-2026-11-08.
-// noindex until the server is live and the terms are final; flip `noindex` then.
 const WAITLIST_URL = "https://ops.leadflowautomation.net/waitlist/signup";
+const seo = bySlug("seo")!;
 
 const checks = [
-  { kind: "Google rank + AI Overview", title: "Where you rank, and who the AI answer cites",
-    note: "Your position in the top 30 for each keyword, next to up to three competitors. For every keyword with an AI Overview: does it cite you, or them?" },
-  { kind: "Local map grid", title: "How far your map listing reaches",
-    note: "Google Maps rank checked on a 3×3, 5×5 or 7×7 grid of points 1 km apart around your business. See the streets where you drop off." },
-  { kind: "Site audit", title: "What is broken on the pages that matter",
-    note: "Homepage and up to nine key pages: missing titles, descriptions and H1s, broken pages, slow mobile load (Lighthouse)." },
-  { kind: "Backlinks", title: "Links won and lost",
-    note: "Referring domains, compared week to week, so a lost link shows up while it can still be won back." },
+  ["Google rank + AI Overview", "Your position in the top 30 for each keyword, next to up to three competitors. On every keyword with an AI Overview: does it cite you, or them?"],
+  ["Local map grid", "Google Maps rank on a 3×3, 5×5 or 7×7 grid of points 1 km apart around your business, so you see the streets where you drop off."],
+  ["Site audit", "Homepage and up to nine key pages: missing titles, descriptions and H1s, broken pages, slow mobile load."],
+  ["Backlinks", "Referring domains compared week to week, so a lost link shows up while it can still be won back."],
 ];
-
 const prices = [
-  ["Rank + AI Overview check", "2 credits + 1 per 10 keywords", "20 keywords = 4 credits ($2)"],
-  ["Local map grid", "3×3 = 2 · 5×5 = 4 · 7×7 = 7 credits", "5×5 = $2"],
-  ["Site audit", "3 credits", "$1.50"],
-  ["Backlinks", "2 credits", "$1"],
-  ["Keyword ideas", "1 credit", "$0.50"],
-  ["Weekly digest, fix list", "free", "built from checks you ran"],
+  ["Rank + AI Overview", "2 + 1 per 10 keywords", "20 keywords: 4 credits, $2"],
+  ["Local map grid", "3×3: 2 · 5×5: 4 · 7×7: 7", "5×5: $2"],
+  ["Site audit", "3", "$1.50"],
+  ["Backlinks", "2", "$1"],
+  ["Keyword ideas", "1", "$0.50"],
+  ["Weekly digest and fix list", "free", "built from checks you ran"],
 ];
-
 const faq = [
   ["Do I need another SEO tool?", "No. The desk pulls Google results, maps, page checks and link data itself. You need Claude with custom connectors enabled."],
-  ["Who writes the fixes?", "Your own Claude. Each fix in the digest comes with its evidence (the keyword, the competitor that is cited, the slow page), so Claude can draft the new title, the paragraph or the outreach e-mail with you."],
-  ["Which countries and languages?", "UK, US, Ireland, Canada, Australia, Hungary, Germany, Austria, Switzerland, the Netherlands, Belgium, Sweden, Denmark, Poland, Czechia, France, Spain, Italy and Romania."],
-  ["What if a check fails?", "A failed check is free. If only some keywords fail, you pay for the ones that worked. Claude shows you the cost and waits for your yes before every run."],
-  ["Is there a subscription?", "No. You top up credits from $50 and spend them as you go. The weekly run is something you switch on and off."],
-  ["What about ChatGPT and Perplexity answers?", "Today the desk checks Google's AI Overview. Other AI answer engines are on the list, not in the product yet."],
+  ["Who writes the fixes?", "Your own Claude. Each fix arrives with its evidence (the keyword, the competitor that is cited, the slow page), so Claude can draft the new title, the paragraph or the outreach e-mail with you."],
+  ["Which countries?", "UK, US, Ireland, Canada, Australia, Hungary, Germany, Austria, Switzerland, the Netherlands, Belgium, Sweden, Denmark, Poland, Czechia, France, Spain, Italy and Romania."],
+  ["What if a check fails?", "A failed check is free. If some keywords fail, you pay only for the ones that worked. Claude shows the cost and waits for your yes before every run."],
+  ["Is there a subscription?", "No. Top up credits from $50 and spend them as you go. The weekly run is a switch you turn on and off."],
+  ["What about ChatGPT and Perplexity?", "Today the desk checks Google's AI Overview. Other answer engines are planned, not in the product yet."],
 ];
 ---
 
-<Base
+<WorkFrame
   title="SEO Desk for Claude"
   description="Weekly Google rank, AI Overview citations, local map grid, site audit and backlinks inside your own Claude, with a digest of what changed and what to fix. Pay per check, no subscription."
-  noindex={true}
+  cta={false}
 >
-  <header class="top">
-    <div class="wrap"><a class="wordmark" href="/">LEADFLOW<span>AUTOMATION</span></a></div>
-  </header>
-
-  <main class="body">
-    <div class="wrap">
-      <p class="eyebrow">SEO Desk · a connector for Claude</p>
-      <h1>Every week: where you rank, whether Google's AI answer cites you, and what to fix first</h1>
-      <p class="lede">
-        Connect the SEO Desk to your Claude. It checks your keywords, your local map ranking, your key pages and your
-        backlinks, then sends you a weekly digest: what moved, and up to seven fixes ranked by effect.
-        Claude writes the fixes with you, in your words.
-      </p>
-      <p><a class="cta" href="#sample">Get a free sample digest for your site</a></p>
-
-      <h2>What it checks</h2>
-      <div class="grid">
-        {checks.map((c) => (
-          <div class="card">
-            <span class="kind">{c.kind}</span>
-            <span class="card-title">{c.title}</span>
-            <span class="card-note">{c.note}</span>
-          </div>
-        ))}
-      </div>
-
-      <h2>The weekly digest</h2>
-      <div class="digest" aria-label="Example digest">
-        <p class="kind">Example · plumbing company, London · 20 keywords</p>
-        <p class="dh">What changed since last week</p>
-        <ul>
-          <li><b>"boiler repair london"</b> 14 → 8: back on page one.</li>
-          <li><b>"emergency plumber"</b>: the AI Overview now cites a competitor, not you.</li>
-          <li>2 referring domains lost, 1 won.</li>
-        </ul>
-        <p class="dh">What to fix this week</p>
-        <ol>
-          <li><b>Win back the AI Overview citation</b> on "emergency plumber": the cited page answers "how fast can you come out" in its first paragraph; yours does not.</li>
-          <li><b>Push "blocked drain" from position 11</b> to page one: the page has no H1 and a 3.9 s mobile load.</li>
-          <li><b>Reach the north of your map grid</b>: you rank 1–3 within 2 km, outside the top 10 beyond it.</li>
-        </ol>
-        <p class="small">Illustrative example. Your digest is built only from checks run on your site.</p>
-      </div>
-
-      <h2>How it works</h2>
-      <ol class="steps">
-        <li><b>Connect.</b> Add the SEO Desk as a custom connector in Claude and sign in.</li>
-        <li><b>Set up your site.</b> Tell Claude your domain, market, keywords and competitors. Short on keywords? Ask for ideas.</li>
-        <li><b>Approve the cost.</b> Claude quotes the credits for the checks you picked. Nothing runs before your yes.</li>
-        <li><b>Read the digest, fix with Claude.</b> Run it once, or switch on the weekly run and get the digest by e-mail.</li>
-      </ol>
-
-      <h2>Pricing: pay per check</h2>
-      <p>1 credit = $0.50. Top up from $50. No subscription, no seats.</p>
-      <div class="tablewrap">
-        <table>
-          <thead><tr><th>Check</th><th>Credits</th><th>Example</th></tr></thead>
-          <tbody>
-            {prices.map(([a, b, c]) => (<tr><td>{a}</td><td>{b}</td><td>{c}</td></tr>))}
-          </tbody>
-        </table>
-      </div>
-      <p>
-        <b>A typical site</b>, with 20 keywords and backlinks checked weekly and an audit once a month, uses about
-        <b>29 credits a month (≈ $15)</b>. A local business that adds a weekly 5×5 map grid: about <b>46 credits (≈ $23)</b>.
-        Failed checks are free.
-      </p>
-
-      <h2>Questions</h2>
-      <dl class="faq">
-        {faq.map(([q, a]) => (<><dt>{q}</dt><dd>{a}</dd></>))}
-      </dl>
-
-      <section class="wait" id="sample">
-        <h2>Free sample digest for your site</h2>
-        <p>
-          We are opening the desk to a first group of sites. Send us your site and up to ten keywords: we run the checks
-          once and e-mail you the digest, free. You also get early access when sign-up opens.
+  <section class="hero">
+    <div class="wf-wrap hero-in">
+      <div class="copy">
+        <p class="tag">SEO Desk · a connector for Claude</p>
+        <h1>Where you rank, whether Google's AI answer cites you, and what to fix first</h1>
+        <p class="lede">
+          The desk checks your keywords, your map listing, your key pages and your backlinks every week, then sends a
+          digest: what moved, and up to seven fixes ranked by effect. Your Claude writes the fixes with you.
         </p>
-        <form id="wl" novalidate>
-          <div class="row">
-            <label>E-mail<input name="email" type="email" required autocomplete="email" /></label>
-            <label>Your site<input name="site" type="text" required placeholder="example.com" /></label>
-          </div>
-          <div class="row">
-            <label>Country<input name="market" type="text" placeholder="e.g. United Kingdom" /></label>
-            <label>Main competitors (optional)<input name="competitors" type="text" placeholder="rival1.com, rival2.com" /></label>
-          </div>
-          <label>Keywords (up to 10, comma separated)<input name="keywords" type="text" placeholder="boiler repair london, emergency plumber" /></label>
-          <label class="hp" aria-hidden="true">Website<input name="website" type="text" tabindex="-1" autocomplete="off" /></label>
-          <button type="submit">Send me the sample digest</button>
-          <p class="msg" id="wl-msg" role="status"></p>
-          <p class="small">We use your details only to run the sample and tell you about the SEO Desk. <a href="/privacy/">Privacy</a></p>
-        </form>
-      </section>
+        <div class="actions">
+          <a class="btn" href="#sample">Get a free sample digest</a>
+          <a class="ghost" href="#pricing">See pricing</a>
+        </div>
+      </div>
 
-      <p class="small more">Also from the same desk: articles, UGC videos and product demos. <a href="/ai-marketing-desk/">See the AI marketing desk →</a></p>
+      <figure class="digest" aria-label="Example weekly digest">
+        <figcaption><span class="dot"></span>Weekly digest · plumbing company, London · example</figcaption>
+        <p class="dh">What changed</p>
+        <ul class="moves">
+          <li><b class="up">14 → 8</b><span>"boiler repair london" is back on page one</span></li>
+          <li><b class="down">lost</b><span>AI Overview for "emergency plumber" now cites a competitor</span></li>
+          <li><b class="flat">−2 / +1</b><span>referring domains lost / won</span></li>
+        </ul>
+        <p class="dh">Fix this week</p>
+        <ol class="fixes">
+          <li><b>Win back the AI Overview citation.</b> The cited page answers "how fast can you come out" in its first paragraph; yours does not.</li>
+          <li><b>Push "blocked drain" from 11 to page one.</b> No H1, 3.9 s mobile load.</li>
+          <li><b>Reach the north of your map grid.</b> You rank 1–3 within 2 km, outside the top 10 beyond it.</li>
+        </ol>
+      </figure>
     </div>
-  </main>
+  </section>
 
-  <footer class="bottom">
-    <div class="wrap">© Lead Flow Automation · Gergely Racz, PhD (Cambridge) · Budapest · <a href="/privacy/">Privacy</a></div>
-  </footer>
+  <section class="wf-wrap band">
+    <h2>Four checks, one digest</h2>
+    <dl class="checks">
+      {checks.map(([t, d]) => (<div><dt>{t}</dt><dd>{d}</dd></div>))}
+    </dl>
+  </section>
+
+  <section class="wf-wrap band">
+    <h2>How a run works</h2>
+    <ol class="steps">
+      <li><b>Connect.</b> Add the SEO Desk as a custom connector in Claude and sign in.</li>
+      <li><b>Set up your site.</b> Domain, country, keywords, competitors. Short on keywords? Ask for ideas.</li>
+      <li><b>Approve the cost.</b> Claude quotes the credits for the checks you picked. Nothing runs before your yes.</li>
+      <li><b>Fix with Claude.</b> Read the digest, or switch on the weekly run and get it by e-mail.</li>
+    </ol>
+  </section>
+
+  <section class="wf-wrap band" id="pricing">
+    <h2>Pay per check</h2>
+    <p class="note">1 credit = $0.50. Top up from $50. No subscription, no seats. Failed checks are free.</p>
+    <div class="tablewrap">
+      <table>
+        <thead><tr><th scope="col">Check</th><th scope="col">Credits</th><th scope="col">Example</th></tr></thead>
+        <tbody>{prices.map(([a, b, c]) => (<tr><th scope="row">{a}</th><td>{b}</td><td>{c}</td></tr>))}</tbody>
+      </table>
+    </div>
+    <div class="typical">
+      <p><b>≈ $15 a month</b><span>a typical site: 20 keywords and backlinks weekly, audit monthly (about 29 credits)</span></p>
+      <p><b>≈ $23 a month</b><span>a local business adding a weekly 5×5 map grid (about 46 credits)</span></p>
+    </div>
+  </section>
+
+  <div class="wf-wrap"><SampleShelf category={{ ...seo, title: "SEO reports we have made", price: undefined }} items={seo.items} more={true} /></div>
+
+  <section class="wf-wrap band">
+    <h2>Questions</h2>
+    <dl class="faq">{faq.map(([q, a]) => (<div><dt>{q}</dt><dd>{a}</dd></div>))}</dl>
+  </section>
+
+  <section class="wf-wrap" id="sample">
+    <div class="wait">
+      <div class="wait-copy">
+        <h2>Free sample digest for your site</h2>
+        <p>We are opening the desk to a first group of sites. Send your site and up to ten keywords: we run the checks once and e-mail you the digest, free, with early access when sign-up opens.</p>
+      </div>
+      <form id="wl" novalidate>
+        <div class="row">
+          <label>E-mail<input name="email" type="email" required autocomplete="email" /></label>
+          <label>Your site<input name="site" type="text" required placeholder="example.com" /></label>
+        </div>
+        <div class="row">
+          <label>Country<input name="market" type="text" placeholder="United Kingdom" /></label>
+          <label>Competitors (optional)<input name="competitors" type="text" placeholder="rival1.com, rival2.com" /></label>
+        </div>
+        <label>Keywords, up to 10, comma separated<input name="keywords" type="text" placeholder="boiler repair london, emergency plumber" /></label>
+        <label class="hp" aria-hidden="true">Website<input name="website" type="text" tabindex="-1" autocomplete="off" /></label>
+        <button type="submit">Send me the sample digest</button>
+        <p class="msg" id="wl-msg" role="status"></p>
+        <p class="small">We use your details only to run the sample and tell you about the SEO Desk. <a href="/privacy/">Privacy</a></p>
+      </form>
+    </div>
+  </section>
 
   <script define:vars={{ WAITLIST_URL }}>
     const form = document.getElementById("wl");
@@ -155,75 +143,97 @@ const faq = [
       if (!/^[^@\s]+@[^@\s]+\.[A-Za-z]{2,}$/.test(f.email || "")) { msg.textContent = "Please enter a valid e-mail."; return; }
       if (!(f.site || "").trim()) { msg.textContent = "Please enter your site."; return; }
       // the waitlist service keeps email/name/company/interest; the sample request travels in `interest`
-      const data = {
-        email: f.email, company: f.site, website: f.website, page: "seo-desk",
-        interest: `SEO Desk sample digest | site: ${f.site} | market: ${f.market || "-"} | keywords: ${f.keywords || "-"} | competitors: ${f.competitors || "-"}`,
-      };
+      const data = { email: f.email, company: f.site, website: f.website, page: "seo-desk",
+        interest: `SEO Desk sample digest | site: ${f.site} | market: ${f.market || "-"} | keywords: ${f.keywords || "-"} | competitors: ${f.competitors || "-"}` };
       const btn = form.querySelector("button");
-      btn.disabled = true;
-      msg.textContent = "Sending…";
+      btn.disabled = true; msg.textContent = "Sending…";
       try {
         const r = await fetch(WAITLIST_URL, { method: "POST", headers: { "Content-Type": "application/json" }, body: JSON.stringify(data) });
         const j = await r.json().catch(() => ({}));
         if (r.ok && j.ok) { form.reset(); msg.textContent = "Thanks. We'll run the checks and e-mail you the digest."; }
         else { msg.textContent = j.error || "Something went wrong. Please try again."; }
-      } catch {
-        msg.textContent = "Network error. Please try again.";
-      } finally {
-        btn.disabled = false;
-      }
+      } catch { msg.textContent = "Network error. Please try again."; }
+      finally { btn.disabled = false; }
     });
   </script>
-</Base>
+</WorkFrame>
 
 <style>
-  .wrap { max-width: 900px; margin: 0 auto; padding: 0 16px; }
-  .top { border-bottom: 1px solid var(--color-border); padding: 18px 0; }
-  .wordmark { font-weight: 800; letter-spacing: 0.08em; font-size: 15px; color: var(--color-text-primary); text-decoration: none; }
-  .wordmark span { color: var(--color-accent); }
-  .body { padding: 44px 0 32px; }
-  .eyebrow { font-family: var(--font-mono); font-size: 12px; letter-spacing: 0.12em; text-transform: uppercase; color: var(--color-accent); margin-bottom: 8px; }
-  h1 { font-weight: 800; color: var(--color-text-primary); font-size: clamp(26px, 5vw, 40px); line-height: 1.15; margin-bottom: 14px; }
-  .lede { font-size: 16.5px; color: var(--color-text-secondary); line-height: 1.65; max-width: 700px; margin-bottom: 18px; }
-  h2 { font-weight: 700; color: var(--color-text-primary); font-size: 21px; margin: 44px 0 14px; }
-  p, li, dd, td { font-size: 15px; color: var(--color-text-secondary); line-height: 1.65; }
-  b { color: var(--color-text-primary); }
-  a { color: var(--color-accent); }
-  .small { font-size: 12.5px; }
-  .cta { display: inline-block; background: var(--color-accent); color: #fff; text-decoration: none; border-radius: 8px; padding: 12px 20px; font-weight: 650; }
-  .cta:hover { background: var(--color-accent-hover); }
-  .grid { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 16px; }
-  @media (max-width: 640px) { .grid { grid-template-columns: 1fr; } }
-  .card { display: flex; flex-direction: column; gap: 6px; padding: 16px; background: var(--color-bg-elevated); border: 1px solid var(--color-border); border-radius: 12px; }
-  .kind { font-family: var(--font-mono); font-size: 11.5px; letter-spacing: .06em; text-transform: uppercase; color: var(--color-accent); }
-  .card-title { color: var(--color-text-primary); font-weight: 650; font-size: 16px; }
-  .card-note { color: var(--color-text-secondary); font-size: 13.5px; line-height: 1.55; }
-  .digest { padding: 20px; background: var(--color-bg-elevated); border: 1px solid var(--color-border); border-radius: 12px; }
-  .digest .dh { color: var(--color-text-primary); font-weight: 700; margin: 14px 0 4px; }
-  .digest ul, .digest ol, .steps { padding-left: 22px; }
-  .digest ul { list-style: disc; } .digest ol, .steps { list-style: decimal; }
-  .digest li, .steps li { margin: 3px 0; }
-  .tablewrap { overflow-x: auto; margin: 10px 0 14px; }
-  table { width: 100%; border-collapse: collapse; min-width: 480px; }
-  th { text-align: left; font-size: 12.5px; text-transform: uppercase; letter-spacing: .05em; color: var(--color-text-secondary); padding: 8px 10px; border-bottom: 1px solid var(--color-border); }
-  td { padding: 9px 10px; border-bottom: 1px solid var(--color-border); font-size: 14.5px; }
-  td:first-child { color: var(--color-text-primary); font-weight: 600; }
-  .faq dt { color: var(--color-text-primary); font-weight: 650; margin-top: 14px; }
-  .faq dd { margin: 4px 0 0; }
-  .wait { margin-top: 48px; padding: 24px; border: 1px solid var(--color-accent); border-radius: 14px; background: var(--color-bg-elevated); }
-  .wait h2 { margin-top: 0; }
-  form { display: flex; flex-direction: column; gap: 12px; margin-top: 12px; }
+  .hero { padding-block: clamp(36px, 6vw, 84px) clamp(24px, 4vw, 48px); }
+  .hero-in { display: grid; grid-template-columns: minmax(0, 1.1fr) minmax(0, .9fr); gap: clamp(28px, 5vw, 64px); align-items: center; }
+  @media (max-width: 920px) { .hero-in { grid-template-columns: minmax(0, 1fr); } }
+  .tag { font-size: 14px; font-weight: 600; color: var(--color-accent); margin: 0 0 14px; }
+  h1 { font-size: clamp(34px, 4.8vw, 58px); line-height: 1.05; letter-spacing: -0.03em; margin: 0 0 18px; text-wrap: balance; }
+  .lede { font-size: clamp(16px, 1.4vw, 18px); line-height: 1.7; color: var(--color-text-secondary); max-width: 56ch; margin: 0; }
+  .actions { display: flex; gap: 12px; flex-wrap: wrap; margin-top: 26px; }
+  .btn, button { display: inline-block; background: var(--color-accent); color: #fff; text-decoration: none; font-weight: 650; font-size: 15px;
+    padding: 13px 22px; border-radius: 10px; border: 0; cursor: pointer; transition: background .2s; }
+  .btn:hover, button:hover { background: var(--color-accent-hover); }
+  .ghost { display: inline-block; color: var(--color-text-primary); text-decoration: none; font-weight: 600; padding: 12px 20px; border-radius: 10px; border: 1px solid var(--color-border); }
+  .ghost:hover { border-color: var(--color-accent); }
+
+  .digest { margin: 0; padding: 22px; border-radius: 16px; background: var(--color-bg-elevated); border: 1px solid var(--color-border);
+    box-shadow: 0 30px 60px -40px color-mix(in oklch, var(--color-accent) 70%, transparent); animation: lift .9s cubic-bezier(.22, 1, .36, 1) .1s both; }
+  @keyframes lift { from { opacity: 0; transform: translateY(16px); } to { opacity: 1; transform: none; } }
+  .digest figcaption { font-size: 12.5px; color: var(--color-text-secondary); display: flex; align-items: center; gap: 8px; }
+  .dot { width: 8px; height: 8px; border-radius: 50%; background: var(--color-success); box-shadow: 0 0 0 4px color-mix(in oklch, var(--color-success) 20%, transparent); }
+  .dh { margin: 18px 0 8px; font-weight: 700; font-size: 15px; color: var(--color-text-primary); }
+  .moves { list-style: none; margin: 0; padding: 0; display: grid; gap: 8px; }
+  .moves li { display: grid; grid-template-columns: 74px minmax(0, 1fr); gap: 10px; align-items: baseline; font-size: 14px; color: var(--color-text-secondary); line-height: 1.45; }
+  .moves b { font-variant-numeric: tabular-nums; font-size: 13px; padding: 2px 8px; border-radius: 6px; text-align: center; }
+  .up { color: #7ee2a0; background: color-mix(in oklch, var(--color-success) 16%, transparent); }
+  .down { color: #ff8fb9; background: color-mix(in oklch, var(--color-accent-2) 16%, transparent); }
+  .flat { color: var(--color-text-primary); background: var(--color-bg-subtle); }
+  .fixes { margin: 0; padding-left: 20px; list-style: decimal; display: grid; gap: 8px; }
+  .fixes li { font-size: 14px; line-height: 1.5; color: var(--color-text-secondary); }
+  .fixes li::marker { color: var(--color-accent); font-weight: 700; }
+  .fixes b { color: var(--color-text-primary); }
+
+  .band { padding-block: clamp(32px, 4vw, 52px); border-top: 1px solid var(--color-border); }
+  h2 { font-size: clamp(24px, 2.6vw, 32px); letter-spacing: -0.02em; margin: 0 0 20px; text-wrap: balance; }
+  .checks { display: grid; grid-template-columns: repeat(auto-fit, minmax(240px, 1fr)); gap: 28px 36px; margin: 0; }
+  .checks div { padding-top: 14px; border-top: 2px solid var(--color-accent); }
+  .checks dt { font-weight: 700; color: var(--color-text-primary); font-size: 16px; margin-bottom: 6px; }
+  .checks dd { margin: 0; color: var(--color-text-secondary); font-size: 15px; line-height: 1.6; }
+  .steps { margin: 0; padding: 0; list-style: none; counter-reset: s; display: grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); gap: 24px; }
+  .steps li { counter-increment: s; font-size: 15px; line-height: 1.6; color: var(--color-text-secondary); }
+  .steps li::before { content: counter(s); display: grid; place-items: center; width: 30px; height: 30px; border-radius: 50%; margin-bottom: 10px;
+    font-weight: 700; font-size: 14px; color: var(--color-text-primary); border: 1px solid var(--color-border); background: var(--color-bg-elevated); }
+  .steps b { color: var(--color-text-primary); display: block; }
+
+  .note { color: var(--color-text-secondary); margin: -8px 0 16px; font-size: 15px; }
+  .tablewrap { overflow-x: auto; }
+  table { width: 100%; border-collapse: collapse; min-width: 520px; max-width: 860px; }
+  thead th { text-align: left; font-size: 12.5px; font-weight: 600; color: var(--color-text-secondary); padding: 8px 12px; border-bottom: 1px solid var(--color-border); }
+  tbody th { text-align: left; font-weight: 650; color: var(--color-text-primary); }
+  tbody th, td { padding: 11px 12px; border-bottom: 1px solid var(--color-border); font-size: 15px; }
+  td { color: var(--color-text-secondary); font-variant-numeric: tabular-nums; }
+  .typical { display: flex; flex-wrap: wrap; gap: 14px; margin-top: 22px; }
+  .typical p { margin: 0; flex: 1 1 280px; max-width: 420px; padding: 16px 18px; border-radius: 12px; background: var(--color-bg-elevated); border: 1px solid var(--color-border);
+    display: flex; flex-direction: column; gap: 4px; color: var(--color-text-secondary); font-size: 14px; line-height: 1.5; }
+  .typical b { color: var(--color-text-primary); font-size: 22px; letter-spacing: -0.01em; }
+
+  .faq { display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 22px 40px; margin: 0; }
+  .faq dt { font-weight: 650; color: var(--color-text-primary); margin-bottom: 6px; font-size: 15.5px; }
+  .faq dd { margin: 0; color: var(--color-text-secondary); font-size: 15px; line-height: 1.6; }
+
+  .wait { margin: 12px 0 56px; padding: clamp(22px, 4vw, 40px); border-radius: 18px; border: 1px solid color-mix(in oklch, var(--color-accent) 60%, transparent);
+    background: radial-gradient(80% 140% at 100% 0%, color-mix(in oklch, var(--color-accent) 12%, transparent), transparent 60%), var(--color-bg-elevated);
+    display: grid; grid-template-columns: minmax(0, .8fr) minmax(0, 1.2fr); gap: clamp(20px, 4vw, 48px); }
+  @media (max-width: 860px) { .wait { grid-template-columns: minmax(0, 1fr); } }
+  .wait p { color: var(--color-text-secondary); line-height: 1.65; font-size: 15px; }
+  form { display: flex; flex-direction: column; gap: 12px; }
   .row { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; }
-  @media (max-width: 640px) { .row { grid-template-columns: 1fr; } }
+  @media (max-width: 560px) { .row { grid-template-columns: 1fr; } }
   label { display: flex; flex-direction: column; gap: 6px; font-size: 13px; color: var(--color-text-secondary); }
   input { background: var(--color-bg-deep); border: 1px solid var(--color-border); border-radius: 8px; padding: 11px 12px; color: var(--color-text-primary); font: inherit; font-size: 15px; }
+  input::placeholder { color: #8a8a9a; }
   input:focus { outline: 2px solid var(--color-accent); outline-offset: 1px; }
   .hp { position: absolute; left: -9999px; width: 1px; height: 1px; overflow: hidden; }
-  button { align-self: flex-start; background: var(--color-accent); color: #fff; border: 0; border-radius: 8px; padding: 12px 20px; font-weight: 650; font-size: 15px; cursor: pointer; }
-  button:hover { background: var(--color-accent-hover); }
+  button { align-self: flex-start; }
   button:disabled { opacity: .6; cursor: default; }
-  .msg { min-height: 1.2em; color: var(--color-text-primary); }
-  .more { margin-top: 28px; }
-  .bottom { border-top: 1px solid var(--color-border); margin-top: 30px; padding: 22px 0 34px; font-size: 12px; color: var(--color-text-secondary); }
-  .bottom a { color: var(--color-text-secondary); }
+  .msg { min-height: 1.2em; color: var(--color-text-primary) !important; margin: 0; }
+  .small { font-size: 12.5px !important; margin: 0; }
+  .small a { color: var(--color-accent); }
+  @media (prefers-reduced-motion: reduce) { .digest { animation: none; } }
 </style>

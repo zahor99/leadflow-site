@@ -1,0 +1,181 @@
+---
+// One category of samples: a short text column and a horizontal scroll-snap carousel.
+// Documents open in a new tab; videos open in the shared <dialog> player (VideoDialog.astro).
+// No carousel library: native scrolling (touch, trackpad, keyboard) with prev/next buttons as an extra.
+import type { Category, Sample } from "../data/samples";
+
+interface Props {
+  category: Category;
+  items: Sample[];
+  /** link to the category sub-page ("See all") */
+  more?: boolean;
+  /** heading level for the category title */
+  as?: "h2" | "h3";
+}
+const { category, items, more = true, as: H = "h2" } = Astro.props;
+const shape = (s: Sample) => s.shape ?? (s.video ? "portrait" : "doc");
+---
+
+<section class="shelf" id={category.slug} aria-labelledby={`${category.slug}-title`}>
+  {(category.anchors ?? []).map((a) => <span id={a} class="anchor" aria-hidden="true"></span>)}
+  <div class="intro">
+    <H class="title" id={`${category.slug}-title`}>{category.title}</H>
+    <p class="blurb">{category.blurb}</p>
+    {category.price && <p class="price">{category.price}</p>}
+    {more && (
+      <a class="all" href={`/work/${category.slug}/`}>
+        See all {items.length} <span class="sr">{category.title.toLowerCase()}</span> samples <span aria-hidden="true">→</span>
+      </a>
+    )}
+  </div>
+
+  <div class="rail" data-rail>
+    <ul class="track" tabindex="0" aria-label={`${category.title} samples, scroll sideways`} data-track>
+      {items.map((s) => (
+        <li class={`item ${shape(s)}`} id={s.id}>
+          {s.video ? (
+            <button type="button" class="open" data-video={s.video} data-poster={s.img} data-title={s.title}
+                    aria-label={`Play video: ${s.title}`}>
+              <span class="thumb">
+                <img src={s.img} alt="" loading="lazy" decoding="async" />
+                <span class="play" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M8 5v14l11-7z" /></svg></span>
+              </span>
+              <span class="kind">{s.kind}</span>
+              <span class="name">{s.title}</span>
+              {s.meta && <span class="meta">{s.meta}</span>}
+            </button>
+          ) : (
+            <a class="open" href={s.href} target={s.href?.startsWith("/blog/") ? undefined : "_blank"}
+               rel={s.href?.startsWith("/blog/") ? undefined : "noopener"}>
+              <span class="thumb">
+                <img src={s.img} alt="" loading="lazy" decoding="async" />
+              </span>
+              <span class="kind">{s.kind}</span>
+              <span class="name">{s.title}</span>
+              {s.meta && <span class="meta">{s.meta}</span>}
+            </a>
+          )}
+          {s.extra && (
+            <span class="extra">
+              {s.extra.map((x) => <a href={x.href} target="_blank" rel="noopener">{x.label}</a>)}
+            </span>
+          )}
+        </li>
+      ))}
+    </ul>
+    <div class="nav" aria-hidden="true">
+      <button type="button" class="arrow prev" data-prev tabindex="-1" title="Previous">
+        <svg viewBox="0 0 24 24"><path d="M15 6l-6 6 6 6" /></svg>
+      </button>
+      <button type="button" class="arrow next" data-next tabindex="-1" title="Next">
+        <svg viewBox="0 0 24 24"><path d="M9 6l6 6-6 6" /></svg>
+      </button>
+    </div>
+  </div>
+</section>
+
+<script>
+  // Prev/next buttons scroll one viewport of the track; they hide at the ends. Native scroll does the rest.
+  function wire(rail: HTMLElement) {
+    const track = rail.querySelector<HTMLElement>("[data-track]")!;
+    const prev = rail.querySelector<HTMLButtonElement>("[data-prev]")!;
+    const next = rail.querySelector<HTMLButtonElement>("[data-next]")!;
+    const update = () => {
+      const max = track.scrollWidth - track.clientWidth - 2;
+      prev.toggleAttribute("disabled", track.scrollLeft <= 2);
+      next.toggleAttribute("disabled", track.scrollLeft >= max);
+      rail.classList.toggle("fits", max <= 0);
+    };
+    const step = (dir: number) => track.scrollBy({ left: dir * track.clientWidth * 0.85, behavior: "smooth" });
+    prev.addEventListener("click", () => step(-1));
+    next.addEventListener("click", () => step(1));
+    track.addEventListener("scroll", update, { passive: true });
+    new ResizeObserver(update).observe(track);
+    update();
+  }
+  document.querySelectorAll<HTMLElement>("[data-rail]").forEach(wire);
+</script>
+
+<style>
+  .shelf {
+    position: relative;
+    display: grid;
+    grid-template-columns: minmax(220px, 280px) minmax(0, 1fr);
+    gap: clamp(20px, 3vw, 40px);
+    align-items: start;
+    padding-block: clamp(28px, 4vw, 44px);
+    border-top: 1px solid var(--color-border);
+    scroll-margin-top: 72px;
+  }
+  @media (max-width: 860px) { .shelf { grid-template-columns: minmax(0, 1fr); gap: 16px; } }
+
+  .intro { display: flex; flex-direction: column; gap: 10px; position: sticky; top: 84px; }
+  @media (max-width: 860px) { .intro { position: static; } }
+  .title { font-size: clamp(22px, 2.4vw, 28px); font-weight: 750; letter-spacing: -0.02em; line-height: 1.15; color: var(--color-text-primary); text-wrap: balance; margin: 0; }
+  .blurb { font-size: 15px; line-height: 1.65; color: var(--color-text-secondary); margin: 0; max-width: 46ch; }
+  .price { font-size: 14px; color: var(--color-text-primary); margin: 0; }
+  .all { font-size: 14px; font-weight: 600; color: var(--color-accent); text-decoration: none; width: fit-content; }
+  .all:hover { color: var(--color-accent-hover); }
+  .all .sr { position: absolute; width: 1px; height: 1px; overflow: hidden; clip: rect(0 0 0 0); }
+  .all span[aria-hidden] { display: inline-block; transition: transform .25s cubic-bezier(.22, 1, .36, 1); }
+  .all:hover span[aria-hidden] { transform: translateX(3px); }
+
+  .anchor { position: absolute; }
+  .rail { position: relative; min-width: 0; }
+  .item[id] { scroll-margin-top: 90px; }
+  .track {
+    display: flex; gap: 16px; list-style: none; margin: 0; padding: 4px 4px 14px;
+    overflow-x: auto; scroll-snap-type: x mandatory; scroll-padding-inline: 4px;
+    overscroll-behavior-x: contain; scrollbar-width: thin; scrollbar-color: var(--color-border) transparent;
+    border-radius: 10px;
+  }
+  .track:focus-visible { outline: 2px solid var(--color-accent); outline-offset: 2px; }
+
+  .item { flex: 0 0 auto; scroll-snap-align: start; display: flex; flex-direction: column; gap: 8px; }
+  .item.doc { width: clamp(176px, 22vw, 214px); }
+  .item.portrait { width: clamp(160px, 19vw, 190px); }
+  .item.wide { width: clamp(260px, 34vw, 340px); }
+  .item.square { width: clamp(190px, 24vw, 230px); }
+
+  .open { all: unset; cursor: pointer; display: flex; flex-direction: column; gap: 6px; border-radius: 12px; }
+  .open:focus-visible { outline: 2px solid var(--color-accent); outline-offset: 4px; }
+  .thumb {
+    position: relative; display: block; overflow: hidden; border-radius: 10px;
+    background: var(--color-bg-subtle); border: 1px solid var(--color-border);
+    transition: border-color .2s, transform .35s cubic-bezier(.22, 1, .36, 1), box-shadow .35s;
+  }
+  .doc .thumb { aspect-ratio: 3 / 4; }
+  .portrait .thumb { aspect-ratio: 9 / 16; }
+  .wide .thumb { aspect-ratio: 16 / 9; }
+  .square .thumb { aspect-ratio: 1; }
+  .thumb img { width: 100%; height: 100%; object-fit: cover; object-position: top; display: block; }
+  .open:hover .thumb, .open:focus-visible .thumb {
+    border-color: color-mix(in oklch, var(--color-accent) 70%, transparent);
+    transform: translateY(-3px);
+    box-shadow: 0 14px 30px -18px color-mix(in oklch, var(--color-accent) 60%, transparent);
+  }
+  .play {
+    position: absolute; inset: auto auto 10px 10px; width: 38px; height: 38px; border-radius: 50%;
+    display: grid; place-items: center; background: rgb(10 10 15 / .72); border: 1px solid rgb(255 255 255 / .18);
+  }
+  .play svg { width: 16px; height: 16px; fill: #fff; margin-left: 2px; }
+
+  .kind { font-size: 12px; font-weight: 600; color: var(--color-accent); }
+  .name { font-size: 14.5px; font-weight: 650; line-height: 1.35; color: var(--color-text-primary); text-wrap: pretty; }
+  .meta { font-size: 13px; line-height: 1.45; color: var(--color-text-secondary); }
+  .extra { display: flex; flex-wrap: wrap; gap: 4px 12px; font-size: 13px; }
+  .extra a { color: var(--color-accent); text-decoration: none; }
+  .extra a:hover { text-decoration: underline; }
+
+  .nav { position: absolute; top: -52px; right: 4px; display: flex; gap: 8px; }
+  @media (max-width: 860px) { .nav { display: none; } }
+  .fits .nav { display: none; }
+  .arrow {
+    width: 36px; height: 36px; border-radius: 50%; display: grid; place-items: center; cursor: pointer;
+    background: var(--color-bg-elevated); border: 1px solid var(--color-border); color: var(--color-text-primary);
+    transition: border-color .2s, opacity .2s;
+  }
+  .arrow:hover:not([disabled]) { border-color: var(--color-accent); }
+  .arrow[disabled] { opacity: .35; cursor: default; }
+  .arrow svg { width: 18px; height: 18px; fill: none; stroke: currentColor; stroke-width: 2; stroke-linecap: round; stroke-linejoin: round; }
+</style>

@@ -1,221 +1,92 @@
 ---
-import Base from "../layouts/Base.astro";
+// Samples hub: one carousel per category, every sample opens (PDF, image, article or video).
+// Data: src/data/samples.ts. Category pages: /work/<slug>/. Unlisted (noindex): linked from proposals and the
+// AI marketing desk page; old anchors (#keyword-research, #seo-audit, #ugc ...) still land on the right sample.
+import WorkFrame from "../components/WorkFrame.astro";
+import SampleShelf from "../components/SampleShelf.astro";
+import { categories, total } from "../data/samples";
 
-// Unlisted content portfolio for Upwork proposals (not in Nav/Footer, noindex).
-// Every item below is real, published work. Add new samples to the arrays.
-
-const videos = [
-  { src: "/videos/seg_rag.mp4", title: "Knowledge assistant explainer", note: "22 s motion-graphics explainer: script, voice-over, animation" },
-  { src: "/videos/seg_shadowai.mp4", title: "Shadow-AI risk explainer", note: "22 s motion-graphics explainer" },
-  { src: "/videos/seg_anonymizer.mp4", title: "Data anonymisation explainer", note: "22 s motion-graphics explainer" },
-];
-
-const whitepapers = [
-  { href: "/work/whitepapers/erp-discovery-agent.pdf", img: "/work/whitepapers/erp-discovery-agent-cover.png", title: "AI-run discovery for ERP implementations", note: "9 pages: an agent over MCP for fit-gap discovery, from a demo build for a Microsoft Dynamics partner." },
-  { href: "/work/whitepapers/merch-mcp-server.pdf", img: "/work/whitepapers/merch-mcp-server-cover.png", title: "MCP servers as a product channel", note: "Lessons from ScalePOD's decorator server: real logos on real blanks inside Claude." },
-];
-
-const ugc = [
-  { src: "/work/videos/scalepod-ugc.mp4", poster: "/work/videos/scalepod-ugc.jpg", title: "AI-avatar hook + product demo", note: "40 s, 9:16 · AI-presenter hook, phone-native product demo, call to action" },
-  { src: "/work/videos/nocta-review-ugc.mp4", poster: "/work/videos/nocta-review-ugc.jpg", title: "Product review (fictional brand)", note: "28 s, 9:16 · AI presenter, medical-style animation, lifestyle shots, captions" },
-];
-
-const articles = [
-  { href: "/blog/ai-agent-risks-the-5-walls-that-kill-smb-deployments-in-the-first-30-days/", title: "AI Agent Risks: The 5 Walls That Kill SMB Deployments in the First 30 Days", tag: "Long-form · 2,200 words" },
-  { href: "/blog/the-true-cost-of-a-sales-qualified-lead/", title: "The True Cost of a Sales Qualified Lead", tag: "Analysis · 2,000 words" },
-  { href: "/blog/the-mfa-problem-how-made-for-advertising-sites-are-draining-your-ad-budget/", title: "The MFA Problem: How Made-for-Advertising Sites Are Draining Your Ad Budget", tag: "Ad-tech research · 2,200 words" },
-  { href: "/blog/the-economics-of-ai-content-automation/", title: "The Economics of AI Content Automation", tag: "Analysis · 2,100 words" },
-  { href: "/blog/ai-voice-receptionist/", title: "AI Voice Receptionist: How It Works", tag: "Technical explainer · 2,000 words" },
-  { href: "/blog/ai-agents-for-small-business-the-5-use-cases-that-actually-make-money-in-2026/", title: "AI Agents for Small Business: The 5 Use Cases That Make Money", tag: "SEO article" },
-];
-
-// Data & research samples (Upwork catalog listings link to these anchors). Built from our own stores' data.
-const research = [
-  { id: "keyword-research", img: "/work/reports/keyword-research/cover.png", title: "E-commerce keyword research",
-    note: "Keyword universe with volume, CPC, competition and intent, clusters, country comparison, and rewritten listing titles and tags. Built from our own Shopify store's data.",
-    links: [{ href: "/work/reports/keyword-research/ecommerce-keyword-research-sample.pdf", label: "Sample report (PDF)" }] },
-  { id: "product-research", img: "/work/reports/product-research/cover.png", title: "E-commerce product & market research",
-    note: "Product ideas scored on demand and competition, Google Shopping price bands, niche deep dives and a launch shortlist. From research for our own print-on-demand stores.",
-    links: [{ href: "/work/reports/product-research/ecommerce-product-research-sample.pdf", label: "Sample report (PDF)" }] },
-  { id: "seo-audit", img: "/work/reports/seo-audit/cover.png", title: "Shopify SEO audit + AI-search baseline",
-    note: "Health score, crawl and indexing, on-page, schema and trust pages, then a prioritised fix plan. Plus an AI-search (GEO) baseline: how AI answers describe a brand against competitors.",
-    links: [{ href: "/work/reports/seo-audit/shopify-seo-audit-sample.pdf", label: "SEO audit (PDF)" },
-            { href: "/work/reports/geo-baseline/seo-geo-baseline-sample.pdf", label: "AI-search baseline (PDF)" }] },
-  { id: "web-scraping", img: "/work/reports/web-scraping/cover.png", title: "Web scraping to a clean dataset",
-    note: "A large public catalogue scraped, cleaned and de-duplicated, with a data dictionary, QA checks and insight charts.",
-    links: [{ href: "/work/reports/web-scraping/web-scraping-sample-report.pdf", label: "Sample report (PDF)" },
-            { href: "/work/reports/web-scraping/sample-dataset.xlsx", label: "Sample dataset (Excel)" },
-            { href: "/work/reports/web-scraping/sample-dataset.csv", label: "CSV" }] },
-  { id: "cold-email", img: "/work/reports/cold-email/cover.png", title: "Personalised cold email outreach system",
-    note: "The pipeline from target list to verified decision makers, first lines written from facts on each prospect's own site, deliverability guards and a daily reply digest. Shown on one fictional prospect.",
-    links: [{ href: "/work/reports/cold-email/cold-email-system-sample.pdf", label: "Sample (PDF)" }] },
-];
-
-const reports = [
-  { href: "/downloads/leadflow-ai-leverage-blueprint.pdf", title: "AI Leverage Blueprint", note: "Designed PDF guide: where AI saves time in a small company, with a self-check" },
-  { href: "/downloads/leadflow-gdpr-ai-checklist.pdf", title: "GDPR & AI Checklist", note: "Designed PDF checklist for using AI tools with personal data" },
+const G = "/work/gallery";
+// hero collage: one real piece per medium, each jumps to its shelf
+const collage = [
+  { img: `${G}/social/medspa-myth-or-fact.webp`, to: "#social", cls: "c1", alt: "Instagram post for a demo med spa" },
+  { img: "/work/reports/seo-desk/seo-desk-baseline-leadflowautomation.webp", to: "#seo", cls: "c2", alt: "SEO Desk baseline report cover" },
+  { img: "/work/videos/scalepod-ugc.jpg", to: "#video", cls: "c3", alt: "UGC ad still with an AI presenter" },
+  { img: `${G}/social/b2b-carousel-1.webp`, to: "#social", cls: "c4", alt: "LinkedIn carousel slide" },
+  { img: `${G}/merch/pod-4-listing.webp`, to: "#products", cls: "c5", alt: "Listing photo of a printed jacket" },
+  { img: "/work/whitepapers/erp-discovery-agent-cover.png", to: "#papers", cls: "c6", alt: "White paper cover" },
 ];
 ---
 
-<Base
-  title="Work samples — Gergely Racz"
-  description="Samples by Gergely Racz: e-commerce keyword and product research, SEO audits, web scraping datasets, technical articles and AI UGC videos."
-  noindex={true}
+<WorkFrame
+  title="Work samples"
+  description="Open real samples: SEO reports, research, articles, social posts, UGC ads and videos, white papers, lead magnets, product mockups and print design, by Lead Flow Automation."
 >
-  <header class="top">
-    <div class="wrap">
-      <a class="wordmark" href="/">LEADFLOW<span>AUTOMATION</span></a>
+  <section class="hero">
+    <div class="wf-wrap hero-in">
+      <div class="copy">
+        <h1>Open the work before you book the call</h1>
+        <p class="lede">
+          {total} samples in {categories.length} categories, each one finished and clickable: reports open as PDFs,
+          videos play here, posts open full size. All of it is our own work, made for our own products or for
+          made-up demo brands. Client work stays private.
+        </p>
+        <p class="who">Made by Gergely Racz (PhD, Cambridge) and a set of AI agents he built, with every piece checked by a person before it ships.</p>
+      </div>
+      <div class="collage" aria-label="A few samples">
+        {collage.map((c) => (
+          <a class={`tile ${c.cls}`} href={c.to}><img src={c.img} alt={c.alt} loading="eager" decoding="async" /></a>
+        ))}
+      </div>
     </div>
-  </header>
+  </section>
 
-  <main class="body">
-    <div class="wrap">
-      <p class="eyebrow">Work samples</p>
-      <h1>Gergely Racz — research, SEO, data &amp; AI video</h1>
-      <p class="lede">
-        PhD in Engineering (Cambridge), 10+ years in AI, based in Budapest (CET). I make keyword and
-        product research reports, SEO audits, scraped datasets, technical articles and AI UGC videos. Everything below
-        is my own published work.
-      </p>
-
-      <h2>Research, SEO &amp; data samples</h2>
-      <div class="research">
-        {research.map((r) => (
-          <section class="card rs" id={r.id}>
-            <a href={r.links[0].href} target="_blank" rel="noopener"><img src={r.img} alt={`${r.title} sample cover`} loading="lazy" /></a>
-            <div>
-              <span class="card-title">{r.title}</span>
-              <span class="card-note">{r.note}</span>
-              <span class="rs-links">{r.links.map((l) => <a href={l.href} target="_blank" rel="noopener">{l.label}</a>)}</span>
-            </div>
-          </section>
-        ))}
-      </div>
-
-      <h2>White papers</h2>
-      <div class="grid two">
-        {whitepapers.map((w) => (
-          <a class="card wp" href={w.href} target="_blank" rel="noopener">
-            <img src={w.img} alt="" loading="lazy" />
-            <span class="card-title">{w.title} (PDF)</span>
-            <span class="card-note">{w.note}</span>
-          </a>
-        ))}
-      </div>
-
-      <h2 id="ugc">UGC-style videos with AI presenters</h2>
-      <div class="grid ugc">
-        {ugc.map((v) => (
-          <figure class="vid">
-            <video src={v.src} poster={v.poster} controls preload="none" playsinline></video>
-            <figcaption><b>{v.title}</b><br /><span>{v.note}</span></figcaption>
-          </figure>
-        ))}
-      </div>
-      <p class="tag-note">AI presenters are labelled in the videos. Nocta is a fictional brand made for this sample.</p>
-
-      <h2>Product demo video</h2>
-      <a class="card feature" href="https://tools.scalepod.ai/v/TFSTRtLiYcCy/" target="_blank" rel="noopener">
-        <span class="card-title">ScalePOD product demo (2:09)</span>
-        <span class="card-note">Script, AI voice-over, screen capture and motion graphics, start to finish. Opens in a new tab.</span>
-      </a>
-
-      <h2>Short explainer videos</h2>
-      <div class="grid">
-        {videos.map((v) => (
-          <figure class="vid">
-            <video src={v.src} poster={v.src.replace("seg_", "poster_").replace(".mp4", ".jpg")} controls preload="metadata" playsinline></video>
-            <figcaption><b>{v.title}</b><br /><span>{v.note}</span></figcaption>
-          </figure>
-        ))}
-      </div>
-
-      <h2>Articles</h2>
-      <ul class="list">
-        {articles.map((a) => (
-          <li>
-            <a href={a.href} target="_blank" rel="noopener">{a.title}</a>
-            <span class="tag">{a.tag}</span>
-          </li>
-        ))}
-      </ul>
-      <p class="more"><a href="/blog/" target="_blank" rel="noopener">All articles →</a></p>
-
-      <h2>Reports &amp; guides</h2>
-      <div class="grid two">
-        {reports.map((r) => (
-          <a class="card" href={r.href} target="_blank" rel="noopener">
-            <span class="card-title">{r.title} (PDF)</span>
-            <span class="card-note">{r.note}</span>
-          </a>
-        ))}
-      </div>
-
-      <h2>How I work</h2>
-      <ol class="steps">
-        <li><b>Brief.</b> Goal, audience, length, tone and the one action the reader should take.</li>
-        <li><b>Research with real data.</b> Google search demand and competitor data, archived pages, reviews, forums. Every number is sourced.</li>
-        <li><b>Draft.</b> Clear structure, short sentences, written for one reader. Code is run before it goes in.</li>
-        <li><b>Check.</b> Fact check against the sources, then an edit for clarity and length.</li>
-        <li><b>Deliver.</b> Google Doc, Markdown, PDF or video file, with one round of changes included.</li>
-      </ol>
-
-      <h2>Also</h2>
-      <p>
-        YouTube: <a href="https://www.youtube.com/@AILeadFlowAutomations" target="_blank" rel="noopener">AI Lead Flow Automations</a>
-        · Contact via Upwork.
-      </p>
+  <nav class="cats" aria-label="Sample categories">
+    <div class="wf-wrap cats-in">
+      {categories.map((c) => (
+        <a href={`#${c.slug}`}>{c.title}<span>{c.items.length}</span></a>
+      ))}
     </div>
-  </main>
+  </nav>
 
-  <footer class="bottom">
-    <div class="wrap">© Lead Flow Automation · <a href="/privacy/">Privacy</a></div>
-  </footer>
-</Base>
+  <div class="wf-wrap shelves">
+    {categories.map((c) => <SampleShelf category={c} items={c.items} />)}
+  </div>
+</WorkFrame>
 
 <style>
-  .wrap { max-width: 860px; margin: 0 auto; padding: 0 16px; }
-  .top { border-bottom: 1px solid var(--color-border); padding: 18px 0; }
-  .wordmark { font-weight: 800; letter-spacing: 0.08em; font-size: 15px; color: var(--color-text-primary); text-decoration: none; }
-  .wordmark span { color: var(--color-accent); }
-  .body { padding: 44px 0 32px; }
-  .eyebrow { font-family: var(--font-mono); font-size: 12px; letter-spacing: 0.12em; text-transform: uppercase; color: var(--color-accent); margin-bottom: 8px; }
-  h1 { font-weight: 800; color: var(--color-text-primary); font-size: clamp(26px, 5vw, 38px); line-height: 1.15; margin-bottom: 14px; }
-  .lede { font-size: 16px; color: var(--color-text-secondary); line-height: 1.65; max-width: 680px; }
-  h2 { font-weight: 700; color: var(--color-text-primary); font-size: 20px; margin: 40px 0 14px; }
-  p, li { font-size: 15px; color: var(--color-text-secondary); line-height: 1.65; }
-  a { color: var(--color-accent); }
-  .grid { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 16px; }
-  @media (max-width: 640px) { .grid { grid-template-columns: 1fr; } }
-  .vid { margin: 0; background: var(--color-bg-elevated); border: 1px solid var(--color-border); border-radius: 10px; overflow: hidden; }
-  .vid video { width: 100%; display: block; aspect-ratio: 16 / 9; background: #000; }
-  .vid figcaption { padding: 10px 12px; font-size: 13.5px; color: var(--color-text-primary); }
-  .vid figcaption span { color: var(--color-text-secondary); font-size: 12.5px; }
-  .grid.ugc { grid-template-columns: repeat(2, minmax(0, 280px)); }
-  @media (max-width: 640px) { .grid.ugc { grid-template-columns: 1fr; } }
-  .grid.ugc .vid video { aspect-ratio: 9 / 16; }
-  .card.wp img { width: 100%; aspect-ratio: 4 / 3; object-fit: cover; object-position: top; border-radius: 6px; }
-  .tag-note { font-size: 12.5px; margin-top: 8px; }
-  .card { display: flex; flex-direction: column; gap: 6px; padding: 16px 18px; background: var(--color-bg-elevated); border: 1px solid var(--color-border); border-radius: 10px; text-decoration: none; transition: border-color .15s; }
-  .card:hover { border-color: var(--color-accent); }
-  .card.feature { border-color: var(--color-accent); }
-  .card-title { color: var(--color-text-primary); font-weight: 650; font-size: 15.5px; }
-  .card-note { color: var(--color-text-secondary); font-size: 13.5px; line-height: 1.5; }
-  .list { list-style: none; padding: 0; margin: 0; }
-  .list li { display: flex; flex-wrap: wrap; justify-content: space-between; gap: 4px 16px; padding: 11px 0; border-bottom: 1px solid var(--color-border); }
-  .list a { text-decoration: none; font-weight: 550; }
-  .list a:hover { text-decoration: underline; }
-  .tag { font-family: var(--font-mono); font-size: 12px; color: var(--color-text-secondary); white-space: nowrap; }
-  .more { margin-top: 10px; }
-  .steps { padding-left: 20px; }
-  .steps li { margin-bottom: 6px; }
-  .steps b { color: var(--color-text-primary); }
-  .research { display: flex; flex-direction: column; gap: 16px; }
-  .card.rs { display: grid; grid-template-columns: 180px 1fr; gap: 18px; align-items: start; scroll-margin-top: 20px; }
-  .card.rs img { width: 100%; aspect-ratio: 3 / 4; object-fit: cover; object-position: top; border-radius: 6px; border: 1px solid var(--color-border); }
-  .card.rs > div { display: flex; flex-direction: column; gap: 6px; }
-  .rs-links { display: flex; flex-wrap: wrap; gap: 6px 16px; font-size: 13.5px; font-weight: 600; margin-top: 4px; }
-  @media (max-width: 640px) { .card.rs { grid-template-columns: 1fr; } .card.rs img { max-width: 220px; } }
-  .bottom { border-top: 1px solid var(--color-border); margin-top: 30px; padding: 22px 0 34px; font-size: 12px; color: var(--color-text-secondary); }
-  .bottom a { color: var(--color-text-secondary); }
+  .hero { padding-block: clamp(36px, 6vw, 80px) clamp(28px, 4vw, 48px); overflow: hidden; }
+  .hero-in { display: grid; grid-template-columns: minmax(0, 1.05fr) minmax(0, 1fr); gap: clamp(28px, 5vw, 64px); align-items: center; }
+  @media (max-width: 900px) { .hero-in { grid-template-columns: minmax(0, 1fr); } }
+  h1 { font-size: clamp(36px, 5.4vw, 64px); line-height: 1.04; letter-spacing: -0.03em; margin: 0 0 20px; text-wrap: balance; }
+  .lede { font-size: clamp(16px, 1.4vw, 18px); line-height: 1.7; color: var(--color-text-secondary); max-width: 58ch; margin: 0 0 14px; text-wrap: pretty; }
+  .who { font-size: 14.5px; line-height: 1.6; color: var(--color-text-primary); max-width: 54ch; margin: 0; }
+
+  /* asymmetric contact sheet of real pieces */
+  .collage { display: grid; grid-template-columns: repeat(6, minmax(0, 1fr)); grid-template-rows: repeat(6, clamp(42px, 5.4vw, 66px)); gap: 10px; }
+  .tile { display: block; overflow: hidden; border-radius: 12px; border: 1px solid var(--color-border); background: var(--color-bg-subtle);
+    animation: rise .8s cubic-bezier(.22, 1, .36, 1) both; transition: transform .35s cubic-bezier(.22, 1, .36, 1), border-color .2s; }
+  .tile img { width: 100%; height: 100%; object-fit: cover; object-position: top; display: block; }
+  .tile:hover { transform: translateY(-4px); border-color: var(--color-accent); }
+  .c1 { grid-area: 1 / 1 / 5 / 3; animation-delay: .05s; }
+  .c2 { grid-area: 1 / 3 / 4 / 5; animation-delay: .12s; }
+  .c3 { grid-area: 1 / 5 / 6 / 7; animation-delay: .19s; }
+  .c4 { grid-area: 4 / 3 / 7 / 5; animation-delay: .26s; }
+  .c5 { grid-area: 5 / 1 / 7 / 3; animation-delay: .33s; }
+  .c6 { grid-area: 6 / 5 / 7 / 7; animation-delay: .4s; }
+  .c6 img { object-position: center 30%; }
+  @keyframes rise { from { opacity: 0; transform: translateY(14px) scale(.98); } to { opacity: 1; transform: none; } }
+
+  .cats { position: sticky; top: 60px; z-index: 10; background: color-mix(in oklch, var(--color-bg-deep) 92%, transparent);
+    backdrop-filter: blur(10px); border-block: 1px solid var(--color-border); }
+  .cats-in { display: flex; gap: 6px; overflow-x: auto; padding-block: 10px; scrollbar-width: none; }
+  .cats-in::-webkit-scrollbar { display: none; }
+  .cats a { flex: 0 0 auto; display: inline-flex; align-items: center; gap: 8px; font-size: 13.5px; color: var(--color-text-secondary);
+    text-decoration: none; padding: 7px 12px; border-radius: 999px; border: 1px solid transparent; transition: color .2s, border-color .2s, background .2s; }
+  .cats a:hover { color: var(--color-text-primary); border-color: var(--color-border); background: var(--color-bg-elevated); }
+  .cats span { font-size: 11.5px; font-weight: 650; color: var(--color-text-primary); background: var(--color-bg-subtle); border-radius: 999px; padding: 1px 7px; }
+
+  .shelves { padding-bottom: 32px; }
+  .shelves :global(.shelf) { scroll-margin-top: 118px; }
+  .shelves :global(.shelf:first-child) { border-top: 0; }
 </style>

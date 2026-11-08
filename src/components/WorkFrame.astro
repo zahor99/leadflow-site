@@ -1,0 +1,77 @@
+---
+// Shared frame for the samples hub, the category pages and product pages: slim header, footer, the video dialog
+// and the booking call to action. Unlisted pages (noindex), like the rest of the work/ section.
+import Base from "../layouts/Base.astro";
+import VideoDialog from "./VideoDialog.astro";
+
+interface Props { title: string; description: string; noindex?: boolean; cta?: boolean }
+const { title, description, noindex = true, cta = true } = Astro.props;
+const path = Astro.url.pathname;
+const links = [
+  { href: "/work/", label: "Samples" },
+  { href: "/seo-desk/", label: "SEO Desk" },
+  { href: "/", label: "Engineering" },
+];
+---
+
+<Base title={title} description={description} noindex={noindex}>
+  <header class="wf-top">
+    <div class="wf-wrap wf-bar">
+      <a class="wf-mark" href="/">LEADFLOW<span>AUTOMATION</span></a>
+      <nav aria-label="Section">
+        {links.map((l) => (
+          <a href={l.href} aria-current={path === l.href ? "page" : undefined}>{l.label}</a>
+        ))}
+      </nav>
+    </div>
+  </header>
+
+  <main class="wf-main"><slot /></main>
+
+  {cta && (
+    <section class="wf-cta" aria-labelledby="wf-cta-title">
+      <div class="wf-wrap wf-cta-in">
+        <div>
+          <h2 id="wf-cta-title">Want one of these for your brand?</h2>
+          <p>Tell me what you need on a 30-minute call. You talk to the engineer who builds it, and you get a quote before anything is made.</p>
+        </div>
+        <a class="wf-btn" href="https://calendly.com/gergelyracz0/30min" target="_blank" rel="noopener">Book a 30-minute call</a>
+      </div>
+    </section>
+  )}
+
+  <footer class="wf-foot">
+    <div class="wf-wrap">© Lead Flow Automation · Gergely Racz, PhD (Cambridge) · Budapest · <a href="/privacy/">Privacy</a></div>
+  </footer>
+  <VideoDialog />
+</Base>
+
+<style is:global>
+  .wf-wrap { max-width: 1180px; margin: 0 auto; padding: 0 16px; }
+  @media (min-width: 720px) { .wf-wrap { padding: 0 28px; } }
+</style>
+
+<style>
+  .wf-top { position: sticky; top: 0; z-index: 20; background: color-mix(in oklch, var(--color-bg-deep) 88%, transparent);
+    backdrop-filter: saturate(1.4) blur(10px); border-bottom: 1px solid var(--color-border); }
+  .wf-bar { display: flex; align-items: center; justify-content: space-between; gap: 16px; height: 60px; }
+  .wf-mark { font-weight: 800; letter-spacing: .08em; font-size: 14px; color: var(--color-text-primary); text-decoration: none; white-space: nowrap; }
+  .wf-mark span { color: var(--color-accent); }
+  nav { display: flex; gap: clamp(12px, 2.4vw, 26px); }
+  nav a { font-size: 14px; color: var(--color-text-secondary); text-decoration: none; padding: 6px 0; border-bottom: 1.5px solid transparent; }
+  nav a:hover { color: var(--color-text-primary); }
+  nav a[aria-current="page"] { color: var(--color-text-primary); border-bottom-color: var(--color-accent); }
+  @media (max-width: 420px) { nav a:last-child { display: none; } }
+
+  .wf-cta { border-top: 1px solid var(--color-border); background:
+      radial-gradient(60% 120% at 100% 0%, color-mix(in oklch, var(--color-accent-2) 10%, transparent), transparent 60%),
+      radial-gradient(60% 120% at 0% 100%, color-mix(in oklch, var(--color-accent) 12%, transparent), transparent 60%); }
+  .wf-cta-in { display: flex; align-items: center; justify-content: space-between; gap: 24px 40px; flex-wrap: wrap; padding-block: clamp(40px, 6vw, 72px); }
+  .wf-cta h2 { font-size: clamp(24px, 3vw, 34px); margin: 0 0 8px; text-wrap: balance; }
+  .wf-cta p { margin: 0; color: var(--color-text-secondary); font-size: 16px; line-height: 1.65; max-width: 58ch; }
+  .wf-btn { display: inline-block; background: var(--color-accent); color: #fff; text-decoration: none; font-weight: 650;
+    padding: 13px 22px; border-radius: 10px; transition: background .2s; white-space: nowrap; }
+  .wf-btn:hover { background: var(--color-accent-hover); }
+  .wf-foot { border-top: 1px solid var(--color-border); padding: 22px 0 34px; font-size: 12.5px; color: var(--color-text-secondary); }
+  .wf-foot a { color: var(--color-text-secondary); }
+</style>

@@ -1,0 +1,44 @@
+---
+// One shared video player for every [data-video] button on the page (native <dialog>: focus trap + Esc for free).
+---
+
+<dialog class="vd" id="video-dialog" aria-label="Video player">
+  <div class="frame">
+    <p class="vt" id="vd-title"></p>
+    <video id="vd-video" controls playsinline preload="none"></video>
+  </div>
+  <form method="dialog"><button class="close" aria-label="Close video">✕</button></form>
+</dialog>
+
+<script>
+  const dlg = document.getElementById("video-dialog") as HTMLDialogElement;
+  const vid = document.getElementById("vd-video") as HTMLVideoElement;
+  const ttl = document.getElementById("vd-title")!;
+  document.addEventListener("click", (e) => {
+    const b = (e.target as HTMLElement).closest<HTMLElement>("[data-video]");
+    if (!b) return;
+    vid.src = b.dataset.video!;
+    vid.poster = b.dataset.poster || "";
+    ttl.textContent = b.dataset.title || "";
+    dlg.showModal();
+    vid.play().catch(() => {});
+  });
+  dlg.addEventListener("close", () => { vid.pause(); vid.removeAttribute("src"); vid.load(); });
+  dlg.addEventListener("click", (e) => { if (e.target === dlg) dlg.close(); });
+</script>
+
+<style>
+  .vd { padding: 0; border: 0; background: transparent; max-width: min(92vw, 960px); max-height: 92vh; overflow: visible; }
+  .vd::backdrop { background: rgb(5 5 8 / .82); backdrop-filter: blur(4px); }
+  .vd[open] { animation: vd-in .35s cubic-bezier(.22, 1, .36, 1); }
+  @keyframes vd-in { from { opacity: 0; transform: scale(.97); } to { opacity: 1; transform: none; } }
+  .frame { display: flex; flex-direction: column; gap: 10px; }
+  .vt { margin: 0; color: #f0f0f5; font-weight: 650; font-size: 15px; }
+  video { display: block; max-width: 92vw; max-height: 80vh; border-radius: 12px; background: #000; }
+  .close {
+    position: absolute; top: -6px; right: -6px; width: 36px; height: 36px; border-radius: 50%; cursor: pointer;
+    background: #111118; color: #f0f0f5; border: 1px solid #2a2a36; font-size: 15px;
+  }
+  .close:hover { border-color: var(--color-accent); }
+  @media (prefers-reduced-motion: reduce) { .vd[open] { animation: none; } }
+</style>
