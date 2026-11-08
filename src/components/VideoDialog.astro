@@ -31,14 +31,15 @@ const L = lang === "hu" ? { player: "Videólejátszó", close: "Videó bezárás
 </script>
 
 <style>
-  .vd { padding: 0; border: 0; background: transparent; max-width: min(92vw, 960px); max-height: 92vh; overflow: visible; }
+  .vd { position: fixed; inset: 0; margin: auto; padding: 0; border: 0; background: transparent; width: fit-content; height: fit-content;
+    max-width: min(92vw, 960px); max-height: 92vh; overflow: visible; }
   .vd::backdrop { background: rgb(5 5 8 / .84); backdrop-filter: blur(4px); }
   .vd[open] { animation: vd-in .35s cubic-bezier(.22, 1, .36, 1); }
   @keyframes vd-in { from { opacity: 0; transform: scale(.97); } to { opacity: 1; transform: none; } }
   .frame { display: flex; flex-direction: column; gap: 10px; }
-  .vt { margin: 0; color: #f0f0f5; font-weight: 650; font-size: 15px; padding-right: 44px; }
-  video { display: block; max-width: 92vw; max-height: 80vh; border-radius: 12px; background: #000; }
-  .close { position: absolute; top: -8px; right: -4px; width: 40px; height: 40px; border-radius: 50%; cursor: pointer;
+  .vt { margin: 0; color: #f0f0f5; font-weight: 650; font-size: 15px; padding-right: 52px; min-height: 40px; display: flex; align-items: center; }
+  video { display: block; max-width: 92vw; max-height: calc(92vh - 60px); border-radius: 12px; background: #000; }
+  .close { position: absolute; top: 0; right: 0; width: 40px; height: 40px; border-radius: 50%; cursor: pointer;
     background: #111118; color: #f0f0f5; border: 1px solid #2a2a36; font-size: 15px; }
   .close:hover, .close:focus-visible { border-color: var(--color-accent); outline: none; }
   @media (prefers-reduced-motion: reduce) { .vd[open] { animation: none; } }

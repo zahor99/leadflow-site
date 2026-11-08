@@ -16,6 +16,7 @@ const C = {
     title: "SEO Desk for Claude",
     desc: "Weekly Google rank, AI Overview citations, local map grid, site audit and backlinks inside your own Claude, with a digest of what changed and what to fix. Pay per check, no subscription.",
     tag: "SEO Desk · a connector for Claude",
+    status: "Opening to a first group of sites. Free sample digest now.",
     h1: "Where you rank, whether Google's AI answer cites you, and what to fix first",
     lede: "Each week the desk checks your keywords, your map listing, your key pages and your backlinks, then sends a digest: what moved, and up to seven fixes ranked by effect. Your own Claude drafts the fixes with you.",
     ctaA: "Get a free sample digest", ctaB: "See the prices",
@@ -35,16 +36,17 @@ const C = {
             ["Describe your site.", "Domain, country, keywords and competitors. No keyword list yet? Ask for suggestions."],
             ["Approve the cost.", "Claude quotes the credits for the checks you picked. Nothing runs until you say yes."],
             ["Fix with Claude.", "Read the digest here, or switch on the weekly run and get it by e-mail."]],
-    priceH: "Pay per check",
-    priceNote: "1 credit = $0.50. Top up from $50. No subscription and no seats. Failed checks cost nothing.",
+    priceH: "Launch prices: pay per check",
+    priceNote: "1 credit = $0.50. Top up from $50, which covers about three months of a typical site. No subscription and no seats. Failed checks cost nothing.",
     th: ["Check", "Credits", "Example"],
     rows: [["Rank and AI Overview", "2 + 1 per 10 keywords", "20 keywords: 4 credits ($2)"], ["Local map grid", "3×3: 2 · 5×5: 4 · 7×7: 7", "5×5: $2"],
            ["Site audit", "3", "$1.50"], ["Backlinks", "2", "$1"], ["Keyword suggestions", "1", "$0.50"], ["Weekly digest and fix list", "free", "built from the checks you ran"]],
     typical: [["≈ $15 a month", "a typical site: 20 keywords and backlinks weekly, an audit once a month (about 29 credits)"],
               ["≈ $23 a month", "a local business that adds a weekly 5×5 map grid (about 46 credits)"]],
-    shelfTitle: "SEO reports we have made",
+    shelfTitle: "SEO reports we made by hand",
+    shelfBlurb: "Made by hand with a wider engine set than the desk uses today (ChatGPT, Gemini, Perplexity and AI Overview). The desk itself checks Google's AI Overview.",
     faqH: "Questions",
-    faq: [["Do I need another SEO tool?", "No. The desk pulls Google results, maps, page checks and link data itself. You need Claude with custom connectors enabled."],
+    faq: [["Do I need another SEO tool?", "No. The desk pulls Google results, maps, page checks and link data itself. You need a Claude plan that allows custom connectors."],
           ["Who writes the fixes?", "Your own Claude. Each fix comes with its evidence (the keyword, the competitor being cited, the slow page), so Claude can draft the new title, paragraph or outreach e-mail with you."],
           ["Which countries?", "UK, US, Ireland, Canada, Australia, Hungary, Germany, Austria, Switzerland, the Netherlands, Belgium, Sweden, Denmark, Poland, Czechia, France, Spain, Italy and Romania."],
           ["What if a check fails?", "A failed check is free. If some keywords fail, you pay only for the ones that worked. Claude shows the cost and waits for your yes before every run."],
@@ -54,26 +56,27 @@ const C = {
     formP: "We are opening the desk to a first group of sites. Send your site and up to ten keywords: we run the checks once, e-mail you the digest for free, and give you early access when sign-up opens.",
     f: { email: "E-mail", site: "Your site", market: "Country", comp: "Competitors (optional)", kw: "Keywords, up to 10, separated by commas",
          sitePh: "example.com", marketPh: "United Kingdom", compPh: "rival1.com, rival2.com", kwPh: "boiler repair london, emergency plumber",
-         btn: "Send me the sample digest", priv: "We use these details only to run the sample and to tell you about the SEO Desk.", privLink: "Privacy" },
-    msg: { email: "Please enter a valid e-mail address.", site: "Please enter your site.", sending: "Sending…", ok: "Thank you. We will run the checks and e-mail you the digest.", err: "Something went wrong. Please try again.", net: "Network error. Please try again." },
+         btn: "Send me the sample digest", priv: "We contact you only about the sample and the SEO Desk, and use your details for nothing else.", privLink: "Privacy notice" },
+    msg: { email: "Please enter a valid e-mail address.", site: "Please enter your site.", kw: "Up to 10 keywords, please.", sending: "Sending…", ok: "Thank you. We will run the checks and e-mail you the digest.", err: "Something went wrong. Please try again.", net: "Network error. Please try again." },
     page: "seo-desk",
   },
   hu: {
     title: "SEO Desk a Claude-hoz",
     desc: "Heti Google-helyezés, AI Overview-hivatkozások, helyi térképes rangsor, oldalaudit és backlinkek a saját Claude-jában, összefoglalóval arról, mi változott és mit érdemes javítani. Ellenőrzésenként fizet, előfizetés nélkül.",
     tag: "SEO Desk · Claude-csatlakozó",
-    h1: "Hol áll a Google-ben, hivatkozik-e Önre az AI-összefoglaló, és mit javítson először",
+    status: "Az első oldalak körével indulunk. Ingyenes mintaösszefoglaló már most kérhető.",
+    h1: "Hol áll a Google-ben, hivatkozik-e Önre a Google AI Overview (AI-összefoglaló), és mit javítson először",
     lede: "A SEO Desk hetente ellenőrzi a kulcsszavait, a térképes megjelenését, a fontosabb oldalait és a backlinkjeit, majd összefoglalót küld: mi mozdult el, és legfeljebb hét javítási javaslatot, hatás szerint sorba rendezve. A javításokat a saját Claude-ja írja meg Önnel együtt.",
     ctaA: "Ingyenes mintaösszefoglalót kérek", ctaB: "Az árak megtekintése",
     dCap: "Heti összefoglaló · vízszerelő cég, London · példa",
     dChanged: "Mi változott", dFix: "Ezen a héten javítandó",
     moves: [["up", "14 → 8", "A „boiler repair london” visszakerült az első oldalra"], ["down", "elveszett", "Az „emergency plumber” AI Overview-ja már egy versenytársra hivatkozik"], ["flat", "−2 / +1", "Elvesztett / új hivatkozó domainek"]],
     fixes: [["Szerezze vissza az AI Overview-hivatkozást.", "A hivatkozott oldal már az első bekezdésben megválaszolja, milyen gyorsan érnek ki. Az Öné nem."],
-            ["Hozza fel a „blocked drain” kulcsszót a 11. helyről az első oldalra.", "Az oldalon nincs H1-cím, és mobilon 3,9 mp alatt töltődik be."],
+            ["Hozza fel a „blocked drain” kulcsszót a 11. helyről az első oldalra.", "Az oldalon nincs H1-cím, és mobilon 3,9 másodpercig tart a betöltése."],
             ["Érje el a térképrács északi részét.", "2 km-en belül az 1–3. helyen áll, azon túl kiesik az első tízből."]],
     checksH: "Négy ellenőrzés, egy összefoglaló",
-    checks: [["Google-helyezés és AI Overview", "Minden kulcsszónál a helyezése az első 30 találatban, legfeljebb három versenytárs mellett. Ahol a Google AI-összefoglalót mutat: Önre hivatkozik, vagy rájuk?"],
-             ["Helyi térképes rács", "A Google Térkép-helyezése 3×3-as, 5×5-ös vagy 7×7-es rácson, egymástól 1 km-re lévő pontokon a vállalkozás körül. Látja, melyik utcánál esik ki."],
+    checks: [["Google-helyezés és AI Overview", "Minden kulcsszónál a helyezése az első 30 találatban, legfeljebb három versenytárs mellett. Ahol a Google AI Overview-t mutat: Önre hivatkozik, vagy rájuk?"],
+             ["Térképes helyezés pontrácson", "A Google Térkép-helyezése 3×3-as, 5×5-ös vagy 7×7-es rácson, egymástól 1 km-re lévő pontokon a vállalkozás körül. Látja, melyik utcánál esik ki."],
              ["Oldalaudit", "A kezdőlap és legfeljebb kilenc fontos aloldal: hiányzó címek, leírások és H1-ek, hibás oldalak, lassú mobilos betöltés."],
              ["Backlinkek", "A hivatkozó domainek hétről hétre összevetve, így egy elvesztett linket még akkor észrevesz, amikor visszaszerezhető."]],
     stepsH: "Így zajlik egy futtatás",
@@ -81,16 +84,17 @@ const C = {
             ["Az oldal adatai.", "Domain, ország, kulcsszavak és versenytársak. Nincs még kulcsszólistája? Kérjen javaslatot."],
             ["A költség jóváhagyása.", "A Claude megmondja, hány kreditbe kerülnek a kiválasztott ellenőrzések. Az Ön igenje nélkül semmi nem indul."],
             ["Javítás a Claude-dal.", "Olvassa el az összefoglalót, vagy kapcsolja be a heti futtatást, és e-mailben kapja meg."]],
-    priceH: "Ellenőrzésenként fizet",
-    priceNote: "1 kredit = 0,50 USD. Feltöltés 50 USD-tól. Nincs előfizetés, nincs felhasználónkénti díj. A sikertelen ellenőrzés ingyenes.",
+    priceH: "Induló árak: ellenőrzésenként fizet",
+    priceNote: "1 kredit = 0,50 USD. Feltöltés 50 USD-tól; ez egy átlagos oldalnál nagyjából három hónapra elég. Nincs előfizetés, nincs felhasználónkénti díj. A sikertelen ellenőrzés ingyenes.",
     th: ["Ellenőrzés", "Kredit", "Példa"],
-    rows: [["Helyezés és AI Overview", "2 + 1 / 10 kulcsszó", "20 kulcsszó: 4 kredit (2 USD)"], ["Helyi térképes rács", "3×3: 2 · 5×5: 4 · 7×7: 7", "5×5: 2 USD"],
+    rows: [["Helyezés és AI Overview", "2 + 1 / 10 kulcsszó", "20 kulcsszó: 4 kredit (2 USD)"], ["Térképes helyezés pontrácson", "3×3: 2 · 5×5: 4 · 7×7: 7", "5×5: 2 USD"],
            ["Oldalaudit", "3", "1,50 USD"], ["Backlinkek", "2", "1 USD"], ["Kulcsszójavaslatok", "1", "0,50 USD"], ["Heti összefoglaló és javítási lista", "ingyenes", "a lefuttatott ellenőrzésekből készül"]],
     typical: [["≈ 15 USD havonta", "egy átlagos oldal: 20 kulcsszó és backlinkek hetente, audit havonta egyszer (kb. 29 kredit)"],
-              ["≈ 23 USD havonta", "helyi vállalkozás heti 5×5-ös térképes ráccsal (kb. 46 kredit)"]],
-    shelfTitle: "SEO-jelentések, amelyeket készítettünk",
+              ["≈ 23 USD havonta", "helyi vállalkozás, amely hetente 5×5-ös pontrácson is méri a térképes helyezését (kb. 46 kredit)"]],
+    shelfTitle: "Kézzel készült SEO-jelentéseink",
+    shelfBlurb: "Kézzel készültek, szélesebb motorkörrel, mint amit a SEO Desk ma ellenőriz (ChatGPT, Gemini, Perplexity és AI Overview). Maga a SEO Desk a Google AI Overview-t vizsgálja.",
     faqH: "Kérdések",
-    faq: [["Kell mellé másik SEO-eszköz?", "Nem. A SEO Desk maga gyűjti a Google-találatokat, a térképadatokat, az oldalellenőrzéseket és a linkadatokat. Egy Claude kell hozzá, amelyben engedélyezettek az egyéni csatlakozók."],
+    faq: [["Kell mellé másik SEO-eszköz?", "Nem. A SEO Desk maga gyűjti a Google-találatokat, a térképadatokat, az oldalellenőrzéseket és a linkadatokat. Olyan Claude-előfizetés kell hozzá, amely engedi az egyéni csatlakozókat."],
           ["Ki írja meg a javításokat?", "Az Ön Claude-ja. Minden javaslat mellé odakerül a bizonyíték (a kulcsszó, a hivatkozott versenytárs, a lassú oldal), így a Claude Önnel együtt megírja az új címet, a bekezdést vagy a megkereső levelet."],
           ["Mely országokban működik?", "Egyesült Királyság, USA, Írország, Kanada, Ausztrália, Magyarország, Németország, Ausztria, Svájc, Hollandia, Belgium, Svédország, Dánia, Lengyelország, Csehország, Franciaország, Spanyolország, Olaszország és Románia."],
           ["Mi van, ha egy ellenőrzés nem sikerül?", "A sikertelen ellenőrzés ingyenes. Ha csak néhány kulcsszó hibázik, csak a sikeresekért fizet. A Claude minden futtatás előtt megmutatja a költséget, és megvárja a jóváhagyását."],
@@ -100,8 +104,8 @@ const C = {
     formP: "Az első oldalak körével indítjuk a SEO Desket. Küldje el a címét és legfeljebb tíz kulcsszót: egyszer lefuttatjuk az ellenőrzéseket, ingyen elküldjük e-mailben az összefoglalót, és a regisztráció indulásakor elsőként kap hozzáférést. Az összefoglaló angol nyelvű.",
     f: { email: "E-mail-cím", site: "Az oldal címe", market: "Ország", comp: "Versenytársak (nem kötelező)", kw: "Kulcsszavak, legfeljebb 10, vesszővel elválasztva",
          sitePh: "pelda.hu", marketPh: "Magyarország", compPh: "versenytars1.hu, versenytars2.hu", kwPh: "vízszerelő budapest, duguláselhárítás",
-         btn: "Kérem a mintaösszefoglalót", priv: "Az adatait csak a minta elkészítéséhez és a SEO Desk-kel kapcsolatos tájékoztatáshoz használjuk.", privLink: "Adatvédelem" },
-    msg: { email: "Kérjük, adjon meg érvényes e-mail-címet.", site: "Kérjük, adja meg az oldal címét.", sending: "Küldés…", ok: "Köszönjük. Lefuttatjuk az ellenőrzéseket, és e-mailben küldjük az összefoglalót.", err: "Valami hiba történt. Kérjük, próbálja újra.", net: "Hálózati hiba. Kérjük, próbálja újra." },
+         btn: "Kérem a mintaösszefoglalót", priv: "Csak a mintával és a SEO Deskkel kapcsolatban keressük meg, másra nem használjuk az adatait.", privLink: "Adatvédelmi tájékoztató (angol nyelvű)" },
+    msg: { email: "Kérjük, adjon meg érvényes e-mail-címet.", site: "Kérjük, adja meg az oldal címét.", kw: "Legfeljebb 10 kulcsszót adjon meg.", sending: "Küldés…", ok: "Köszönjük. Lefuttatjuk az ellenőrzéseket, és e-mailben küldjük az összefoglalót.", err: "Valami hiba történt. Kérjük, próbálja újra.", net: "Hálózati hiba. Kérjük, próbálja újra." },
     page: "seo-desk-hu",
   },
 }[lang];
@@ -112,6 +116,7 @@ const C = {
     <div class="wf-wrap hero-in">
       <div class="copy">
         <p class="tag">{C.tag}</p>
+        <p class="status">{C.status}</p>
         <h1>{C.h1}</h1>
         <p class="lede">{C.lede}</p>
         <div class="actions">
@@ -121,7 +126,7 @@ const C = {
       </div>
 
       <figure class="digest" aria-label={C.dCap}>
-        <figcaption><span class="dot" aria-hidden="true"></span>{C.dCap}</figcaption>
+        <figcaption>{C.dCap}</figcaption>
         <p class="dh">{C.dChanged}</p>
         <ul class="moves">{C.moves.map(([k, v, txt]) => (<li><b class={k}>{v}</b><span>{txt}</span></li>))}</ul>
         <p class="dh">{C.dFix}</p>
@@ -152,7 +157,7 @@ const C = {
     <div class="typical">{C.typical.map(([a, b]) => (<p><b>{a}</b><span>{b}</span></p>))}</div>
   </section>
 
-  <div class="wf-wrap"><SampleShelf category={seo} lang={lang} title={C.shelfTitle} /></div>
+  <div class="wf-wrap"><SampleShelf category={seo} lang={lang} title={C.shelfTitle} blurb={C.shelfBlurb} /></div>
 
   <section class="wf-wrap band">
     <h2>{C.faqH}</h2>
@@ -167,14 +172,14 @@ const C = {
       </div>
       <form id="wl" novalidate>
         <div class="row">
-          <label>{C.f.email}<input name="email" type="email" required autocomplete="email" /></label>
-          <label>{C.f.site}<input name="site" type="text" required placeholder={C.f.sitePh} /></label>
+          <label>{C.f.email}<input name="email" type="email" required autocomplete="email" aria-describedby="err-email" /><span class="err" id="err-email" aria-live="polite"></span></label>
+          <label>{C.f.site}<input name="site" type="text" required placeholder={C.f.sitePh} aria-describedby="err-site" /><span class="err" id="err-site" aria-live="polite"></span></label>
         </div>
         <div class="row">
           <label>{C.f.market}<input name="market" type="text" placeholder={C.f.marketPh} /></label>
           <label>{C.f.comp}<input name="competitors" type="text" placeholder={C.f.compPh} /></label>
         </div>
-        <label>{C.f.kw}<input name="keywords" type="text" placeholder={C.f.kwPh} /></label>
+        <label>{C.f.kw}<input name="keywords" type="text" placeholder={C.f.kwPh} aria-describedby="err-keywords" /><span class="err" id="err-keywords" aria-live="polite"></span></label>
         <label class="hp" aria-hidden="true">Website<input name="website" type="text" tabindex="-1" autocomplete="off" /></label>
         <button type="submit">{C.f.btn}</button>
         <p class="msg" id="wl-msg" role="status"></p>
@@ -189,8 +194,22 @@ const C = {
     form.addEventListener("submit", async (e) => {
       e.preventDefault();
       const f = Object.fromEntries(new FormData(form).entries());
-      if (!/^[^@\s]+@[^@\s]+\.[A-Za-z]{2,}$/.test(f.email || "")) { msg.textContent = M.email; return; }
-      if (!(f.site || "").trim()) { msg.textContent = M.site; return; }
+      const kws = String(f.keywords || "").split(",").map((k) => k.trim()).filter(Boolean);
+      const errs = {
+        email: /^[^@\s]+@[^@\s]+\.[A-Za-z]{2,}$/.test(f.email || "") ? "" : M.email,
+        site: String(f.site || "").trim() ? "" : M.site,
+        keywords: kws.length <= 10 ? "" : M.kw,
+      };
+      let first = null;
+      for (const [k, v] of Object.entries(errs)) {
+        const input = form.elements.namedItem(k);
+        document.getElementById("err-" + k).textContent = v;
+        input.setAttribute("aria-invalid", v ? "true" : "false");
+        if (v && !first) first = input;
+      }
+      msg.textContent = "";
+      if (first) { first.focus(); return; }
+      f.keywords = kws.join(", ");
       // the waitlist service keeps email/name/company/interest; the sample request travels in `interest`
       const data = { email: f.email, company: f.site, website: f.website, page: PAGE,
         interest: `SEO Desk sample digest | site: ${f.site} | market: ${f.market || "-"} | keywords: ${f.keywords || "-"} | competitors: ${f.competitors || "-"}` };
@@ -215,9 +234,12 @@ const C = {
   h1 { font-size: clamp(34px, 4.6vw, 56px); line-height: 1.05; letter-spacing: -0.03em; margin: 0 0 20px; text-wrap: balance; }
   .lede { font-size: clamp(16.5px, 1.4vw, 18.5px); line-height: 1.7; color: #b4b4c2; max-width: 56ch; margin: 0; text-wrap: pretty; }
   .actions { display: flex; gap: 12px; flex-wrap: wrap; margin-top: 28px; }
-  .btn, button[type="submit"] { display: inline-block; background: var(--color-accent); color: #fff; text-decoration: none; font-weight: 650; font-size: 15px;
+  .btn, button[type="submit"] { display: inline-block; background: #1F78C1; color: #fff; text-decoration: none; font-weight: 650; font-size: 15px;
     padding: 14px 22px; border-radius: 10px; border: 0; cursor: pointer; transition: background .2s; }
-  .btn:hover, button[type="submit"]:hover { background: var(--color-accent-hover); }
+  .btn:hover, button[type="submit"]:hover { background: #1A68A8; }
+  .status { margin: -6px 0 16px; font-size: 14.5px; color: var(--color-text-primary); display: inline-block; padding: 5px 12px; border-radius: 999px; border: 1px solid var(--color-border); background: var(--color-bg-elevated); }
+  .err { color: #ff9cc3; font-size: 13px; margin: 0; min-height: 0; }
+  input[aria-invalid="true"] { border-color: #ff6fa8; }
   .ghost { display: inline-block; color: var(--color-text-primary); text-decoration: none; font-weight: 600; padding: 13px 20px; border-radius: 10px; border: 1px solid var(--color-border); }
   .ghost:hover { border-color: var(--color-accent); }
   .btn:focus-visible, .ghost:focus-visible, button:focus-visible { outline: 2px solid var(--color-accent); outline-offset: 3px; }

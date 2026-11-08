@@ -18,11 +18,11 @@ const T = {
   en: { samples: "Samples", seo: "SEO Desk", eng: "Engineering", switchLabel: "Magyar nyelvű változat",
         ctaTitle: "Want one of these for your brand?",
         ctaBody: "Tell me what you need on a 30-minute call. You talk to the engineer who builds it, and you get a quote before anything is made.",
-        ctaBtn: "Book a 30-minute call", priv: "Privacy" },
+        ctaBtn: "Book a 30-minute call", priv: "Privacy", cases: "Engineering work for clients: see the case studies on the home page" },
   hu: { samples: "Minták", seo: "SEO Desk", eng: "Fejlesztés", switchLabel: "English version",
         ctaTitle: "Ilyet szeretne a saját márkájának?",
         ctaBody: "Mondja el egy 30 perces beszélgetésen, mire van szüksége. Azzal a mérnökkel beszél, aki elkészíti, és árajánlatot kap, mielőtt bármi elkészülne.",
-        ctaBtn: "30 perces időpont foglalása", priv: "Adatvédelem" },
+        ctaBtn: "30 perces időpont foglalása", priv: "Adatvédelem", cases: "Ügyfeleknek végzett fejlesztések: esettanulmányok a főoldalon (angol nyelvű)" },
 }[lang];
 const links = [
   { href: `${base}/work/`, label: T.samples },
@@ -57,6 +57,7 @@ const links = [
         <div>
           <h2 id="wf-cta-title">{T.ctaTitle}</h2>
           <p>{T.ctaBody}</p>
+          <p class="wf-cases"><a href="/#work">{T.cases} →</a></p>
         </div>
         <a class="wf-btn" href="https://calendly.com/gergelyracz0/30min" target="_blank" rel="noopener">{T.ctaBtn}</a>
       </div>
@@ -64,7 +65,7 @@ const links = [
   )}
 
   <footer class="wf-foot">
-    <div class="wf-wrap">© Lead Flow Automation · {lang === "hu" ? "Rácz Gergely" : "Gergely Racz"}, PhD (Cambridge) · Budapest · <a href="/privacy/">{T.priv}</a></div>
+    <div class="wf-wrap">© LeadFlow Automation · {lang === "hu" ? "Rácz Gergely" : "Gergely Racz"}, PhD (Cambridge) · Budapest · <a href="/privacy/">{T.priv}</a></div>
   </footer>
   <VideoDialog lang={lang} />
 </Base>
@@ -95,8 +96,8 @@ const links = [
   nav a[aria-current="page"] { color: var(--color-text-primary); border-bottom-color: var(--color-accent); }
   nav a:focus-visible, .wf-lang:focus-visible, .wf-btn:focus-visible { outline: 2px solid var(--color-accent); outline-offset: 3px; border-radius: 6px; }
   @media (max-width: 520px) { nav a:last-child { display: none; } .wf-mark { font-size: 12.5px; } }
-  @media (max-width: 440px) { .wf-mark { font-size: 11.5px; letter-spacing: .05em; } nav { gap: 12px; } nav a { font-size: 13px; }
-    nav a[aria-current="page"] { display: none; } .wf-lang { padding: 5px 8px; gap: 4px; } .wf-bar { gap: 8px; } .wf-right { gap: 10px; } }
+  @media (max-width: 440px) { .wf-mark { font-size: 10.5px; letter-spacing: .04em; } nav { gap: 10px; } nav a { font-size: 12.5px; }
+    .wf-lang { padding: 5px 8px; gap: 4px; } .wf-bar { gap: 8px; } .wf-right { gap: 10px; } }
   .wf-lang { display: inline-flex; align-items: center; gap: 6px; font-size: 13px; font-weight: 650; color: var(--color-text-primary); text-decoration: none;
     padding: 6px 10px; border-radius: 999px; border: 1px solid var(--color-border); transition: border-color .2s; }
   .wf-lang:hover { border-color: var(--color-accent); }
@@ -108,8 +109,11 @@ const links = [
   .wf-cta-in { display: flex; align-items: center; justify-content: space-between; gap: 24px 40px; flex-wrap: wrap; padding-block: clamp(44px, 6vw, 80px); }
   .wf-cta h2 { font-size: clamp(26px, 3vw, 36px); margin: 0 0 10px; text-wrap: balance; }
   .wf-cta p { margin: 0; color: #b4b4c2; font-size: 16px; line-height: 1.7; max-width: 58ch; }
-  .wf-btn { display: inline-block; background: var(--color-accent); color: #fff; text-decoration: none; font-weight: 650; padding: 14px 24px; border-radius: 10px; transition: background .2s; }
-  .wf-btn:hover { background: var(--color-accent-hover); }
+  .wf-btn { display: inline-block; background: #1F78C1; color: #fff; text-decoration: none; font-weight: 650; padding: 14px 24px; border-radius: 10px; transition: background .2s; }
+  .wf-btn:hover { background: #1A68A8; }
+  .wf-cases { margin-top: 14px !important; font-size: 15px !important; }
+  .wf-cases a { color: var(--color-accent); text-decoration: none; font-weight: 600; }
+  .wf-cases a:hover { text-decoration: underline; }
   .wf-foot { border-top: 1px solid var(--color-border); padding: 22px 0 34px; font-size: 12.5px; color: var(--color-text-secondary); }
   .wf-foot a { color: var(--color-text-secondary); }
 </style>

@@ -1,8 +1,9 @@
 ---
-// Samples hub body (EN /work/, HU /hu/work/): hero with real pieces, sticky category menu, one shelf per category.
+// Samples hub body (EN /work/, HU /hu/work/): hero with real pieces, sticky category menu with scroll-spy,
+// one shelf per category.
 import WorkFrame from "../WorkFrame.astro";
 import SampleShelf from "../SampleShelf.astro";
-import { categories, total, t, type Lang } from "../../data/samples";
+import { categories, t, type Lang } from "../../data/samples";
 
 interface Props { lang: Lang }
 const { lang } = Astro.props;
@@ -10,28 +11,28 @@ const G = "/work/gallery";
 const C = {
   en: {
     title: "Work samples",
-    desc: "Open real samples: SEO reports, research, articles, social posts, UGC ads and videos, white papers, lead magnets, product mockups and print design.",
+    desc: "Open real samples: SEO reports, research, articles, social posts, UGC ads and videos, white papers, lead magnets, product images and print design.",
     h1: "Open the work before you book the call",
-    lede: `${total} finished samples in ${categories.length} categories. Reports open as PDFs, videos play on this page, posts open full size. Each one was made for our own products or for a made-up demo brand, because client work stays private.`,
+    lede: `Finished samples in ${categories.length} categories. Reports open as PDFs, videos play on this page, posts open full size. They were made for our own products, for made-up demo brands or from public data. Client work is shown only anonymised.`,
     who: "Gergely Racz (PhD, Cambridge) builds the AI agents that produce this work and checks every piece before it ships.",
     menu: "Sample categories", collage: "A few of the samples",
   },
   hu: {
     title: "Munkaminták",
-    desc: "Nyisson meg valódi mintákat: SEO-jelentések, kutatások, cikkek, közösségimédia-posztok, UGC-hirdetések és videók, szakmai anyagok, termékmockupok és nyomdai anyagok.",
+    desc: "Nyisson meg valódi mintákat: SEO-jelentések, kutatások, cikkek, közösségimédia-posztok, UGC-hirdetések és videók, szakmai anyagok, termékképek és nyomdai anyagok.",
     h1: "Nézze meg a munkát, mielőtt időpontot foglal",
-    lede: `${total} kész minta, ${categories.length} kategóriában. A jelentések PDF-ként nyílnak meg, a videók itt az oldalon indulnak, a posztok teljes méretben. Mindegyik a saját termékeinkhez vagy kitalált demómárkához készült, mert az ügyfélmunkák bizalmasak. Maguk a minták angol nyelvűek.`,
+    lede: `Kész minták ${categories.length} kategóriában. A jelentések PDF-ként nyílnak meg, a videók itt az oldalon indulnak, a posztok teljes méretben. A saját termékeinkhez, kitalált demómárkákhoz vagy nyilvános adatokból készültek; ügyfélmunkát csak anonimizálva mutatunk. Maguk a minták angol nyelvűek.`,
     who: "Az anyagokat előállító AI-ügynököket Rácz Gergely (PhD, Cambridge) fejleszti, és minden darabot ő ellenőriz, mielőtt kiadja a kezéből.",
     menu: "Mintakategóriák", collage: "Néhány minta",
   },
 }[lang];
 const collage = [
   { img: `${G}/social/medspa-myth-or-fact.webp`, to: "#social", cls: "c1" },
-  { img: `${G}/highlights/seo-audit.webp`, to: "#seo", cls: "c2" },
-  { img: "/work/videos/scalepod-ugc.jpg", to: "#video", cls: "c3" },
-  { img: `${G}/highlights/kw.webp`, to: "#seo", cls: "c4" },
+  { img: `${G}/highlights/seo-audit-m.webp`, to: "#seo", cls: "c2" },
+  { img: "/work/videos/scalepod-ugc-poster.jpg", to: "#video", cls: "c3" },
+  { img: `${G}/highlights/kw-m.webp`, to: "#seo", cls: "c4" },
   { img: `${G}/merch/pod-4-listing.webp`, to: "#products", cls: "c5" },
-  { img: `${G}/highlights/wp-erp.webp`, to: "#papers", cls: "c6" },
+  { img: `${G}/highlights/wp-erp-m.webp`, to: "#papers", cls: "c6" },
 ];
 ---
 
@@ -52,8 +53,8 @@ const collage = [
   </section>
 
   <nav class="cats" aria-label={C.menu}>
-    <div class="wf-wrap cats-in">
-      {categories.map((c) => (<a href={`#${c.slug}`}>{t(c.title, lang)}<span>{c.items.length}</span></a>))}
+    <div class="wf-wrap cats-in" data-cats>
+      {categories.map((c) => (<a href={`#${c.slug}`} data-spy={c.slug}>{t(c.title, lang)}<span>{c.items.length}</span></a>))}
     </div>
   </nav>
 
@@ -61,6 +62,27 @@ const collage = [
     {categories.map((c, i) => <SampleShelf category={c} lang={lang} eager={i === 0} />)}
   </div>
 </WorkFrame>
+
+<script>
+  // scroll-spy: mark the category whose shelf is under the sticky bars, and keep that pill in view on phones
+  const pills = new Map([...document.querySelectorAll<HTMLAnchorElement>("[data-spy]")].map((a) => [a.dataset.spy!, a]));
+  const bar = document.querySelector<HTMLElement>("[data-cats]")!;
+  let current = "";
+  const pick = () => {
+    let id = "";
+    for (const key of pills.keys()) {
+      const el = document.getElementById(key);
+      if (el && el.getBoundingClientRect().top < 200) id = key;
+    }
+    if (id === current) return;
+    current = id;
+    pills.forEach((a, k) => (k === id ? a.setAttribute("aria-current", "true") : a.removeAttribute("aria-current")));
+    const a = pills.get(id);
+    if (a && bar.scrollWidth > bar.clientWidth) bar.scrollTo({ left: a.offsetLeft - 16, behavior: "auto" });
+  };
+  window.addEventListener("scroll", pick, { passive: true });
+  pick();
+</script>
 
 <style>
   .hero { padding-block: clamp(40px, 6vw, 88px) clamp(32px, 4vw, 56px); overflow: hidden; }
@@ -73,26 +95,36 @@ const collage = [
   .collage { display: grid; grid-template-columns: repeat(6, minmax(0, 1fr)); grid-template-rows: repeat(6, clamp(40px, 5.2vw, 66px)); gap: 10px; }
   .tile { display: block; overflow: hidden; border-radius: 12px; border: 1px solid var(--color-border); background: #fff;
     animation: rise .8s cubic-bezier(.22, 1, .36, 1) both; transition: transform .35s cubic-bezier(.22, 1, .36, 1), border-color .2s; }
-  .tile img { width: 100%; height: 100%; object-fit: cover; object-position: top left; display: block; }
+  .tile img { width: 100%; height: 100%; object-fit: cover; object-position: center top; display: block; }
   .tile:hover { transform: translateY(-4px); border-color: var(--color-accent); }
   .c1 { grid-area: 1 / 1 / 5 / 3; animation-delay: .05s; }
-  .c2 { grid-area: 1 / 3 / 4 / 5; animation-delay: .12s; }
-  .c2 img { object-position: left center; }
+  .c1 { background: #2a211c; }
+  .c1 img { object-fit: contain; object-position: center bottom; }   /* whole post, so the "Myth or fact" type is never cut */
+  .c2 { grid-area: 1 / 3 / 4 / 5; animation-delay: .12s; background: #15130f; }
+  .c2 img { object-fit: contain; object-position: center; }
   .c3 { grid-area: 1 / 5 / 6 / 7; animation-delay: .19s; }
   .c4 { grid-area: 4 / 3 / 7 / 5; animation-delay: .26s; }
   .c5 { grid-area: 5 / 1 / 7 / 3; animation-delay: .33s; }
+  .c5 img { object-position: center 20%; }
   .c6 { grid-area: 6 / 5 / 7 / 7; animation-delay: .4s; }
-  .c6 img { object-position: center 20%; }
+  .c6 img { object-position: center 30%; }
   @keyframes rise { from { opacity: 0; transform: translateY(14px) scale(.98); } to { opacity: 1; transform: none; } }
   @media (max-width: 520px) { .collage { grid-template-rows: repeat(6, 44px); gap: 8px; } }
 
   .cats { position: sticky; top: 60px; z-index: 10; background: color-mix(in oklch, var(--color-bg-deep) 94%, transparent);
     backdrop-filter: blur(10px); border-block: 1px solid var(--color-border); }
-  .cats-in { display: flex; gap: 6px; overflow-x: auto; padding-block: 10px; scrollbar-width: none; }
-  .cats-in::-webkit-scrollbar { display: none; }
+  .cats-in { display: flex; flex-wrap: wrap; gap: 6px; padding-block: 10px; }
+  @media (max-width: 899px) {
+    .cats { position: sticky; }
+    .cats-in { flex-wrap: nowrap; overflow-x: auto; scrollbar-width: none; padding-right: 48px; }
+    .cats-in::-webkit-scrollbar { display: none; }
+    .cats::after { content: ""; position: absolute; right: 0; top: 0; bottom: 0; width: 48px; pointer-events: none;
+      background: linear-gradient(to right, transparent, var(--color-bg-deep)); }
+  }
   .cats a { flex: 0 0 auto; display: inline-flex; align-items: center; gap: 8px; font-size: 13.5px; color: #b4b4c2; text-decoration: none;
     padding: 7px 12px; border-radius: 999px; border: 1px solid transparent; transition: color .2s, border-color .2s, background .2s; }
   .cats a:hover { color: var(--color-text-primary); border-color: var(--color-border); background: var(--color-bg-elevated); }
+  .cats a[aria-current] { color: var(--color-text-primary); border-color: color-mix(in oklch, var(--color-accent) 70%, transparent); background: var(--color-bg-elevated); }
   .cats a:focus-visible { outline: 2px solid var(--color-accent); outline-offset: 1px; }
   .cats span { font-size: 11.5px; font-weight: 650; color: var(--color-text-primary); background: var(--color-bg-subtle); border-radius: 999px; padding: 1px 7px; }
 

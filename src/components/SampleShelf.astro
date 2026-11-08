@@ -16,10 +16,12 @@ interface Props {
   spotlight?: boolean;
   /** title override (e.g. on a product page) */
   title?: string;
+  /** blurb override */
+  blurb?: string;
   /** first shelf on the page: load its images eagerly */
   eager?: boolean;
 }
-const { category, lang = "en", more = true, spotlight = true, title, eager = false } = Astro.props;
+const { category, lang = "en", more = true, spotlight = true, title, blurb, eager = false } = Astro.props;
 const U = ui[lang];
 const base = lang === "hu" ? "/hu" : "";
 const items = category.items;
@@ -35,7 +37,7 @@ const load = eager ? "eager" : "lazy";
   <div class="head" class:list={[{ solo: !spot }]}>
     <div class="intro">
       <h2 class="title" id={`${category.slug}-title`}>{title ?? t(category.title, lang)}</h2>
-      <p class="blurb">{t(category.blurb, lang)}</p>
+      <p class="blurb">{blurb ?? t(category.blurb, lang)}</p>
       {more && (
         <a class="all" href={`${base}/work/${category.slug}/`}>
           {U.seeAll(items.length)}<span class="sr">: {t(category.title, lang)}</span> <span aria-hidden="true">→</span>
@@ -47,16 +49,16 @@ const load = eager ? "eager" : "lazy";
       <figure class="spot">
         {spot.video ? (
           <button type="button" class="spot-img" data-video={spot.video} data-poster={spot.img} data-title={t(spot.title, lang)} aria-label={`${U.play}: ${t(spot.title, lang)}`}>
-            <img src={spot.hl.img} alt="" loading={load} decoding="async" {...wh(spot.hl.img)} />
+            <picture>{spot.hl.m && <source media="(max-width: 600px)" srcset={spot.hl.m} {...wh(spot.hl.m)} />}<img src={spot.hl.img} alt="" loading={load} decoding="async" {...wh(spot.hl.img)} /></picture>
             <span class="play big" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M8 5v14l11-7z" /></svg></span>
           </button>
         ) : (
           <a class="spot-img" href={spot.href} target="_blank" rel="noopener" aria-label={`${spotAction}: ${t(spot.title, lang)}`}>
-            <img src={spot.hl.img} alt="" loading={load} decoding="async" {...wh(spot.hl.img)} />
+            <picture>{spot.hl.m && <source media="(max-width: 600px)" srcset={spot.hl.m} {...wh(spot.hl.m)} />}<img src={spot.hl.img} alt="" loading={load} decoding="async" {...wh(spot.hl.img)} /></picture>
           </a>
         )}
         <figcaption>
-          <span class="from">{U.fromPage}: <b>{t(spot.title, lang)}</b>{lang === "hu" && <span class="en-tag">{U.assetLang}</span>}</span>
+          <span class="from">{spot.hl.from ? <b>{t(spot.hl.from, lang)}</b> : <>{U.fromPage}: <b>{t(spot.title, lang)}</b></>}{lang === "hu" && !spot.noText && <span class="en-tag">{U.assetLang}</span>}</span>
           <span class="cap">{t(spot.hl.cap, lang)}</span>
           {spot.video ? (
             <button type="button" class="act" data-video={spot.video} data-poster={spot.img} data-title={t(spot.title, lang)}>{spotAction} <span aria-hidden="true">→</span></button>
@@ -98,7 +100,7 @@ const load = eager ? "eager" : "lazy";
               {s.meta && <span class="meta">{t(s.meta, lang)}</span>}
             </a>
           )}
-          {lang === "hu" && <span class="en-tag">{U.assetLang}</span>}
+          {lang === "hu" && !s.noText && <span class="en-tag">{U.assetLang}</span>}
           {s.extra && (
             <span class="extra">{s.extra.map((x) => <a href={x.href} target="_blank" rel="noopener">{t(x.label, lang)}</a>)}</span>
           )}
@@ -133,8 +135,8 @@ const load = eager ? "eager" : "lazy";
 </script>
 
 <style>
-  .shelf { position: relative; padding-block: clamp(36px, 5vw, 64px); border-top: 1px solid var(--color-border); scroll-margin-top: 118px; }
-  .anchor { position: absolute; top: 0; }
+  .shelf { position: relative; padding-block: clamp(36px, 5vw, 64px); border-top: 1px solid var(--color-border); scroll-margin-top: 150px; }
+  .anchor { position: absolute; top: 0; scroll-margin-top: 150px; }
   .item[id] { scroll-margin-top: 130px; }
 
   .head { display: grid; grid-template-columns: minmax(0, 0.8fr) minmax(0, 1.2fr); gap: clamp(20px, 4vw, 56px); align-items: start; margin-bottom: clamp(22px, 3vw, 32px); }
@@ -155,6 +157,8 @@ const load = eager ? "eager" : "lazy";
   /* spotlight: the evidence panel */
   .spot { margin: 0; display: grid; gap: 14px; padding: 12px; border-radius: 16px; background: var(--color-bg-elevated); border: 1px solid var(--color-border); }
   .spot-img { all: unset; cursor: pointer; position: relative; display: block; border-radius: 10px; overflow: hidden; background: #fff; max-height: 360px; }
+  .spot-img picture { display: block; }
+  @media (max-width: 600px) { .spot-img, .spot-img img { max-height: none; } .spot-img img { object-fit: contain; } }
   .spot-img img { display: block; width: 100%; height: auto; max-height: 360px; object-fit: cover; object-position: top; transition: transform .6s cubic-bezier(.22, 1, .36, 1); }
   .spot-img:hover img { transform: scale(1.015); }
   .spot figcaption { display: flex; flex-direction: column; gap: 6px; padding: 0 6px 6px; }
@@ -218,5 +222,6 @@ const load = eager ? "eager" : "lazy";
   .extra { display: flex; flex-wrap: wrap; gap: 4px 12px; font-size: 13px; }
   .extra a { color: var(--color-accent); text-decoration: none; }
   .extra a:hover { text-decoration: underline; }
-  @media (prefers-reduced-motion: reduce) { .thumb, .spot-img img { transition: none; } }
+  @media (prefers-reduced-motion: reduce) { .thumb, .spot-img picture { display: block; }
+  .spot-img img { transition: none; } }
 </style>

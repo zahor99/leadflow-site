@@ -1,51 +1,91 @@
 {
+"/work/gallery/highlights/cold-m.webp": [
+600,
+135
+],
 "/work/gallery/highlights/cold.webp": [
 1200,
 752
 ],
-"/work/gallery/highlights/geo.webp": [
-1200,
-401
+"/work/gallery/highlights/kw-m.webp": [
+600,
+483
 ],
 "/work/gallery/highlights/kw.webp": [
 1200,
 979
 ],
+"/work/gallery/highlights/lm-blue-m.webp": [
+600,
+125
+],
 "/work/gallery/highlights/lm-blue.webp": [
 1200,
-666
+655
+],
+"/work/gallery/highlights/lm-gdpr-m.webp": [
+600,
+240
 ],
 "/work/gallery/highlights/lm-gdpr.webp": [
 1200,
 849
 ],
+"/work/gallery/highlights/prod-m.webp": [
+600,
+305
+],
 "/work/gallery/highlights/prod.webp": [
 1200,
 895
+],
+"/work/gallery/highlights/scrape-m.webp": [
+600,
+460
 ],
 "/work/gallery/highlights/scrape.webp": [
 1200,
 1108
 ],
+"/work/gallery/highlights/seo-audit-m.webp": [
+515,
+496
+],
 "/work/gallery/highlights/seo-audit.webp": [
 1200,
 707
 ],
+"/work/gallery/highlights/seodesk-lf-m.webp": [
+600,
+214
+],
 "/work/gallery/highlights/seodesk-lf.webp": [
 1200,
-359
+103
+],
+"/work/gallery/highlights/seodesk-sp-m.webp": [
+600,
+238
 ],
 "/work/gallery/highlights/seodesk-sp.webp": [
 1200,
-359
+116
 ],
 "/work/gallery/highlights/social-set.webp": [
 1400,
 427
 ],
+"/work/gallery/highlights/wp-erp-m.webp": [
+600,
+391
+],
 "/work/gallery/highlights/wp-erp.webp": [
 1200,
 886
+],
+"/work/gallery/highlights/wp-mcp-m.webp": [
+529,
+577
 ],
 "/work/gallery/highlights/wp-mcp.webp": [
 1200,
@@ -75,19 +115,7 @@
 640,
 905
 ],
-"/work/gallery/lead/manual-lash-mapping.webp": [
-640,
-905
-],
 "/work/gallery/merch/pod-1-pattern.webp": [
-640,
-640
-],
-"/work/gallery/merch/pod-2-print-file.webp": [
-640,
-640
-],
-"/work/gallery/merch/pod-3-mockup.webp": [
 640,
 640
 ],
@@ -151,10 +179,6 @@
 640,
 800
 ],
-"/work/gallery/social/esthetician-before-after.webp": [
-640,
-800
-],
 "/work/gallery/social/facial-carousel-cover.webp": [
 640,
 800
@@ -166,10 +190,6 @@
 "/work/gallery/social/fitness-yt-thumb.webp": [
 640,
 360
-],
-"/work/gallery/social/lash-fills.webp": [
-640,
-800
 ],
 "/work/gallery/social/medspa-carousel-1.webp": [
 640,
@@ -216,14 +236,6 @@
 1754
 ],
 "/work/gallery/merch/pod-1-pattern.jpg": [
-640,
-640
-],
-"/work/gallery/merch/pod-2-print-file.jpg": [
-640,
-640
-],
-"/work/gallery/merch/pod-3-mockup.jpg": [
 640,
 640
 ],
@@ -287,10 +299,6 @@
 1080,
 1350
 ],
-"/work/gallery/social/esthetician-before-after.jpg": [
-1080,
-1350
-],
 "/work/gallery/social/facial-carousel-cover.jpg": [
 1080,
 1350
@@ -302,10 +310,6 @@
 "/work/gallery/social/fitness-yt-thumb.jpg": [
 1280,
 720
-],
-"/work/gallery/social/lash-fills.jpg": [
-1080,
-1350
 ],
 "/work/gallery/social/medspa-carousel-1.jpg": [
 1080,
@@ -343,6 +347,10 @@
 960,
 540
 ],
+"/work/videos/scalepod-ugc-poster.jpg": [
+720,
+1280
+],
 "/work/videos/scalepod-ugc.jpg": [
 540,
 960
@@ -372,8 +380,8 @@
 1200
 ],
 "/work/reports/cold-email/cover.png": [
-1600,
-2264
+640,
+906
 ],
 "/work/reports/cold-email/page-2.png": [
 1600,
