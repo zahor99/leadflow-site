@@ -5,7 +5,7 @@
 // Visual-first: inline SVG diagrams in the site palette (agency system, AI brain ingestion, work loop, content
 // machine), agent team as icon cards, samples as carousels. Honest status: SEO Desk live in Claude for invited
 // sites; research, social listening and content are delivered as a service on the same system while the
-// connector tools are built. noindex until the terms are final. CTA posts to the VPS waitlist service.
+// connector tools are built. Indexable and in the sitemap since 2026-11-11 (operator). CTA posts to the VPS waitlist service.
 import WorkFrame from "../WorkFrame.astro";
 import SampleShelf from "../SampleShelf.astro";
 import { bySlug, type Lang } from "../../data/samples";
@@ -153,7 +153,7 @@ const icons = [
 ];
 ---
 
-<WorkFrame title={C.title} description={C.desc} lang={lang} cta={false}>
+<WorkFrame title={C.title} description={C.desc} lang={lang} cta={false} noindex={false}>
   <section class="hero">
     <div class="wf-wrap hero-in">
       <div class="copy">
