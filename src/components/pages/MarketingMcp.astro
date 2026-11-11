@@ -1,0 +1,373 @@
+---
+// Marketing MCP sales page body (EN /marketing-mcp/, HU /hu/marketing-mcp/), part of Agency OS.
+// Honest status: the SEO Desk tools run in Claude today (invited sites); content production (clips, b-roll re-cuts,
+// AI scenes, mechanism animations, articles) is delivered as a done-for-you service on the same stack while the
+// connector tools are built. Prices: SEO Desk per RATE-CARD-2026-11-08; content month quoted after a free sample.
+// noindex until the terms are final (same as the SEO Desk page). The CTA posts to the VPS waitlist service.
+import WorkFrame from "../WorkFrame.astro";
+import SampleShelf from "../SampleShelf.astro";
+import { bySlug, type Lang } from "../../data/samples";
+
+interface Props { lang: Lang }
+const { lang } = Astro.props;
+const WAITLIST_URL = "https://ops.leadflowautomation.net/waitlist/signup";
+const base = lang === "hu" ? "/hu" : "";
+const video = bySlug("video")!;
+const social = bySlug("social")!;
+const papers = bySlug("papers")!;
+const seo = bySlug("seo")!;
+
+const C = {
+  en: {
+    title: "Marketing MCP · Agency OS",
+    desc: "Agency OS learns your brand, your ideal customers and your public material, then makes on-brand marketing assets: short clips from long videos, new videos from your existing b-roll, AI scenes with your real product, mechanism animations, articles and weekly SEO checks in Claude.",
+    tag: "Marketing MCP · part of Agency OS",
+    status: "SEO Desk live for invited sites · content made for you on the same system",
+    h1: "On-brand marketing assets, made from the material you already have",
+    lede: "Agency OS reads your website, guides, product sheets and social posts, and learns your voice, your ideal customers and the claims you can prove. Then it turns one long video into a batch of short clips, re-cuts your existing b-roll into new videos, and drafts ads, articles and animations that sound like you. Nothing goes out before you approve it.",
+    ctaA: "Get a free sample for your brand", ctaB: "See the samples",
+    mCap: "One month from one recording · illustration",
+    mIn: "In", mInItems: ["One webinar, live or podcast", "Your existing reels and product shots", "Your website and webshop"],
+    mOut: "Out", mOutItems: ["Short 9:16 clips with a hook, captions and a call to action", "Topic videos and tips re-cut from your b-roll", "AI scenes with your real product label", "A mechanism animation for the hero product", "An article and a lead-magnet PDF", "A weekly SEO digest in Claude"],
+    mFoot: "Every piece waits on a review page for your yes.",
+    brainH: "First, Agency OS learns your brand",
+    brainP: "Generic AI writes generic copy. So before anything is made, your public material goes into a private brand brain, and every brief starts from it.",
+    brain: [["Everything you have published", "Pages, guides, product sheets, FAQs, case studies and the PDFs linked from your site. Each fact keeps the address it came from."],
+            ["Your ideal customers", "Who buys, what they ask, what makes them hesitate. We write these profiles with you, and every script names the one it speaks to."],
+            ["Claims you can prove", "Product claims come only from your site or packaging, each with its source. No health or medical claims, and AI presenters are always labelled."],
+            ["Your voice", "Tone, the words you use and the ones you avoid, taken from your own posts and videos. A cloned voice only with written consent and your own recording."]],
+    machineH: "The content machine",
+    machineP: "Most brands do not run out of ideas. They run out of time to cut, caption and post what they already have.",
+    machine: [["Long form to short", "One webinar, podcast, live or product demo becomes a batch of vertical clips: the strongest moments, a hook in the first three seconds, burned-in captions, your music and a spoken call to action."],
+              ["New videos from old b-roll", "Your past reels and product shots are raw material. We re-cut them into topic videos, quick tips and myth-versus-fact clips, without a new shoot."],
+              ["AI scenes with your real product", "No footage of a routine or a use scene? We generate it, with your real label placed on the product, not redrawn by the model. Every AI shot is labelled."],
+              ["Mechanism animations", "Medical-style 3D explainers: skin up close, droplets, ingredients sinking in, a calm after-state. Each one is marked as an illustration."],
+              ["Written assets", "Articles built on search data, lead-magnet PDFs, carousels and newsletters, in the same voice as the videos."]],
+    mechCap: "Mechanism animation · 6 s · made for a skincare toner ad · illustration",
+    mcpH: "Inside Claude: the Marketing MCP",
+    mcpP: "MCP is the standard way to plug tools into Claude. The Marketing MCP gives your Claude the brand brain and the production tools, so you can ask for a clip, a brief or an SEO check in plain words.",
+    mcpTh: ["Tool", "What it does", "Status"],
+    mcpRows: [["SEO Desk", "Weekly Google rank, AI Overview citations, map grid, site audit and backlinks, with a fix list", "live · invited sites"],
+              ["Brand brain", "Answers and drafts from your own material, with the source", "live in Agency OS"],
+              ["Clips and b-roll re-cuts", "Long recordings and old footage into short vertical videos", "made for you · tools in build"],
+              ["UGC ads and AI scenes", "Labelled AI presenters and product scenes with your real label", "made for you · tools in build"],
+              ["Articles and lead magnets", "Search-data briefs, articles, designed PDFs", "made for you · tools in build"]],
+    mcpLink: "See the SEO Desk",
+    stepsH: "How it works",
+    steps: [["Send your site.", "Your website and, if you have one, a link to a long video. A consent tick lets us read your public material."],
+            ["We build the brand brain.", "Pages, products, voice, ideal customers and the claims we may use, written down where you can check them."],
+            ["You review a free sample.", "A short batch on a private review page: approve, comment or reject each piece."],
+            ["We make the month.", "Only what you approve goes out. Your comments go into the brain, so the next month starts closer to your taste."]],
+    priceH: "Prices",
+    price: [["SEO Desk", "Pay per check with credits from $50, about $15 a month for a typical site. No subscription.", `${base}/seo-desk/#pricing`, "SEO Desk prices"],
+            ["Content month", "One fixed monthly price, quoted after you have seen the free sample. You know the cost before anything is made.", "#sample", "Ask for a sample"]],
+    samplesH: "Samples",
+    samplesP: "Made by this system for our own products, made-up demo brands and prospects. AI presenters and made-up brands are labelled as such.",
+    faqH: "Questions",
+    faq: [["Do I need Claude?", "Not for the content service: you get finished assets and a review page. For the SEO Desk tools you need a Claude plan that allows custom connectors."],
+          ["Is AI content labelled?", "Yes. AI presenters, AI scenes and animations carry a label in the video. We never present an AI person as a real customer."],
+          ["Will it make claims about my products?", "Only claims your own site or packaging makes, each with its source. No health or medical claims, even when an animation shows how a product works."],
+          ["Can it use my voice or face?", "Only with your written consent and from your own recording. Without it we use clearly labelled AI voices and presenters."],
+          ["Which languages?", "English and Hungarian today, written and spoken. More languages after these two are proven."],
+          ["What does the sample cost?", "Nothing. If you like it, you get a fixed monthly quote. If not, we delete your brand brain."]],
+    formH: "A free sample for your brand",
+    formP: "Send your site and, if you have one, a long video. We build a small brand brain and a short batch of pieces, and send you a private review page.",
+    f: { email: "E-mail", site: "Your website", vid: "Link to a long video (optional)", note: "What would help you most? (optional)",
+         sitePh: "yourbrand.com", vidPh: "YouTube, Facebook or Instagram link", notePh: "e.g. short clips from our webinars",
+         btn: "Send me a free sample", priv: "We read only your public material, contact you only about the sample, and delete it on request.", privLink: "Privacy notice" },
+    msg: { email: "Please enter a valid e-mail address.", site: "Please enter your website.", sending: "Sending…", ok: "Thank you. We will be in touch with your sample.", err: "Something went wrong. Please try again.", net: "Network error. Please try again." },
+    page: "marketing-mcp",
+  },
+  hu: {
+    title: "Marketing MCP · Agency OS",
+    desc: "Az Agency OS megtanulja a márkáját, az ideális ügyfeleit és a nyilvános anyagait, majd márkahű marketinganyagokat készít: rövid videókat a hosszúakból, új videókat a meglévő felvételeiből, AI-jeleneteket a valódi termékével, hatásmechanizmus-animációkat, cikkeket és heti SEO-ellenőrzést a Claude-ban.",
+    tag: "Marketing MCP · az Agency OS része",
+    status: "A SEO Desk már működik · a tartalmat mi készítjük el Önnek",
+    h1: "Márkahű marketinganyagok abból, ami már megvan",
+    lede: "Az Agency OS elolvassa a weboldalát, az útmutatóit, a termékleírásait és a közösségimédia-posztjait, és megtanulja a hangnemét, az ideális ügyfeleit, valamint azokat az állításokat, amelyeket alá tud támasztani. Ezután egy hosszú videóból rövid videók sorozatát készíti, a meglévő felvételeiből új videókat vág, és olyan hirdetéseket, cikkeket és animációkat ír, amelyek az Ön hangján szólalnak meg. Semmi nem jelenik meg az Ön jóváhagyása nélkül.",
+    ctaA: "Ingyenes mintát kérek a márkámhoz", ctaB: "A minták megtekintése",
+    mCap: "Egy hónap egyetlen felvételből · illusztráció",
+    mIn: "Ebből", mInItems: ["Egy webinár, élő adás vagy podcast", "A meglévő reelsei és termékfotói", "A weboldala és a webshopja"],
+    mOut: "Ez lesz", mOutItems: ["Rövid, álló videók figyelemfelkeltő nyitással, felirattal, cselekvésre hívással", "Témavideók és tippek a meglévő felvételekből vágva", "AI-jelenetek a valódi termékcímkével", "Hatásmechanizmus-animáció a fő termékhez", "Egy cikk és egy letölthető PDF-útmutató", "Heti SEO-összefoglaló a Claude-ban"],
+    mFoot: "Minden darab egy jóváhagyó oldalon várja az Ön igenjét.",
+    brainH: "Először az Agency OS megtanulja a márkáját",
+    brainP: "Az általános AI általános szöveget ír. Ezért mielőtt bármi elkészülne, a nyilvános anyagai egy saját márkaadatbázisba kerülnek, és minden feladat innen indul.",
+    brain: [["Minden, amit eddig közzétett", "Oldalak, útmutatók, termékleírások, gyakori kérdések, esettanulmányok és a weboldalról linkelt PDF-ek. Minden adat mellett ott marad a forrás címe."],
+            ["Az ideális ügyfelei", "Ki vásárol, mit kérdez, mi tartja vissza. Ezeket a profilokat Önnel együtt írjuk meg, és minden forgatókönyv megnevezi, kinek szól."],
+            ["Alátámasztható állítások", "Termékállítás csak az Ön weboldaláról vagy csomagolásáról kerül be, mindig forrással. Gyógyhatást, orvosi állítást nem teszünk az Ön szájába, és az AI-bemutatókat mindig jelöljük."],
+            ["Az Ön hangja", "A hangnem, a használt és a kerülendő szavak, a saját posztjaiból és videóiból. Klónozott hang csak írásos hozzájárulással és saját felvételből."]],
+    machineH: "A tartalomgyár",
+    machineP: "A legtöbb márkának nem az ötlet fogy el, hanem az idő arra, hogy a meglévő anyagait megvágja, feliratozza és közzétegye.",
+    machine: [["Hosszúból rövidet", "Egy webinárból, podcastból, élő adásból vagy termékbemutatóból álló videók sorozata lesz: a legerősebb pillanatok, figyelemfelkeltő első három másodperc, beégetett felirat, saját zene és kimondott cselekvésre hívás."],
+              ["Új videók a régi felvételekből", "A korábbi reelsei és termékfotói nyersanyagok. Témavideókat, gyors tippeket és tévhit–tény videókat vágunk belőlük, új forgatás nélkül."],
+              ["AI-jelenetek a valódi termékkel", "Nincs felvétel egy rutinról vagy használati jelenetről? Legeneráljuk, a valódi címkével a terméken, nem a modell rajzolja újra. Minden AI-val készült képet jelölünk."],
+              ["Hatásmechanizmus-animációk", "Orvosi stílusú 3D magyarázó jelenetek: a bőr közelről, cseppek, beszívódó hatóanyagok, nyugodt végállapot. Mindegyiket illusztrációként jelöljük."],
+              ["Írott anyagok", "Keresési adatokra épülő cikkek, letölthető PDF-útmutatók, körhinta-posztok és hírlevelek, ugyanazon a hangon, mint a videók."]],
+    mechCap: "Hatásmechanizmus-animáció · 6 mp · egy arctonik hirdetéséhez készült · illusztráció",
+    mcpH: "A Claude-on belül: a Marketing MCP",
+    mcpP: "Az MCP a szabványos módja annak, hogy eszközöket kössünk a Claude-hoz. A Marketing MCP a márkaadatbázist és a gyártóeszközöket adja a Claude-jához, így egyszerű mondatokban kérhet videót, feladatleírást vagy SEO-ellenőrzést.",
+    mcpTh: ["Eszköz", "Mit csinál", "Állapot"],
+    mcpRows: [["SEO Desk", "Heti Google-helyezés, AI Overview-hivatkozások, térképes pontrács, oldalaudit és backlinkek, javítási listával", "működik · meghívott oldalak"],
+              ["Márkaadatbázis", "Válaszok és szövegtervek az Ön saját anyagaiból, forrással", "működik az Agency OS-ben"],
+              ["Rövid videók és újravágások", "Hosszú felvételekből és régi anyagokból rövid, álló videók", "mi készítjük · az eszköz épül"],
+              ["UGC-hirdetések és AI-jelenetek", "Jelölt AI-bemutatók és termékjelenetek a valódi címkével", "mi készítjük · az eszköz épül"],
+              ["Cikkek és letölthető anyagok", "Keresési adatokra épülő feladatleírás, cikk, tervezett PDF", "mi készítjük · az eszköz épül"]],
+    mcpLink: "A SEO Desk megtekintése",
+    stepsH: "Így működik",
+    steps: [["Elküldi a weboldalát.", "A weboldal címét és, ha van, egy hosszú videó linkjét. Egy hozzájáruló pipával engedélyezi, hogy a nyilvános anyagait elolvassuk."],
+            ["Felépítjük a márkaadatbázist.", "Oldalak, termékek, hangnem, ideális ügyfelek és a használható állítások, leírva, hogy ellenőrizni tudja."],
+            ["Átnéz egy ingyenes mintát.", "Rövid csomag egy privát jóváhagyó oldalon: minden darabot jóváhagy, megjegyzéssel lát el vagy elutasít."],
+            ["Elkészítjük a hónapot.", "Csak az jelenik meg, amit jóváhagyott. A megjegyzései bekerülnek az adatbázisba, így a következő hónap már közelebb indul az ízléséhez."]],
+    priceH: "Árak",
+    price: [["SEO Desk", "Ellenőrzésenként fizet, 50 USD-tól feltölthető kreditekkel; egy átlagos oldalnál ez kb. 15 USD havonta. Előfizetés nincs.", `${base}/seo-desk/#pricing`, "A SEO Desk árai"],
+            ["Tartalomhónap", "Egyetlen fix havi ár, amelyet az ingyenes minta után adunk meg. Mielőtt bármi elkészülne, tudja, mennyibe kerül.", "#sample", "Mintát kérek"]],
+    samplesH: "Minták",
+    samplesP: "Ezzel a rendszerrel készültek saját termékeinkhez, kitalált demómárkáknak és érdeklődőknek. Az AI-bemutatókat és a kitalált márkákat jelöljük.",
+    faqH: "Kérdések",
+    faq: [["Kell hozzá Claude?", "A tartalomszolgáltatáshoz nem: kész anyagokat és egy jóváhagyó oldalt kap. A SEO Desk eszközeihez olyan Claude-előfizetés kell, amely engedi az egyéni csatlakozókat."],
+          ["Jelölik az AI-val készült tartalmat?", "Igen. Az AI-bemutatók, AI-jelenetek és animációk jelölést kapnak a videóban. AI-szereplőt soha nem mutatunk be valódi vásárlóként."],
+          ["Tesz állításokat a termékeimről?", "Csak olyat, amit a saját weboldala vagy csomagolása is állít, mindig forrással. Gyógyhatást vagy orvosi állítást akkor sem, ha egy animáció a termék hatását mutatja."],
+          ["Használhatja a hangomat vagy az arcomat?", "Csak az Ön írásos hozzájárulásával és a saját felvételéből. Enélkül jól jelölt AI-hangokat és -bemutatókat használunk."],
+          ["Milyen nyelveken?", "Ma angolul és magyarul, írásban és hangban is. Más nyelvek, ha ez a kettő bevált."],
+          ["Mennyibe kerül a minta?", "Semmibe. Ha tetszik, fix havi ajánlatot kap. Ha nem, töröljük a márkaadatbázisát."]],
+    formH: "Ingyenes minta az Ön márkájához",
+    formP: "Küldje el a weboldala címét és, ha van, egy hosszú videót. Felépítünk egy kis márkaadatbázist és néhány mintadarabot, és elküldjük a privát jóváhagyó oldal linkjét.",
+    f: { email: "E-mail-cím", site: "A weboldal címe", vid: "Egy hosszú videó linkje (nem kötelező)", note: "Miben segítenénk a legtöbbet? (nem kötelező)",
+         sitePh: "markam.hu", vidPh: "YouTube-, Facebook- vagy Instagram-link", notePh: "pl. rövid videók a webinárjainkból",
+         btn: "Kérem az ingyenes mintát", priv: "Csak a nyilvános anyagait olvassuk el, csak a mintával kapcsolatban keressük, és kérésre töröljük.", privLink: "Adatvédelmi tájékoztató (angol nyelvű)" },
+    msg: { email: "Kérjük, adjon meg érvényes e-mail-címet.", site: "Kérjük, adja meg a weboldala címét.", sending: "Küldés…", ok: "Köszönjük. Hamarosan jelentkezünk a mintával.", err: "Valami hiba történt. Kérjük, próbálja újra.", net: "Hálózati hiba. Kérjük, próbálja újra." },
+    page: "marketing-mcp-hu",
+  },
+}[lang];
+---
+
+<WorkFrame title={C.title} description={C.desc} lang={lang} cta={false}>
+  <section class="hero">
+    <div class="wf-wrap hero-in">
+      <div class="copy">
+        <p class="tag">{C.tag}</p>
+        <p class="status">{C.status}</p>
+        <h1>{C.h1}</h1>
+        <p class="lede">{C.lede}</p>
+        <div class="actions">
+          <a class="btn" href="#sample">{C.ctaA}</a>
+          <a class="ghost" href="#samples">{C.ctaB}</a>
+        </div>
+      </div>
+      <figure class="machine" aria-label={C.mCap}>
+        <figcaption>{C.mCap}</figcaption>
+        <p class="mh">{C.mIn}</p>
+        <ul class="ins">{C.mInItems.map((x) => <li>{x}</li>)}</ul>
+        <div class="arrow" aria-hidden="true">↓</div>
+        <p class="mh">{C.mOut}</p>
+        <ul class="outs">{C.mOutItems.map((x) => <li>{x}</li>)}</ul>
+        <p class="mfoot">{C.mFoot}</p>
+      </figure>
+    </div>
+  </section>
+
+  <section class="wf-wrap band">
+    <h2>{C.brainH}</h2>
+    <p class="intro">{C.brainP}</p>
+    <dl class="cards">{C.brain.map(([a, b]) => (<div><dt>{a}</dt><dd>{b}</dd></div>))}</dl>
+  </section>
+
+  <section class="wf-wrap band">
+    <h2>{C.machineH}</h2>
+    <p class="intro">{C.machineP}</p>
+    <div class="machine-grid">
+      <dl class="cards two">{C.machine.map(([a, b]) => (<div><dt>{a}</dt><dd>{b}</dd></div>))}</dl>
+      <figure class="mech">
+        <video src="/work/videos/skin-mechanism.mp4" poster="/work/videos/skin-mechanism.jpg" muted loop playsinline autoplay preload="metadata"></video>
+        <figcaption>{C.mechCap}</figcaption>
+      </figure>
+    </div>
+  </section>
+
+  <section class="wf-wrap band">
+    <h2>{C.mcpH}</h2>
+    <p class="intro">{C.mcpP}</p>
+    <div class="tablewrap">
+      <table>
+        <thead><tr>{C.mcpTh.map((h) => <th scope="col">{h}</th>)}</tr></thead>
+        <tbody>{C.mcpRows.map(([a, b, c]) => (<tr><th scope="row">{a}</th><td>{b}</td><td><span class:list={["chip", { live: c.startsWith("live") || c.startsWith("működik") }]}>{c}</span></td></tr>))}</tbody>
+      </table>
+    </div>
+    <p class="more"><a href={`${base}/seo-desk/`}>{C.mcpLink} →</a></p>
+  </section>
+
+  <section class="wf-wrap band">
+    <h2>{C.stepsH}</h2>
+    <ol class="steps">{C.steps.map(([a, b]) => (<li><b>{a}</b> {b}</li>))}</ol>
+  </section>
+
+  <section class="wf-wrap band" id="pricing">
+    <h2>{C.priceH}</h2>
+    <div class="typical">{C.price.map(([a, b, href, link]) => (<p><b>{a}</b><span>{b}</span><a href={href}>{link} →</a></p>))}</div>
+  </section>
+
+  <section class="wf-wrap band" id="samples">
+    <h2>{C.samplesH}</h2>
+    <p class="intro">{C.samplesP}</p>
+  </section>
+  <div class="wf-wrap shelves">
+    <SampleShelf category={video} lang={lang} eager />
+    <SampleShelf category={social} lang={lang} />
+    <SampleShelf category={papers} lang={lang} />
+    <SampleShelf category={seo} lang={lang} />
+  </div>
+
+  <section class="wf-wrap band">
+    <h2>{C.faqH}</h2>
+    <dl class="faq">{C.faq.map(([q, a]) => (<div><dt>{q}</dt><dd>{a}</dd></div>))}</dl>
+  </section>
+
+  <section class="wf-wrap" id="sample">
+    <div class="wait">
+      <div class="wait-copy">
+        <h2>{C.formH}</h2>
+        <p>{C.formP}</p>
+      </div>
+      <form id="wl" novalidate>
+        <div class="row">
+          <label>{C.f.email}<input name="email" type="email" required autocomplete="email" aria-describedby="err-email" /><span class="err" id="err-email" aria-live="polite"></span></label>
+          <label>{C.f.site}<input name="site" type="text" required placeholder={C.f.sitePh} aria-describedby="err-site" /><span class="err" id="err-site" aria-live="polite"></span></label>
+        </div>
+        <label>{C.f.vid}<input name="video" type="text" placeholder={C.f.vidPh} /></label>
+        <label>{C.f.note}<input name="note" type="text" placeholder={C.f.notePh} /></label>
+        <label class="hp" aria-hidden="true">Website<input name="website" type="text" tabindex="-1" autocomplete="off" /></label>
+        <button type="submit">{C.f.btn}</button>
+        <p class="msg" id="wl-msg" role="status"></p>
+        <p class="small">{C.f.priv} <a href="/privacy/">{C.f.privLink}</a></p>
+      </form>
+    </div>
+  </section>
+
+  <script define:vars={{ WAITLIST_URL, M: C.msg, PAGE: C.page }}>
+    const form = document.getElementById("wl");
+    const msg = document.getElementById("wl-msg");
+    form.addEventListener("submit", async (e) => {
+      e.preventDefault();
+      const f = Object.fromEntries(new FormData(form).entries());
+      const errs = {
+        email: /^[^@\s]+@[^@\s]+\.[A-Za-z]{2,}$/.test(f.email || "") ? "" : M.email,
+        site: String(f.site || "").trim() ? "" : M.site,
+      };
+      let first = null;
+      for (const [k, v] of Object.entries(errs)) {
+        const input = form.elements.namedItem(k);
+        document.getElementById("err-" + k).textContent = v;
+        input.setAttribute("aria-invalid", v ? "true" : "false");
+        if (v && !first) first = input;
+      }
+      msg.textContent = "";
+      if (first) { first.focus(); return; }
+      const data = { email: f.email, company: f.site, website: f.website, page: PAGE,
+        interest: `Marketing MCP free sample | site: ${f.site} | video: ${f.video || "-"} | note: ${f.note || "-"}` };
+      const btn = form.querySelector("button");
+      btn.disabled = true; msg.textContent = M.sending;
+      try {
+        const r = await fetch(WAITLIST_URL, { method: "POST", headers: { "Content-Type": "application/json" }, body: JSON.stringify(data) });
+        const j = await r.json().catch(() => ({}));
+        if (r.ok && j.ok) { form.reset(); msg.textContent = M.ok; }
+        else { msg.textContent = j.error || M.err; }
+      } catch { msg.textContent = M.net; }
+      finally { btn.disabled = false; }
+    });
+  </script>
+</WorkFrame>
+
+<style>
+  .hero { padding-block: clamp(40px, 6vw, 88px) clamp(28px, 4vw, 56px); }
+  .hero-in { display: grid; grid-template-columns: minmax(0, 1.1fr) minmax(0, .9fr); gap: clamp(28px, 5vw, 64px); align-items: center; }
+  @media (max-width: 920px) { .hero-in { grid-template-columns: minmax(0, 1fr); } }
+  .tag { font-size: 14px; font-weight: 600; color: var(--color-accent); margin: 0 0 16px; }
+  .status { margin: -6px 0 16px; font-size: 14.5px; color: var(--color-text-primary); display: inline-block; padding: 5px 12px; border-radius: 999px; border: 1px solid var(--color-border); background: var(--color-bg-elevated); }
+  h1 { font-size: clamp(34px, 4.6vw, 56px); line-height: 1.05; letter-spacing: -0.03em; margin: 0 0 20px; text-wrap: balance; }
+  .lede { font-size: clamp(16.5px, 1.4vw, 18.5px); line-height: 1.7; color: #b4b4c2; max-width: 58ch; margin: 0; text-wrap: pretty; }
+  .actions { display: flex; gap: 12px; flex-wrap: wrap; margin-top: 28px; }
+  .btn, button[type="submit"] { display: inline-block; background: #1F78C1; color: #fff; text-decoration: none; font-weight: 650; font-size: 15px;
+    padding: 14px 22px; border-radius: 10px; border: 0; cursor: pointer; transition: background .2s; }
+  .btn:hover, button[type="submit"]:hover { background: #1A68A8; }
+  .ghost { display: inline-block; color: var(--color-text-primary); text-decoration: none; font-weight: 600; padding: 13px 20px; border-radius: 10px; border: 1px solid var(--color-border); }
+  .ghost:hover { border-color: var(--color-accent); }
+  .btn:focus-visible, .ghost:focus-visible, button:focus-visible, .more a:focus-visible, .typical a:focus-visible { outline: 2px solid var(--color-accent); outline-offset: 3px; }
+
+  .machine { margin: 0; padding: 22px; border-radius: 16px; background: var(--color-bg-elevated); border: 1px solid var(--color-border);
+    box-shadow: 0 30px 60px -40px color-mix(in oklch, var(--color-accent) 70%, transparent); animation: lift .9s cubic-bezier(.22, 1, .36, 1) .1s both; }
+  @keyframes lift { from { opacity: 0; transform: translateY(16px); } to { opacity: 1; transform: none; } }
+  .machine figcaption { font-size: 12.5px; color: #a8a8b8; }
+  .mh { margin: 16px 0 8px; font-weight: 700; font-size: 13px; letter-spacing: .06em; text-transform: uppercase; color: var(--color-accent); }
+  .ins, .outs { list-style: none; margin: 0; padding: 0; display: grid; gap: 7px; }
+  .ins li, .outs li { font-size: 14px; line-height: 1.45; color: #b4b4c2; padding-left: 18px; position: relative; }
+  .ins li::before { content: ""; position: absolute; left: 2px; top: .55em; width: 7px; height: 7px; border-radius: 50%; border: 1.5px solid #8e8e9e; }
+  .outs li::before { content: ""; position: absolute; left: 2px; top: .55em; width: 8px; height: 8px; border-radius: 50%; background: var(--color-accent); }
+  .outs li { color: var(--color-text-primary); }
+  .arrow { text-align: center; color: var(--color-accent); font-size: 20px; margin-top: 10px; }
+  .mfoot { margin: 16px 0 0; padding-top: 12px; border-top: 1px solid var(--color-border); font-size: 13px; color: #a8a8b8; }
+
+  .band { padding-block: clamp(36px, 4.5vw, 60px); border-top: 1px solid var(--color-border); }
+  h2 { font-size: clamp(26px, 2.8vw, 34px); letter-spacing: -0.02em; margin: 0 0 14px; text-wrap: balance; }
+  .intro { color: #b4b4c2; font-size: 16.5px; line-height: 1.7; max-width: 64ch; margin: 0 0 28px; }
+  .cards { display: grid; grid-template-columns: repeat(auto-fit, minmax(240px, 1fr)); gap: 28px 36px; margin: 0; }
+  .cards div { padding-top: 14px; border-top: 2px solid var(--color-accent); }
+  .cards dt { font-weight: 700; color: var(--color-text-primary); font-size: 16.5px; margin-bottom: 6px; }
+  .cards dd { margin: 0; color: #b4b4c2; font-size: 15px; line-height: 1.65; }
+  .machine-grid { display: grid; grid-template-columns: minmax(0, 1fr) 280px; gap: clamp(24px, 4vw, 48px); align-items: start; }
+  @media (max-width: 860px) { .machine-grid { grid-template-columns: minmax(0, 1fr); } .mech { max-width: 300px; } }
+  .cards.two { grid-template-columns: repeat(auto-fit, minmax(260px, 1fr)); }
+  .mech { margin: 0; display: grid; gap: 10px; }
+  .mech video { width: 100%; aspect-ratio: 9 / 16; object-fit: cover; border-radius: 16px; background: #000; border: 1px solid var(--color-border); }
+  .mech figcaption { font-size: 13px; color: #a8a8b8; line-height: 1.5; }
+
+  .tablewrap { overflow-x: auto; }
+  table { width: 100%; border-collapse: collapse; min-width: 560px; max-width: 980px; }
+  thead th { text-align: left; font-size: 12.5px; font-weight: 600; color: #a8a8b8; padding: 8px 12px; border-bottom: 1px solid var(--color-border); }
+  tbody th { text-align: left; font-weight: 650; color: var(--color-text-primary); white-space: nowrap; }
+  tbody th, td { padding: 12px; border-bottom: 1px solid var(--color-border); font-size: 15px; vertical-align: top; }
+  td { color: #b4b4c2; line-height: 1.55; }
+  .chip { display: inline-block; font-size: 12.5px; padding: 3px 10px; border-radius: 999px; border: 1px solid var(--color-border); color: #b4b4c2; white-space: nowrap; }
+  .chip.live { color: #7ee2a0; border-color: color-mix(in oklch, var(--color-success) 50%, transparent); background: color-mix(in oklch, var(--color-success) 12%, transparent); }
+  .more { margin: 18px 0 0; }
+  .more a, .typical a { color: var(--color-accent); text-decoration: none; font-weight: 600; }
+  .more a:hover, .typical a:hover { text-decoration: underline; }
+
+  .steps { margin: 0; padding: 0; list-style: none; counter-reset: s; display: grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); gap: 24px 32px; }
+  .steps li { counter-increment: s; font-size: 15px; line-height: 1.65; color: #b4b4c2; }
+  .steps li::before { content: counter(s); display: grid; place-items: center; width: 32px; height: 32px; border-radius: 50%; margin-bottom: 12px;
+    font-weight: 700; font-size: 14px; color: var(--color-text-primary); border: 1px solid var(--color-border); background: var(--color-bg-elevated); }
+  .steps b { color: var(--color-text-primary); display: block; margin-bottom: 2px; }
+
+  .typical { display: flex; flex-wrap: wrap; gap: 14px; }
+  .typical p { margin: 0; flex: 1 1 300px; max-width: 460px; padding: 20px 22px; border-radius: 12px; background: var(--color-bg-elevated); border: 1px solid var(--color-border);
+    display: flex; flex-direction: column; gap: 8px; color: #b4b4c2; font-size: 15px; line-height: 1.6; }
+  .typical b { color: var(--color-text-primary); font-size: 22px; letter-spacing: -0.01em; }
+  .shelves { padding-bottom: 12px; }
+  #samples { padding-bottom: 0; }
+
+  .faq { display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 24px 44px; margin: 0; }
+  .faq dt { font-weight: 650; color: var(--color-text-primary); margin-bottom: 6px; font-size: 16px; }
+  .faq dd { margin: 0; color: #b4b4c2; font-size: 15px; line-height: 1.65; }
+
+  .wait { margin: 16px 0 64px; padding: clamp(22px, 4vw, 44px); border-radius: 18px; border: 1px solid color-mix(in oklch, var(--color-accent) 60%, transparent);
+    background: radial-gradient(80% 140% at 100% 0%, color-mix(in oklch, var(--color-accent) 12%, transparent), transparent 60%), var(--color-bg-elevated);
+    display: grid; grid-template-columns: minmax(0, .8fr) minmax(0, 1.2fr); gap: clamp(20px, 4vw, 48px); }
+  @media (max-width: 860px) { .wait { grid-template-columns: minmax(0, 1fr); } }
+  .wait p { color: #b4b4c2; line-height: 1.7; font-size: 15.5px; }
+  form { display: flex; flex-direction: column; gap: 12px; }
+  .row { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; }
+  @media (max-width: 560px) { .row { grid-template-columns: 1fr; } }
+  label { display: flex; flex-direction: column; gap: 6px; font-size: 13.5px; color: #b4b4c2; }
+  input { background: var(--color-bg-deep); border: 1px solid var(--color-border); border-radius: 8px; padding: 12px; color: var(--color-text-primary); font: inherit; font-size: 15px; }
+  input::placeholder { color: #8e8e9e; }
+  input:focus { outline: 2px solid var(--color-accent); outline-offset: 1px; }
+  .err { color: #ff9cc3; font-size: 13px; margin: 0; }
+  input[aria-invalid="true"] { border-color: #ff6fa8; }
+  .hp { position: absolute; left: -9999px; width: 1px; height: 1px; overflow: hidden; }
+  button[type="submit"] { align-self: flex-start; }
+  button:disabled { opacity: .6; cursor: default; }
+  .wait .msg { min-height: 1.2em; color: var(--color-text-primary); margin: 0; }
+  .wait .small { font-size: 12.5px; margin: 0; }
+  .small a { color: var(--color-accent); }
+  @media (prefers-reduced-motion: reduce) { .machine { animation: none; } }
+</style>

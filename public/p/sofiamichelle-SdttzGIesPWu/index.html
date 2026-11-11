@@ -1,0 +1,261 @@
+<!doctype html>
+<html lang="hu">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta name="robots" content="noindex, nofollow, noarchive">
+<title>Sofia Michelle · videóminták és egy hónap tartalom</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Newsreader:ital,opsz,wght@0,6..72,400;0,6..72,500;1,6..72,400;1,6..72,500&family=Figtree:wght@400;500;600&display=swap">
+<style>
+/* Quiet single column, phone-shaped video frames, plum only for marks and labels (Sofia Michelle's own colour) */
+:root {
+  --bg: #f6f4f1; --surface: #ffffff; --fg: #2a2430; --muted: #6c6472; --line: #e2dde3;
+  --plum: #623d85; --plum-soft: #efe8f5; --sage: #6f7f68;
+  --display: "Newsreader", Georgia, "Times New Roman", serif;
+  --body: "Figtree", "Segoe UI", system-ui, sans-serif;
+}
+@media (prefers-color-scheme: dark) {
+  :root { --bg: #18151b; --surface: #221e26; --fg: #ece7ef; --muted: #a79fae; --line: #37313d;
+    --plum: #c4a6e3; --plum-soft: #2e2539; --sage: #a3b59a; color-scheme: dark; }
+}
+* { box-sizing: border-box; }
+html { -webkit-text-size-adjust: 100%; }
+body {
+  margin: 0; background: var(--bg); color: var(--fg); font-family: var(--body); font-size: 17px; line-height: 1.6;
+  padding-left: max(16px, env(safe-area-inset-left, 0px)); padding-right: max(16px, env(safe-area-inset-right, 0px));
+  padding-block: 0 48px;
+}
+.wrap { max-width: 1080px; margin: 0 auto; }
+.prose { max-width: 64ch; }
+header.top { display: flex; flex-wrap: wrap; justify-content: space-between; gap: 8px 24px; padding-block: 22px;
+  border-bottom: 1px solid var(--line); font-size: 14px; color: var(--muted); }
+header.top strong { color: var(--fg); font-weight: 600; }
+.hero { padding-block: 56px 40px; display: grid; grid-template-columns: minmax(0, 1fr); gap: 18px; }
+.eyebrow { font-size: 13px; letter-spacing: .08em; text-transform: uppercase; color: var(--plum); font-weight: 600; }
+h1, h2, h3 { font-family: var(--display); font-weight: 500; text-wrap: balance; margin: 0; letter-spacing: -.01em; }
+h1 { font-size: clamp(36px, 6vw, 60px); line-height: 1.08; }
+h1 em, h2 em { font-style: italic; color: var(--plum); }
+h2 { font-size: clamp(27px, 3.6vw, 38px); line-height: 1.15; }
+h3 { font-size: 22px; line-height: 1.25; }
+p { margin: 0; }
+.lead { font-size: 19px; }
+.muted { color: var(--muted); }
+section { padding-block: 44px; border-top: 1px solid var(--line); display: grid; grid-template-columns: minmax(0, 1fr); gap: 26px; }
+.sechead { display: grid; gap: 12px; }
+.facts { display: grid; grid-template-columns: repeat(auto-fit, minmax(150px, 1fr)); gap: 14px; max-width: 900px; }
+.facts div { background: var(--surface); border: 1px solid var(--line); border-radius: 12px; padding: 14px 16px; display: grid; gap: 2px; }
+.facts b { font-family: var(--display); font-size: 30px; font-weight: 500; line-height: 1.1; color: var(--plum); font-variant-numeric: tabular-nums; }
+.facts span { font-size: 14px; color: var(--muted); }
+.grid { display: grid; gap: 28px; grid-template-columns: repeat(auto-fill, minmax(min(100%, 280px), 1fr)); }
+.grid.two { grid-template-columns: repeat(auto-fill, minmax(min(100%, 320px), 1fr)); max-width: 760px; }
+figure { margin: 0; display: grid; gap: 12px; align-content: start; min-width: 0; }
+.phone { position: relative; aspect-ratio: 9 / 16; max-width: 100%; border-radius: 18px; overflow: hidden; background: #000;
+  box-shadow: 0 1px 0 var(--line), 0 14px 34px -18px rgba(40, 20, 60, .45); }
+.phone video { width: 100%; height: 100%; display: block; object-fit: cover; background: #000; }
+figcaption { display: grid; gap: 6px; }
+.cap-title { font-weight: 600; font-size: 17px; }
+.meta { display: flex; flex-wrap: wrap; gap: 6px; }
+.chip { font-size: 12.5px; padding: 2px 9px; border-radius: 999px; background: var(--plum-soft); color: var(--plum); font-variant-numeric: tabular-nums; font-weight: 500; }
+.chip.ai { background: transparent; border: 1px solid var(--plum); }
+.cap-text { font-size: 15px; color: var(--muted); }
+.note { background: var(--surface); border: 1px solid var(--line); border-radius: 12px; padding: 18px 20px; display: grid; gap: 8px; font-size: 15.5px; max-width: 760px; }
+.note b { font-weight: 600; }
+.feature { display: grid; grid-template-columns: minmax(0, 320px) minmax(0, 1fr); gap: clamp(24px, 5vw, 56px); align-items: center; }
+@media (max-width: 760px) { .feature { grid-template-columns: minmax(0, 1fr); } .feature .phone { max-width: 320px; } }
+.feature-copy { display: grid; gap: 16px; }
+ol.how { margin: 0; padding-left: 22px; display: grid; gap: 10px; }
+ol.how li::marker { color: var(--plum); font-weight: 600; }
+.cards { display: grid; grid-template-columns: repeat(auto-fit, minmax(min(100%, 280px), 1fr)); gap: 18px; }
+.card { background: var(--surface); border: 1px solid var(--line); border-radius: 14px; padding: 20px 22px; display: grid; gap: 8px; align-content: start; }
+.card p { color: var(--muted); font-size: 15.5px; }
+ol.steps { list-style: none; margin: 0; padding: 0; display: grid; max-width: 760px; counter-reset: s; }
+ol.steps li { counter-increment: s; display: grid; grid-template-columns: 44px 1fr; gap: 4px 14px; padding-block: 16px; border-bottom: 1px solid var(--line); }
+ol.steps li::before { content: counter(s); grid-row: span 2; font-family: var(--display); font-size: 28px; line-height: 1; color: var(--plum); }
+ol.steps b { font-weight: 600; }
+ol.steps span { color: var(--muted); font-size: 15.5px; }
+ul.rules { margin: 0; padding-left: 20px; display: grid; gap: 8px; max-width: 64ch; }
+ul.rules li::marker { color: var(--sage); }
+.cta { display: grid; gap: 14px; }
+.cta p.big { font-family: var(--display); font-size: clamp(24px, 3vw, 31px); line-height: 1.25; max-width: 32ch; text-wrap: balance; }
+.btn { justify-self: start; display: inline-block; background: var(--plum); color: #fff; text-decoration: none; font-weight: 600; padding: 13px 22px; border-radius: 10px; }
+@media (prefers-color-scheme: dark) { .btn { color: #18151b; } }
+footer { padding-block: 32px 0; border-top: 1px solid var(--line); font-size: 14px; color: var(--muted); display: grid; gap: 6px; }
+a { color: var(--plum); }
+:focus-visible { outline: 2px solid var(--plum); outline-offset: 3px; }
+</style>
+</head>
+<body>
+<div class="wrap">
+  <header class="top">
+    <span><strong>Sofia Michelle</strong> részére · bemutató anyag</span>
+    <span>LeadFlow Automation · 2026. november</span>
+  </header>
+
+  <div class="hero">
+    <div class="eyebrow">Videóminták és egy hónap tartalom</div>
+    <h1>Hat videó a meglévő anyagaitokból, <em>forgatás nélkül</em></h1>
+    <p class="lead prose">A nyilvános weboldalatokból, a webshop termékleírásaiból és a Facebook-reelsekből készítettük őket, hogy ne leírva kelljen elmagyaráznunk, mit tudunk. Három a saját videóitokból készült, kettő teljesen új, AI-val forgatott felvétel ugyanazokra a termékekre, egy pedig a hatóanyagok útját mutatja be a bőrben.</p>
+    <p class="muted prose">Egyik videó sem került ki sehová. Csak ti látjátok ezen a linken.</p>
+  </div>
+
+  <section>
+    <div class="sechead">
+      <div class="eyebrow">0 · Amit megtanultunk rólatok</div>
+      <h2>Mielőtt bármit elkészítettünk, elolvastuk, amit eddig közzétettetek</h2>
+      <p class="muted prose">A nyilvános anyagaitokból egy saját márkaadatbázis készült. Ebből dolgozik minden szöveg és alámondás: a ti szavaitokkal, a ti termékneveitekkel, és csak olyan állítással, amelyet ti is leírtatok.</p>
+    </div>
+    <div class="facts">
+      <div><b>75</b><span>termék a webshopból</span></div>
+      <div><b>34</b><span>oldal a weboldalról</span></div>
+      <div><b>35</b><span>blogbejegyzés</span></div>
+      <div><b>44</b><span>reels, összesen 18 perc</span></div>
+      <div><b>83</b><span>termékállítás, mindegyik forrással</span></div>
+    </div>
+  </section>
+
+  <section>
+    <div class="sechead">
+      <div class="eyebrow">1 · A saját videóitokból</div>
+      <h2>Ugyanaz a tartalom, rövidebben, felirattal, cselekvésre hívással</h2>
+      <p class="muted prose">A meglévő felvételekből vágtuk ki a legerősebb részeket. Mindegyik kapott egy nyitó mondatot az első három másodpercre, égetett feliratot, zenét, és a végén egy kimondott felhívást a webshopra.</p>
+    </div>
+    <div class="grid">
+      <figure>
+        <div class="phone"><video controls playsinline preload="none" poster="v/hidratalas.jpg" src="v/hidratalas.mp4" aria-label="Hidratálás videó"></video></div>
+        <figcaption>
+          <span class="cap-title">Hidratálás</span>
+          <span class="meta"><span class="chip">49 mp</span><span class="chip">saját felvétel</span></span>
+          <span class="cap-text">Témavideó öt reelből összefűzve, egyetlen gondolatmenetre.</span>
+        </figcaption>
+      </figure>
+      <figure>
+        <div class="phone"><video controls playsinline preload="none" poster="v/tonik-tipp.jpg" src="v/tonik-tipp.mp4" aria-label="Tonik tipp videó"></video></div>
+        <figcaption>
+          <span class="cap-title">Tipp: alkoholmentes tonik</span>
+          <span class="meta"><span class="chip">19 mp</span><span class="chip">saját felvétel</span></span>
+          <span class="cap-text">Egy tipp, egy termék, gyors nyitással.</span>
+        </figcaption>
+      </figure>
+      <figure>
+        <div class="phone"><video controls playsinline preload="none" poster="v/peeling-tipp.jpg" src="v/peeling-tipp.mp4" aria-label="Peeling tipp videó"></video></div>
+        <figcaption>
+          <span class="cap-title">Tipp: a peelinget nem kell dörzsölni</span>
+          <span class="meta"><span class="chip">28 mp</span><span class="chip">saját felvétel</span></span>
+          <span class="cap-text">Tévhit és válasz szerkezetben, a végén a termékkel.</span>
+        </figcaption>
+      </figure>
+    </div>
+  </section>
+
+  <section>
+    <div class="sechead">
+      <div class="eyebrow">2 · Új, AI-val készült felvételek</div>
+      <h2>Új videók forgatás nélkül, a valódi termékkel</h2>
+      <p class="muted prose">A termékfotóitokból indultunk. A címke mindkét videóban a valódi címke, nem az AI rajzolta újra. A hangalámondás magyar, a bőrön belüli hatást bemutató rész illusztráció.</p>
+    </div>
+    <div class="grid two">
+      <figure>
+        <div class="phone"><video controls playsinline preload="none" poster="v/tonik-ai.jpg" src="v/tonik-ai.mp4" aria-label="Tonik rutin AI videó"></video></div>
+        <figcaption>
+          <span class="cap-title">Tonik rutin, új modellel</span>
+          <span class="meta"><span class="chip">33 mp</span><span class="chip ai">AI-generált</span></span>
+          <span class="cap-text">Ugyanaz a rutin, mint a reeletekben: korong, finom nyomkodás, nem dörzsölés. Közeli képek, valós sebességgel.</span>
+        </figcaption>
+      </figure>
+      <figure>
+        <div class="phone"><video controls playsinline preload="none" poster="v/ai-bemutato.jpg" src="v/ai-bemutato.mp4" aria-label="AI-bemutatós videó"></video></div>
+        <figcaption>
+          <span class="cap-title">Hamamelis tonik, AI-bemutatóval</span>
+          <span class="meta"><span class="chip">34 mp</span><span class="chip ai">AI-bemutató</span></span>
+          <span class="cap-text">Beszélő bemutató, használat, a hatóanyagok animációja, eredmény, és a termék neve a bemutató szájából.</span>
+        </figcaption>
+      </figure>
+    </div>
+    <div class="note">
+      <b>Az AI-bemutató nem valós személy, és nem Zsófi.</b>
+      <p>Senki arcát vagy hangját nem másoltuk le. Ha szeretnétek, hogy Zsófi hangján vagy arcával készüljenek videók, az csak az ő írásos hozzájárulásával és a saját felvételéből történhet. Minden AI-val készült kép jelölve van a videóban.</p>
+    </div>
+  </section>
+
+  <section>
+    <div class="sechead">
+      <div class="eyebrow">3 · Hatásmechanizmus-animáció</div>
+      <h2>Ami a bőrben történik, <em>láthatóvá téve</em></h2>
+    </div>
+    <div class="feature">
+      <figure>
+        <div class="phone"><video controls playsinline loop muted preload="metadata" poster="v/hatasmechanizmus.jpg" src="v/hatasmechanizmus.mp4" aria-label="Hatásmechanizmus-animáció a Hamamelis tonikhoz"></video></div>
+        <figcaption>
+          <span class="meta"><span class="chip">6 mp</span><span class="chip ai">illusztráció</span></span>
+        </figcaption>
+      </figure>
+      <div class="feature-copy">
+        <p class="lead">A gyógyszer- és kozmetikai hirdetésekből ismert orvosi stílusú 3D jelenet: a bőr közelről, a termék cseppjei, a hatóanyagok beszívódása, majd a megnyugodott végállapot.</p>
+        <p class="muted">Ezt a Hamamelis tonikhoz készítettük, a termékoldalon felsorolt hatóanyagokból. Önmagában is működik, de a legerősebb egy hosszabb videó közepén, ahol megmutatja, miért működik a termék.</p>
+        <h3>Bármelyik termékhez elkészítjük</h3>
+        <ol class="how">
+          <li>A termékoldalról kigyűjtjük a hatóanyagokat és azt, amit ti állítotok róluk.</li>
+          <li>Megírjuk a jelenetet: milyen bőrön, milyen cseppekkel, milyen végállapottal.</li>
+          <li>Elkészül a 6 másodperces klip, álló formátumban, illusztrációként jelölve.</li>
+        </ol>
+        <p class="muted">Gyógyhatást nem állítunk vele: a jelenet azt mutatja meg, amit a termékoldalatok is leír.</p>
+      </div>
+    </div>
+  </section>
+
+  <section>
+    <div class="sechead">
+      <div class="eyebrow">4 · A tartalomgyár</div>
+      <h2>Egy hosszabb felvételből egy hónap rövid videó</h2>
+      <p class="muted prose">A legtöbb márkának nem az ötlet fogy el, hanem az idő arra, hogy a meglévő anyagait megvágja, feliratozza és közzétegye. Ezt vennénk le a vállatokról.</p>
+    </div>
+    <div class="cards">
+      <div class="card"><h3>Hosszúból rövidet</h3><p>Egy élő adásból, webinárból vagy hosszabb bemutatóból rövid, álló videók sorozata lesz: a legerősebb pillanatok, figyelemfelkeltő első három másodperc, felirat és cselekvésre hívás.</p></div>
+      <div class="card"><h3>Új videók a régi felvételekből</h3><p>A 44 reelsetek nyersanyag. Témavideókat, tippeket és tévhit–tény videókat vágunk belőlük, ahogy a fenti hármat is.</p></div>
+      <div class="card"><h3>Ami hiányzik, azt AI-val</h3><p>Rutinok, használati jelenetek, bemutatók és hatásmechanizmus-animációk a valódi termékcímkével, mindig jelölve.</p></div>
+      <div class="card"><h3>Szövegek is</h3><p>Posztszövegek, blogcikkek és hírlevelek ugyanazon a hangon, a márkaadatbázisból, forrással ellátott termékállításokkal.</p></div>
+    </div>
+  </section>
+
+  <section>
+    <div class="sechead">
+      <div class="eyebrow">5 · Hogyan menne egy hónap</div>
+      <h2>Ti jóváhagytok, mi elkészítjük</h2>
+    </div>
+    <ol class="steps">
+      <li><b>Egy anyag tőletek havonta</b><span>Egy élő videó, egy hosszabb felvétel, vagy akár csak az új termékek. A többit a webshopból és a meglévő videókból vesszük.</span></li>
+      <li><b>Mi megírjuk és legyártjuk</b><span>Reelsek, tippek, termékvideók és animációk, a hozzájuk tartozó szövegekkel, a márkátok hangján.</span></li>
+      <li><b>Egy linken átnézitek</b><span>Minden darabnál: jóváhagyás, megjegyzés vagy elutasítás. A megjegyzéseket beépítjük, és a következő hónapban már eszerint dolgozunk.</span></li>
+      <li><b>Csak a jóváhagyott megy ki</b><span>Amihez nem adtatok egyértelmű igent, az nem jelenik meg.</span></li>
+    </ol>
+    <ul class="rules">
+      <li>Csak azt mondjuk a termékekről, amit ti mondotok a weboldalon vagy a csomagoláson.</li>
+      <li>Gyógyhatást, orvosi állítást nem teszünk a szájatokba.</li>
+      <li>Az AI-val készült képek, szereplők és animációk mindig jelölve vannak.</li>
+    </ul>
+  </section>
+
+  <section class="cta">
+    <div class="eyebrow">Következő lépés</div>
+    <p class="big">Ha tetszenek, beszéljünk húsz percet arról, mi kellene nektek egy hónapra.</p>
+    <p class="muted prose">Elég válaszolni arra az e-mailre, amelyben ezt a linket kaptátok, vagy foglaljatok időpontot. A beszélgetésre hozunk egy konkrét havi tervet a ti termékeitekre.</p>
+    <a class="btn" href="https://calendly.com/gergelyracz0/30min" target="_blank" rel="noopener">Időpontot foglalok</a>
+  </section>
+
+  <footer>
+    <span>Rácz Gergely · LeadFlow Automation · <a href="https://www.leadflowautomation.net/hu/marketing-mcp/" rel="noopener">leadflowautomation.net</a></span>
+    <span>A videókban szereplő termékek és felvételek a Sofia Michelle tulajdonai. Ez az oldal bemutató célú, nem nyilvános.</span>
+  </footer>
+</div>
+<script>
+  // play one video at a time
+  document.querySelectorAll("video").forEach(function (v) {
+    v.addEventListener("play", function () {
+      document.querySelectorAll("video").forEach(function (o) { if (o !== v) o.pause(); });
+    });
+  });
+</script>
+</body>
+</html>

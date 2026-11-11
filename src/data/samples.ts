@@ -204,6 +204,8 @@ export const categories: Category[] = [
         meta: l("Our own product, ScalePOD · AI presenter labelled", "Saját termékünk, a ScalePOD · AI-jelöléssel ellátott előadó"), img: "/work/videos/scalepod-ugc-poster.jpg", video: "/work/videos/scalepod-ugc.mp4" },
       { kind: l("UGC review · 28 s · 9:16", "UGC-termékértékelés · 28 mp · 9:16"), title: l("Product review for a fictional brand", "Termékértékelés egy kitalált márkának"),
         meta: l("AI presenter, mechanism animation, captions", "AI-jelöléssel ellátott előadó, hatásmechanizmus-animáció, feliratok"), img: "/work/videos/nocta-review-ugc.jpg", video: "/work/videos/nocta-review-ugc.mp4" },
+      { kind: l("Mechanism animation · 6 s · 9:16", "Hatásmechanizmus-animáció · 6 mp · 9:16"), title: l("A skincare toner, shown inside the skin", "Egy arctonik hatása, a bőr belsejéből nézve"),
+        meta: l("3D medical-style illustration for a skincare ad · marked as illustration", "3D, orvosi stílusú illusztráció egy bőrápolási hirdetéshez · illusztrációként jelölve"), img: "/work/videos/skin-mechanism.jpg", video: "/work/videos/skin-mechanism.mp4" },
       { kind: l("Product demo · 2 min · 16:9", "Termékdemó · 2 perc · 16:9"), title: l("ScalePOD AI designer walkthrough", "A ScalePOD AI-tervező bemutatója"),
         meta: l("Narrated, motion graphics, real product screens", "Narrálva, mozgógrafikával, valódi termékképernyőkkel"), shape: "wide",
         img: "/work/videos/scalepod-ai-demo.jpg", video: "/work/videos/scalepod-ai-demo.mp4",
