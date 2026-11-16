@@ -1,0 +1,55 @@
+---
+// Shell for the legal pages (privacy notices, terms): plain reading layout, same look as the original privacy page.
+import Base from "../layouts/Base.astro";
+
+interface Props {
+  title: string;
+  description: string;
+}
+const { title, description } = Astro.props;
+---
+
+<Base title={title} description={description}>
+  <header class="top">
+    <div class="wrap">
+      <a class="wordmark" href="/">LEADFLOW<span>AUTOMATION</span></a>
+    </div>
+  </header>
+
+  <section class="body">
+    <div class="wrap legal">
+      <slot />
+    </div>
+  </section>
+
+  <footer class="bottom">
+    <div class="wrap">
+      LeadFlow Automation · BioInsight Lab Inc. ·
+      <a href="/terms/">Terms of service</a> ·
+      <a href="/privacy/">Privacy notice</a> ·
+      <a href="/privacy/tools/">Privacy notice for the online tools</a> ·
+      <a href="mailto:gergely@startleadflowautomation.com">gergely@startleadflowautomation.com</a>
+    </div>
+  </footer>
+</Base>
+
+<style>
+  .wrap { max-width: 720px; margin: 0 auto; padding: 0 20px; }
+  .top { border-bottom: 1px solid var(--color-border); padding: 18px 0; }
+  .wordmark { font-weight: 800; letter-spacing: 0.08em; font-size: 15px; color: var(--color-text-primary); text-decoration: none; }
+  .wordmark span { color: var(--color-accent); }
+  .body { padding: 48px 0 40px; }
+  .legal :global(h1) { font-weight: 800; color: var(--color-text-primary); font-size: clamp(28px, 5vw, 36px); margin-bottom: 6px; }
+  .legal :global(.updated), .legal :global(.muted) { font-size: 13px; color: var(--color-text-secondary); margin-bottom: 18px; }
+  .legal :global(.note) { font-size: 13.5px; color: var(--color-text-secondary); border: 1px solid var(--color-border); border-radius: 8px; padding: 10px 14px; margin-bottom: 22px; }
+  .legal :global(h2) { font-weight: 700; color: var(--color-text-primary); font-size: 19px; margin: 26px 0 8px; }
+  .legal :global(p), .legal :global(li) { font-size: 14.5px; color: var(--color-text-secondary); line-height: 1.65; }
+  .legal :global(p) { margin-bottom: 10px; }
+  .legal :global(ol), .legal :global(ul) { padding-left: 1.3em; margin: 0 0 12px; display: grid; gap: 8px; }
+  .legal :global(ol) { list-style: decimal; }
+  .legal :global(ul) { list-style: disc; }
+  .legal :global(strong) { color: var(--color-text-primary); }
+  .legal :global(a) { color: var(--color-accent); }
+  .bottom { border-top: 1px solid var(--color-border); margin-top: 30px; padding: 22px 0 34px; font-size: 12px; color: var(--color-text-secondary); line-height: 1.8; }
+  .bottom a { color: var(--color-text-secondary); }
+</style>

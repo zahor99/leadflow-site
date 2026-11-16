@@ -1,0 +1,18 @@
+---
+import LegalPage from "../components/LegalPage.astro";
+// copied from the live service by scripts/sync-legal.mjs; do not edit here
+import text from "../content/legal/tools-terms.html?raw";
+---
+
+<LegalPage
+  title="Terms of service"
+  description="Terms of service for the LeadFlow Automation online tools (SEO Desk and Content Engine)."
+>
+  <p class="note">
+    These are the terms of the LeadFlow Automation online tools at
+    <a href="https://tools.leadflowautomation.net/terms">tools.leadflowautomation.net</a>, copied here word for word.
+    The copy on the tools site is the one you accept when you sign up. How we handle personal data is in the
+    <a href="/privacy/tools/">privacy notice for the online tools</a>.
+  </p>
+  <Fragment set:html={text} />
+</LegalPage>

@@ -1,0 +1,18 @@
+---
+import LegalPage from "../../components/LegalPage.astro";
+// copied from the live service by scripts/sync-legal.mjs; do not edit here
+import text from "../../content/legal/tools-privacy.html?raw";
+---
+
+<LegalPage
+  title="Privacy notice for the online tools"
+  description="How the LeadFlow Automation online tools (SEO Desk and Content Engine) handle personal data."
+>
+  <p class="note">
+    This is the privacy notice of the LeadFlow Automation online tools at
+    <a href="https://tools.leadflowautomation.net/privacy">tools.leadflowautomation.net</a>, copied here word for word.
+    For forms on this website, see the <a href="/privacy/">website privacy notice</a>. The tools'
+    <a href="/terms/">terms of service</a> are here too.
+  </p>
+  <Fragment set:html={text} />
+</LegalPage>
