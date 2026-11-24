@@ -1,0 +1,241 @@
+---
+import LegalPage from "../../components/LegalPage.astro";
+import { PROPERTY_ASSISTANT as P } from "../../data/products";
+import { SELLER as S, POLICY_LINKS as L } from "../../data/seller";
+const product = `/${P.slug}/`;
+---
+
+<LegalPage
+  title={`${P.name}: subscription and trial terms`}
+  description={`Terms for the free trial and the Assistant plan of ${P.name}: what you get, the price, billing, renewal, cancelling and what happens to your data. Sold by ${S.legalName}.`}
+>
+  <h1>{P.name}: subscription and trial terms</h1>
+  <p class="updated">Version 2026-11. Last updated: 24 November 2026</p>
+
+  <p class="note">
+    These terms cover the free trial and the Assistant plan of <a href={product}>{P.name}</a>.
+    The seller is <strong>{S.legalName}</strong>; {S.brand} is its brand. Refunds are explained in the
+    <a href={L.refunds}>refund and cancellation policy</a>, personal data in the
+    <a href={L.privacy}>privacy notice</a>, and how to reach us on the <a href={L.contact}>contact page</a>.
+  </p>
+
+  <h2>1. Who the agreement is between</h2>
+  <p>
+    The agreement is between {S.legalName} ({S.address}; {S.corporationNo}), which trades as {S.brand}
+    ("we"), and the real-estate business that requests a trial or subscribes ("you", "your office").
+    The service is for businesses only. It is not sold to consumers. The person who signs up confirms that
+    they may do so for the office.
+  </p>
+
+  <h2>2. What the service is</h2>
+  <p>
+    We read the public pages of your office's website (your listings and your guides) and build an AI
+    assistant from them. The assistant answers questions about your listings and guides in plain language
+    and shows the listing or page each answer comes from. We call the stored copy of your pages your office's
+    "brain".
+  </p>
+
+  <h2>3. The free trial</h2>
+  <ul>
+    <li><strong>Length and price.</strong> 14 days, free. We do not ask for a payment card for the trial.</li>
+    <li><strong>What you get.</strong> Your office's brain built from up to 300 listings, the chatbot on a
+      private link with up to 50 visitor questions, the connection for your team's Claude or ChatGPT, one
+      listing brief, up to 5 listing videos of your own listings, and the result of our 200-question test.</li>
+    <li><strong>When it starts.</strong> We build the trial after we receive your request and aim to send it
+      within 24 hours on working days. The 14 days start on the day we send it to you.</li>
+    <li><strong>When it ends.</strong> The trial stops by itself after 14 days. Nothing is charged, and it
+      does not turn into a paid subscription unless you choose to subscribe.</li>
+    <li><strong>Conditions.</strong> One trial per office. We need your website address and a work e-mail
+      address at your agency. We may decline or stop a trial, for example if we cannot confirm that the request
+      comes from the office, or if the website is not a real-estate agency's.</li>
+  </ul>
+
+  <h2>4. The Assistant plan</h2>
+  <p>The Assistant plan is the paid subscription. For one office it includes:</p>
+  <ul>
+    <li>the chatbot for your own website;</li>
+    <li>up to 500 listings in your office's brain, re-read every day;</li>
+    <li>up to 1,500 visitor questions a month;</li>
+    <li>5 listing briefs a month, each sent to you for approval first;</li>
+    <li>every enquiry that a visitor leaves with the chatbot, sent to your office by e-mail;</li>
+    <li>the connection for your team's Claude or ChatGPT;</li>
+    <li>a monthly report on what visitors asked.</li>
+  </ul>
+  <p>
+    "One office" means one website and its listings, and everyone who works there. There is no fee per agent.
+    To use the assistant inside Claude or ChatGPT, each person needs their own Claude or ChatGPT account on a
+    plan that allows custom connectors; that account is covered by your agreement with its provider, not by
+    these terms.
+  </p>
+  <p>
+    If your office regularly needs more listings or more visitor questions than the plan includes, we contact
+    you to agree a larger plan. We do not charge anything extra without your agreement.
+  </p>
+
+  <h2>5. Other packages and add-ons</h2>
+  <p>
+    The <a href={`${product}#price`}>product page</a> also describes the Marketing and Lead Desk packages, the
+    voice agent add-on, and CRM (customer relationship management system) integration. These are not part of
+    the Assistant plan and cannot be bought by card on this website. We sell them by written quote and a
+    separate agreement. The voice agent add-on is sold with a 12-month contract. Parts marked "In build" or "Pilot" on the product page are not available yet.
+  </p>
+
+  <h2>6. Price and payment</h2>
+  <ul>
+    <li><strong>Price.</strong> USD 99 (US dollars) a month for each office.</li>
+    <li><strong>Taxes.</strong> The price does not include taxes. If a sales tax applies to your purchase, it
+      is shown before you pay.</li>
+    <li><strong>How you pay.</strong> By payment card, on a secure payment page run by our payment provider,
+      Stripe. Your card details go to Stripe. We do not see or store your full card number.</li>
+    <li><strong>When you pay.</strong> The first payment is taken on the day you subscribe and covers the month
+      that starts that day. You get a receipt by e-mail for every payment.</li>
+    <li><strong>Card statement.</strong> The payment appears on your statement as
+      the name of our company, BioInsight Lab Inc., or our brand, LeadFlow.</li>
+  </ul>
+
+  <h2>7. Renewal</h2>
+  <p>
+    The subscription runs month to month. It renews automatically on the same day of each month, and the card
+    you gave is charged USD 99 for the next month, until you cancel. There is no minimum term.
+  </p>
+
+  <h2>8. Cancelling</h2>
+  <p>
+    You can cancel at any time. E-mail <a href={`mailto:${S.supportEmail}`}>{S.supportEmail}</a> from an address
+    at your office and say that you want to cancel. We confirm by e-mail within 24 hours on working days.
+  </p>
+  <p>
+    The cancellation counts from the moment your e-mail arrives. No further payment is taken. Your assistant
+    keeps working until the end of the month you have already paid for, then it is switched off. Refunds are
+    explained in the <a href={L.refunds}>refund and cancellation policy</a>.
+  </p>
+
+  <h2>9. If a payment fails</h2>
+  <p>
+    If a renewal payment fails, we tell you by e-mail and the payment is tried again. If it is still unpaid
+    14 days after the renewal date, we switch the assistant off and end the subscription. You owe nothing for
+    the time after it is switched off.
+  </p>
+
+  <h2>10. Changes to the price or the plan</h2>
+  <p>
+    If we change the price or reduce what the plan includes, we tell you by e-mail at least 15 calendar days before the
+    change. The change applies from your next renewal after those 15 days. If you do not agree, you can cancel
+    before it applies.
+  </p>
+
+  <h2>11. How the service is delivered</h2>
+  <p>
+    The service is digital. Nothing is shipped. We deliver by e-mail to the work address you gave us: the
+    private link to the chatbot, the connector address for Claude and ChatGPT, the test result and your
+    listing briefs. For the Assistant plan we also send what your web developer needs to place the chatbot on
+    your website. When you subscribe, nothing has to be delivered again: the assistant from your trial stays on,
+    and the plan is switched on automatically as soon as your first payment succeeds.
+  </p>
+
+  <h2>12. An AI assistant can make mistakes</h2>
+  <p>
+    The assistant is an AI system. It is built to answer only from your published listings and pages, to show
+    the source, and to decline when your website does not cover the question. It can still give a wrong or
+    incomplete answer. Visitors are told that they are talking to an AI assistant. The assistant does not give
+    legal, tax, financial or valuation advice, and it does not replace your agents.
+  </p>
+  <p>
+    You remain responsible for your listings, your prices and what your office tells buyers and owners. We
+    send each listing brief to you first; you decide whether it goes out. Tell us about a wrong answer and we
+    correct the cause as soon as we reasonably can.
+  </p>
+
+  <h2>13. No promised results</h2>
+  <p>
+    We do not promise any number of enquiries, leads, viewings or sales. We work to keep the service
+    running, but we do not promise that it will be available without interruption.
+  </p>
+
+  <h2>14. Your content</h2>
+  <p>
+    Your listings, guides, photos and documents stay yours. You confirm that your office may publish them, and
+    you allow us to read and copy them to build and run your assistant. We use them only for your office. The
+    listing briefs, videos and reports we make for you are yours to use.
+  </p>
+
+  <h2>15. Personal data</h2>
+  <p>
+    We use the contact details you give us to build and send your trial, to run your subscription and to
+    answer you, as described in the <a href={L.privacy}>privacy notice</a>.
+  </p>
+  <p>
+    During the trial the chatbot does not collect visitors' contact details; it shows your office's. On the
+    Assistant plan, when a visitor leaves contact details with the chatbot, we pass them to your office and
+    use them for nothing else. For those details your office decides why and how they are used, and we handle
+    them on your behalf, under data processing terms that we give you before you subscribe. We use hosting
+    and AI model providers to run the service; the data processing terms name them.
+  </p>
+
+  <h2>16. Your data when the trial or the subscription ends</h2>
+  <ul>
+    <li><strong>End of a trial.</strong> If you do not subscribe, the chatbot link and the connector stop
+      working when the trial ends. We delete your office's brain and the questions asked during the trial within
+      30 days.</li>
+    <li><strong>End of a subscription.</strong> The assistant is switched off at the end of the month you paid
+      for. Within 30 days after that we delete your office's brain, the questions visitors asked and any
+      visitor details held for your office.</li>
+    <li><strong>Sooner on request.</strong> Ask us by e-mail and we delete this data within 7 days.</li>
+    <li><strong>A copy for you.</strong> Ask before the deletion and we send you the monthly reports and the
+      enquiries we hold for your office.</li>
+    <li><strong>What we keep.</strong> Your office's name and contact address, and the records of payments, for
+      as long as our accounts and the law require.</li>
+  </ul>
+
+  <h2>17. Acceptable use</h2>
+  <ul>
+    <li>Use the service only for your own office's website and listings.</li>
+    <li>Do not use it for anything unlawful, or to publish listings or statements that mislead buyers.</li>
+    <li>Follow the rules on property advertising and on data protection that apply to your office.</li>
+    <li>Do not resell the service, share your private links outside your office, or try to break or overload
+      the service.</li>
+  </ul>
+  <p>
+    If these rules are broken we may switch the assistant off. Where the problem can be fixed, we tell you
+    first and give you a reasonable time to fix it.
+  </p>
+
+  <h2>18. Legal restrictions</h2>
+  <p>
+    We do not provide the service to persons or organisations under Canadian, United States, European Union or
+    United Kingdom sanctions, or in countries where those sanctions forbid it.
+  </p>
+
+  <h2>19. If we end the subscription</h2>
+  <p>
+    We may end a subscription by giving you at least 30 days' notice by e-mail. If we do, or if we stop
+    offering the service, we refund the part of your last payment that covers the time after the service stops.
+  </p>
+
+  <h2>20. No warranty and liability</h2>
+  <p>
+    The service is provided as is. Neither side is liable to the other for indirect or consequential losses,
+    including lost profits or lost sales. Each side's total liability under these terms is limited to the
+    amount you paid us in the 12 months before the claim. These limits do not apply to liability that cannot
+    be limited by law, such as for fraud.
+  </p>
+
+  <h2>21. Changes to these terms</h2>
+  <p>
+    If these terms change, we tell you by e-mail at least 15 calendar days before the new version applies. If you do
+    not agree, you can cancel before it applies.
+  </p>
+
+  <h2>22. Law and courts</h2>
+  <p>
+    These terms are governed by the laws of the Province of Ontario and the federal laws of Canada that apply
+    there, and the courts of Ontario decide any dispute. This does not take away rights you have under the
+    data protection law that applies to you.
+  </p>
+
+  <h2>23. Contact</h2>
+  <p>
+    {S.legalName}, {S.address}. Customer service: <a href={`mailto:${S.supportEmail}`}>{S.supportEmail}</a>.
+    More on the <a href={L.contact}>contact page</a>.
+  </p>
+</LegalPage>

@@ -1,0 +1,90 @@
+---
+import LegalPage from "../components/LegalPage.astro";
+import { PROPERTY_ASSISTANT as P } from "../data/products";
+import { SELLER as S, POLICY_LINKS as L } from "../data/seller";
+---
+
+<LegalPage
+  title="Refund and cancellation policy"
+  description={`How to cancel a ${P.name} subscription, when a payment is refunded and how to ask. Sold by ${S.legalName}.`}
+>
+  <h1>Refund and cancellation policy</h1>
+  <p class="updated">Last updated: 24 November 2026</p>
+
+  <p class="note">
+    This policy covers the Assistant plan of <a href={`/${P.slug}/`}>{P.name}</a> (USD 99 a month for each
+    office), sold by <strong>{S.legalName}</strong> under the {S.brand} brand. The full conditions are in the
+    <a href={L.subscriptionTerms}>subscription and trial terms</a>. Credits for the online tools (SEO Desk,
+    Content Engine) follow their own <a href={L.toolsTerms}>terms of service</a>.
+  </p>
+
+  <h2>The free trial</h2>
+  <p>
+    The 14-day trial is free and we do not ask for a payment card. It stops by itself. There is nothing to
+    cancel and nothing to refund.
+  </p>
+
+  <h2>How to cancel a subscription</h2>
+  <ol>
+    <li>E-mail <a href={`mailto:${S.supportEmail}`}>{S.supportEmail}</a> from an address at your office and say
+      that you want to cancel.</li>
+    <li>We confirm by e-mail within 24 hours on working days. The cancellation counts from the moment your e-mail
+      arrived, not from our reply.</li>
+    <li>No further payment is taken. Your assistant keeps working until the end of the month you have already
+      paid for.</li>
+  </ol>
+  <p>
+    You can cancel at any time. There is no minimum term, no notice period and no cancellation fee.
+  </p>
+
+  <h2>Refunds</h2>
+  <p>
+    You can try the service free for 14 days before you pay, so a month that has started is not refunded,
+    in full or in part. When you cancel, you keep the service to the end of the paid month.
+  </p>
+  <p>We refund a payment in full when:</p>
+  <ul>
+    <li>you were charged twice for the same month;</li>
+    <li>you were charged after we received your cancellation;</li>
+    <li>we did not deliver your assistant within 10 working days of your first payment.</li>
+  </ul>
+  <p>
+    If we end your subscription or stop offering the service, we refund the part of your last payment that
+    covers the time after the service stops.
+  </p>
+
+  <h2>How to ask for a refund</h2>
+  <p>
+    E-mail <a href={`mailto:${S.supportEmail}`}>{S.supportEmail}</a> with your office's name and the date of the
+    payment. We answer within 24 hours on working days. An approved refund goes back to the card that was charged; your
+    bank usually shows it within 5 to 10 working days.
+  </p>
+
+  <h2>A payment you do not recognise</h2>
+  <p>
+    The payment appears on your card statement as
+    the name of our company, BioInsight Lab Inc., or our brand, LeadFlow. If you see a
+    payment from us that you do not recognise, write to us first. We reply within 24 hours on working days and can
+    usually settle it faster than a dispute through your bank.
+  </p>
+
+  <h2>Delivery</h2>
+  <p>
+    The service is digital. Nothing is shipped and there is nothing to return. We deliver by e-mail to the
+    work address you gave us; the details are in section 11 of the
+    <a href={L.subscriptionTerms}>subscription and trial terms</a>.
+  </p>
+
+  <h2>Other packages</h2>
+  <p>
+    The Marketing and Lead Desk packages, the voice agent add-on and CRM (customer relationship management
+    system) integration are sold by written quote, not by card on this website. Their payment and cancellation
+    terms are set in that quote. The voice agent add-on is sold with a 12-month contract.
+  </p>
+
+  <h2>Contact</h2>
+  <p>
+    {S.legalName}, {S.address}. Customer service: <a href={`mailto:${S.supportEmail}`}>{S.supportEmail}</a>.
+    More on the <a href={L.contact}>contact page</a>.
+  </p>
+</LegalPage>

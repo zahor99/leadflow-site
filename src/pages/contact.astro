@@ -1,0 +1,50 @@
+---
+import LegalPage from "../components/LegalPage.astro";
+import { PROPERTY_ASSISTANT as P } from "../data/products";
+import { SELLER as S, POLICY_LINKS as L } from "../data/seller";
+---
+
+<LegalPage
+  title="Contact and customer service"
+  description={`How to reach ${S.brand} customer service: support e-mail, working hours, response time and the company behind the brand, ${S.legalName}.`}
+>
+  <h1>Contact and customer service</h1>
+  <p class="updated">Last updated: 24 November 2026</p>
+
+  <h2>Customer service</h2>
+  <ul>
+    <li><strong>E-mail:</strong> <a href={`mailto:${S.supportEmail}`}>{S.supportEmail}</a>. Use it for
+      questions about your trial, your subscription, a payment, a refund or cancelling.</li>
+    <li><strong>Hours:</strong> Monday to Friday, 08:00 to 16:00 Central European Time, except public
+      holidays.</li>
+    <li><strong>Response time:</strong> we answer e-mails within 24 hours on working days.</li>
+    <li><strong>A call:</strong> <a href={S.callUrl} target="_blank" rel="noopener">book a 30-minute video call</a>
+      with the founder, Gergely Racz.</li>
+    <li><strong>Post:</strong> {S.legalName}, {S.address}.</li>
+  </ul>
+  <p>
+    When you write about a subscription, tell us your office's name and website so we can find your account
+    quickly.
+  </p>
+
+  <h2>Who you are buying from</h2>
+  <p>
+    {S.brand} is a brand of <strong>{S.legalName}</strong> ({S.address}; {S.corporationNo}).
+    {S.legalName} is the seller of the products on this website and the company that takes your payment.
+  </p>
+
+  <h2>Policies</h2>
+  <ul>
+    <li><a href={`/${P.slug}/`}>{P.name}</a>: what it is and what it costs</li>
+    <li><a href={L.subscriptionTerms}>{P.name}: subscription and trial terms</a></li>
+    <li><a href={L.refunds}>Refund and cancellation policy</a></li>
+    <li><a href={L.privacy}>Privacy notice</a></li>
+    <li><a href={L.toolsTerms}>Terms of service for the online tools</a> (SEO Desk, Content Engine)</li>
+  </ul>
+
+  <h2>Privacy requests</h2>
+  <p>
+    To see, correct or delete the personal data we hold about you, write to the same address. The details are
+    in the <a href={L.privacy}>privacy notice</a>.
+  </p>
+</LegalPage>

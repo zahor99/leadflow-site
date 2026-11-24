@@ -136,6 +136,7 @@ const schema = [
             <button type="submit">Start my free 14-day trial</button>
             <p class="msg" role="status"></p>
             <p class="fine">No card. Built from your public website within 24 hours on working days. Then from $99 a month per office.</p>
+            <p class="fine seller">Sold by BioInsight Lab Inc. · <a href="/terms/agency-os-real-estate/">Trial and subscription terms</a> · <a href="/refunds/">Refunds and cancellation</a> · <a href="/privacy/">Privacy notice</a></p>
           </form>
         </div>
 
@@ -312,6 +313,14 @@ const schema = [
           ))}
         </div>
 
+        <p class="fine seller">
+          Prices are in US dollars (USD) and do not include taxes. The Assistant plan is sold by BioInsight Lab Inc.,
+          the company behind LeadFlow Automation. It is paid monthly by card and you can cancel at any time.
+          <a href="/terms/agency-os-real-estate/">Subscription and trial terms</a> ·
+          <a href="/refunds/">Refund and cancellation policy</a> ·
+          <a href="/contact/">Contact and customer service</a>
+        </p>
+
         <div class="addon">
           <div>
             <span class="pills"><span class="role">Add-on</span><span class="st">Pilot</span></span>
@@ -360,6 +369,7 @@ const schema = [
             <button type="submit">Start my free 14-day trial</button>
             <p class="msg" role="status"></p>
             <p class="fine">No card. We use your details only to build and send your trial. <a href="/privacy/">Privacy notice</a></p>
+            <p class="fine seller">Sold by BioInsight Lab Inc. · <a href="/terms/agency-os-real-estate/">Trial and subscription terms</a> · <a href="/refunds/">Refunds and cancellation</a> · <a href="/contact/">Contact</a></p>
           </form>
         </div>
       </div>
@@ -405,6 +415,8 @@ const schema = [
   .lede { font-size: 18px; max-width: 34em; margin-bottom: 26px; }
   .fine { font-size: 13px; margin-top: 10px; }
   .fine a { color: var(--color-accent); }
+  .fine.seller { margin-top: 0; }
+  .plans + .fine.seller { margin-top: 14px; max-width: 80ch; }
 
   .hero { display: grid; grid-template-columns: 1.05fr .95fr; gap: 56px; align-items: center; padding-top: 16px; }
   .split { display: grid; grid-template-columns: 1.1fr .9fr; gap: 56px; align-items: center; }
