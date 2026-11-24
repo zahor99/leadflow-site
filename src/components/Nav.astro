@@ -1,14 +1,17 @@
 ---
+import { PROPERTY_ASSISTANT } from "../data/products";
 const base = import.meta.env.BASE_URL;
+const pa = PROPERTY_ASSISTANT;
 ---
 <header class="sticky top-0 z-30 backdrop-blur-md bg-bg-deep/70 border-b border-border">
   <nav class="max-w-6xl mx-auto px-6 py-4 flex items-center justify-between">
-    <a href={base} class="flex items-center gap-2.5 font-bold text-lg tracking-tight">
+    <a href={base} class="flex items-center gap-2.5 font-bold text-lg tracking-tight shrink-0 mr-6">
       <img src={`${base}logo/leadflow-mark.png`} alt="" width="42" height="14" class="h-3.5 w-auto" />
       <span>Lead Flow <span class="text-accent">Automation</span></span>
     </a>
-    <div class="hidden md:flex items-center gap-8 text-sm text-text-secondary">
+    <div class="hidden lg:flex items-center gap-6 text-sm text-text-secondary whitespace-nowrap">
       <a href="/#work" class="hover:text-text-primary transition-colors">Work</a>
+      <a href={`/${pa.slug}/`} class="text-text-primary font-medium hover:text-accent transition-colors">{pa.name}</a>
       <a href="/marketing-mcp/" class="hover:text-text-primary transition-colors">AI Marketing</a>
       <a href="/#capabilities" class="hover:text-text-primary transition-colors">Capabilities</a>
       <a href="/#process" class="hover:text-text-primary transition-colors">Approach</a>
@@ -22,7 +25,7 @@ const base = import.meta.env.BASE_URL;
       </a>
     </div>
     <button
-      class="md:hidden text-text-primary p-2 -mr-2"
+      class="lg:hidden text-text-primary p-2 -mr-2"
       aria-label="Open menu"
       data-nav-toggle
     >
@@ -34,9 +37,10 @@ const base = import.meta.env.BASE_URL;
 </header>
 
 <!-- Mobile menu (hidden by default; toggled via data-nav-toggle). -->
-<div class="md:hidden hidden border-b border-border bg-bg-deep" data-nav-panel>
+<div class="lg:hidden hidden border-b border-border bg-bg-deep" data-nav-panel>
   <div class="px-6 py-4 flex flex-col gap-3 text-sm text-text-secondary">
     <a href="/#work" class="py-2 hover:text-text-primary">Work</a>
+    <a href={`/${pa.slug}/`} class="py-2 text-text-primary font-medium">{pa.name}</a>
     <a href="/marketing-mcp/" class="py-2 hover:text-text-primary">AI Marketing</a>
     <a href="/#capabilities" class="py-2 hover:text-text-primary">Capabilities</a>
     <a href="/#process" class="py-2 hover:text-text-primary">Approach</a>

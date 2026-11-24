@@ -1,0 +1,595 @@
+---
+import Base from "../layouts/Base.astro";
+import Nav from "../components/Nav.astro";
+import Footer from "../components/Footer.astro";
+import { PROPERTY_ASSISTANT as P } from "../data/products";
+
+// Sales page for the real-estate edition of the Agency OS (free trial + packages per office).
+// noindex for now: visitors arrive from ads. Each skill and package carries a status tag
+// (In your trial / On order / Pilot / In build); keep the tags true when the product changes.
+// Trial requests post to the existing waitlist service, which stores them and e-mails the operator.
+const SIGNUP_URL = "https://ops.leadflowautomation.net/waitlist/signup";
+// Link to a live sample assistant. Empty = the button is hidden. Fill only with the agency's written OK.
+const SAMPLE_URL = "";
+const IMG = "/images/agency-os-real-estate";
+
+const pains = [
+  { t: "The evening visitor leaves without a word", d: "People look at homes after work. They have one question, nobody to ask, and the portal is one tab away. You never learn they were there." },
+  { t: "Your agents answer the same ten questions", d: "Is it still available? Is there parking? What are the running costs? Every answer is already on your website. Your agents still type it out, one enquiry at a time." },
+  { t: "Search filters miss what people mean", d: "“Three rooms near a school, with a garden, under 400,000” is not a filter. A visitor who cannot find it assumes you do not have it." },
+  { t: "Buyers from abroad write in English", d: "They ask about the buying process, taxes and timing before they ask about a property. Slow answers send them to the agency that replied first." },
+  { t: "A listing gives nobody a reason to leave a name", d: "Photos, a price and a form. A buyer who is only curious tonight stays anonymous, and you cannot follow up with someone you never met." },
+];
+
+const without = [
+  { h: "21:07", t: "A buyer has a question about a flat on your site." },
+  { h: "21:08", t: "No one to ask. The contact form asks for six fields." },
+  { h: "21:15", t: "Back on the portal. Three other agencies get the enquiry." },
+  { h: "09:30", t: "Your office opens. Nothing in the inbox to act on." },
+];
+const withIt = [
+  { h: "21:07", t: "The buyer asks the assistant on your site, in their own words." },
+  { h: "21:07", t: "It answers with three matching listings and a link to each." },
+  { h: "21:09", t: "It shows the agent for that listing and how to reach your office." },
+  { h: "09:00", t: "The buyer calls your office about a property they have already chosen." },
+];
+
+// The seven skills, each headed by what the agency owner gets out of it.
+const skills = [
+  { r: "Chatbot", s: "In your trial", plan: "Assistant · $99", t: "No buyer leaves your website unanswered", d: "Finds listings from a plain question and answers from your guides with the source, in your language and in English. In the trial it runs on a private link and inside your team's Claude or ChatGPT." },
+  { r: "Voice agent", s: "Pilot", plan: "Add-on to any package", t: "Every call picked up, also during viewings", d: "Answers the phone when your agents cannot, searches your listings during the call, takes the caller's details and tells your office who to call back." },
+  { r: "Qualification", s: "In build", plan: "Lead Desk", t: "Your agents call the serious buyers first", d: "Every enquiry from your website and the portals gets an answer within minutes, the questions an agent would ask (budget, timing, financing), and a score." },
+  { r: "Listing generation", s: "In build", plan: "Marketing · $299", t: "A new listing written in minutes, not an evening", d: "From your photos and the facts of the property: the listing text in your style, in your language and in English, for you to edit and approve." },
+  { r: "Listing brief", s: "In your trial", plan: "Assistant · $99", t: "Something worth sending to a buyer or an owner", d: "A two-page brief on a listing and its surroundings, in your brand, for you to send to a buyer or take to an owner. One is included in the trial." },
+  { r: "Listing video", s: "In your trial", plan: "Marketing · $299", t: "A reel for the listing without a film crew", d: "A 30 to 40 second vertical video made from the listing's own photos and facts, ready for Instagram, Facebook and TikTok." },
+  { r: "Article generation", s: "On order today", plan: "Marketing · $299", t: "Be the agency that search and AI answers show for your district", d: "District and market articles from your own data and listings, written for search engines and AI assistants, for you to approve." },
+];
+
+const plans = [
+  { n: "Assistant", s: "Starts after your trial", price: "$99", unit: "a month, per office", who: "Answer every buyer and collect names", items: ["Chatbot on your own website", "5 listing briefs a month", "Every enquiry e-mailed to your office", "Works in your team's Claude or ChatGPT", "Monthly report on what buyers asked", "Up to 500 listings, re-read every day"], cta: true },
+  { n: "Marketing", s: "On order, by arrangement", price: "$299", unit: "a month, per office", who: "Everything in Assistant, plus your listings marketed", items: ["Listing texts written for you", "4 listing videos a month", "20 social posts a month from new listings", "2 district or market articles a month", "Local search desk for your office", "Up to 2,000 listings"] },
+  { n: "Lead Desk", s: "In build", price: "$640", unit: "a month + $5,900 set-up", who: "Everything in Assistant, plus every enquiry worked", items: ["Website and portal enquiries answered in minutes", "Each enquiry qualified and scored", "Alert to the right agent", "Weekly report", "Marketing skills as add-ons", "CRM integration or a custom CRM on request"] },
+];
+
+// Rows: [label, trial, assistant, marketing, lead desk]
+const Y = "✓", N = "–";
+const matrix = [
+  ["Listings in your office's brain", "300", "500", "2,000", "by arrangement"],
+  ["Listings re-read every day", N, Y, Y, Y],
+  ["Chatbot", "private link", "your website", "your website", "your website"],
+  ["Visitor questions", "50", "1,500 a month", "5,000 a month", "by arrangement"],
+  ["Listing briefs", "1", "5 a month", "5 a month", "5 a month"],
+  ["Enquiries e-mailed to your office", N, Y, Y, Y],
+  ["Works in your team's Claude or ChatGPT", Y, Y, Y, Y],
+  ["Monthly report", N, Y, Y, Y],
+  ["200-question test result", Y, Y, Y, Y],
+  ["Listing generation (texts)", N, N, Y, "add-on"],
+  ["Listing videos", "5 in the trial", N, "4 a month", "add-on"],
+  ["Social posts from new listings", N, N, "20 a month", "add-on"],
+  ["Article generation", N, N, "2 a month", "add-on"],
+  ["Local search desk", N, N, "one office", "add-on"],
+  ["Enquiry qualification and scoring", N, N, N, Y],
+  ["Alert to the agent, weekly report", N, N, N, Y],
+  ["Voice agent", N, "add-on", "add-on", "add-on"],
+  ["CRM integration", N, N, N, "on request"],
+  ["Custom CRM", N, N, N, "on request"],
+];
+
+const steps = [
+  { n: "1", t: "Send us your website", d: "One field. No access, no feed, no IT project. We work from the pages anyone can see." },
+  { n: "2", t: "We build and test it", d: "We read your listings and guides, build your brain, and run 200 test questions against it before you see it." },
+  { n: "3", t: "Your team starts within 24 hours", d: "On working days. You get the chatbot on a private link, the connection for Claude and ChatGPT, the test result and your first listing brief." },
+];
+
+const faq = [
+  { q: "Which package should we start with?", a: "Start with the free trial. It gives you the chatbot on a private link, one listing brief and five listing videos for your own office, so you can judge the answers on your own listings before you choose a package." },
+  { q: "How does it work inside Claude or ChatGPT?", a: "You get a connector address. Anyone in your office whose Claude or ChatGPT plan allows custom connectors adds it once, and can then ask about your listings and guides in their own assistant." },
+  { q: "Can it work with our CRM?", a: "CRM integration, or a custom CRM built for your office, is available on request with the Lead Desk package. We scope it with you first, so there is no list price." },
+  { q: "Is the price per agent or per office?", a: `Per office. One price covers one website and its listings, and everyone who works there. There is no fee per agent.` },
+  { q: "What is a listing brief?", a: "A two-page document about one listing, in your brand: schools, shops, transport and parks nearby with distances, travel times, and how the price compares with similar properties you list. It is built from public sources and your own listings, and every figure names its source." },
+  { q: "Who approves a brief before buyers see it?", a: "Your office. We send the brief to you first. Nothing goes to a buyer or an owner before you approve it." },
+  { q: "Can it say something wrong about a property?", a: "Any AI system can make a mistake, so we limit what it is allowed to say. It answers only from your listings and your pages, shows the source, and declines when your site does not cover the question. Before you see it we run 200 test questions and give you the result." },
+  { q: "What do you need from us?", a: "Your website address and a work e-mail address at your agency. Nothing is installed during the trial." },
+  { q: "What happens when a listing changes?", a: "On the plan we re-read your listings every day. A sold property stops appearing; a new one appears the next morning." },
+  { q: "What happens to visitors' details?", a: "During the trial the chatbot does not collect contact details; it shows your office's. Visitors see a notice that they are talking to an AI assistant. On the plan a visitor's details go to your office and are used for nothing else, under data processing terms." },
+  { q: "Which languages?", a: "English, French and Hungarian are tested today. Each assistant runs in your local language and English; ask us about other languages." },
+  { q: "What happens after 14 days?", a: "The trial stops by itself. We do not ask for a card, so nothing is charged. If you want to keep it, you subscribe and it stays on." },
+  { q: "Our office is part of a network with a shared website.", a: "The price is per office. Tell us in the form which office you are and we will tell you how we separate your listings." },
+  { q: "We have more than 500 listings.", a: "Tell us in the form and we will quote for your catalogue." },
+];
+
+const schema = [
+  JSON.stringify({
+    "@context": "https://schema.org",
+    "@type": "FAQPage",
+    mainEntity: faq.map((f) => ({ "@type": "Question", name: f.q, acceptedAnswer: { "@type": "Answer", text: f.a } })),
+  }),
+];
+---
+
+<Base
+  title={`${P.name}: one office, one brain, one sales team`}
+  description={`${P.name} gives your office one brain and an AI sales team: chatbot, voice agent, enquiry qualification, listing texts, listing briefs, listing videos and articles. Free for 14 days, then from $99 a month per office.`}
+  noindex={true}
+  schema={schema}
+>
+  <Nav />
+  <main class="pp">
+    <!-- 1. HERO -->
+    <section class="bg-hero-glow">
+      <div class="wrap hero">
+        <div>
+          <p class="eyebrow">{P.name} · by LeadFlow</p>
+          <h1>One office.<br />One brain.<br />One sales team.</h1>
+          <p class="lede">
+            It is 9 pm and a buyer is on your website. Who answers? {P.name} turns everything your
+            office already publishes into one brain. Buyers ask it in a chat. Your agents ask it inside
+            Claude or ChatGPT. The same brain runs the rest of the team: voice agent, qualification,
+            listing texts, briefs, videos and articles.
+          </p>
+          <form class="trial" data-trial novalidate>
+            <div class="trial-row">
+              <label><span>Your agency's website</span><input name="site" type="text" inputmode="url" placeholder="youragency.com" required /></label>
+              <label><span>Work e-mail</span><input name="email" type="email" autocomplete="email" placeholder="you@youragency.com" required /></label>
+            </div>
+            <label class="hp" aria-hidden="true">Leave empty<input name="website" type="text" tabindex="-1" autocomplete="off" /></label>
+            <button type="submit">Start my free 14-day trial</button>
+            <p class="msg" role="status"></p>
+            <p class="fine">No card. Built from your public website within 24 hours on working days. Then from $99 a month per office.</p>
+          </form>
+        </div>
+
+        <!-- Product illustration: drawn in HTML so every word stays sharp -->
+        <figure class="chat" aria-label="Illustration of a conversation with the assistant">
+          <div class="chat-top"><span class="dot"></span>Your agency · assistant<em>21:07</em></div>
+          <p class="bubble user">3 rooms near a school, with a balcony, up to 400,000?</p>
+          <p class="bubble bot">I found 3 that match. All three are within a 10-minute walk of a primary school.</p>
+          <div class="tiles">
+            <div class="tile"><i class="ph a"></i><b>3 rooms · 84 m²</b><span>Balcony · 2nd floor</span><strong>389,000</strong><u>View listing →</u></div>
+            <div class="tile"><i class="ph b"></i><b>3 rooms · 91 m²</b><span>Balcony · garage</span><strong>398,000</strong><u>View listing →</u></div>
+            <div class="tile"><i class="ph c"></i><b>3 rooms · 78 m²</b><span>Balcony · lift</span><strong>365,000</strong><u>View listing →</u></div>
+          </div>
+          <p class="bubble user">Can I see the second one on Saturday?</p>
+          <p class="bubble bot">The agent for that listing arranges viewings. Here is the office number and the listing page.</p>
+          <figcaption>Illustration with invented listings</figcaption>
+        </figure>
+      </div>
+    </section>
+
+    <!-- 2. PAIN -->
+    <section class="band">
+      <div class="wrap">
+        <figure class="wide">
+          <img src={`${IMG}/night.webp`} alt="A woman with a phone in her hand looks at the window of a closed estate agency at night" width="1920" height="1072" loading="lazy" />
+          <figcaption>
+            <h2>Buyers look in the evening. Your office answers in the morning.</h2>
+            <p>By then the question has gone to whoever replied first.</p>
+          </figcaption>
+        </figure>
+        <div class="grid4">
+          {pains.map((p) => (<div class="card"><h3>{p.t}</h3><p>{p.d}</p></div>))}
+        </div>
+      </div>
+    </section>
+
+    <!-- 3. BEFORE / AFTER DIAGRAM -->
+    <section>
+      <div class="wrap">
+        <p class="eyebrow">One enquiry, two outcomes</p>
+        <h2>The same question, on a Tuesday evening</h2>
+        <div class="lanes">
+          <div class="lane off">
+            <h3>Without an assistant</h3>
+            <ol>{without.map((s) => (<li><time>{s.h}</time><span>{s.t}</span></li>))}</ol>
+            <p class="result">Result: the buyer is talking to someone else.</p>
+          </div>
+          <div class="lane on">
+            <h3>With your AI sales team</h3>
+            <ol>{withIt.map((s) => (<li><time>{s.h}</time><span>{s.t}</span></li>))}</ol>
+            <p class="result">Result: a buyer who has chosen a property and knows who to call.</p>
+          </div>
+        </div>
+        <p class="fine">An example of how the assistant works, not a measured result from a customer.</p>
+      </div>
+    </section>
+
+    <!-- 4. THE SKILLS AND THE BRAIN -->
+    <section class="band" id="skills">
+      <div class="wrap">
+        <p class="eyebrow">The sales team</p>
+        <h2>Seven skills. All of them work from what your office already publishes.</h2>
+        <ul class="team">
+          {skills.map((m) => (<li><span class="pills"><span class="role">{m.r}</span><span class={`st ${m.s === "In your trial" ? "live" : ""}`}>{m.s}</span></span><h3>{m.t}</h3><p>{m.d}</p><span class="in">{m.plan}</span></li>))}
+          <li class="later"><span class="role">On request</span><h3>CRM integration or a custom CRM</h3><p>With the Lead Desk package: enquiries written into the system your agents already use, or a CRM built for your office.</p><span class="in">Lead Desk · scoped with you</span></li>
+        </ul>
+
+        <p class="eyebrow gap">The brain</p>
+        <div class="source" role="img" aria-label="Diagram: your listings, your guides and reports and your documents form one brain for your office; the chatbot, voice agent, qualification, listing generation, listing brief, listing video and article generation all work from it">
+          <div class="col">
+            <span class="box">Your listings</span>
+            <span class="box">Your guides and reports</span>
+            <span class="box">Your documents</span>
+          </div>
+          <svg class="join" viewBox="0 0 60 120" aria-hidden="true"><path d="M0 18h20q10 0 10 10v22q0 10 10 10h20M0 60h60M0 102h20q10 0 10-10V70q0-10 10-10" fill="none" stroke="currentColor" stroke-width="2" /></svg>
+          <div class="col mid">
+            <span class="box core">One brain for your office<small>re-read every day; every answer links back to its source</small></span>
+            <span class="check">200 test questions before you see it</span>
+          </div>
+          <svg class="join" viewBox="0 0 60 120" aria-hidden="true"><path d="M0 60h52M44 52l10 8-10 8" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" /></svg>
+          <div class="col roles">
+            {skills.map((m) => (<span class="box">{m.r}</span>))}
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- 4b. THE PROPERTY BRIEF (lead magnet) -->
+    <section>
+      <div class="wrap split">
+        <div>
+          <p class="eyebrow">The listing brief</p>
+          <h2>Give a buyer more than a link to the listing</h2>
+          <ul class="does">
+            <li><h3>What is in it</h3><p>Two pages in your brand about one listing: schools, shops, transport and parks nearby with distances, travel times, and how the price compares with similar properties you list. Every figure names its source.</p></li>
+            <li><h3>How a buyer gets it</h3><p>You send it, or attach it to an ad, a post or an e-mail. A sign-up page that collects the buyer's name before the download is in build.</p></li>
+            <li><h3>It works with owners too</h3><p>Take it to a listing appointment. It shows the owner how you will present their property.</p></li>
+            <li><h3>You approve every brief</h3><p>We send it to you first. Nothing goes out before you approve it.</p></li>
+          </ul>
+        </div>
+        <figure class="brief" aria-label="Illustration of a two-page property brief">
+          <div class="sheet">
+            <span class="brand">Your agency</span>
+            <b>3-room flat with balcony</b>
+            <i class="ph a"></i>
+            <div class="facts"><span><strong>4 min</strong>primary school</span><span><strong>6 min</strong>tram stop</span><span><strong>9 min</strong>park</span></div>
+            <em></em><em></em><em class="short"></em>
+          </div>
+          <div class="sheet two">
+            <span class="brand">Price in context</span>
+            <div class="bars"><u style="height:46%"></u><u style="height:62%"></u><u class="me" style="height:55%"></u><u style="height:78%"></u><u style="height:70%"></u></div>
+            <em></em><em class="short"></em>
+            <small>Sources named on every page</small>
+          </div>
+          <figcaption>Illustration with invented data</figcaption>
+        </figure>
+      </div>
+    </section>
+
+    <!-- 5. HOW IT WORKS DIAGRAM -->
+    <section>
+      <div class="wrap">
+        <p class="eyebrow">How it works</p>
+        <h2>From your website address to a working team in a day</h2>
+        <ol class="flow">
+          {steps.map((s, i) => (
+            <li>
+              <span class="num">{s.n}</span>
+              <h3>{s.t}</h3>
+              <p>{s.d}</p>
+              {i < steps.length - 1 && <svg class="arrow" viewBox="0 0 40 16" aria-hidden="true"><path d="M0 8h34M28 2l8 6-8 6" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" /></svg>}
+            </li>
+          ))}
+        </ol>
+
+      </div>
+    </section>
+
+    <!-- 6. TRUST -->
+    <section class="band">
+      <div class="wrap">
+        <p class="eyebrow">How we test it</p>
+        <h2>You see the test result before your visitors meet the team</h2>
+        <div class="grid3">
+          <div class="card"><h3>200 questions per agency</h3><p>Searches, questions about your guides, and questions it should refuse. You get the score and the failed cases.</p></div>
+          <div class="card"><h3>Every answer shows its source</h3><p>Listings link to the listing. Guide answers link to the page. A statement it cannot support from your site is removed before the visitor sees it.</p></div>
+          <div class="card"><h3>It says when it does not know</h3><p>No guessing about price, availability or legal questions. It offers your office's contact details instead.</p></div>
+        </div>
+        <figure class="wide low">
+          <img src={`${IMG}/sofa.webp`} alt="A couple on a sofa in the evening looking at a laptop together" width="1200" height="896" loading="lazy" />
+        </figure>
+        {SAMPLE_URL && <p class="sample"><a class="ghost" href={SAMPLE_URL} target="_blank" rel="noopener">Try a live sample assistant →</a></p>}
+      </div>
+    </section>
+
+    <!-- 7. PACKAGES -->
+    <section id="price">
+      <div class="wrap">
+        <p class="eyebrow">Packages</p>
+        <h2>One price per office. No fee per agent.</h2>
+        <div class="trialbar">
+          <div><h3>Free trial, 14 days, no card</h3><p>Your office's brain from up to 300 listings, the chatbot on a private link with 50 visitor questions, one listing brief and the 200-question test result, delivered within 24 hours on working days. Plus 5 listing videos of your own listings during the 14 days.</p></div>
+          <a class="btn" href="#start">Start my free trial</a>
+        </div>
+        <div class="plans">
+          {plans.map((pl) => (
+            <div class={`plan${pl.cta ? " main" : ""}`}>
+              <h3>{pl.n}</h3>
+              <span class="st">{pl.s}</span>
+              <p class="amount">{pl.price}<small> {pl.unit}</small></p>
+              <p class="who">{pl.who}</p>
+              <ul>{pl.items.map((i) => (<li>{i}</li>))}</ul>
+            </div>
+          ))}
+        </div>
+
+        <div class="addon">
+          <div>
+            <span class="pills"><span class="role">Add-on</span><span class="st">Pilot</span></span>
+            <h3>Voice agent, added to any package</h3>
+            <p>Answers the phone when your agents cannot, searches your listings during the call, takes the caller's details and tells your office who to call back. It starts with a pilot of test calls that you judge. We quote it with you after the pilot.</p>
+          </div>
+          <a class="btn ghostbtn" href="#start">Ask about the voice pilot</a>
+        </div>
+
+        <h3 class="mh">Everything, package by package</h3>
+        <div class="mwrap">
+          <table class="matrix">
+            <thead><tr><th></th><th>Trial</th><th>Assistant</th><th>Marketing</th><th>Lead Desk</th></tr></thead>
+            <tbody>
+              {matrix.map((r) => (<tr><th>{r[0]}</th>{r.slice(1).map((c) => (<td class={c === Y ? "y" : c === N ? "n" : ""}>{c}</td>))}</tr>))}
+            </tbody>
+          </table>
+        </div>
+        <p class="fine">The free trial is open today. Paid packages start after a trial. Parts marked In build or Pilot are not available yet; we tell you the date before you pay for them.</p>
+        <p class="fine">Several offices or a network? The price is per office; tell us in the form. CRM integration and a custom CRM are scoped with you, so they have no list price.</p>
+      </div>
+    </section>
+
+    <!-- 8. FAQ -->
+    <section class="band">
+      <div class="wrap narrow">
+        <h2>Questions agencies ask</h2>
+        {faq.map((f) => (<details><summary>{f.q}</summary><p>{f.a}</p></details>))}
+      </div>
+    </section>
+
+    <!-- 9. FINAL CTA -->
+    <section id="start">
+      <div class="wrap split end">
+        <figure class="photo">
+          <img src={`${IMG}/desk.webp`} alt="An estate agent's desk early in the morning with a phone, keys and property brochures" width="1200" height="896" loading="lazy" />
+        </figure>
+        <div>
+          <h2>Open the office tomorrow to buyers who are already answered</h2>
+          <p class="lede">Send us your website. Within 24 hours on working days your office gets its brain, its chatbot and its first listing brief to try, with the test result.</p>
+          <form class="trial" data-trial novalidate>
+            <label><span>Your agency's website</span><input name="site" type="text" inputmode="url" placeholder="youragency.com" required /></label>
+            <label><span>Work e-mail</span><input name="email" type="email" autocomplete="email" placeholder="you@youragency.com" required /></label>
+            <label><span>Your name</span><input name="name" type="text" autocomplete="name" /></label>
+            <label class="hp" aria-hidden="true">Leave empty<input name="website" type="text" tabindex="-1" autocomplete="off" /></label>
+            <button type="submit">Start my free 14-day trial</button>
+            <p class="msg" role="status"></p>
+            <p class="fine">No card. We use your details only to build and send your trial. <a href="/privacy/">Privacy notice</a></p>
+          </form>
+        </div>
+      </div>
+    </section>
+  </main>
+  <Footer />
+
+  <script define:vars={{ SIGNUP_URL, PRODUCT: P.name }}>
+    document.querySelectorAll("form[data-trial]").forEach((form) => {
+      const msg = form.querySelector(".msg");
+      form.addEventListener("submit", async (e) => {
+        e.preventDefault();
+        const f = Object.fromEntries(new FormData(form).entries());
+        const site = (f.site || "").trim();
+        if (!/^(https?:\/\/)?[^\s./]+\.[^\s]{2,}$/.test(site)) { msg.textContent = "Please enter your agency's website."; return; }
+        if (!/^[^@\s]+@[^@\s]+\.[A-Za-z]{2,}$/.test(f.email || "")) { msg.textContent = "Please enter a valid e-mail address."; return; }
+        // The sign-up service keeps email / name / company / interest; the site travels in company + interest.
+        const data = { email: f.email, name: f.name || "", company: site, interest: `${PRODUCT} trial: ${site}`.slice(0, 200), website: f.website || "", page: "property-assistant-trial" };
+        const btn = form.querySelector("button");
+        btn.disabled = true; msg.textContent = "Sending…";
+        try {
+          const r = await fetch(SIGNUP_URL, { method: "POST", headers: { "Content-Type": "application/json" }, body: JSON.stringify(data) });
+          const j = await r.json().catch(() => ({}));
+          if (r.ok && j.ok) { form.reset(); msg.textContent = "Thank you. Your trial will arrive by e-mail within 24 hours on working days."; }
+          else { msg.textContent = j.error || "Something went wrong. Please try again."; }
+        } catch { msg.textContent = "Network error. Please try again."; }
+        finally { btn.disabled = false; }
+      });
+    });
+  </script>
+</Base>
+
+<style>
+  .pp section { padding: 72px 0; }
+  .pp .band { background: var(--color-bg-elevated); border-block: 1px solid var(--color-border); }
+  .wrap { max-width: 1120px; margin: 0 auto; padding: 0 24px; }
+  .wrap.narrow { max-width: 780px; }
+  .eyebrow { font-family: var(--font-mono); font-size: 12px; letter-spacing: .12em; text-transform: uppercase; color: var(--color-accent); margin-bottom: 12px; }
+  h1 { font-size: clamp(34px, 5vw, 56px); line-height: 1.08; margin-bottom: 20px; text-wrap: balance; }
+  h2 { font-size: clamp(26px, 3.4vw, 38px); margin-bottom: 28px; max-width: 22em; text-wrap: balance; }
+  h3 { font-size: 17px; color: var(--color-text-primary); margin-bottom: 6px; }
+  p, li { color: var(--color-text-secondary); font-size: 15.5px; line-height: 1.65; }
+  .lede { font-size: 18px; max-width: 34em; margin-bottom: 26px; }
+  .fine { font-size: 13px; margin-top: 10px; }
+  .fine a { color: var(--color-accent); }
+
+  .hero { display: grid; grid-template-columns: 1.05fr .95fr; gap: 56px; align-items: center; padding-top: 16px; }
+  .split { display: grid; grid-template-columns: 1.1fr .9fr; gap: 56px; align-items: center; }
+  .split.end { grid-template-columns: .9fr 1.1fr; }
+
+  /* form */
+  .trial { display: flex; flex-direction: column; gap: 12px; max-width: 560px; }
+  .trial-row { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; }
+  .trial label { display: flex; flex-direction: column; gap: 6px; font-size: 13px; color: var(--color-text-secondary); }
+  .trial input { background: var(--color-bg-deep); border: 1px solid var(--color-border); border-radius: 10px; padding: 13px 14px; color: var(--color-text-primary); font: inherit; font-size: 16px; }
+  .trial input:focus { outline: 2px solid var(--color-accent); outline-offset: 1px; }
+  .trial button, .btn { align-self: flex-start; display: inline-block; background: var(--color-accent); color: #fff; border: 0; border-radius: 10px; padding: 14px 24px; font-weight: 650; font-size: 16px; cursor: pointer; text-decoration: none; transition: background .15s; }
+  .trial button:hover, .btn:hover { background: var(--color-accent-hover); }
+  .trial button:disabled { opacity: .6; cursor: default; }
+  .msg { min-height: 1.3em; color: var(--color-text-primary); font-size: 14px; }
+  .hp { position: absolute !important; left: -9999px; width: 1px; height: 1px; overflow: hidden; }
+
+  /* chat illustration */
+  .chat { margin: 0; background: var(--color-bg-elevated); border: 1px solid var(--color-border); border-radius: 18px; padding: 16px; display: flex; flex-direction: column; gap: 10px; box-shadow: 0 30px 80px -40px rgba(46,155,232,.45); }
+  .chat-top { display: flex; align-items: center; gap: 8px; font-size: 13px; color: var(--color-text-primary); font-weight: 600; padding-bottom: 10px; border-bottom: 1px solid var(--color-border); }
+  .chat-top em { margin-left: auto; font-style: normal; font-family: var(--font-mono); font-weight: 400; color: var(--color-text-secondary); }
+  .dot { width: 8px; height: 8px; border-radius: 50%; background: var(--color-success); }
+  .bubble { max-width: 86%; padding: 10px 14px; border-radius: 14px; font-size: 14.5px; line-height: 1.45; }
+  .bubble.user { align-self: flex-end; background: var(--color-accent); color: #fff; border-bottom-right-radius: 4px; }
+  .bubble.bot { align-self: flex-start; background: var(--color-bg-subtle); color: var(--color-text-primary); border-bottom-left-radius: 4px; }
+  .tiles { display: grid; grid-template-columns: repeat(3, 1fr); gap: 8px; }
+  .tile { background: var(--color-bg-deep); border: 1px solid var(--color-border); border-radius: 12px; padding: 8px; display: flex; flex-direction: column; gap: 2px; font-size: 12px; color: var(--color-text-secondary); }
+  .tile b { color: var(--color-text-primary); font-size: 12.5px; }
+  .tile strong { color: var(--color-text-primary); font-size: 14px; margin-top: 2px; }
+  .tile u { color: var(--color-accent); text-decoration: none; font-size: 11.5px; }
+  .ph { display: block; aspect-ratio: 4 / 3; border-radius: 8px; margin-bottom: 6px; }
+  .ph.a { background: linear-gradient(160deg, #31506b, #1b2a3a 60%, #3d3327); }
+  .ph.b { background: linear-gradient(160deg, #5a4a3a, #2a2430 60%, #24384a); }
+  .ph.c { background: linear-gradient(160deg, #2f4a44, #1c2630 60%, #4a3a44); }
+  .chat figcaption { font-size: 11.5px; color: var(--color-text-secondary); text-align: center; padding-top: 4px; }
+
+  /* pain */
+  .wide { margin: 0 0 28px; position: relative; border-radius: 18px; overflow: hidden; border: 1px solid var(--color-border); }
+  .wide img { width: 100%; height: clamp(300px, 42vw, 480px); object-fit: cover; object-position: 60% 50%; display: block; }
+  .wide figcaption { position: absolute; inset: 0; display: flex; flex-direction: column; justify-content: flex-end; padding: 32px; background: linear-gradient(90deg, rgba(10,10,15,.92) 0%, rgba(10,10,15,.6) 45%, rgba(10,10,15,0) 75%); }
+  .wide h2 { margin-bottom: 8px; max-width: 14em; }
+  .wide p { color: var(--color-text-primary); font-size: 17px; }
+  .grid4 { display: grid; grid-template-columns: repeat(5, 1fr); gap: 14px; }
+  .grid4 .card { padding: 18px; }
+  .grid3 { display: grid; grid-template-columns: repeat(3, 1fr); gap: 16px; }
+  .card { background: var(--color-bg-deep); border: 1px solid var(--color-border); border-radius: 14px; padding: 20px; }
+
+  /* lanes diagram */
+  .lanes { display: grid; grid-template-columns: 1fr 1fr; gap: 20px; }
+  .lane { border: 1px solid var(--color-border); border-radius: 16px; padding: 24px; background: var(--color-bg-elevated); }
+  .lane.on { border-color: var(--color-accent); }
+  .lane h3 { margin-bottom: 16px; }
+  .lane ol { list-style: none; padding: 0; margin: 0; position: relative; }
+  .lane ol::before { content: ""; position: absolute; left: 67px; top: 8px; bottom: 8px; width: 2px; background: var(--color-border); }
+  .lane.on ol::before { background: var(--color-accent); opacity: .5; }
+  .lane li { display: grid; grid-template-columns: 52px 1fr; gap: 32px; padding: 9px 0; position: relative; }
+  .lane li::before { content: ""; position: absolute; left: 62px; top: 16px; width: 12px; height: 12px; border-radius: 50%; background: var(--color-bg-elevated); border: 2px solid var(--color-text-secondary); }
+  .lane.on li::before { border-color: var(--color-accent); background: var(--color-accent); }
+  .lane time { font-family: var(--font-mono); font-size: 13.5px; color: var(--color-text-primary); padding-top: 2px; }
+  .lane span { font-size: 15px; line-height: 1.5; }
+  .lane.on span { color: var(--color-text-primary); }
+  .result { margin-top: 16px; padding-top: 14px; border-top: 1px solid var(--color-border); font-weight: 600; }
+  .lane.off .result { color: var(--color-accent-2); }
+  .lane.on .result { color: var(--color-success); }
+
+  /* team */
+  .team { list-style: none; padding: 0; margin: 0 0 8px; display: grid; grid-template-columns: repeat(3, 1fr); gap: 16px; }
+  .team > li { background: var(--color-bg-deep); border: 1px solid var(--color-border); border-radius: 14px; padding: 20px; }
+  .role { display: inline-block; align-self: flex-start; font-family: var(--font-mono); font-size: 11.5px; letter-spacing: .08em; text-transform: uppercase; color: var(--color-accent); border: 1px solid var(--color-accent); border-radius: 999px; padding: 3px 10px; margin-bottom: 12px; }
+  .team { grid-template-columns: repeat(4, 1fr); }
+  .team > li { display: flex; flex-direction: column; }
+  .team .in { margin-top: auto; padding-top: 14px; font-family: var(--font-mono); font-size: 11.5px; color: var(--color-text-secondary); }
+  .pills { display: flex; flex-wrap: wrap; gap: 6px; margin-bottom: 12px; }
+  .pills .role { margin-bottom: 0; }
+  .st { display: inline-block; align-self: flex-start; font-family: var(--font-mono); font-size: 11.5px; letter-spacing: .04em; color: var(--color-text-secondary); border: 1px dashed var(--color-border); border-radius: 999px; padding: 3px 10px; }
+  .st.live { color: var(--color-success); border: 1px solid var(--color-success); }
+  .team .later { border-style: dashed; background: transparent; }
+  .team .later .role { color: var(--color-text-secondary); border-color: var(--color-border); }
+  .team .later ul { list-style: none; padding: 0; margin: 6px 0 0; }
+  .team .later ul li { font-size: 14.5px; padding: 3px 0; }
+  .eyebrow.gap { margin-top: 48px; }
+  .source .roles .box { padding: 7px 12px; font-size: 13.5px; }
+  .source .roles { gap: 8px; }
+  .wide.low { margin: 28px 0 0; }
+  .wide.low img { height: clamp(220px, 30vw, 340px); object-position: 50% 45%; }
+
+  /* brief illustration */
+  .brief { margin: 0; position: relative; display: grid; grid-template-columns: 1fr 1fr; gap: 14px; align-items: start; }
+  .sheet { background: #f4f2ee; color: #1a1a24; border-radius: 8px; padding: 16px; aspect-ratio: 210 / 297; display: flex; flex-direction: column; gap: 9px; box-shadow: 0 30px 60px -30px rgba(0,0,0,.8); }
+  .sheet.two { margin-top: 34px; }
+  .sheet .brand { font-family: var(--font-mono); font-size: 10px; letter-spacing: .1em; text-transform: uppercase; color: #2E6FA8; }
+  .sheet b { font-size: 15px; line-height: 1.2; color: #1a1a24; }
+  .sheet .ph { margin: 0; border-radius: 4px; aspect-ratio: 16 / 9; }
+  .facts { display: grid; grid-template-columns: repeat(3, 1fr); gap: 6px; }
+  .facts span { font-size: 9.5px; color: #555; line-height: 1.3; }
+  .facts strong { display: block; font-size: 14px; color: #1a1a24; }
+  .sheet em { display: block; height: 6px; border-radius: 3px; background: #d9d5cd; }
+  .sheet em.short { width: 60%; }
+  .bars { flex: 1; display: flex; align-items: flex-end; gap: 8px; padding: 8px 4px 0; border-bottom: 2px solid #c9c4ba; }
+  .bars u { flex: 1; background: #c9c4ba; border-radius: 3px 3px 0 0; }
+  .bars u.me { background: #2E9BE8; }
+  .sheet small { margin-top: auto; font-size: 9.5px; color: #777; }
+  .brief figcaption { grid-column: 1 / -1; font-size: 11.5px; color: var(--color-text-secondary); text-align: center; }
+
+  /* benefit list */
+  .does { list-style: none; padding: 0; margin: 0; display: flex; flex-direction: column; gap: 18px; }
+  .does li { padding-left: 18px; border-left: 2px solid var(--color-accent); }
+  .photo { margin: 0; }
+  .photo img { width: 100%; height: auto; border-radius: 18px; border: 1px solid var(--color-border); display: block; }
+
+  /* flow diagram */
+  .flow { list-style: none; padding: 0; margin: 0 0 40px; display: grid; grid-template-columns: repeat(3, 1fr); gap: 44px; }
+  .flow li { position: relative; background: var(--color-bg-elevated); border: 1px solid var(--color-border); border-radius: 16px; padding: 22px; }
+  .num { display: inline-flex; width: 34px; height: 34px; align-items: center; justify-content: center; border-radius: 50%; background: var(--color-accent); color: #fff; font-weight: 700; margin-bottom: 12px; }
+  .arrow { position: absolute; right: -42px; top: 50%; width: 40px; height: 16px; color: var(--color-accent); transform: translateY(-50%); }
+
+  .source { display: grid; grid-template-columns: 1fr 60px 1.2fr 60px 1fr; background: var(--color-bg-deep); align-items: center; gap: 8px; border: 1px solid var(--color-border); border-radius: 16px; padding: 28px; background: var(--color-bg-elevated); }
+  .source .col { display: flex; flex-direction: column; gap: 12px; }
+  .box { display: block; text-align: center; padding: 14px 12px; border: 1px solid var(--color-border); border-radius: 12px; background: var(--color-bg-deep); color: var(--color-text-primary); font-size: 14.5px; font-weight: 550; }
+  .box.core { border-color: var(--color-accent); font-size: 17px; font-weight: 700; padding: 20px 14px; }
+  .box.core small { display: block; font-weight: 400; font-size: 13px; color: var(--color-text-secondary); margin-top: 6px; }
+  .check { text-align: center; font-family: var(--font-mono); font-size: 12px; color: var(--color-success); }
+  .join { width: 60px; height: 120px; color: var(--color-accent); opacity: .7; }
+
+  /* price */
+  .trialbar { display: flex; align-items: center; justify-content: space-between; gap: 24px; border: 1px solid var(--color-accent); border-radius: 16px; padding: 22px 26px; background: var(--color-bg-elevated); margin-bottom: 20px; }
+  .trialbar p { max-width: 60ch; }
+  .trialbar .btn { flex-shrink: 0; }
+  .plans { display: grid; grid-template-columns: repeat(3, 1fr); gap: 16px; }
+  .addon { display: flex; align-items: center; justify-content: space-between; gap: 24px; border: 1px dashed var(--color-border); border-radius: 16px; padding: 22px 26px; margin-top: 16px; }
+  .addon p { max-width: 64ch; }
+  .addon .btn { flex-shrink: 0; }
+  .ghostbtn { background: transparent; color: var(--color-accent); border: 1px solid var(--color-accent); }
+  .ghostbtn:hover { background: var(--color-accent); color: #fff; }
+  .plan .amount { font-size: 34px; }
+  .plan .amount small { display: block; margin-top: 4px; font-size: 13.5px; }
+  .who { font-size: 14px; min-height: 3.2em; }
+  .mh { margin: 44px 0 14px; font-size: 20px; }
+  .mwrap { overflow-x: auto; border: 1px solid var(--color-border); border-radius: 14px; }
+  .matrix { width: 100%; min-width: 680px; border-collapse: collapse; font-size: 14.5px; }
+  .matrix th, .matrix td { padding: 11px 14px; text-align: center; border-bottom: 1px solid var(--color-border); color: var(--color-text-primary); }
+  .matrix tbody tr:last-child th, .matrix tbody tr:last-child td { border-bottom: 0; }
+  .matrix thead th { background: var(--color-bg-elevated); font-weight: 650; }
+  .matrix tbody th { text-align: left; font-weight: 500; color: var(--color-text-secondary); }
+  .matrix td.y { color: var(--color-success); font-weight: 700; }
+  .matrix td.n { color: var(--color-text-secondary); opacity: .5; }
+  .plan { border: 1px solid var(--color-border); border-radius: 16px; padding: 26px; background: var(--color-bg-elevated); display: flex; flex-direction: column; gap: 12px; }
+  .plan.main { border-color: var(--color-accent); box-shadow: 0 30px 80px -50px rgba(46,155,232,.6); }
+  .amount { font-size: 40px; font-weight: 800; color: var(--color-text-primary); line-height: 1.1; letter-spacing: -.02em; }
+  .amount small { font-size: 15px; font-weight: 400; color: var(--color-text-secondary); letter-spacing: 0; }
+  .plan ul { list-style: none; padding: 0; margin: 4px 0 8px; display: flex; flex-direction: column; gap: 8px; }
+  .plan li { padding-left: 24px; position: relative; color: var(--color-text-primary); font-size: 15px; }
+  .plan li::before { content: ""; position: absolute; left: 2px; top: 7px; width: 11px; height: 6px; border-left: 2px solid var(--color-success); border-bottom: 2px solid var(--color-success); transform: rotate(-45deg); }
+  .plan .btn { margin-top: auto; }
+
+  /* faq */
+  details { border-bottom: 1px solid var(--color-border); padding: 16px 0; }
+  summary { cursor: pointer; color: var(--color-text-primary); font-weight: 600; font-size: 16.5px; list-style: none; display: flex; justify-content: space-between; gap: 16px; }
+  summary::after { content: "+"; color: var(--color-accent); font-weight: 400; font-size: 22px; line-height: 1; }
+  details[open] summary::after { content: "–"; }
+  summary::-webkit-details-marker { display: none; }
+  details p { margin-top: 10px; max-width: 62ch; }
+  .sample { margin-top: 24px; }
+  .ghost { color: var(--color-accent); font-weight: 600; text-decoration: none; }
+
+  @media (max-width: 900px) {
+    .pp section { padding: 52px 0; }
+    .wrap { padding: 0 16px; }
+    .hero, .split, .split.end, .lanes { grid-template-columns: 1fr; gap: 32px; }
+    .plans { grid-template-columns: 1fr; }
+    .trialbar, .addon { flex-direction: column; align-items: stretch; }
+    .split.end .photo { order: 2; }
+    .grid4, .team { grid-template-columns: 1fr 1fr; }
+    .grid3, .flow { grid-template-columns: 1fr; }
+    .flow { gap: 36px; }
+    .arrow { right: auto; left: 50%; top: auto; bottom: -27px; transform: translateX(-50%) rotate(90deg); }
+    .source { grid-template-columns: 1fr; padding: 18px; }
+    .join { display: none; }
+    .trial button, .btn { align-self: stretch; text-align: center; }
+    .wide figcaption { padding: 20px; background: linear-gradient(0deg, rgba(10,10,15,.94) 0%, rgba(10,10,15,.55) 60%, rgba(10,10,15,.1) 100%); }
+  }
+  @media (max-width: 560px) {
+    .grid4, .team, .trial-row, .plans { grid-template-columns: 1fr; }
+    .who { min-height: 0; }
+    .tiles { gap: 6px; }
+    .tile span { display: none; }
+  }
+</style>
