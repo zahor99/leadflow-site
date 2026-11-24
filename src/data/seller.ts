@@ -6,6 +6,8 @@ export const SELLER = {
   address: "226 Halyard Way, Kanata, Ontario K2T 0L3, Canada",
   corporationNo: "Canada Corporation No. 1606251-2",
   supportEmail: "gergely@startleadflowautomation.com",
+  phone: "+36 30 813 6202",
+  phoneHref: "tel:+36308136202",
   callUrl: "https://calendly.com/gergelyracz0/30min",
 };
 
