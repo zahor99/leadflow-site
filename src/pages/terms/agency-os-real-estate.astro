@@ -2,7 +2,6 @@
 import LegalPage from "../../components/LegalPage.astro";
 import { PROPERTY_ASSISTANT as P } from "../../data/products";
 import { SELLER as S, POLICY_LINKS as L } from "../../data/seller";
-const product = `/${P.slug}/`;
 ---
 
 <LegalPage
@@ -13,7 +12,7 @@ const product = `/${P.slug}/`;
   <p class="updated">Version 2026-11. Last updated: 24 November 2026</p>
 
   <p class="note">
-    These terms cover the free trial and the Assistant plan of <a href={product}>{P.name}</a>.
+    These terms cover the free trial and the Assistant plan of {P.name}.
     The seller is <strong>{S.legalName}</strong>; {S.brand} is its brand. Refunds are explained in the
     <a href={L.refunds}>refund and cancellation policy</a>, personal data in the
     <a href={L.privacy}>privacy notice</a>, and how to reach us on the <a href={L.contact}>contact page</a>.
@@ -74,7 +73,7 @@ const product = `/${P.slug}/`;
 
   <h2>5. Other packages and add-ons</h2>
   <p>
-    The <a href={`${product}#price`}>product page</a> also describes the Marketing and Lead Desk packages, the
+    We also offer the Marketing and Lead Desk packages, the
     voice agent add-on, and CRM (customer relationship management system) integration. These are not part of
     the Assistant plan and cannot be bought by card on this website. We sell them by written quote and a
     separate agreement. The voice agent add-on is sold with a 12-month contract. Parts marked "In build" or "Pilot" on the product page are not available yet.
